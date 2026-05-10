@@ -10,7 +10,7 @@ export default function ChiSiamoPage() {
           Nati per risolvere <span className="text-brand-600">un'anomalia.</span>
         </h1>
         <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed text-balance">
-          Nel 2024, i medici specialisti italiani utilizzavano ancora Word ed Excel per gestire pazienti complessi. Non perché mancassero i software, ma perché quelli esistenti erano stati pensati per l'amministrazione, non per la clinica.
+          Nel 2024, i medici specialisti italiani utilizzavano ancora carta e penna Word e Excel per gestire l ambulatorio. Non perché mancassero i software, ma perché quelli esistenti erano stati pensati per l'amministrazione, non per la clinica.
         </p>
       </div>
 
