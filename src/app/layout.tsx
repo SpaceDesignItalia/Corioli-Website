@@ -7,7 +7,12 @@ import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
-const newsreader = Newsreader({ subsets: ["latin"], variable: "--font-newsreader", style: "italic" });
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-newsreader",
+  style: ["normal", "italic"],
+  adjustFontFallback: false,
+});
 
 const siteUrl = "https://corioli.it";
 
