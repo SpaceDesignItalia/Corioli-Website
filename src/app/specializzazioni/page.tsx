@@ -24,10 +24,10 @@ export default function SpecializzazioniPage() {
             </div>
             <h2 className="font-heading text-3xl font-bold text-gray-900 mb-4">Ginecologia & Ostetricia</h2>
             <p className="text-gray-600 mb-8 leading-relaxed">
-              Il nostro modulo di punta, sviluppato e validato clinicamente da specialisti del Policlinico Gemelli. Progettato per ottimizzare le visite ostetriche e ginecologiche.
+              Il nostro modulo di punta, sviluppato e validato clinicamente da specialisti delle migliori strutture italiane. Progettato per ottimizzare le visite ostetriche e ginecologiche.
             </p>
             <ul className="flex flex-col gap-3 text-sm font-medium text-gray-700 mb-8">
-              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> Cartella ostetrica elettronica</li>
+              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> Cartella ostetrica elettronica e ginecologia pediatrica</li>
               <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> Calcolo automatico della datazione</li>
               <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> Integrazione di curve e percentili fetali</li>
             </ul>

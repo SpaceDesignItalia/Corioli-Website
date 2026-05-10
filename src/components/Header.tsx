@@ -24,7 +24,6 @@ export default function Header() {
     { name: "Specializzazioni", href: "/specializzazioni" },
     { name: "Prezzi", href: "/prezzi" },
     { name: "Chi siamo", href: "/chi-siamo" },
-    { name: "Blog", href: "/blog" },
     { name: "Contatti", href: "/contatti" },
   ];
 

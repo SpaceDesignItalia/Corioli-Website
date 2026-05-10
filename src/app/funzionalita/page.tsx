@@ -110,7 +110,7 @@ export default function FunzionalitaPage() {
             <div className="grid grid-cols-2 gap-6">
                <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
                   <h4 className="font-bold text-gray-900 mb-1 text-sm">Crittografia Totale</h4>
-                  <p className="text-xs text-gray-500">Dati cifrati AES-256 a riposo e in transito.</p>
+                  <p className="text-xs text-gray-500">Dati cifrati a riposo e in transito.</p>
                </div>
                <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
                   <h4 className="font-bold text-gray-900 mb-1 text-sm">Backup Automatici</h4>

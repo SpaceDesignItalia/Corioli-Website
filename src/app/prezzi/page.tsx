@@ -56,16 +56,17 @@ export default function PricingPage() {
 
              <ul className="flex flex-col gap-4 text-sm text-gray-700">
                {[
-                 "Cartella clinica elettronica illimitata",
-                 "Anagrafica pazienti cloud sicura",
-                 "Refertazione in formato PDF",
-                 "Supporto prioritario via chat/email",
-                 "Backup giornaliero georeplicato",
-                 "Conformità privacy e GDPR completa",
+                 { text: "Cartella clinica elettronica illimitata" },
+                 { text: "Anagrafica pazienti cloud sicura" },
+                 { text: "Refertazione in formato PDF" },
+                 { text: "Calcolatori avanzati: 3 mesi inclusi", nowrap: true },
+                 { text: "Supporto prioritario via chat/email" },
+                 { text: "Backup giornaliero georeplicato" },
+                 { text: "Conformità privacy e GDPR completa" },
                ].map((feature, i) => (
                  <li key={i} className="flex items-start gap-3">
                    <Check size={18} className="text-brand-500 shrink-0 mt-0.5" />
-                   <span className="font-medium">{feature}</span>
+                   <span className={clsx("font-medium", feature.nowrap && "whitespace-nowrap")}>{feature.text}</span>
                  </li>
                ))}
              </ul>
@@ -82,14 +83,14 @@ export default function PricingPage() {
               <p className="text-sm text-gray-500">Percentili, stime, curve di crescita (Hadlock, WHO).</p>
             </div>
             <div className="text-brand-700 font-medium whitespace-nowrap bg-brand-50 px-3 py-1.5 rounded-lg border border-brand-100 text-sm text-center">
-               15€/mese o 149€ vita
+               15€/mese
             </div>
           </div>
 
           <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-soft flex flex-col sm:flex-row justify-between sm:items-center gap-4 hover:border-brand-200 transition-colors">
             <div>
               <h4 className="font-bold text-gray-900 text-lg mb-1">Multi-utente (Team)</h4>
-              <p className="text-sm text-gray-500">Aggiungi colleghi o segreteria con permessi dedicati.</p>
+              <p className="text-sm text-gray-500">Aggiungi collaboratore o segreteria con permessi dedicati.</p>
             </div>
             <div className="text-brand-700 font-medium whitespace-nowrap bg-brand-50 px-3 py-1.5 rounded-lg border border-brand-100 text-sm text-center">
                +15€/mese per utente

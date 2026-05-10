@@ -178,8 +178,8 @@ export default function Home() {
             <ul className="flex flex-col gap-4 mb-12">
                {[
                  "Cartella clinica elettronica specializzata",
-                 "Agenda intelligente e promemoria automatici",
-                 "Fatturazione integrata e conforme"
+                 "Calcolatori clinici e strumenti nativi in visita",
+                 "Cloud sicuro, backup e conformità GDPR"
                ].map((item, i) => (
                  <li key={i} className="flex items-center gap-3 text-gray-700 font-medium text-base md:text-lg">
                    <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center">
@@ -281,38 +281,39 @@ export default function Home() {
       </section>
 
       {/* Feature Highlight - Interactive Calcolo Datazione */}
-      <section className="py-24 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="order-2 lg:order-1">
+      <section className="py-16 sm:py-24 bg-white overflow-hidden">
+        <div
+          className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 grid grid-cols-1 gap-y-10 lg:grid-cols-2 lg:gap-x-16 lg:gap-y-10 lg:items-center [grid-template-areas:'intro'_'cards'_'mockup'_'link'] lg:[grid-template-areas:'intro_mockup'_'cards_mockup'_'link_mockup']"
+        >
+          <div className="[grid-area:intro]">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider mb-6">
                <Calculator size={14} /> Strumenti Integrati
             </div>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-              Calcolo Datazione<br/>preciso in un istante.
+            <h2 className="font-heading text-2xl min-[400px]:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+              <span className="block whitespace-nowrap">Ottimizza il tempo:</span>
+              <span className="block whitespace-nowrap">la tua risorsa più preziosa.</span>
             </h2>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              I medici italiani perdono molto tempo in data-entry ripetitivo. Corioli può restituirti fino a 240 ore l&apos;anno grazie a calcolatori integrati che si aggiornano in tempo reale.
+            <p className="text-lg text-gray-600 leading-relaxed">
+              I medici italiani perdono molto tempo in operazioni ripetitive. Corioli può restituirti fino a 240 ore l&apos;anno grazie a calcolatori integrati che si aggiornano in tempo reale.
             </p>
+          </div>
+
+          <div className="[grid-area:cards]">
             <div className="grid grid-cols-2 gap-6">
                <div className="p-4 bg-gray-50 rounded-xl border border-gray-100">
                   <div className="text-sm text-gray-500 mb-1">Tempo risparmiato</div>
                   <div className="text-3xl font-bold text-brand-600">{savedHours}h<span className="text-lg font-normal text-brand-400">/anno</span></div>
                </div>
                <div className="p-4 bg-gray-50 rounded-xl border border-gray-100">
-                  <div className="text-sm text-gray-500 mb-1">Aggiornamento</div>
-                  <div className="text-2xl font-bold text-brand-600 mt-1">In tempo reale</div>
+                  <div className="text-sm text-gray-500 mb-1">Visite</div>
+                  <div className="text-3xl font-bold text-brand-600 mt-1">+2<span className="text-lg font-normal text-brand-400">/sessione</span></div>
                </div>
             </div>
-            <div className="mt-8">
-               <Link href="/contatti" className="text-brand-700 font-bold flex items-center gap-2 hover:gap-3 transition-all">
-                  Scopri tutti i calcolatori <ArrowRight size={18} />
-               </Link>
-            </div>
           </div>
-          
-          <div className="relative order-1 lg:order-2">
+
+          <div className="[grid-area:mockup] relative w-full max-w-lg mx-auto lg:max-w-none">
             {/* Visual Interactive Element - Dashboard Mockup */}
-            <div className="aspect-square bg-brand-900 rounded-3xl p-6 md:p-8 relative overflow-hidden flex flex-col shadow-2xl">
+            <div className="bg-brand-900 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 relative overflow-hidden flex flex-col shadow-2xl w-full min-h-0 h-auto lg:aspect-square">
                <div className="absolute top-0 right-0 w-80 h-80 bg-brand-600 rounded-full blur-[100px] opacity-30 -translate-y-1/2 translate-x-1/3"></div>
                <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-800 rounded-full blur-[80px] opacity-40 translate-y-1/2 -translate-x-1/3"></div>
                
@@ -333,34 +334,34 @@ export default function Home() {
                </div>
                
                {/* Terminal/Search Header */}
-               <div className="relative z-10 w-full bg-brand-950 rounded-xl p-4 mb-6 border border-brand-800 shadow-inner flex items-center gap-3">
-                  <div className="text-brand-400">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+               <div className="relative z-10 w-full bg-brand-950 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6 border border-brand-800 shadow-inner flex items-center gap-2 sm:gap-3 min-w-0">
+                  <div className="text-brand-400 shrink-0">
+                    <svg className="w-4 h-4 sm:w-[18px] sm:h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                   </div>
-                  <div className="font-mono text-brand-100 text-sm md:text-base flex-1 flex items-center">
-                     <span className="opacity-50 mr-2">&gt;</span>
-                     <span>{typedText}</span>
-                     <span className="inline-block w-2 h-4 bg-brand-400 ml-1 animate-pulse"></span>
+                  <div className="font-mono text-brand-100 text-xs sm:text-sm md:text-base flex-1 flex items-center min-w-0">
+                     <span className="opacity-50 mr-1.5 sm:mr-2 shrink-0">&gt;</span>
+                     <span className="truncate">{typedText}</span>
+                     <span className="inline-block w-2 h-3.5 sm:h-4 bg-brand-400 ml-1 shrink-0 animate-pulse"></span>
                   </div>
                </div>
 
-               {/* Calculators Grid */}
-               <div className="relative z-10 flex-1 grid grid-cols-2 gap-4">
+               {/* Calculators Grid: 1 col su mobile per evitare grafici schiacciati */}
+               <div className="relative z-10 flex-1 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 min-h-0">
                   {activeTab === 'ostetricia' ? (
                      <>
                         {/* Calc 1 */}
-                        <div className="bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/10 flex flex-col justify-center">
+                        <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 sm:p-5 border border-white/10 flex flex-col justify-center">
                            <div className="text-brand-100 text-xs font-bold uppercase tracking-wider mb-2">Datazione</div>
-                           <div className="text-3xl font-bold text-white mb-1">{gestationalWeeks}<span className="text-lg text-brand-300 font-normal">w</span> +{gestationalDays}<span className="text-lg text-brand-300 font-normal">d</span></div>
+                           <div className="text-2xl sm:text-3xl font-bold text-white mb-1">{gestationalWeeks}<span className="text-base sm:text-lg text-brand-300 font-normal">w</span> +{gestationalDays}<span className="text-base sm:text-lg text-brand-300 font-normal">d</span></div>
                            <div className="text-[11px] text-brand-300">DPP: 12 Giu 2024</div>
                         </div>
                   
                   {/* Calc 2 - Graph with Growing Fetus */}
-                  <div className="bg-white rounded-xl p-5 shadow-card flex flex-col justify-between col-span-2 sm:col-span-1 row-span-2 relative overflow-hidden">
-                     <div className="relative z-10 flex justify-between items-start">
-                        <div>
+                  <div className="bg-white rounded-xl p-4 sm:p-5 shadow-card flex flex-col justify-between sm:row-span-2 relative overflow-hidden">
+                     <div className="relative z-10 flex justify-between items-start gap-2">
+                        <div className="min-w-0">
                            <div className="text-gray-400 text-[10px] font-bold uppercase tracking-wider mb-1">Stima Crescita (Hadlock)</div>
-                           <div className="text-2xl font-bold text-gray-900 transition-all duration-300">
+                           <div className="text-xl sm:text-2xl font-bold text-gray-900 transition-all duration-300">
                              {Math.floor(Math.pow(gestationalWeeks / 40, 3) * 3400 + 50)}<span className="text-sm text-gray-500 font-normal">g</span>
                            </div>
                            <div className="text-xs text-brand-600 font-semibold mt-1">
@@ -370,14 +371,14 @@ export default function Home() {
                      </div>
                      
                      {/* Graph with Fetus */}
-                     <div className="w-full flex-1 min-h-[140px] mt-6 relative z-10 border-l-2 border-b-2 border-gray-100">
+                     <div className="w-full flex-1 min-h-[11rem] sm:min-h-[9.5rem] lg:min-h-[140px] mt-4 sm:mt-6 relative z-10 border-l-2 border-b-2 border-gray-100">
                         {/* Graph Grid Lines */}
-                        <div className="absolute inset-0 flex flex-col justify-between opacity-40">
+                        <div className="absolute inset-0 flex flex-col justify-between opacity-40 pointer-events-none">
                            <div className="w-full h-px bg-gray-200"></div>
                            <div className="w-full h-px bg-gray-200"></div>
                            <div className="w-full h-px bg-gray-200"></div>
                         </div>
-                        <div className="absolute inset-0 flex justify-between opacity-40">
+                        <div className="absolute inset-0 flex justify-between opacity-40 pointer-events-none">
                            <div className="h-full w-px bg-gray-200"></div>
                            <div className="h-full w-px bg-gray-200"></div>
                            <div className="h-full w-px bg-gray-200"></div>
@@ -385,7 +386,7 @@ export default function Home() {
                         </div>
 
                         {/* Percentile Curves */}
-                        <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
+                        <svg className="absolute inset-0 w-full h-full touch-none" preserveAspectRatio="none" viewBox="0 0 100 100">
                            {/* 95th Percentile */}
                            <path d="M 0,100 Q 40,80 100,10" fill="none" stroke="#e2e8f0" strokeWidth="2" strokeDasharray="4 4"/>
                            {/* 50th Percentile (Median Growth) */}
@@ -430,10 +431,10 @@ export default function Home() {
                   </div>
 
                   {/* Calc 3 */}
-                  <div className="bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/10 flex flex-col justify-center relative overflow-hidden group">
+                  <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 sm:p-5 border border-white/10 flex flex-col justify-center relative overflow-hidden group">
                      <div className="text-brand-100 text-xs font-bold uppercase tracking-wider mb-2 relative z-10">BMI & Delta Peso</div>
-                     <div className="flex items-end gap-2 mb-2 relative z-10">
-                        <div className="text-2xl font-bold text-white transition-all duration-300">{bmi.toFixed(1)} <span className="text-sm font-normal text-brand-300">kg/m²</span></div>
+                     <div className="flex items-end gap-2 mb-2 relative z-10 flex-wrap">
+                        <div className="text-xl sm:text-2xl font-bold text-white transition-all duration-300">{bmi.toFixed(1)} <span className="text-sm font-normal text-brand-300">kg/m²</span></div>
                         <div className="text-xs font-bold text-brand-300 transition-all duration-300 mb-1.5">+{((bmi - 18) * 1.5).toFixed(1)} kg</div>
                      </div>
                      <div className={`relative z-10 inline-flex px-2 py-0.5 rounded-full ${bmiStatus.bg} ${bmiStatus.color} text-[10px] font-bold w-fit border ${bmiStatus.border} transition-colors duration-300`}>{bmiStatus.label}</div>
@@ -451,10 +452,10 @@ export default function Home() {
                   ) : (
                   <>
                         {/* Pediatric Calc 1 - Target Genetico */}
-                        <div className="bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/10 flex flex-col justify-center relative overflow-hidden group">
+                        <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 sm:p-5 border border-white/10 flex flex-col justify-center relative overflow-hidden group">
                            <div className="text-brand-100 text-xs font-bold uppercase tracking-wider mb-2 relative z-10">Target Genetico</div>
                            <div className="flex items-end gap-2 mb-2 relative z-10">
-                              <div className="text-3xl font-bold text-white transition-all duration-300">178<span className="text-lg font-normal text-brand-300">.5 cm</span></div>
+                              <div className="text-2xl sm:text-3xl font-bold text-white transition-all duration-300">178<span className="text-base sm:text-lg font-normal text-brand-300">.5 cm</span></div>
                            </div>
                            <div className="text-[11px] text-brand-300 relative z-10 flex items-center gap-1">
                               Formula di Tanner
@@ -462,11 +463,11 @@ export default function Home() {
                         </div>
                         
                         {/* Pediatric Calc 2 - Graph */}
-                        <div className="bg-white rounded-xl p-5 shadow-card flex flex-col justify-between col-span-2 sm:col-span-1 row-span-2 relative overflow-hidden">
-                           <div className="relative z-10 flex justify-between items-start">
-                              <div>
+                        <div className="bg-white rounded-xl p-4 sm:p-5 shadow-card flex flex-col justify-between sm:row-span-2 relative overflow-hidden">
+                           <div className="relative z-10 flex justify-between items-start gap-2">
+                              <div className="min-w-0">
                                  <div className="text-gray-400 text-[10px] font-bold uppercase tracking-wider mb-1">Andamento Altezza</div>
-                                 <div className="text-2xl font-bold text-gray-900 transition-all duration-300">
+                                 <div className="text-xl sm:text-2xl font-bold text-gray-900 transition-all duration-300">
                                    {pedHeight.toFixed(1)}<span className="text-sm text-gray-500 font-normal">cm</span>
                                  </div>
                                  <div className="text-xs text-brand-600 font-semibold mt-1">
@@ -476,19 +477,19 @@ export default function Home() {
                            </div>
                            
                            {/* Graph */}
-                           <div className="w-full flex-1 min-h-[140px] mt-6 relative z-10 border-l-2 border-b-2 border-gray-100">
-                              <div className="absolute inset-0 flex flex-col justify-between opacity-40">
+                           <div className="w-full flex-1 min-h-[11rem] sm:min-h-[9.5rem] lg:min-h-[140px] mt-4 sm:mt-6 relative z-10 border-l-2 border-b-2 border-gray-100">
+                              <div className="absolute inset-0 flex flex-col justify-between opacity-40 pointer-events-none">
                                  <div className="w-full h-px bg-gray-200"></div>
                                  <div className="w-full h-px bg-gray-200"></div>
                                  <div className="w-full h-px bg-gray-200"></div>
                               </div>
-                              <div className="absolute inset-0 flex justify-between opacity-40">
+                              <div className="absolute inset-0 flex justify-between opacity-40 pointer-events-none">
                                  <div className="h-full w-px bg-gray-200"></div>
                                  <div className="h-full w-px bg-gray-200"></div>
                                  <div className="h-full w-px bg-gray-200"></div>
                               </div>
 
-                              <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
+                              <svg className="absolute inset-0 w-full h-full touch-none" preserveAspectRatio="none" viewBox="0 0 100 100">
                                  <path d="M 0,90 Q 50,50 100,10" fill="none" stroke="#e2e8f0" strokeWidth="2" strokeDasharray="4 4"/>
                                  <path d="M 10,80 Q 40,30 90,15" fill="none" stroke="#14b8a6" strokeWidth="3" className="opacity-60"/>
                               </svg>
@@ -514,10 +515,10 @@ export default function Home() {
                         </div>
 
                         {/* Pediatric Calc 3 - Peso OMS with Sparkline */}
-                        <div className="bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/10 flex flex-col justify-center relative overflow-hidden group">
+                        <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 sm:p-5 border border-white/10 flex flex-col justify-center relative overflow-hidden group">
                            <div className="text-brand-100 text-xs font-bold uppercase tracking-wider mb-2 relative z-10">Peso (OMS)</div>
-                           <div className="flex items-end gap-2 mb-2 relative z-10">
-                              <div className="text-2xl font-bold text-white transition-all duration-300">{pedWeight.toFixed(1)} <span className="text-sm font-normal text-brand-300">kg</span></div>
+                           <div className="flex items-end gap-2 mb-2 relative z-10 flex-wrap">
+                              <div className="text-xl sm:text-2xl font-bold text-white transition-all duration-300">{pedWeight.toFixed(1)} <span className="text-sm font-normal text-brand-300">kg</span></div>
                               <div className="text-xs font-bold text-brand-300 transition-all duration-300 mb-1.5">{percentile}° perc.</div>
                            </div>
                            <div className={`relative z-10 inline-flex px-2 py-0.5 rounded-full ${percStatus.bg} ${percStatus.color} text-[10px] font-bold w-fit border ${percStatus.border} transition-colors duration-300`}>{percStatus.label}</div>
@@ -535,6 +536,12 @@ export default function Home() {
                   )}
                </div>
             </div>
+          </div>
+
+          <div className="[grid-area:link]">
+            <Link href="/contatti" className="text-brand-700 font-bold inline-flex items-center gap-2 hover:gap-3 transition-all">
+              Scopri tutti i calcolatori <ArrowRight size={18} />
+            </Link>
           </div>
         </div>
       </section>

@@ -42,7 +42,6 @@ export default function Footer() {
           <h4 className="font-heading font-semibold text-gray-900 mb-6">Risorse</h4>
           <ul className="flex flex-col gap-4 text-gray-500 text-sm">
             <li><Link href="/chi-siamo" className="hover:text-brand-600 transition-colors">Chi Siamo</Link></li>
-            <li><Link href="/blog" className="hover:text-brand-600 transition-colors">Blog & Guide</Link></li>
             <li><Link href="/contatti" className="hover:text-brand-600 transition-colors">Supporto</Link></li>
           </ul>
         </div>
