@@ -165,11 +165,11 @@ export default function Home() {
               SOFTWARE GESTIONALE MEDICO
             </div>
             <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl text-gray-950 leading-[1.0] mb-10 tracking-tight">
-              <span className="font-newsreader italic font-normal">Il gestionale medico</span> <br />
+              <span className="font-newsreader italic font-normal whitespace-nowrap">Il gestionale medico</span> <br />
               <span className="relative">
-                che rispetta
+                che rispetta <span className="font-newsreader italic font-normal">il tuo</span>
               </span> <br />
-              <span className="font-newsreader italic font-normal">il tuo tempo</span>
+              <span className="font-newsreader italic font-normal">tempo</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed font-sans max-w-[90%]">
               Corioli è il software gestionale medico cloud per dottori e studi specialistici. Non adattato, non generico: una cartella clinica elettronica pensata per come lavori davvero.
@@ -277,50 +277,6 @@ export default function Home() {
             </p>
           </div>
 
-        </div>
-      </section>
-
-      {/* SEO Content Section */}
-      <section className="py-24 bg-brand-50/40 border-y border-brand-100/60">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          <div className="lg:col-span-5">
-            <div className="text-brand-700 font-bold text-xs tracking-[0.2em] uppercase mb-5">
-              Gestionale medico per specialisti
-            </div>
-            <h2 className="font-heading text-3xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
-              Perché un dottore dovrebbe scegliere Corioli?
-            </h2>
-            <p className="text-lg text-gray-600 leading-relaxed">
-              Se stai cercando un gestionale medico per il tuo studio, Corioli nasce per aiutarti a seguire pazienti, visite, referti e dati clinici senza perdere tempo in strumenti generici.
-            </p>
-          </div>
-
-          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white rounded-2xl p-7 border border-brand-100 shadow-soft">
-              <h3 className="font-heading text-xl font-bold text-gray-900 mb-3">Software per dottori, non per uffici generici</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Corioli organizza anamnesi, diario clinico, referti PDF e storico paziente in un workflow pensato per l&apos;ambulatorio medico specialistico.
-              </p>
-            </div>
-            <div className="bg-white rounded-2xl p-7 border border-brand-100 shadow-soft">
-              <h3 className="font-heading text-xl font-bold text-gray-900 mb-3">Cartella clinica elettronica cloud</h3>
-              <p className="text-gray-600 leading-relaxed">
-                I dati del paziente sono sempre ordinati, accessibili e protetti, con backup e attenzione alla conformità GDPR per informazioni sanitarie sensibili.
-              </p>
-            </div>
-            <div className="bg-white rounded-2xl p-7 border border-brand-100 shadow-soft">
-              <h3 className="font-heading text-xl font-bold text-gray-900 mb-3">Ideale per ginecologia, ostetricia e pediatria</h3>
-              <p className="text-gray-600 leading-relaxed">
-                I moduli verticali includono strumenti clinici come datazione, curve di crescita, percentili, BMI, Hadlock e refertazione specializzata.
-              </p>
-            </div>
-            <div className="bg-white rounded-2xl p-7 border border-brand-100 shadow-soft">
-              <h3 className="font-heading text-xl font-bold text-gray-900 mb-3">Alternativa moderna a Word, Excel e carta</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Un gestionale studio medico riduce copia-incolla, errori, archivi dispersi e lavoro amministrativo, lasciando più spazio alla relazione clinica.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -586,6 +542,50 @@ export default function Home() {
             <Link href="/contatti" className="text-brand-700 font-bold inline-flex items-center gap-2 hover:gap-3 transition-all">
               Scopri tutti i calcolatori <ArrowRight size={18} />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* SEO Content Section */}
+      <section className="py-24 bg-brand-50/40 border-y border-brand-100/60">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="lg:col-span-5">
+            <div className="text-brand-700 font-bold text-xs tracking-[0.2em] uppercase mb-5">
+              Gestionale medico per specialisti
+            </div>
+            <h2 className="font-heading text-3xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
+              Perché un dottore dovrebbe scegliere Corioli?
+            </h2>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              Se stai cercando un gestionale medico per il tuo studio, Corioli nasce per aiutarti a seguire pazienti, visite, referti e dati clinici senza perdere tempo in strumenti generici.
+            </p>
+          </div>
+
+          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-white rounded-2xl p-7 border border-brand-100 shadow-soft">
+              <h3 className="font-heading text-xl font-bold text-gray-900 mb-3">Software per dottori, non per uffici generici</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Corioli organizza anamnesi, diario clinico, referti PDF e storico paziente in un workflow pensato per l&apos;ambulatorio medico specialistico.
+              </p>
+            </div>
+            <div className="bg-white rounded-2xl p-7 border border-brand-100 shadow-soft">
+              <h3 className="font-heading text-xl font-bold text-gray-900 mb-3">Cartella clinica elettronica cloud</h3>
+              <p className="text-gray-600 leading-relaxed">
+                I dati del paziente sono sempre ordinati, accessibili e protetti, con backup e attenzione alla conformità GDPR per informazioni sanitarie sensibili.
+              </p>
+            </div>
+            <div className="bg-white rounded-2xl p-7 border border-brand-100 shadow-soft">
+              <h3 className="font-heading text-xl font-bold text-gray-900 mb-3">Ideale per ginecologia, ostetricia e pediatria</h3>
+              <p className="text-gray-600 leading-relaxed">
+                I moduli verticali includono strumenti clinici come datazione, curve di crescita, percentili, BMI, Hadlock e refertazione specializzata.
+              </p>
+            </div>
+            <div className="bg-white rounded-2xl p-7 border border-brand-100 shadow-soft">
+              <h3 className="font-heading text-xl font-bold text-gray-900 mb-3">Alternativa moderna a Word, Excel e carta</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Un gestionale studio medico riduce copia-incolla, errori, archivi dispersi e lavoro amministrativo, lasciando più spazio alla relazione clinica.
+              </p>
+            </div>
           </div>
         </div>
       </section>

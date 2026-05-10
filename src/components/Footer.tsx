@@ -32,31 +32,45 @@ export default function Footer() {
         <div className="md:col-span-4 lg:col-span-2 lg:col-start-6">
           <h4 className="font-heading font-semibold text-gray-900 mb-6">Prodotto</h4>
           <ul className="flex flex-col gap-4 text-gray-500 text-sm">
-            <li><Link href="/funzionalita" className="hover:text-brand-600 transition-colors">Funzionalità</Link></li>
-            <li><Link href="/specializzazioni" className="hover:text-brand-600 transition-colors">Specializzazioni</Link></li>
+            <li><Link href="/funzionalita" className="hover:text-brand-600 transition-colors">Funzionalità gestionale medico</Link></li>
+            <li><Link href="/specializzazioni" className="hover:text-brand-600 transition-colors">Specializzazioni mediche</Link></li>
+            <li><Link href="/lp/ginecologia" className="hover:text-brand-600 transition-colors">Gestionale per ginecologi</Link></li>
             <li><Link href="/prezzi" className="hover:text-brand-600 transition-colors">Prezzi</Link></li>
+            <li><Link href="/contatti" className="hover:text-brand-600 transition-colors">Demo gratuita</Link></li>
           </ul>
         </div>
 
         <div className="md:col-span-4 lg:col-span-2">
-          <h4 className="font-heading font-semibold text-gray-900 mb-6">Risorse</h4>
+          <h4 className="font-heading font-semibold text-gray-900 mb-6">Approfondimenti</h4>
+          <ul className="flex flex-col gap-4 text-gray-500 text-sm">
+            <li><Link href="/blog/gestionale-per-ginecologi-cosa-cercare" className="hover:text-brand-600 transition-colors">Gestionale per ginecologi</Link></li>
+            <li><Link href="/blog/cos-e-cartella-clinica-elettronica-come-sceglierla" className="hover:text-brand-600 transition-colors">Cartella clinica elettronica</Link></li>
+            <li><Link href="/blog/gestionale-medico-gdpr-cosa-deve-avere" className="hover:text-brand-600 transition-colors">Gestionale medico e GDPR</Link></li>
+            <li><Link href="/blog" className="hover:text-brand-600 transition-colors">Tutti gli articoli</Link></li>
+          </ul>
+        </div>
+
+        <div className="md:col-span-4 lg:col-span-2">
+          <h4 className="font-heading font-semibold text-gray-900 mb-6">Azienda</h4>
           <ul className="flex flex-col gap-4 text-gray-500 text-sm">
             <li><Link href="/chi-siamo" className="hover:text-brand-600 transition-colors">Chi Siamo</Link></li>
-            <li><Link href="/contatti" className="hover:text-brand-600 transition-colors">Supporto</Link></li>
-          </ul>
-        </div>
-
-        <div className="md:col-span-4 lg:col-span-2">
-          <h4 className="font-heading font-semibold text-gray-900 mb-6">Legale</h4>
-          <ul className="flex flex-col gap-4 text-gray-500 text-sm">
+            <li><Link href="/gdpr" className="hover:text-brand-600 transition-colors">Sicurezza e GDPR</Link></li>
             <li><Link href="/privacy-policy" className="hover:text-brand-600 transition-colors">Privacy Policy</Link></li>
-            <li><Link href="/gdpr" className="hover:text-brand-600 transition-colors">Conformità GDPR</Link></li>
           </ul>
         </div>
 
       </div>
-      
-      <div className="max-w-7xl mx-auto px-6 md:px-12 mt-16 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400 gap-4">
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 mt-12 py-8 border-t border-gray-100">
+        <p className="text-xs text-gray-400 leading-relaxed max-w-3xl">
+          Corioli è un <strong className="font-medium text-gray-500">software gestionale medico cloud</strong> per medici specialisti privati.
+          Offre <Link href="/funzionalita" className="underline underline-offset-2 hover:text-brand-600 transition-colors">cartella clinica elettronica</Link>,{" "}
+          <Link href="/specializzazioni" className="underline underline-offset-2 hover:text-brand-600 transition-colors">gestionale per ginecologi e ostetrici</Link>,{" "}
+          refertazione PDF, calcolatori clinici e sicurezza GDPR. Sede legale: Sesto Fiorentino (FI), Italia.
+        </p>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 pt-6 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400 gap-4">
         <p>&copy; {new Date().getFullYear()} Corioli - P.IVA IT07420400488</p>
       </div>
     </footer>
