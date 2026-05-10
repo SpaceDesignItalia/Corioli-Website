@@ -6,10 +6,38 @@ import Link from "next/link";
 
 export default function ContattiPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSendError(null);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    const nome = String(fd.get("nome") ?? "").trim();
+    const email = String(fd.get("email") ?? "").trim();
+    const specializzazione = String(fd.get("specializzazione") ?? "").trim();
+    const messaggio = String(fd.get("messaggio") ?? "").trim();
+
+    setSending(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nome, email, specializzazione, messaggio }),
+      });
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+      if (!res.ok) {
+        setSendError(data.error ?? "Invio non riuscito. Riprova tra poco.");
+        return;
+      }
+      setSubmitted(true);
+      form.reset();
+    } catch {
+      setSendError("Errore di rete. Controlla la connessione e riprova.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -82,15 +110,21 @@ export default function ContattiPage() {
                ) : (
                  <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                    <h3 className="font-heading text-2xl font-bold text-gray-900 mb-2">Richiedi una Demo Gratuita</h3>
+
+                   {sendError ? (
+                     <p className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-xl px-4 py-3" role="alert">
+                       {sendError}
+                     </p>
+                   ) : null}
                    
                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                      <div className="flex flex-col gap-2">
                        <label htmlFor="nome" className="text-sm font-medium text-gray-700">Nome e Cognome *</label>
-                       <input type="text" id="nome" required className="bg-gray-50 border border-gray-200 rounded-xl p-3.5 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all text-sm" />
+                       <input type="text" id="nome" name="nome" required disabled={sending} className="bg-gray-50 border border-gray-200 rounded-xl p-3.5 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all text-sm disabled:opacity-60" />
                      </div>
                      <div className="flex flex-col gap-2">
                        <label htmlFor="email" className="text-sm font-medium text-gray-700">Email Professionale *</label>
-                       <input type="email" id="email" required className="bg-gray-50 border border-gray-200 rounded-xl p-3.5 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all text-sm" />
+                       <input type="email" id="email" name="email" required disabled={sending} className="bg-gray-50 border border-gray-200 rounded-xl p-3.5 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all text-sm disabled:opacity-60" />
                      </div>
                    </div>
 
@@ -98,19 +132,19 @@ export default function ContattiPage() {
                      <label className="text-sm font-medium text-gray-700">Specializzazione *</label>
                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <label className="relative">
-                          <input type="radio" name="specializzazione" value="ginecologia" required className="peer sr-only" />
+                          <input type="radio" name="specializzazione" value="ginecologia" required disabled={sending} className="peer sr-only" />
                           <div className="p-3 text-sm text-center font-medium text-gray-600 border border-gray-200 rounded-xl cursor-pointer peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-700 hover:bg-gray-50 transition-all">
                              Ginecologia
                           </div>
                         </label>
                         <label className="relative">
-                          <input type="radio" name="specializzazione" value="pediatria" required className="peer sr-only" />
+                          <input type="radio" name="specializzazione" value="pediatria" required disabled={sending} className="peer sr-only" />
                           <div className="p-3 text-sm text-center font-medium text-gray-600 border border-gray-200 rounded-xl cursor-pointer peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-700 hover:bg-gray-50 transition-all">
                              Pediatria
                           </div>
                         </label>
                         <label className="relative">
-                          <input type="radio" name="specializzazione" value="altro" required className="peer sr-only" />
+                          <input type="radio" name="specializzazione" value="altro" required disabled={sending} className="peer sr-only" />
                           <div className="p-3 text-sm text-center font-medium text-gray-600 border border-gray-200 rounded-xl cursor-pointer peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-700 hover:bg-gray-50 transition-all">
                              Altro
                           </div>
@@ -120,18 +154,18 @@ export default function ContattiPage() {
 
                    <div className="flex flex-col gap-2">
                      <label htmlFor="messaggio" className="text-sm font-medium text-gray-700">Note Aggiuntive</label>
-                     <textarea id="messaggio" rows={3} className="bg-gray-50 border border-gray-200 rounded-xl p-3.5 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all resize-none text-sm" placeholder="Es. Utilizzo attualmente Word, vorrei capire come importare i dati storici..."></textarea>
+                     <textarea id="messaggio" name="messaggio" rows={3} disabled={sending} className="bg-gray-50 border border-gray-200 rounded-xl p-3.5 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all resize-none text-sm disabled:opacity-60" placeholder="Es. Utilizzo attualmente Word, vorrei capire come importare i dati storici..."></textarea>
                    </div>
 
                    <div className="flex items-start gap-3 mt-2">
-                     <input type="checkbox" id="privacy" required className="mt-1 w-4 h-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500" />
+                     <input type="checkbox" id="privacy" name="privacy" required disabled={sending} className="mt-1 w-4 h-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500 disabled:opacity-60" />
                      <label htmlFor="privacy" className="text-sm text-gray-500 leading-snug">
                        Acconsento al trattamento dei dati personali ai sensi del GDPR. Leggi la nostra <Link href="/privacy-policy" className="text-brand-600 hover:underline">Privacy Policy</Link>.
                      </label>
                    </div>
 
-                   <button type="submit" className="w-full bg-brand-600 text-white py-4 rounded-xl font-bold hover:bg-brand-700 transition-all shadow-md hover:shadow-lg mt-2">
-                     Invia Richiesta
+                   <button type="submit" disabled={sending} className="w-full bg-brand-600 text-white py-4 rounded-xl font-bold hover:bg-brand-700 transition-all shadow-md hover:shadow-lg mt-2 disabled:opacity-60 disabled:pointer-events-none">
+                     {sending ? "Invio in corso…" : "Invia Richiesta"}
                    </button>
                  </form>
                )}
