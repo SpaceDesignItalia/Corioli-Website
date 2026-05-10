@@ -50,7 +50,6 @@ export default function Footer() {
           <h4 className="font-heading font-semibold text-gray-900 mb-6">Legale</h4>
           <ul className="flex flex-col gap-4 text-gray-500 text-sm">
             <li><Link href="/privacy-policy" className="hover:text-brand-600 transition-colors">Privacy Policy</Link></li>
-            <li><Link href="/termini" className="hover:text-brand-600 transition-colors">Termini di Servizio</Link></li>
             <li><Link href="/gdpr" className="hover:text-brand-600 transition-colors">Conformità GDPR</Link></li>
           </ul>
         </div>

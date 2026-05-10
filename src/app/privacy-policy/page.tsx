@@ -15,7 +15,7 @@ export default function PrivacyPolicyPage() {
 
           <h2 className="font-heading text-xl font-bold mt-10 mb-4 text-gray-900">1. Titolare del Trattamento</h2>
           <p className="mb-6">
-            Il Titolare del trattamento dei dati raccolti tramite questo sito è Corioli s.r.l., con sede legale in Via Milano 123, Roma (RM). Email: privacy@corioli.it.
+            Il Titolare del trattamento dei dati raccolti tramite questo sito è Corioli, con sede legale in Firenze (FI). Email: privacy@corioli.it.
           </p>
 
           <h2 className="font-heading text-xl font-bold mt-10 mb-4 text-gray-900">2. Tipologia di dati raccolti</h2>
