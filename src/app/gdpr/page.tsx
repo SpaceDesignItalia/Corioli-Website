@@ -1,4 +1,18 @@
+import type { Metadata } from "next";
 import { Shield, Server, FileCheck, Lock } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Gestionale medico GDPR e sicurezza dati sanitari",
+  description: "Scopri come Corioli protegge dati sanitari, cartelle cliniche elettroniche e referti con sicurezza cloud, crittografia, backup e attenzione alla conformità GDPR.",
+  alternates: {
+    canonical: "/gdpr",
+  },
+  openGraph: {
+    title: "Corioli GDPR | Sicurezza per gestionale medico",
+    description: "Privacy by design, crittografia, backup e controlli per dati sanitari e studi medici.",
+    url: "https://corioli.it/gdpr",
+  },
+};
 
 export default function GDPRPage() {
   return (

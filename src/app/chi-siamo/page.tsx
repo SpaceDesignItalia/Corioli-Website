@@ -1,3 +1,18 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Chi siamo",
+  description: "Corioli nasce per creare un gestionale medico davvero pensato per la pratica clinica: software cloud, design medico, cartella clinica elettronica e sicurezza per specialisti.",
+  alternates: {
+    canonical: "/chi-siamo",
+  },
+  openGraph: {
+    title: "Chi siamo | Corioli",
+    description: "Il team dietro Corioli, gestionale medico cloud per specialisti.",
+    url: "https://corioli.it/chi-siamo",
+  },
+};
+
 export default function ChiSiamoPage() {
   return (
     <div className="pt-32 pb-24 bg-background">

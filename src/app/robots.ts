@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: '/lp/',
+      disallow: ['/login'],
     },
     sitemap: 'https://corioli.it/sitemap.xml',
   }

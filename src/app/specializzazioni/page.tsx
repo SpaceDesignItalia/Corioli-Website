@@ -1,5 +1,19 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ChevronRight } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Gestionale medico per ginecologia, ostetricia e pediatria",
+  description: "Corioli è il gestionale medico specializzato per ginecologi, ostetrici e pediatri: moduli verticali, cartella clinica elettronica, curve, percentili e referti.",
+  alternates: {
+    canonical: "/specializzazioni",
+  },
+  openGraph: {
+    title: "Specializzazioni Corioli | Gestionale medico verticale",
+    description: "Software gestionale medico per ginecologia, ostetricia e pediatria, con strumenti clinici integrati.",
+    url: "https://corioli.it/specializzazioni",
+  },
+};
 
 export default function SpecializzazioniPage() {
   return (

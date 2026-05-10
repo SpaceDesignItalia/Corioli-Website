@@ -1,5 +1,19 @@
+import type { Metadata } from "next";
 import { FileText, Activity, Lock, ArrowRight, Layers, FileOutput } from "lucide-react";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Funzionalità gestionale medico",
+  description: "Scopri le funzionalità di Corioli: cartella clinica elettronica, anamnesi strutturata, refertazione PDF, calcolatori clinici, sicurezza cloud e GDPR per studi medici specialistici.",
+  alternates: {
+    canonical: "/funzionalita",
+  },
+  openGraph: {
+    title: "Funzionalità Corioli | Gestionale medico cloud",
+    description: "Cartella clinica elettronica, referti, calcolatori clinici e sicurezza GDPR per medici specialisti.",
+    url: "https://corioli.it/funzionalita",
+  },
+};
 
 export default function FunzionalitaPage() {
   return (

@@ -1,3 +1,18 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "Privacy Policy di Corioli per sito e servizi SaaS: trattamento dati personali, dati clinici, sicurezza e gestione privacy del gestionale medico.",
+  alternates: {
+    canonical: "/privacy-policy",
+  },
+  openGraph: {
+    title: "Privacy Policy | Corioli",
+    description: "Informazioni privacy per Corioli, gestionale medico cloud per specialisti.",
+    url: "https://corioli.it/privacy-policy",
+  },
+};
+
 export default function PrivacyPolicyPage() {
   return (
     <div className="pt-32 pb-24 max-w-4xl mx-auto px-6 md:px-12 bg-background min-h-screen">

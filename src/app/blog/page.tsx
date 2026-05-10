@@ -1,5 +1,19 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Blog gestionale medico e digitalizzazione studio",
+  description: "Guide e approfondimenti su gestionale medico, cartella clinica elettronica, digitalizzazione dello studio medico, GDPR e software per ginecologi e specialisti.",
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    title: "Blog Corioli | Gestionale medico e studio digitale",
+    description: "Risorse per medici specialisti su software gestionale, cartella clinica elettronica, referti e sicurezza GDPR.",
+    url: "https://corioli.it/blog",
+  },
+};
 
 const articoli = [
   {
