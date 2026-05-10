@@ -36,7 +36,7 @@ export default function ContattiPage() {
               <div>
                 <h3 className="font-bold text-gray-900 mb-1">Email</h3>
                 <p className="text-gray-600 text-sm">info@corioli.it</p>
-                <p className="text-xs text-gray-500 mt-1">Rispondiamo in &lt; 24h</p>
+                <p className="text-xs text-gray-500 mt-1">Rispondiamo entro 24h</p>
               </div>
             </div>
 
@@ -46,7 +46,7 @@ export default function ContattiPage() {
               </div>
               <div>
                 <h3 className="font-bold text-gray-900 mb-1">Telefono</h3>
-                <p className="text-gray-600 text-sm">+39 02 1234 5678</p>
+                <p className="text-gray-600 text-sm">+39 393 800 1284</p>
                 <p className="text-xs text-gray-500 mt-1">Lun - Ven, 09:00 - 18:00</p>
               </div>
             </div>
@@ -57,10 +57,9 @@ export default function ContattiPage() {
               </div>
               <div>
                 <h3 className="font-bold text-gray-900 mb-1">Sede Legale</h3>
-                <p className="text-gray-600 text-sm">Via Milano 123, Roma (RM)<br/>Italia</p>
+                <p className="text-gray-600 text-sm">Sesto Fiorentino, Firenze (FI)<br/>Italia</p>
               </div>
-            </div>
-          </div>
+            </div>          </div>
         </div>
 
         {/* Form Column */}
@@ -95,14 +94,28 @@ export default function ContattiPage() {
                      </div>
                    </div>
 
-                   <div className="flex flex-col gap-2">
-                     <label htmlFor="specializzazione" className="text-sm font-medium text-gray-700">Specializzazione *</label>
-                     <select id="specializzazione" required className="bg-gray-50 border border-gray-200 rounded-xl p-3.5 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all text-sm appearance-none">
-                       <option value="">Seleziona la tua area clinica...</option>
-                       <option value="ginecologia">Ginecologia e Ostetricia</option>
-                       <option value="pediatria">Pediatria</option>
-                       <option value="altro">Altra specializzazione</option>
-                     </select>
+                   <div className="flex flex-col gap-3">
+                     <label className="text-sm font-medium text-gray-700">Specializzazione *</label>
+                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <label className="relative">
+                          <input type="radio" name="specializzazione" value="ginecologia" required className="peer sr-only" />
+                          <div className="p-3 text-sm text-center font-medium text-gray-600 border border-gray-200 rounded-xl cursor-pointer peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-700 hover:bg-gray-50 transition-all">
+                             Ginecologia
+                          </div>
+                        </label>
+                        <label className="relative">
+                          <input type="radio" name="specializzazione" value="pediatria" required className="peer sr-only" />
+                          <div className="p-3 text-sm text-center font-medium text-gray-600 border border-gray-200 rounded-xl cursor-pointer peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-700 hover:bg-gray-50 transition-all">
+                             Pediatria
+                          </div>
+                        </label>
+                        <label className="relative">
+                          <input type="radio" name="specializzazione" value="altro" required className="peer sr-only" />
+                          <div className="p-3 text-sm text-center font-medium text-gray-600 border border-gray-200 rounded-xl cursor-pointer peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-700 hover:bg-gray-50 transition-all">
+                             Altro
+                          </div>
+                        </label>
+                     </div>
                    </div>
 
                    <div className="flex flex-col gap-2">
