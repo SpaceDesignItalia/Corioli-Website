@@ -323,7 +323,7 @@ export default function Home() {
                      onClick={() => setActiveTab('ostetricia')} 
                      className={`flex-1 py-1.5 rounded-lg text-[11px] font-bold tracking-wider uppercase transition-all duration-300 ${activeTab === 'ostetricia' ? 'bg-brand-600 text-white shadow-md' : 'text-brand-400 hover:text-brand-200'}`}
                   >
-                     Ostetricia
+                     Ginecologia & Ostetricia
                   </button>
                   <button 
                      onClick={() => setActiveTab('pediatria')} 
@@ -597,7 +597,7 @@ export default function Home() {
             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-600 rounded-full blur-[80px] opacity-50 transform translate-x-1/2 -translate-y-1/2"></div>
             <div className="relative z-10">
                <h2 className="font-heading text-3xl md:text-5xl font-bold text-white mb-6">
-                 Pronto ad aggiornare il tuo studio?
+                 Pronto ad ottimizzare il tuo studio?
                </h2>
                <p className="text-brand-100 text-lg mb-10 max-w-2xl mx-auto">
                  Unisciti ai professionisti che hanno già scelto la semplicità e la sicurezza di Corioli per la loro pratica quotidiana.

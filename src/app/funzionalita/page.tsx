@@ -56,12 +56,76 @@ export default function FunzionalitaPage() {
             </ul>
           </div>
           <div className="order-1 lg:order-2">
-            <div className="aspect-[4/3] bg-gray-50 rounded-2xl border border-gray-100 shadow-soft p-8 flex items-center justify-center">
-               <div className="w-full max-w-sm bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col gap-5">
-                  <div className="h-4 bg-gray-200 rounded w-1/3"></div>
-                  <div className="h-10 border border-gray-200 rounded-lg flex items-center px-3"><div className="w-1/2 h-2.5 bg-gray-300 rounded"></div></div>
-                  <div className="h-10 border border-gray-200 rounded-lg flex items-center px-3"><div className="w-2/3 h-2.5 bg-gray-300 rounded"></div></div>
-                  <div className="h-20 border border-gray-200 rounded-lg p-3"><div className="w-full h-2.5 bg-gray-300 rounded mb-2"></div><div className="w-4/5 h-2.5 bg-gray-300 rounded"></div></div>
+            <div className="aspect-[4/3] bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 rounded-2xl shadow-2xl p-8 flex items-center justify-center relative overflow-hidden">
+               {/* Pattern di sfondo */}
+               <div className="absolute inset-0 opacity-10">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,white_1px,transparent_1px)] bg-[length:20px_20px]"></div>
+               </div>
+               
+               {/* Elementi visivi che rappresentano la struttura dei dati */}
+               <div className="relative z-10 w-full h-full flex flex-col items-center justify-center gap-6">
+                  
+                  {/* Icona centrale grande */}
+                  <div className="relative">
+                     <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/30 shadow-xl">
+                        <FileText size={36} className="text-white" strokeWidth={2} />
+                     </div>
+                     {/* Badge auto-completamento */}
+                     <div className="absolute -top-2 -right-2 w-8 h-8 bg-green-400 rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-white">
+                           <path d="M13 4L6 11L3 8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                     </div>
+                  </div>
+
+                  {/* Tre card che rappresentano le funzionalità */}
+                  <div className="flex gap-3 items-center">
+                     {/* Card 1: Campi Strutturati */}
+                     <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-xl border border-white/50 w-28 transform -rotate-3 hover:rotate-0 transition-transform">
+                        <div className="flex flex-col gap-2">
+                           <div className="h-2 bg-brand-200 rounded-full w-3/4"></div>
+                           <div className="h-2 bg-brand-200 rounded-full w-full"></div>
+                           <div className="h-2 bg-brand-200 rounded-full w-5/6"></div>
+                           <div className="mt-2 flex gap-1">
+                              <div className="h-4 px-2 bg-brand-100 rounded text-[8px] font-bold text-brand-700 flex items-center">ICD-10</div>
+                           </div>
+                        </div>
+                     </div>
+
+                     {/* Card 2: Timeline */}
+                     <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-xl border border-white/50 w-28 transform rotate-2 hover:rotate-0 transition-transform">
+                        <div className="flex items-center gap-2">
+                           <div className="flex flex-col gap-1.5">
+                              <div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div>
+                              <div className="w-0.5 h-6 bg-brand-200 mx-auto"></div>
+                              <div className="w-1.5 h-1.5 rounded-full bg-brand-300"></div>
+                              <div className="w-0.5 h-6 bg-brand-200 mx-auto"></div>
+                              <div className="w-1.5 h-1.5 rounded-full bg-brand-300"></div>
+                           </div>
+                           <div className="flex flex-col gap-2 flex-1">
+                              <div className="h-1.5 bg-brand-500 rounded-full w-full"></div>
+                              <div className="h-1.5 bg-brand-200 rounded-full w-3/4"></div>
+                              <div className="h-1.5 bg-brand-200 rounded-full w-2/3"></div>
+                           </div>
+                        </div>
+                     </div>
+
+                     {/* Card 3: Tags */}
+                     <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-xl border border-white/50 w-28 transform -rotate-2 hover:rotate-0 transition-transform">
+                        <div className="flex flex-wrap gap-1.5">
+                           <div className="h-3 px-2 bg-red-100 rounded-full text-[7px] font-bold text-red-700 flex items-center">Patologia</div>
+                           <div className="h-3 px-2 bg-blue-100 rounded-full text-[7px] font-bold text-blue-700 flex items-center">Allergia</div>
+                           <div className="h-3 px-2 bg-amber-100 rounded-full text-[7px] font-bold text-amber-700 flex items-center">Farmaco</div>
+                           <div className="h-3 px-2 bg-green-100 rounded-full text-[7px] font-bold text-green-700 flex items-center">+</div>
+                        </div>
+                     </div>
+                  </div>
+
+                  {/* Testo descrittivo */}
+                  <div className="text-center">
+                     <p className="text-white text-sm font-semibold drop-shadow-lg">Anamnesi Intelligente</p>
+                     <p className="text-brand-100 text-xs mt-1">Strutturata • Storico • Auto-completamento</p>
+                  </div>
                </div>
             </div>
           </div>
