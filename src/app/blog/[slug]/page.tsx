@@ -18,7 +18,8 @@ type BlogPost = {
 const posts: Record<string, BlogPost> = {
   "come-digitalizzare-lo-studio-ginecologico": {
     title: "Come digitalizzare lo studio ginecologico: la guida definitiva",
-    description: "Guida pratica per passare da carta, Word ed Excel a un gestionale medico per ginecologi con cartella clinica elettronica, referti e dati sicuri.",
+    description:
+      "Guida pratica per passare da carta, Word ed Excel a un gestionale medico per ginecologi con cartella clinica elettronica, referti e dati sicuri.",
     date: "24 Maggio 2024",
     category: "Gestione Studio",
     lead: "Digitalizzare uno studio ginecologico non significa solo sostituire la carta con uno schermo. Significa costruire un flusso clinico più ordinato, veloce e sicuro per medico, segreteria e paziente.",
@@ -39,7 +40,8 @@ const posts: Record<string, BlogPost> = {
   },
   "gestionale-medico-vs-word-ginecologi": {
     title: "Gestionale medico vs Word: perché i ginecologi cambiano",
-    description: "Confronto tra Word, Excel e un gestionale medico per ginecologi: limiti dei documenti generici, rischi operativi e vantaggi della cartella clinica elettronica.",
+    description:
+      "Confronto tra Word, Excel e un gestionale medico per ginecologi: limiti dei documenti generici, rischi operativi e vantaggi della cartella clinica elettronica.",
     date: "12 Maggio 2024",
     category: "Tecnologia",
     lead: "Word è familiare, ma non è un gestionale medico. Per uno studio ginecologico, usare documenti separati può creare archivi fragili, referti non strutturati e molto lavoro manuale.",
@@ -60,7 +62,8 @@ const posts: Record<string, BlogPost> = {
   },
   "cartella-clinica-elettronica-obbligatoria-2025": {
     title: "Cartella clinica elettronica: cosa cambia nel 2025?",
-    description: "Cosa valutare nel 2025 quando si sceglie una cartella clinica elettronica per studio medico: sicurezza, GDPR, backup, accessi e software cloud.",
+    description:
+      "Cosa valutare nel 2025 quando si sceglie una cartella clinica elettronica per studio medico: sicurezza, GDPR, backup, accessi e software cloud.",
     date: "3 Maggio 2024",
     category: "Normativa",
     lead: "La gestione digitale dei dati sanitari richiede sempre più attenzione a privacy, sicurezza e tracciabilità. Per gli studi medici privati, la cartella clinica elettronica deve essere scelta con criteri clinici e tecnici.",
@@ -81,7 +84,8 @@ const posts: Record<string, BlogPost> = {
   },
   "migliori-software-gestionali-medici-italia": {
     title: "Migliori software gestionali per medici in Italia (2025)",
-    description: "Guida ai migliori software gestionali per medici in Italia nel 2025: cosa valutare, differenze tra soluzioni generiche e verticali, e perché la specializzazione fa la differenza.",
+    description:
+      "Guida ai migliori software gestionali per medici in Italia nel 2025: cosa valutare, differenze tra soluzioni generiche e verticali, e perché la specializzazione fa la differenza.",
     date: "10 Gennaio 2025",
     category: "Confronto",
     lead: "Scegliere il gestionale medico giusto non è facile: l'offerta è ampia, i prezzi variano molto e i dettagli che contano davvero emergono solo durante l'uso clinico quotidiano. Questa guida ti aiuta a orientarti.",
@@ -106,7 +110,8 @@ const posts: Record<string, BlogPost> = {
   },
   "cos-e-cartella-clinica-elettronica-come-sceglierla": {
     title: "Cos'è la cartella clinica elettronica e come sceglierla",
-    description: "Guida completa alla cartella clinica elettronica per studi medici: differenze con la carta, vantaggi, criteri di scelta e cosa deve offrire un buon software medico.",
+    description:
+      "Guida completa alla cartella clinica elettronica per studi medici: differenze con la carta, vantaggi, criteri di scelta e cosa deve offrire un buon software medico.",
     date: "15 Gennaio 2025",
     category: "Guide",
     lead: "La cartella clinica elettronica è lo strumento centrale di qualsiasi studio medico moderno. Non è solo un archivio digitale: è il luogo in cui vive la storia clinica del paziente, strutturata in modo da essere utile durante la visita.",
@@ -131,7 +136,8 @@ const posts: Record<string, BlogPost> = {
   },
   "gestionale-medico-gdpr-cosa-deve-avere": {
     title: "Gestionale medico e GDPR: cosa deve avere per essere conforme",
-    description: "Guida pratica alla conformità GDPR per studi medici: cosa deve garantire un gestionale medico in termini di sicurezza, accessi, backup e contratti per proteggere i dati dei pazienti.",
+    description:
+      "Guida pratica alla conformità GDPR per studi medici: cosa deve garantire un gestionale medico in termini di sicurezza, accessi, backup e contratti per proteggere i dati dei pazienti.",
     date: "20 Gennaio 2025",
     category: "Normativa",
     lead: "I dati sanitari sono tra le informazioni più sensibili che esistano. Per un medico specialista privato, scegliere un gestionale non conforme al GDPR non è solo un rischio legale: è una responsabilità verso i propri pazienti.",
@@ -156,7 +162,8 @@ const posts: Record<string, BlogPost> = {
   },
   "come-sostituire-word-excel-studio-medico": {
     title: "Come sostituire Word e Excel nello studio medico",
-    description: "Guida pratica per passare da Word ed Excel a un gestionale medico: come migrare i dati storici, eliminare la carta e migliorare il flusso clinico senza perdere nulla.",
+    description:
+      "Guida pratica per passare da Word ed Excel a un gestionale medico: come migrare i dati storici, eliminare la carta e migliorare il flusso clinico senza perdere nulla.",
     date: "28 Gennaio 2025",
     category: "Gestione Studio",
     lead: "Word e Excel sono strumenti potenti, ma non sono stati progettati per gestire pazienti, visite cliniche e referti medici. Molti studi li usano per abitudine, senza rendersi conto di quanto tempo si perda ogni giorno.",
@@ -181,7 +188,8 @@ const posts: Record<string, BlogPost> = {
   },
   "gestionale-per-ginecologi-cosa-cercare": {
     title: "Gestionale per ginecologi: cosa cercare nel 2025",
-    description: "Guida alla scelta del gestionale medico per ginecologi: funzionalità cliniche, calcolatori ostetrici, cartella ostetrica elettronica, GDPR e differenze rispetto ai software generici.",
+    description:
+      "Guida alla scelta del gestionale medico per ginecologi: funzionalità cliniche, calcolatori ostetrici, cartella ostetrica elettronica, GDPR e differenze rispetto ai software generici.",
     date: "5 Febbraio 2025",
     category: "Ginecologia",
     lead: "Un ginecologo ha esigenze cliniche molto specifiche che un software generico non può soddisfare. Dalla biometria fetale alla curva di crescita, dalla cartella ostetrica al consenso informato: ogni visita richiede strumenti pensati per la specializzazione.",
@@ -210,7 +218,11 @@ export function generateStaticParams() {
   return Object.keys(posts).map((slug) => ({ slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+export function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Metadata {
   const post = posts[params.slug];
 
   if (!post) {
@@ -267,7 +279,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           name: "Corioli",
           logo: {
             "@type": "ImageObject",
-            url: "https://corioli.it/logo-icon.png",
+            url: "https://corioli.it/logo_short.png",
           },
         },
         mainEntityOfPage: `https://corioli.it/blog/${params.slug}`,
@@ -303,21 +315,33 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(articleStructuredData).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(articleStructuredData).replace(
+            /</g,
+            "\\u003c",
+          ),
         }}
       />
-      
+
       <div className="max-w-3xl mx-auto px-6 md:px-12">
-        <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-brand-600 transition-colors mb-12">
+        <Link
+          href="/blog"
+          className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-brand-600 transition-colors mb-12"
+        >
           <ArrowLeft size={16} /> Torna agli articoli
         </Link>
 
         <div className="mb-12">
           <div className="flex items-center gap-4 mb-6">
-            <span className="text-xs font-bold uppercase text-brand-600 bg-brand-50 px-2.5 py-1 rounded-md">{post.category}</span>
-            <span className="text-sm text-gray-500 font-medium">{post.date}</span>
+            <span className="text-xs font-bold uppercase text-brand-600 bg-brand-50 px-2.5 py-1 rounded-md">
+              {post.category}
+            </span>
+            <span className="text-sm text-gray-500 font-medium">
+              {post.date}
+            </span>
           </div>
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">{post.title}</h1>
+          <h1 className="font-heading text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            {post.title}
+          </h1>
         </div>
 
         <div className="prose prose-lg prose-brand max-w-none text-gray-700 leading-relaxed">
@@ -327,29 +351,40 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
           <div className="my-10 p-8 bg-brand-50 rounded-2xl border border-brand-100">
             <p className="italic text-brand-900 font-heading text-xl mb-0">
-              "Un gestionale medico utile non archivia soltanto dati: deve aiutare il medico a lavorare meglio durante la visita."
+              "Un gestionale medico utile non archivia soltanto dati: deve
+              aiutare il medico a lavorare meglio durante la visita."
             </p>
           </div>
 
           {post.sections.map((section) => (
             <section key={section.title}>
-              <h2 className="font-heading text-2xl font-bold mt-12 mb-4 text-gray-900">{section.title}</h2>
+              <h2 className="font-heading text-2xl font-bold mt-12 mb-4 text-gray-900">
+                {section.title}
+              </h2>
               <p className="mb-6">{section.body}</p>
             </section>
           ))}
         </div>
 
         <div className="mt-16 pt-10 border-t border-gray-100">
-           <div className="bg-brand-900 rounded-3xl p-10 text-center relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-brand-600 rounded-full blur-[80px] opacity-40 transform translate-x-1/2 -translate-y-1/2"></div>
-              <div className="relative z-10">
-                <h4 className="font-heading font-bold text-2xl text-white mb-3">Pronto a trasformare il tuo ambulatorio?</h4>
-                <p className="text-brand-100 text-sm mb-8 max-w-md mx-auto">Scopri come Corioli può farti risparmiare ore di lavoro amministrativo con una demo gratuita di 15 minuti.</p>
-                <Link href="/contatti" className="bg-white text-brand-900 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors inline-block text-sm shadow-md">
-                  Richiedi una Demo
-                </Link>
-              </div>
-           </div>
+          <div className="bg-brand-900 rounded-3xl p-10 text-center relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-600 rounded-full blur-[80px] opacity-40 transform translate-x-1/2 -translate-y-1/2"></div>
+            <div className="relative z-10">
+              <h4 className="font-heading font-bold text-2xl text-white mb-3">
+                Pronto a trasformare il tuo ambulatorio?
+              </h4>
+              <p className="text-brand-100 text-sm mb-8 max-w-md mx-auto">
+                Scopri come Corioli può farti risparmiare ore di lavoro
+                amministrativo con una demo gratuita di 15 minuti.
+              </p>
+              <Link
+                href="/contatti"
+                className="bg-white text-brand-900 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors inline-block text-sm shadow-md"
+              >
+                Richiedi una Demo
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </article>

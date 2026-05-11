@@ -23,12 +23,13 @@ export const metadata: Metadata = {
     default: "Corioli | Gestionale medico cloud per specialisti",
     template: "%s | Corioli",
   },
-  description: "Corioli è il gestionale medico cloud per dottori e studi specialistici: cartella clinica elettronica, referti, calcolatori clinici, sicurezza GDPR e workflow per ginecologia, ostetricia e pediatria.",
+  description:
+    "Corioli è il gestionale medico cloud per dottori e studi specialistici: cartella clinica elettronica, referti, calcolatori clinici, sicurezza GDPR e workflow per ginecologia, ostetricia e pediatria.",
   alternates: {
     canonical: "/",
   },
   icons: {
-    icon: "/logo-icon.png",
+    icon: "/logo_short.png",
   },
   keywords: [
     "gestionale medico",
@@ -63,7 +64,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Corioli | Gestionale medico cloud per specialisti",
-    description: "Software gestionale medico per dottori e studi specialistici: cartella clinica elettronica, referti, calcolatori clinici e sicurezza GDPR.",
+    description:
+      "Software gestionale medico per dottori e studi specialistici: cartella clinica elettronica, referti, calcolatori clinici e sicurezza GDPR.",
     url: siteUrl,
     siteName: "Corioli",
     images: [
@@ -80,7 +82,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Corioli | Gestionale medico cloud per specialisti",
-    description: "Cartella clinica elettronica, referti e calcolatori clinici per studi medici specialistici.",
+    description:
+      "Cartella clinica elettronica, referti e calcolatori clinici per studi medici specialistici.",
     images: ["/og-image.jpg"],
   },
 };
@@ -93,7 +96,7 @@ const structuredData = {
       "@id": `${siteUrl}/#organization`,
       name: "Corioli",
       url: siteUrl,
-      logo: `${siteUrl}/logo-icon.png`,
+      logo: `${siteUrl}/logo_short.png`,
       contactPoint: {
         "@type": "ContactPoint",
         email: "info@corioli.it",
@@ -112,7 +115,8 @@ const structuredData = {
       publisher: {
         "@id": `${siteUrl}/#organization`,
       },
-      description: "Sito ufficiale di Corioli, gestionale medico cloud per dottori e studi specialistici.",
+      description:
+        "Sito ufficiale di Corioli, gestionale medico cloud per dottori e studi specialistici.",
     },
     {
       "@type": "SoftwareApplication",
@@ -132,7 +136,8 @@ const structuredData = {
       publisher: {
         "@id": `${siteUrl}/#organization`,
       },
-      description: "Gestionale medico cloud per medici specialisti con cartella clinica elettronica, refertazione PDF, calcolatori clinici, backup e conformita GDPR.",
+      description:
+        "Gestionale medico cloud per medici specialisti con cartella clinica elettronica, refertazione PDF, calcolatori clinici, backup e conformita GDPR.",
       featureList: [
         "Cartella clinica elettronica per specialisti",
         "Refertazione PDF",
@@ -181,7 +186,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it" className="scroll-smooth">
-      <body className={`${inter.variable} ${outfit.variable} ${newsreader.variable} font-sans antialiased min-h-screen flex flex-col bg-background text-foreground`}>
+      <body
+        className={`${inter.variable} ${outfit.variable} ${newsreader.variable} font-sans antialiased min-h-screen flex flex-col bg-background text-foreground`}
+      >
         <Script
           id="Cookiebot"
           src="https://consent.cookiebot.com/uc.js"
@@ -197,9 +204,7 @@ export default function RootLayout({
           }}
         />
         <Header />
-        <main className="flex-grow">
-          {children}
-        </main>
+        <main className="flex-grow">{children}</main>
         <Footer />
       </body>
     </html>

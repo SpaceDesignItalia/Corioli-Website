@@ -39,29 +39,34 @@ export default function Header() {
   ];
 
   return (
-    <header className={clsx(
-      "fixed top-0 w-full z-50 transition-all duration-500",
-      isScrolled ? "py-4 pointer-events-none" : "py-5 pointer-events-auto"
-    )}>
+    <header
+      className={clsx(
+        "fixed top-0 w-full z-50 transition-all duration-500",
+        isScrolled ? "py-4 pointer-events-none" : "py-5 pointer-events-auto",
+      )}
+    >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center relative">
-        
         {/* Logo */}
-        <div className={clsx(
-          "flex items-center transition-all duration-500 pointer-events-auto",
-          isScrolled ? "opacity-0 -translate-y-4" : "opacity-100 translate-y-0"
-        )}>
+        <div
+          className={clsx(
+            "flex items-center transition-all duration-500 pointer-events-auto",
+            isScrolled
+              ? "opacity-0 -translate-y-4"
+              : "opacity-100 translate-y-0",
+          )}
+        >
           <Link href="/" className="flex items-center gap-2">
-            <Image 
-              src="/logo-full.png" 
-              alt="Corioli Logo" 
-              width={280} 
-              height={80} 
+            <Image
+              src="/logo_long.png"
+              alt="Corioli Logo"
+              width={280}
+              height={80}
               className="h-20 md:h-24 w-auto"
               priority
             />
           </Link>
         </div>
-        
+
         {/* Desktop Nav - Centered */}
         <div className="absolute left-1/2 -translate-x-1/2 z-50 pointer-events-auto">
           <nav className={clsx(
@@ -82,11 +87,16 @@ export default function Header() {
               })}
             </div>
             {/* Integrated Button */}
-            <div className={clsx(
-              "overflow-hidden transition-all duration-500 flex items-center",
-              isScrolled ? "max-w-[200px] opacity-100" : "max-w-0 opacity-0"
-            )}>
-              <Link href="/contatti" className="bg-brand-800 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-brand-900 transition-colors whitespace-nowrap shadow-sm">
+            <div
+              className={clsx(
+                "overflow-hidden transition-all duration-500 flex items-center",
+                isScrolled ? "max-w-[200px] opacity-100" : "max-w-0 opacity-0",
+              )}
+            >
+              <Link
+                href="/contatti"
+                className="bg-brand-800 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-brand-900 transition-colors whitespace-nowrap shadow-sm"
+              >
                 Inizia ora
               </Link>
             </div>
@@ -94,21 +104,33 @@ export default function Header() {
         </div>
 
         {/* Desktop Standalone Button */}
-        <div className={clsx(
-          "hidden lg:flex items-center gap-4 transition-all duration-500 pointer-events-auto",
-          isScrolled ? "opacity-0 -translate-y-4" : "opacity-100 translate-y-0"
-        )}>
-          <Link href="/contatti" className="bg-brand-800 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-brand-900 transition-all shadow-sm hover:shadow-md flex items-center gap-2 group">
+        <div
+          className={clsx(
+            "hidden lg:flex items-center gap-4 transition-all duration-500 pointer-events-auto",
+            isScrolled
+              ? "opacity-0 -translate-y-4"
+              : "opacity-100 translate-y-0",
+          )}
+        >
+          <Link
+            href="/contatti"
+            className="bg-brand-800 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-brand-900 transition-all shadow-sm hover:shadow-md flex items-center gap-2 group"
+          >
             Inizia la prova gratuita
-            <span className="group-hover:translate-x-0.5 transition-transform">→</span>
+            <span className="group-hover:translate-x-0.5 transition-transform">
+              →
+            </span>
           </Link>
         </div>
 
         {/* Mobile Toggle */}
-        <button className={clsx(
-          "lg:hidden text-gray-700 transition-all duration-500 pointer-events-auto bg-white/80 p-2 rounded-full shadow-sm backdrop-blur-md border border-gray-200/50",
-          isScrolled ? "translate-y-0" : ""
-        )} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+        <button
+          className={clsx(
+            "lg:hidden text-gray-700 transition-all duration-500 pointer-events-auto bg-white/80 p-2 rounded-full shadow-sm backdrop-blur-md border border-gray-200/50",
+            isScrolled ? "translate-y-0" : "",
+          )}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
