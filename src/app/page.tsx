@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import posthog from "posthog-js";
 import {
   ArrowRight,
   CheckCircle2,
@@ -262,6 +263,7 @@ export default function Home() {
               <Link
                 href="/contatti"
                 className="w-full sm:w-auto bg-brand-800 text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-950 transition-all shadow-md hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 group text-lg"
+                onClick={() => posthog.capture("hero_cta_clicked", { location: "hero" })}
               >
                 Inizia la prova gratuita{" "}
                 <ArrowRight
@@ -433,13 +435,13 @@ export default function Home() {
               {/* Dashboard Navigation Tabs */}
               <div className="relative z-20 flex bg-brand-950 p-1 rounded-xl mb-4 border border-brand-800 shadow-inner">
                 <button
-                  onClick={() => setActiveTab("ostetricia")}
+                  onClick={() => { setActiveTab("ostetricia"); posthog.capture("dashboard_tab_switched", { tab: "ostetricia" }); }}
                   className={`flex-1 py-1.5 rounded-lg text-[11px] font-bold tracking-wider uppercase transition-all duration-300 ${activeTab === "ostetricia" ? "bg-brand-600 text-white shadow-md" : "text-brand-400 hover:text-brand-200"}`}
                 >
                   Ostetricia
                 </button>
                 <button
-                  onClick={() => setActiveTab("pediatria")}
+                  onClick={() => { setActiveTab("pediatria"); posthog.capture("dashboard_tab_switched", { tab: "pediatria" }); }}
                   className={`flex-1 py-1.5 rounded-lg text-[11px] font-bold tracking-wider uppercase transition-all duration-300 ${activeTab === "pediatria" ? "bg-brand-600 text-white shadow-md" : "text-brand-400 hover:text-brand-200"}`}
                 >
                   Pediatria

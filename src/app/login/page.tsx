@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, KeyRound, Mail } from "lucide-react";
+import posthog from "posthog-js";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -11,6 +12,8 @@ export default function LoginPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
+    posthog.capture("login_attempted", { email });
+    posthog.identify(email);
     setIsLoading(true);
     // Simulate login network request
     setTimeout(() => {

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { getPostHogClient } from "@/lib/posthog-server";
 
 const CONTACT_TO = "info@corioli.it";
 
@@ -57,6 +58,13 @@ export async function POST(req: NextRequest) {
         haNote: Boolean(note),
       },
     );
+    const posthog = getPostHogClient();
+    posthog.capture({
+      distinctId: email.trim(),
+      event: "contact_form_submitted",
+      properties: { specializzazione, has_note: Boolean(note), skip_email: true },
+    });
+    posthog.identify({ distinctId: email.trim(), properties: { name: nome.trim(), specializzazione } });
     return NextResponse.json({ ok: true });
   }
 
@@ -146,6 +154,14 @@ export async function POST(req: NextRequest) {
       { status: 502 },
     );
   }
+
+  const posthog = getPostHogClient();
+  posthog.capture({
+    distinctId: email.trim(),
+    event: "contact_form_submitted",
+    properties: { specializzazione, has_note: Boolean(note) },
+  });
+  posthog.identify({ distinctId: email.trim(), properties: { name: nome.trim(), specializzazione } });
 
   return NextResponse.json({ ok: true });
 }

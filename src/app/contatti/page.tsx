@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Mail, MapPin, Phone, MessageSquare } from "lucide-react";
 import Link from "next/link";
+import posthog from "posthog-js";
 
 export default function ContattiPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -28,12 +29,23 @@ export default function ContattiPage() {
       });
       const data = (await res.json().catch(() => ({}))) as { error?: string };
       if (!res.ok) {
-        setSendError(data.error ?? "Invio non riuscito. Riprova tra poco.");
+        const errorMsg = data.error ?? "Invio non riuscito. Riprova tra poco.";
+        setSendError(errorMsg);
+        posthog.capture("demo_request_failed", {
+          error: errorMsg,
+          specializzazione,
+        });
         return;
       }
+      posthog.capture("demo_request_submitted", {
+        specializzazione,
+        has_note: Boolean(messaggio),
+      });
+      posthog.identify(email, { name: nome, specializzazione });
       setSubmitted(true);
       form.reset();
-    } catch {
+    } catch (err) {
+      posthog.captureException(err);
       setSendError("Errore di rete. Controlla la connessione e riprova.");
     } finally {
       setSending(false);

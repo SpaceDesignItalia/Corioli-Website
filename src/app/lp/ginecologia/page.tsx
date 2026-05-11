@@ -1,10 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CheckCircle2, ShieldCheck } from "lucide-react";
+import posthog from "posthog-js";
 
 export default function LandingPageGinecologia() {
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    posthog.capture("lp_ginecologia_viewed");
+  }, []);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -76,7 +81,7 @@ export default function LandingPageGinecologia() {
                      <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2 text-center">Inizia la prova gratuita di 14 giorni</h2>
                      <p className="text-gray-500 text-sm text-center mb-8">Nessun impegno. Nessuna carta di credito richiesta.</p>
                      
-                     <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="flex flex-col gap-5">
+                     <form onSubmit={(e) => { e.preventDefault(); posthog.capture("lp_ginecologia_demo_requested"); setSubmitted(true); }} className="flex flex-col gap-5">
                         <div className="flex flex-col gap-1.5">
                            <label className="text-sm font-medium text-gray-700">Nome e Cognome *</label>
                            <input type="text" required className="bg-gray-50 border border-gray-200 rounded-xl p-3.5 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all text-sm" />

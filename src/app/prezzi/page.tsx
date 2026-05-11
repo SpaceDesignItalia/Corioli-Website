@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Check, Info } from "lucide-react";
 import clsx from "clsx";
+import posthog from "posthog-js";
 
 export default function PricingPage() {
   const [annual, setAnnual] = useState(true);
@@ -20,15 +21,15 @@ export default function PricingPage() {
 
       <div className="flex justify-center mb-16">
         <div className="bg-gray-100 p-1 rounded-xl flex items-center border border-gray-200">
-          <button 
+          <button
             className={clsx("px-6 py-2.5 rounded-lg text-sm font-medium transition-colors", !annual ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-900")}
-            onClick={() => setAnnual(false)}
+            onClick={() => { setAnnual(false); posthog.capture("pricing_billing_toggled", { billing_period: "mensile" }); }}
           >
             Fatturazione Mensile
           </button>
-          <button 
+          <button
             className={clsx("px-6 py-2.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-2", annual ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-900")}
-            onClick={() => setAnnual(true)}
+            onClick={() => { setAnnual(true); posthog.capture("pricing_billing_toggled", { billing_period: "annuale" }); }}
           >
             Annuale <span className="bg-brand-100 text-brand-700 px-2 py-0.5 rounded-full text-xs font-bold">-20%</span>
           </button>
@@ -50,7 +51,11 @@ export default function PricingPage() {
                <span className="text-gray-500 font-medium">/ mese</span>
              </div>
 
-             <Link href="/contatti" className="block w-full bg-brand-600 text-white text-center py-4 rounded-xl font-medium hover:bg-brand-700 transition-colors mb-10 shadow-soft hover:shadow-md">
+             <Link
+               href="/contatti"
+               className="block w-full bg-brand-600 text-white text-center py-4 rounded-xl font-medium hover:bg-brand-700 transition-colors mb-10 shadow-soft hover:shadow-md"
+               onClick={() => posthog.capture("pricing_cta_clicked", { billing_period: annual ? "annuale" : "mensile", price: annual ? 15 : 19 })}
+             >
                Inizia la prova di 14 giorni
              </Link>
 

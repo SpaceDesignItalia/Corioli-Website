@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { FileText, Activity, Lock, ArrowRight, Layers, FileOutput } from "lucide-react";
+import { FileText, Activity, Lock, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import FeaturesCta from "@/components/FeaturesCta";
 
 export const metadata: Metadata = {
   title: "Funzionalità gestionale medico",
@@ -219,9 +220,7 @@ export default function FunzionalitaPage() {
         <div className="max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-6">Migliora la qualità del tuo tempo in studio</h2>
           <p className="text-lg text-gray-600 mb-10 max-w-2xl">Scopri di persona come la nostra piattaforma può semplificare la tua attività clinica.</p>
-          <Link href="/contatti" className="bg-brand-600 text-white px-8 py-4 rounded-xl font-medium hover:bg-brand-700 transition-colors shadow-soft hover:shadow-card">
-            Richiedi Demo
-          </Link>
+          <FeaturesCta />
         </div>
       </section>
 
