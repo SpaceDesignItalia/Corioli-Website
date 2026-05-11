@@ -456,27 +456,16 @@ export default function Home() {
                     stroke="currentColor"
                     strokeWidth="2"
                   >
-                     Ginecologia & Ostetricia
-                  </button>
-                  <button 
-                     onClick={() => setActiveTab('pediatria')} 
-                     className={`flex-1 py-1.5 rounded-lg text-[11px] font-bold tracking-wider uppercase transition-all duration-300 ${activeTab === 'pediatria' ? 'bg-brand-600 text-white shadow-md' : 'text-brand-400 hover:text-brand-200'}`}
-                  >
-                     Pediatria
-                  </button>
-               </div>
-               
-               {/* Terminal/Search Header */}
-               <div className="relative z-10 w-full bg-brand-950 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6 border border-brand-800 shadow-inner flex items-center gap-2 sm:gap-3 min-w-0">
-                  <div className="text-brand-400 shrink-0">
-                    <svg className="w-4 h-4 sm:w-[18px] sm:h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                  </div>
-                  <div className="font-mono text-brand-100 text-xs sm:text-sm md:text-base flex-1 flex items-center min-w-0">
-                     <span className="opacity-50 mr-1.5 sm:mr-2 shrink-0">&gt;</span>
-                     <span className="truncate">{typedText}</span>
-                     <span className="inline-block w-2 h-3.5 sm:h-4 bg-brand-400 ml-1 shrink-0 animate-pulse"></span>
-                  </div>
-               </div>
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.3-4.3" />
+                  </svg>
+                </div>
+                <div className="font-mono text-brand-100 text-xs sm:text-sm md:text-base flex-1 flex items-center min-w-0">
+                  <span className="opacity-50 mr-1.5 sm:mr-2 shrink-0">&gt;</span>
+                  <span className="truncate">{typedText}</span>
+                  <span className="inline-block w-2 h-3.5 sm:h-4 bg-brand-400 ml-1 shrink-0 animate-pulse"></span>
+                </div>
+              </div>
 
               {/* Calculators Grid: 1 col su mobile per evitare grafici schiacciati */}
               <div className="relative z-10 flex-1 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 min-h-0">
