@@ -148,8 +148,8 @@ export default function Header() {
           onClick={() => setMobileMenuOpen(false)}
         />
         <div className={clsx(
-          "relative bg-white/95 backdrop-blur-xl rounded-3xl border border-gray-200/80 shadow-2xl p-8 w-full max-w-sm flex flex-col items-center gap-3 transition-all duration-300 pointer-events-auto",
-          mobileMenuOpen ? "scale-100 translate-y-0" : "scale-95 -translate-y-4"
+          "relative bg-white/95 backdrop-blur-xl rounded-3xl border border-gray-200/80 shadow-2xl p-8 w-full max-w-sm flex flex-col items-center gap-3 transition-all duration-300",
+          mobileMenuOpen ? "scale-100 translate-y-0 pointer-events-auto" : "scale-95 -translate-y-4 pointer-events-none"
         )}>
           <button 
             onClick={() => setMobileMenuOpen(false)} 
@@ -169,9 +169,6 @@ export default function Header() {
             );
           })}
           <div className="w-full border-t border-gray-100 mt-3 pt-5 flex flex-col gap-3">
-            <Link href="/login" className="text-center py-3 rounded-xl border border-gray-200 text-gray-700 font-medium hover:bg-gray-50 transition-colors" onClick={() => setMobileMenuOpen(false)}>
-              Accedi
-            </Link>
             <Link href="/contatti" className="text-center py-3 rounded-xl bg-brand-700 text-white font-semibold shadow-md hover:bg-brand-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>
               Richiedi Demo
             </Link>

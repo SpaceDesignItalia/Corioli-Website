@@ -19,16 +19,16 @@ export default function PricingPage() {
         </p>
       </div>
 
-      <div className="flex justify-center mb-16">
-        <div className="bg-gray-100 p-1 rounded-xl flex items-center border border-gray-200">
+      <div className="flex justify-center mb-16 px-6">
+        <div className="bg-gray-100 p-1 rounded-xl flex items-center border border-gray-200 w-full max-w-xs sm:w-auto">
           <button
-            className={clsx("px-6 py-2.5 rounded-lg text-sm font-medium transition-colors", !annual ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-900")}
+            className={clsx("flex-1 sm:flex-none px-4 sm:px-6 py-2.5 rounded-lg text-sm font-medium transition-colors text-center", !annual ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-900")}
             onClick={() => { setAnnual(false); posthog.capture("pricing_billing_toggled", { billing_period: "mensile" }); }}
           >
-            Fatturazione Mensile
+            Mensile
           </button>
           <button
-            className={clsx("px-6 py-2.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-2", annual ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-900")}
+            className={clsx("flex-1 sm:flex-none px-4 sm:px-6 py-2.5 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2", annual ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-900")}
             onClick={() => { setAnnual(true); posthog.capture("pricing_billing_toggled", { billing_period: "annuale" }); }}
           >
             Annuale <span className="bg-brand-100 text-brand-700 px-2 py-0.5 rounded-full text-xs font-bold">-20%</span>
@@ -64,14 +64,14 @@ export default function PricingPage() {
                  { text: "Cartella clinica elettronica illimitata" },
                  { text: "Anagrafica pazienti cloud sicura" },
                  { text: "Refertazione in formato PDF" },
-                 { text: "Calcolatori avanzati: 90 giorni inclusi", nowrap: true },
+                 { text: "Calcolatori avanzati: 90 giorni inclusi" },
                  { text: "Supporto prioritario via chat/email" },
                  { text: "Backup giornaliero georeplicato" },
                  { text: "Conformità privacy e GDPR completa" },
                ].map((feature, i) => (
                  <li key={i} className="flex items-start gap-3">
                    <Check size={18} className="text-brand-500 shrink-0 mt-0.5" />
-                   <span className={clsx("font-medium", feature.nowrap && "whitespace-nowrap")}>{feature.text}</span>
+                   <span className="font-medium">{feature.text}</span>
                  </li>
                ))}
              </ul>
