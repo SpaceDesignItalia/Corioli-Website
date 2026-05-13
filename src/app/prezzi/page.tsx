@@ -56,7 +56,7 @@ export default function PricingPage() {
                className="block w-full bg-brand-600 text-white text-center py-4 rounded-xl font-medium hover:bg-brand-700 transition-colors mb-10 shadow-soft hover:shadow-md"
                onClick={() => posthog.capture("pricing_cta_clicked", { billing_period: annual ? "annuale" : "mensile", price: annual ? 15 : 19 })}
              >
-               Inizia la prova di 14 giorni
+               Inizia la prova gratuita di 90 giorni
              </Link>
 
              <ul className="flex flex-col gap-4 text-sm text-gray-700">
@@ -64,7 +64,7 @@ export default function PricingPage() {
                  { text: "Cartella clinica elettronica illimitata" },
                  { text: "Anagrafica pazienti cloud sicura" },
                  { text: "Refertazione in formato PDF" },
-                 { text: "Calcolatori avanzati: 3 mesi inclusi", nowrap: true },
+                 { text: "Calcolatori avanzati: 90 giorni inclusi", nowrap: true },
                  { text: "Supporto prioritario via chat/email" },
                  { text: "Backup giornaliero georeplicato" },
                  { text: "Conformità privacy e GDPR completa" },
