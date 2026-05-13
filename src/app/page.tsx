@@ -221,8 +221,8 @@ export default function Home() {
             <div className="text-brand-700 font-bold text-[10px] md:text-xs tracking-[0.2em] uppercase mb-8 font-sans">
               SOFTWARE GESTIONALE MEDICO
             </div>
-            <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl text-gray-950 leading-[1.0] mb-10 tracking-tight">
-              <span className="font-newsreader italic font-normal whitespace-nowrap">
+            <h1 className="font-heading text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl text-gray-950 leading-[1.1] sm:leading-[1.0] mb-10 tracking-tight">
+              <span className="font-newsreader italic font-normal">
                 Il gestionale medico
               </span>{" "}
               <br />
@@ -387,10 +387,10 @@ export default function Home() {
               <Calculator size={14} /> Strumenti Integrati
             </div>
             <h2 className="font-heading text-2xl min-[400px]:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-              <span className="block whitespace-nowrap">
+              <span className="block">
                 Ottimizza il tempo:
               </span>
-              <span className="block whitespace-nowrap">
+              <span className="block">
                 la tua risorsa più preziosa.
               </span>
             </h2>
@@ -438,7 +438,7 @@ export default function Home() {
                   onClick={() => { setActiveTab("ostetricia"); posthog.capture("dashboard_tab_switched", { tab: "ostetricia" }); }}
                   className={`flex-1 py-1.5 rounded-lg text-[11px] font-bold tracking-wider uppercase transition-all duration-300 ${activeTab === "ostetricia" ? "bg-brand-600 text-white shadow-md" : "text-brand-400 hover:text-brand-200"}`}
                 >
-                  Ostetricia
+                  Ginecologia & Ostetricia
                 </button>
                 <button
                   onClick={() => { setActiveTab("pediatria"); posthog.capture("dashboard_tab_switched", { tab: "pediatria" }); }}
