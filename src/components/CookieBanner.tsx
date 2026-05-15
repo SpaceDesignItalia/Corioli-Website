@@ -1,26 +1,30 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import {
+  getStoredCookieConsent,
+  setStoredCookieConsent,
+} from "@/lib/cookie-consent";
+import { initPostHog, shutdownPostHog } from "@/lib/posthog-client";
 
 export default function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Check if the user has already accepted the cookies
-    const cookieConsent = localStorage.getItem("cookie_consent");
-    if (!cookieConsent) {
-      // Show the banner if no consent is found
+    if (!getStoredCookieConsent()) {
       setIsVisible(true);
     }
   }, []);
 
   const acceptCookies = () => {
-    localStorage.setItem("cookie_consent", "accepted");
+    setStoredCookieConsent("accepted");
+    initPostHog();
     setIsVisible(false);
   };
 
   const declineCookies = () => {
-    localStorage.setItem("cookie_consent", "declined");
+    setStoredCookieConsent("declined");
+    shutdownPostHog();
     setIsVisible(false);
   };
 
