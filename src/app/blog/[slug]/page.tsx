@@ -218,12 +218,13 @@ export function generateStaticParams() {
   return Object.keys(posts).map((slug) => ({ slug }));
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
-}): Metadata {
-  const post = posts[params.slug];
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = posts[slug];
 
   if (!post) {
     return {
@@ -239,21 +240,26 @@ export function generateMetadata({
     title: post.title,
     description: post.description,
     alternates: {
-      canonical: `/blog/${params.slug}`,
+      canonical: `/blog/${slug}`,
     },
     openGraph: {
       title: post.title,
       description: post.description,
       type: "article",
-      url: `https://corioli.it/blog/${params.slug}`,
+      url: `https://corioli.it/blog/${slug}`,
       publishedTime: "2024-05-24",
       authors: ["Corioli"],
     },
   };
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = posts[params.slug];
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const post = posts[slug];
 
   if (!post) {
     notFound();
@@ -282,7 +288,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             url: "https://corioli.it/logo_short.png",
           },
         },
-        mainEntityOfPage: `https://corioli.it/blog/${params.slug}`,
+        mainEntityOfPage: `https://corioli.it/blog/${slug}`,
       },
       {
         "@type": "BreadcrumbList",
@@ -303,7 +309,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             "@type": "ListItem",
             position: 3,
             name: post.title,
-            item: `https://corioli.it/blog/${params.slug}`,
+            item: `https://corioli.it/blog/${slug}`,
           },
         ],
       },
