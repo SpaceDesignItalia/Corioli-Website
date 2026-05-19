@@ -52,7 +52,7 @@ export default function PricingPage() {
              </div>
 
              <Link
-               href="/contatti"
+               href="/download"
                className="block w-full bg-brand-600 text-white text-center py-4 rounded-xl font-medium hover:bg-brand-700 transition-colors mb-10 shadow-soft hover:shadow-md"
                onClick={() => posthog.capture("pricing_cta_clicked", { billing_period: annual ? "annuale" : "mensile", price: annual ? 15 : 19 })}
              >

@@ -70,7 +70,7 @@ export default function LandingPageGinecologia() {
                         <CheckCircle2 size={32} />
                      </div>
                      <h3 className="font-heading text-3xl font-bold text-gray-900 mb-4">Richiesta ricevuta.</h3>
-                     <p className="text-gray-600 leading-relaxed">Grazie Dottore. Un nostro specialista la contatterà nelle prossime 24 ore per l'attivazione della demo gratuita di 14 giorni.</p>
+                     <p className="text-gray-600 leading-relaxed">Grazie Dottore. Un nostro specialista la contatterà nelle prossime 24 ore per l'attivazione della demo gratuita di 90 giorni.</p>
                   </div>
                ) : (
                   <>
@@ -78,7 +78,7 @@ export default function LandingPageGinecologia() {
                         <ShieldCheck size={20} />
                         <span className="text-sm font-bold uppercase tracking-widest">Test Gratuito</span>
                      </div>
-                     <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2 text-center">Inizia la prova gratuita di 14 giorni</h2>
+                     <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2 text-center">Inizia la prova gratuita di 90 giorni</h2>
                      <p className="text-gray-500 text-sm text-center mb-8">Nessun impegno. Nessuna carta di credito richiesta.</p>
                      
                      <form onSubmit={(e) => { e.preventDefault(); posthog.capture("lp_ginecologia_demo_requested"); setSubmitted(true); }} className="flex flex-col gap-5">

@@ -94,7 +94,7 @@ export default function Header() {
               )}
             >
               <Link
-                href="/contatti"
+                href="/download"
                 className="bg-brand-800 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-brand-900 transition-colors whitespace-nowrap shadow-sm"
               >
                 Inizia ora
@@ -113,7 +113,7 @@ export default function Header() {
           )}
         >
           <Link
-            href="/contatti"
+            href="/download"
             className="bg-brand-800 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-brand-900 transition-all shadow-sm hover:shadow-md flex items-center gap-2 group"
           >
             Inizia la prova gratuita
@@ -169,8 +169,8 @@ export default function Header() {
             );
           })}
           <div className="w-full border-t border-gray-100 mt-3 pt-5 flex flex-col gap-3">
-            <Link href="/contatti" className="text-center py-3 rounded-xl bg-brand-700 text-white font-semibold shadow-md hover:bg-brand-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>
-              Richiedi Demo
+            <Link href="/download" className="text-center py-3 rounded-xl bg-brand-700 text-white font-semibold shadow-md hover:bg-brand-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>
+              Inizia la prova
             </Link>
           </div>
         </div>

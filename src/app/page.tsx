@@ -261,7 +261,7 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
               <Link
-                href="/contatti"
+                href="/download"
                 className="w-full sm:w-auto bg-brand-800 text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-950 transition-all shadow-md hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 group text-lg"
                 onClick={() => posthog.capture("hero_cta_clicked", { location: "hero" })}
               >
@@ -279,7 +279,7 @@ export default function Home() {
               </Link>
             </div>
             <p className="text-sm text-gray-400 font-medium">
-              Nessuna carta di credito richiesta &bull; Prova gratuita di 14
+              Nessuna carta di credito richiesta &bull; Prova gratuita di 90
               giorni
             </p>
           </div>

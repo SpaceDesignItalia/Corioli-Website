@@ -208,7 +208,7 @@ const posts: Record<string, BlogPost> = {
       },
       {
         title: "Corioli per ginecologi e ostetrici",
-        body: "Corioli nasce specificamente per ginecologia e ostetricia, sviluppato con la consulenza di specialisti delle migliori strutture italiane. Include tutti gli strumenti clinici elencati sopra, una cartella ostetrica elettronica completa, referti PDF personalizzabili e sicurezza cloud con attenzione alla conformità GDPR. La prova gratuita di 14 giorni permette di valutarlo nel proprio flusso clinico reale.",
+        body: "Corioli nasce specificamente per ginecologia e ostetricia, sviluppato con la consulenza di specialisti delle migliori strutture italiane. Include tutti gli strumenti clinici elencati sopra, una cartella ostetrica elettronica completa, referti PDF personalizzabili e sicurezza cloud con attenzione alla conformità GDPR. La prova gratuita di 90 giorni permette di valutarlo nel proprio flusso clinico reale.",
       },
     ],
   },

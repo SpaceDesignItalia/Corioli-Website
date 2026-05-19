@@ -69,10 +69,10 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                href="/contatti"
+                href="/download"
                 className="hover:text-brand-600 transition-colors"
               >
-                Demo gratuita
+                Inizia la prova
               </Link>
             </li>
           </ul>
