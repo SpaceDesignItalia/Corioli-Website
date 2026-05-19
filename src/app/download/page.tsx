@@ -151,8 +151,8 @@ export default function DownloadPage() {
             {!isFullscreen && (
               <div className="absolute -right-16 top-1/2 -translate-y-1/2 hidden xl:flex flex-col items-center gap-2 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                 <span className="text-xs font-bold tracking-widest uppercase rotate-90 mb-8 text-brand-500">Scorri</span>
-                <div className="w-1 h-24 bg-gray-200 rounded-full overflow-hidden relative">
-                  <div className="absolute top-0 left-0 w-full h-1/3 bg-brand-400 rounded-full animate-bounce"></div>
+                <div className="animate-bounce mt-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-brand-400"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
                 </div>
               </div>
             )}

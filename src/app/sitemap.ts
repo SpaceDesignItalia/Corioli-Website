@@ -63,6 +63,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: 'https://corioli.it/download',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: 'https://corioli.it/blog/gestionale-per-ginecologi-cosa-cercare',
       lastModified: new Date('2025-02-05'),
       changeFrequency: 'yearly',
