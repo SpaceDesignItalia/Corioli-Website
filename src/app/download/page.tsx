@@ -16,6 +16,9 @@ const screenshots = [
 export default function DownloadPage() {
   const [activeTab, setActiveTab] = useState(screenshots[0].id);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [latestVersion, setLatestVersion] = useState<string | null>(null);
+  const [windowsDownloading, setWindowsDownloading] = useState(false);
+  const [downloadError, setDownloadError] = useState<string | null>(null);
 
   // Esci dallo schermo intero premendo ESC
   useEffect(() => {
@@ -40,9 +43,34 @@ export default function DownloadPage() {
     };
   }, [isFullscreen]);
 
-  const handleDownload = (os: string) => {
-    posthog.capture("program_downloaded", { os });
-    // In a real app, this would trigger the actual download
+  useEffect(() => {
+    fetch("/api/download/windows")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: { version?: string } | null) => {
+        if (data?.version) setLatestVersion(data.version);
+      })
+      .catch(() => {});
+  }, []);
+
+  const handleWindowsDownload = async () => {
+    setDownloadError(null);
+    setWindowsDownloading(true);
+    posthog.capture("program_downloaded", { os: "windows" });
+
+    try {
+      const res = await fetch("/api/download/windows");
+      const data = await res.json();
+
+      if (!res.ok || !data.url) {
+        throw new Error(data.error ?? "Download non disponibile");
+      }
+
+      if (data.version) setLatestVersion(data.version);
+      window.location.href = data.url;
+    } catch {
+      setDownloadError("Impossibile avviare il download. Riprova tra poco.");
+      setWindowsDownloading(false);
+    }
   };
 
   return (
@@ -63,11 +91,12 @@ export default function DownloadPage() {
 
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 mb-16 w-full max-w-2xl justify-center z-20 px-4">
           <button 
-            onClick={() => handleDownload('windows')}
-            className="flex-1 bg-brand-800 text-white px-6 py-4 rounded-xl font-bold hover:bg-brand-950 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-3 group text-lg"
+            onClick={handleWindowsDownload}
+            disabled={windowsDownloading}
+            className="flex-1 bg-brand-800 text-white px-6 py-4 rounded-xl font-bold hover:bg-brand-950 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-3 group text-lg disabled:opacity-70 disabled:cursor-wait disabled:hover:translate-y-0"
           >
             <Monitor size={24} className="group-hover:scale-110 transition-transform" />
-            Scarica per Windows
+            {windowsDownloading ? "Avvio download..." : "Scarica per Windows"}
           </button>
           
           <div className="flex-1 relative">
@@ -83,6 +112,10 @@ export default function DownloadPage() {
             </div>
           </div>
         </div>
+
+        {downloadError && (
+          <p className="text-sm text-red-600 font-medium -mt-10 mb-10">{downloadError}</p>
+        )}
 
         {/* INTERACTIVE GALLERY */}
         <div className="w-full mt-6 sm:mt-10 relative">
@@ -243,7 +276,7 @@ export default function DownloadPage() {
         </div>
         
         <p className="text-sm text-gray-500 mt-8 font-medium">
-          Versione 2.4.1 • <Link href="/contatti" className="text-brand-600 hover:underline">Serve aiuto?</Link>
+          Versione {latestVersion ?? "…"} • <Link href="/contatti" className="text-brand-600 hover:underline">Serve aiuto?</Link>
         </p>
 
       </div>
