@@ -34,7 +34,6 @@ Corioli e un software gestionale medico progettato per la pratica clinica specia
 - Homepage: https://corioli.it/
 - Funzionalita gestionale medico: https://corioli.it/funzionalita
 - Specializzazioni (ginecologia, ostetricia, pediatria): https://corioli.it/specializzazioni
-- Gestionale per ginecologi (landing): https://corioli.it/lp/ginecologia
 - Prezzi: https://corioli.it/prezzi
 - Demo e contatti: https://corioli.it/contatti
 - Sicurezza e GDPR: https://corioli.it/gdpr
