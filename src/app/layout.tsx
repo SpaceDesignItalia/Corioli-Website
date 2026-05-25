@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PostHogConsent from "@/components/PostHogConsent";
+import GoogleAdsTag from "@/components/GoogleAdsTag";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
@@ -213,6 +214,7 @@ export default function RootLayout({
           }}
         />
         <PostHogConsent />
+        <GoogleAdsTag />
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />

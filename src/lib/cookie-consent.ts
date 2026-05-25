@@ -27,3 +27,17 @@ export function hasAnalyticsConsent(): boolean {
   if (stored === "declined") return false;
   return stored === "accepted";
 }
+
+/** Consenso marketing: Cookiebot (marketing) o, in assenza, banner locale. */
+export function hasMarketingConsent(): boolean {
+  if (typeof window === "undefined") return false;
+
+  const cookiebot = window.Cookiebot;
+  if (cookiebot?.consent) {
+    return cookiebot.consent.marketing === true;
+  }
+
+  const stored = getStoredCookieConsent();
+  if (stored === "declined") return false;
+  return stored === "accepted";
+}
