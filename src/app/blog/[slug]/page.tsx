@@ -3,17 +3,72 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 
+type BlogSection = {
+  title: string;
+  body: string;
+  variant?: "text" | "comparison-table";
+};
+
+type FaqItem = {
+  question: string;
+  answer: string;
+};
+
 type BlogPost = {
   title: string;
   description: string;
   date: string;
   category: string;
   lead: string;
-  sections: {
-    title: string;
-    body: string;
-  }[];
+  sections: BlogSection[];
+  faq?: FaqItem[];
 };
+
+type ComparisonRow = {
+  name: string;
+  deployment: string;
+  fetalCalculators: string;
+  obstetricRecord: string;
+  freeTrial: string;
+  price: string;
+  highlight?: boolean;
+};
+
+const gynecologySoftwareComparison: ComparisonRow[] = [
+  {
+    name: "Corioli",
+    deployment: "Cloud",
+    fetalCalculators: "Sì — Hadlock, biometria, percentili, età gestazionale",
+    obstetricRecord: "Sì — cartella ostetrica e ginecologica completa",
+    freeTrial: "90 giorni, senza carta di credito",
+    price: "da 15€/mese (piano annuale)",
+    highlight: true,
+  },
+  {
+    name: "ArzaMed",
+    deployment: "Cloud",
+    fetalCalculators: "Limitati — focus su gestione amministrativa",
+    obstetricRecord: "Sì — modulo ginecologia personalizzabile",
+    freeTrial: "Demo gratuita su richiesta",
+    price: "da 99€/mese (fino a 2 utenti)",
+  },
+  {
+    name: "Gynobase",
+    deployment: "Cloud + versione desktop offline",
+    fetalCalculators: "Parziali — strumenti base, interfaccia datata",
+    obstetricRecord: "Sì — visite in gravidanza e ginecologia",
+    freeTrial: "Demo e registrazione",
+    price: "Su richiesta",
+  },
+  {
+    name: "WindDoctor",
+    deployment: "Cloud",
+    fetalCalculators: "Generici — non verticali per ostetricia",
+    obstetricRecord: "Parziale — cartelle cliniche generiche",
+    freeTrial: "Prova gratuita limitata (12 documenti/anno)",
+    price: "da 10€/mese",
+  },
+];
 
 const posts: Record<string, BlogPost> = {
   "come-digitalizzare-lo-studio-ginecologico": {
@@ -210,6 +265,37 @@ const posts: Record<string, BlogPost> = {
         title: "Corioli per ginecologi e ostetrici",
         body: "Corioli nasce specificamente per ginecologia e ostetricia, sviluppato con la consulenza di specialisti delle migliori strutture italiane. Include tutti gli strumenti clinici elencati sopra, una cartella ostetrica elettronica completa, referti PDF personalizzabili e sicurezza cloud con attenzione alla conformità GDPR. La prova gratuita di 90 giorni permette di valutarlo nel proprio flusso clinico reale.",
       },
+      {
+        title: "Confronto tra i principali software ginecologici in Italia",
+        variant: "comparison-table",
+        body: "Scegliere un gestionale per ginecologi significa confrontare soluzioni molto diverse tra loro: alcune nascono per la gestione amministrativa dello studio e aggiungono moduli clinici in un secondo momento, altre sono verticali e pensate fin dall'inizio per la visita ostetrica e ginecologica. In Italia, tra i nomi più citati in ambulatorio troviamo Corioli, ArzaMed, Gynobase e WindDoctor. Nessuno di questi software è 'migliore in assoluto': la scelta dipende da quanto peso dai agli strumenti clinici nativi rispetto alla fatturazione elettronica, al numero di utenti e al budget mensile dello studio.\n\nArzaMed è una soluzione cloud consolidata, molto orientata alla gestione complessiva di studi e poliambulatori: agenda, fatturazione sanitaria, integrazione con il Sistema Tessera Sanitaria e cartella clinica ginecologica personalizzabile. È una scelta solida per chi gestisce team numerosi, ma il canone parte da 99€ al mese per due utenti — un investimento significativo per il libero professionista che lavora da solo.\n\nGynobase è storico nel panorama italiano: offre gestione di anagrafiche, visite ginecologiche e visite in gravidanza, con la possibilità di usare una versione desktop offline (Gynobase Portable) quando la connessione non è disponibile. L'interfaccia è essenziale e funzionale, ma i calcolatori fetali avanzati e l'esperienza utente moderna non sono il suo punto di forza principale.\n\nWindDoctor propone un gestionale cloud accessibile, con piani a partire da 10€ al mese e una prova gratuita limitata. Copre appuntamenti, cartelle cliniche digitali e fatturazione, ma resta un software generalista: per la biometria fetale, i percentili Hadlock e una cartella ostetrica strutturata il medico dovrà spesso integrare strumenti esterni.\n\nCorioli si colloca come alternativa verticale: nato per ginecologia e ostetricia, integra cartella ostetrica elettronica, calcolatori fetali (Hadlock, biometria, percentili, età gestazionale), referti PDF e consenso informato digitale in un unico flusso clinico. Il piano base parte da 15€ al mese con prova gratuita di 90 giorni — un posizionamento pensato per lo specialista privato che vuole strumenti clinici professionali senza il costo di un gestionale enterprise.\n\nLa tabella seguente riassume le differenze principali. I prezzi indicativi sono quelli pubblicati sui siti ufficiali al 2025 e possono variare in base a moduli aggiuntivi, numero di utenti e promozioni in corso.",
+      },
+      {
+        title: "Quanto costa un gestionale per ginecologi?",
+        body: "Il costo di un gestionale per ginecologi dipende dal modello commerciale scelto dal fornitore e dalle funzionalità incluse nel canone base. Conoscere le tre tipologie di pricing più diffuse aiuta a evitare sorprese e a calcolare il costo reale su 12 mesi, non solo quello del primo mese promozionale.\n\nIl modello più comune oggi è l'abbonamento mensile (SaaS cloud): paghi un canone fisso ogni mese e ottieni accesso al software, aggiornamenti automatici, backup e assistenza. I vantaggi sono prevedibilità, nessun investimento iniziale in server o licenze e la possibilità di disdire se il software non si adatta al tuo flusso. I canoni variano da circa 10€ al mese per soluzioni generaliste con funzionalità limitate, fino a 99€-499€ al mese per gestionali enterprise pensati per poliambulatori con molti utenti. Per un ginecologo in libera professione, la fascia utile si colloca generalmente tra 15€ e 50€ al mese per un software verticale completo.\n\nEsiste ancora, soprattutto tra software più datati, il modello a licenza perpetua: paghi una tantum per il software e lo installi sul tuo computer. Il costo iniziale può sembrare conveniente, ma non include aggiornamenti, backup cloud, assistenza continuativa e conformità GDPR — voci che, sommate nel tempo, spesso superano l'abbonamento. Inoltre, una licenza desktop legata a un singolo PC crea rischi operativi: se il computer si guasta, perdi l'accesso ai dati finché non ripristini il backup locale.\n\nIl modello freemium prevede una versione base gratuita con limiti (numero di pazienti, documenti o funzionalità) e piani a pagamento per sbloccare il pieno potenziale. WindDoctor, ad esempio, offre una prova gratuita con 12 documenti annui; Gynobase permette di registrarsi e testare il servizio. Attenzione: un piano freemium può andare bene per valutare l'interfaccia, ma raramente copre le esigenze cliniche di un ambulatorio ostetrico attivo con decine di visite settimanali.\n\nQuando calcoli il budget, considera anche i costi nascosti: moduli extra per calcolatori clinici avanzati, migrazione dati storici, personalizzazione template PDF, utenti aggiuntivi per segreteria o collaboratori. Un gestionale a 19€ al mese che richiede 15€ extra per i percentili fetali e 29€ una tantum per la migrazione costa di più di un software a 15€ con tutto incluso.\n\nCorioli adotta un modello di abbonamento trasparente: il Piano Specialista include cartella clinica elettronica illimitata, anagrafica pazienti cloud, refertazione PDF, backup giornaliero e conformità GDPR. Il canone è di 19€ al mese (o 15€/mese con fatturazione annuale). I calcolatori clinici avanzati — percentili, stime Hadlock, curve di crescita — sono disponibili come modulo opzionale a 15€/mese, con i primi 90 giorni inclusi nel periodo di prova. La migrazione dati storici da Word, Excel o altri gestionali costa 29€ una tantum. Non ci sono costi di attivazione né vincoli contrattuali: puoi provare Corioli gratuitamente per 90 giorni, senza carta di credito, e valutarlo nel tuo ambulatorio reale prima di decidere.",
+      },
+    ],
+    faq: [
+      {
+        question: "Il gestionale funziona senza internet?",
+        answer: "Corioli è un software cloud: per accedere alla cartella clinica, compilare le visite e generare i referti serve una connessione internet attiva. Questo garantisce backup automatici, sincronizzazione tra dispositivi e aggiornamenti sempre disponibili senza interventi manuali. Se lavori in zone con connettività instabile, valuta la qualità della rete in ambulatorio prima dell'adozione. A differenza di soluzioni desktop come Gynobase Portable, Corioli non offre una modalità offline completa: la scelta è deliberata, per garantire che i dati sanitari siano sempre protetti su server europei con crittografia e backup georeplicati, anziché su un singolo hard disk locale.",
+      },
+      {
+        question: "Posso migrare i dati dal mio vecchio software?",
+        answer: "Sì. Corioli include un servizio di migrazione dati storici che permette di trasferire l'archivio pazienti da Word, Excel, carta o altri gestionali medici. Il costo è di 29€ una tantum e copre l'importazione dell'anagrafica e dei dati clinici principali. Il team di Corioli ti guida nel processo: non devi fare da solo export manuali o conversioni di formato. Molti ginecologi che passano da Word o da software datati come Gynobase completano la migrazione in pochi giorni, continuando a lavorare in parallelo finché l'archivio non è completamente operativo nel nuovo gestionale.",
+      },
+      {
+        question: "È conforme al GDPR?",
+        answer: "Corioli è progettato per la conformità GDPR dei dati sanitari. I dati sono cifrati in transito (TLS) e a riposo (AES-256), con backup giornalieri su server europei certificati. Il software include log degli accessi auditabili, gestione granulare dei permessi utente e un Data Processing Agreement (DPA) precompilato che formalizza il rapporto tra il medico (titolare del trattamento) e Corioli (responsabile del trattamento). Il modulo di consenso informato digitale è integrato nativamente, eliminando archivi cartacei separati. Per approfondire le misure tecniche e organizzative adottate, consulta la pagina dedicata alla sicurezza e al GDPR sul sito Corioli.",
+      },
+      {
+        question: "Quante pazienti posso gestire?",
+        answer: "Con il Piano Specialista di Corioli non ci sono limiti al numero di pazienti gestibili: l'anagrafica e la cartella clinica elettronica sono illimitate. Puoi archiviare l'intero storico del tuo ambulatorio — visite ginecologiche, gravidanze in corso e concluse, referti, consensi — senza costi aggiuntivi legati al volume. A differenza di alcuni gestionali freemium che limitano i contatti in rubrica o i documenti annuali, Corioli è pensato per studi specialistici con flussi clinici intensi. Se lavori in team, puoi aggiungere collaboratori o segreteria con il modulo Multi-utente (+15€/mese per utente aggiuntivo).",
+      },
+      {
+        question: "C'è assistenza in italiano?",
+        answer: "Sì. Corioli offre supporto prioritario in italiano via chat ed email, con un team che conosce il contesto clinico della ginecologia e dell'ostetricia — non un call center generico. Durante la prova gratuita di 90 giorni hai accesso allo stesso livello di assistenza dei clienti attivi, così puoi risolvere dubbi operativi mentre valuti il software nel tuo ambulatorio. Per richieste di configurazione avanzata, personalizzazione template PDF o migrazione dati, il team è raggiungibile anche telefonicamente. Corioli ha sede in Italia (Sesto Fiorentino, FI) e sviluppa il software in collaborazione con ginecologi italiani.",
+      },
     ],
   },
 };
@@ -313,6 +399,21 @@ export default async function BlogPostPage({
           },
         ],
       },
+      ...(post.faq
+        ? [
+            {
+              "@type": "FAQPage",
+              mainEntity: post.faq.map((item) => ({
+                "@type": "Question",
+                name: item.question,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: item.answer,
+                },
+              })),
+            },
+          ]
+        : []),
     ],
   };
 
@@ -367,9 +468,100 @@ export default async function BlogPostPage({
               <h2 className="font-heading text-2xl font-bold mt-12 mb-4 text-gray-900">
                 {section.title}
               </h2>
-              <p className="mb-6">{section.body}</p>
+              {section.body.split("\n\n").map((paragraph) => (
+                <p key={paragraph.slice(0, 40)} className="mb-6">
+                  {paragraph}
+                </p>
+              ))}
+              {section.variant === "comparison-table" && (
+                <div className="my-8 overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
+                  <table className="w-full min-w-[640px] text-sm text-left">
+                    <thead>
+                      <tr className="bg-brand-50 border-b border-brand-100">
+                        <th className="px-4 py-3 font-bold text-gray-900">
+                          Nome
+                        </th>
+                        <th className="px-4 py-3 font-bold text-gray-900">
+                          Cloud/Desktop
+                        </th>
+                        <th className="px-4 py-3 font-bold text-gray-900">
+                          Calcolatori fetali
+                        </th>
+                        <th className="px-4 py-3 font-bold text-gray-900">
+                          Cartella ostetrica
+                        </th>
+                        <th className="px-4 py-3 font-bold text-gray-900">
+                          Prova gratuita
+                        </th>
+                        <th className="px-4 py-3 font-bold text-gray-900">
+                          Prezzo indicativo
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {gynecologySoftwareComparison.map((row) => (
+                        <tr
+                          key={row.name}
+                          className={
+                            row.highlight
+                              ? "bg-brand-50/60 border-b border-brand-100"
+                              : "border-b border-gray-100 even:bg-gray-50/50"
+                          }
+                        >
+                          <td className="px-4 py-3 font-semibold text-gray-900">
+                            {row.name}
+                          </td>
+                          <td className="px-4 py-3 text-gray-700">
+                            {row.deployment}
+                          </td>
+                          <td className="px-4 py-3 text-gray-700">
+                            {row.fetalCalculators}
+                          </td>
+                          <td className="px-4 py-3 text-gray-700">
+                            {row.obstetricRecord}
+                          </td>
+                          <td className="px-4 py-3 text-gray-700">
+                            {row.freeTrial}
+                          </td>
+                          <td className="px-4 py-3 text-gray-700">
+                            {row.price}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <p className="px-4 py-3 text-xs text-gray-500 bg-gray-50 border-t border-gray-100">
+                    * Prezzi e funzionalità basati su informazioni pubbliche
+                    al 2025. Verificare sempre sul sito ufficiale del
+                    fornitore.
+                  </p>
+                </div>
+              )}
             </section>
           ))}
+
+          {post.faq && post.faq.length > 0 && (
+            <section>
+              <h2 className="font-heading text-2xl font-bold mt-12 mb-6 text-gray-900">
+                Domande frequenti
+              </h2>
+              <dl className="flex flex-col gap-6">
+                {post.faq.map((item) => (
+                  <div
+                    key={item.question}
+                    className="p-6 bg-gray-50 rounded-2xl border border-gray-100"
+                  >
+                    <dt className="font-heading font-bold text-lg text-gray-900 mb-3">
+                      {item.question}
+                    </dt>
+                    <dd className="text-gray-700 leading-relaxed mb-0">
+                      {item.answer}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          )}
         </div>
 
         <div className="mt-16 pt-10 border-t border-gray-100">
