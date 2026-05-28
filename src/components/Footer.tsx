@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import CookiePreferencesButton from "@/components/CookiePreferencesButton";
 
 export default function Footer() {
   return (
@@ -138,6 +139,9 @@ export default function Footer() {
               >
                 Privacy Policy
               </Link>
+            </li>
+            <li>
+              <CookiePreferencesButton className="hover:text-brand-600 transition-colors text-left" />
             </li>
           </ul>
         </div>

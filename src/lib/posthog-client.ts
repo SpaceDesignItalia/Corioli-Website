@@ -45,5 +45,4 @@ export function bootstrapPostHog(): void {
   window.addEventListener("CookiebotOnConsentReady", syncPostHogWithConsent);
   window.addEventListener("CookiebotOnAccept", syncPostHogWithConsent);
   window.addEventListener("CookiebotOnDecline", syncPostHogWithConsent);
-  window.addEventListener("cookie_consent_changed", syncPostHogWithConsent);
 }

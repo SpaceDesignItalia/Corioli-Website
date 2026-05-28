@@ -75,10 +75,34 @@ export default function PrivacyPolicyPage() {
           <ul className="list-disc pl-6 mb-6 flex flex-col gap-3">
             <li><strong>Dati di navigazione:</strong> I sistemi informatici acquisiscono alcuni dati la cui trasmissione è implicita nell'uso dei protocolli di comunicazione di Internet (es. indirizzi IP, tipo di browser, data e ora di accesso).</li>
             <li><strong>Dati forniti volontariamente dall'utente:</strong> L'invio facoltativo ed esplicito di messaggi tramite i moduli di contatto, la richiesta di demo o il download del software comporta l'acquisizione dei dati personali del medico (Nome, Email, Telefono, Specializzazione, ed eventuali note).</li>
-            <li><strong>Cookie e Strumenti di Analisi:</strong> Il sito utilizza cookie tecnici e di analisi anonima (come PostHog o Google Analytics, previo consenso) per ottimizzare l'esperienza utente e comprendere il traffico del sito web.</li>
           </ul>
 
-          <h2 className="font-heading text-xl font-bold mt-10 mb-4 text-gray-900">4. Finalità del trattamento dei dati di contatto</h2>
+          <h2 className="font-heading text-xl font-bold mt-10 mb-4 text-gray-900">4. Cookie e tecnologie di tracciamento</h2>
+          <p className="mb-4">
+            Il sito <strong>corioli.it</strong> utilizza cookie e tecnologie analoghe gestite tramite la piattaforma <strong>Cookiebot</strong> (Cybot A/S). Al primo accesso viene mostrato un banner che consente di accettare, rifiutare o personalizzare le preferenze per categoria. Puoi modificare le scelte in qualsiasi momento tramite il link <strong>Gestisci cookie</strong> presente nel footer del sito.
+          </p>
+
+          <h3 className="font-heading text-lg font-semibold mt-6 mb-3 text-gray-900">4.1 Cookie necessari</h3>
+          <p className="mb-4">
+            Sono indispensabili al funzionamento del sito (es. sicurezza, preferenze di consenso, bilanciamento del carico). Non richiedono consenso e non possono essere disattivati dal banner.
+          </p>
+
+          <h3 className="font-heading text-lg font-semibold mt-6 mb-3 text-gray-900">4.2 Cookie statistici (previo consenso)</h3>
+          <p className="mb-4">
+            Con il tuo consenso alla categoria <strong>Statistiche</strong>, utilizziamo <strong>PostHog</strong> (hosting dati in UE) per analizzare in forma aggregata come viene utilizzato il sito (pagine visitate, interazioni, errori tecnici), al fine di migliorare contenuti e usabilità. Base giuridica: consenso (art. 6, par. 1, lett. a GDPR). I dati raccolti non vengono utilizzati per profilazione pubblicitaria.
+          </p>
+
+          <h3 className="font-heading text-lg font-semibold mt-6 mb-3 text-gray-900">4.3 Cookie di marketing (previo consenso)</h3>
+          <p className="mb-4">
+            Con il tuo consenso alla categoria <strong>Marketing</strong>, utilizziamo <strong>Google Ads</strong> (Google Ireland Limited) tramite il tag di conversione <code className="text-sm bg-gray-100 px-1.5 py-0.5 rounded">gtag.js</code> per misurare l&apos;efficacia delle campagne pubblicitarie, registrare conversioni e, ove applicabile, attività di remarketing verso visitatori del sito. Base giuridica: consenso (art. 6, par. 1, lett. a GDPR). Senza questo consenso, il tag Google Ads non viene caricato.
+          </p>
+
+          <p className="mb-6">
+            L&apos;elenco aggiornato dei cookie, delle finalità e delle durate è disponibile nella dichiarazione cookie generata da Cookiebot e accessibile dal banner o dal link <strong>Gestisci cookie</strong>. Per revocare il consenso, apri le preferenze cookie e disattiva le categorie Statistiche e/o Marketing, oppure scrivi a{" "}
+            <a href="mailto:privacy@corioli.it" className="text-brand-600 hover:underline">privacy@corioli.it</a>.
+          </p>
+
+          <h2 className="font-heading text-xl font-bold mt-10 mb-4 text-gray-900">5. Finalità del trattamento dei dati di contatto</h2>
           <p className="mb-4"> I dati personali del medico (es. contatti o richieste di demo) raccolti tramite il sito sono utilizzati per: </p>
           <ul className="list-disc pl-6 mb-6 flex flex-col gap-2">
             <li>Erogare l'assistenza richiesta, inviare i link di download del software o configurare una demo personalizzata.</li>
@@ -86,12 +110,12 @@ export default function PrivacyPolicyPage() {
             <li>Adempiere ad obblighi di natura amministrativa, contabile o legale legati all'eventuale acquisto della licenza del software.</li>
           </ul>
 
-          <h2 className="font-heading text-xl font-bold mt-10 mb-4 text-gray-900">5. Sicurezza dei dati di contatto</h2>
+          <h2 className="font-heading text-xl font-bold mt-10 mb-4 text-gray-900">6. Sicurezza dei dati di contatto</h2>
           <p className="mb-6">
             Corioli implementa misure di sicurezza tecniche e organizzative rigorose per proteggere i dati di contatto dei medici e dei clienti gestiti tramite il sito web da accessi non autorizzati, divulgazioni o distruzioni indesiderate.
           </p>
 
-          <h2 className="font-heading text-xl font-bold mt-10 mb-4 text-gray-900">6. Diritti degli interessati</h2>
+          <h2 className="font-heading text-xl font-bold mt-10 mb-4 text-gray-900">7. Diritti degli interessati</h2>
           <p className="mb-6">
             Ai sensi del GDPR (Regolamento UE 2016/679), in relazione ai dati di contatto o navigazione da noi gestiti, gli utenti hanno il diritto in qualsiasi momento di chiedere l'accesso, la rettifica, la cancellazione, la limitazione del trattamento o di opporsi al trattamento stesso inviando una comunicazione scritta a <a href="mailto:privacy@corioli.it" className="text-brand-600 hover:underline">privacy@corioli.it</a>.
           </p>

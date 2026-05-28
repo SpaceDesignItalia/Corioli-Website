@@ -7,6 +7,7 @@ interface CookiebotConsent {
 
 interface Cookiebot {
   consent: CookiebotConsent;
+  renew: () => void;
 }
 
 interface Window {
