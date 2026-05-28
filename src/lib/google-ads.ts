@@ -22,5 +22,4 @@ export function bootstrapGoogleAds(
   window.addEventListener("CookiebotOnConsentReady", sync);
   window.addEventListener("CookiebotOnAccept", sync);
   window.addEventListener("CookiebotOnDecline", sync);
-  window.addEventListener("cookie_consent_changed", sync);
 }
