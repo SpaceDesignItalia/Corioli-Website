@@ -10,7 +10,7 @@ export default function PricingPage() {
   const [annual, setAnnual] = useState(true);
 
   return (
-    <div className="pt-32 pb-24 bg-background">
+    <div className="pt-40 md:pt-48 pb-24 bg-background">
       
       <div className="text-center mb-20 max-w-7xl mx-auto px-6 md:px-12">
         <h1 className="font-heading text-4xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">Piani chiari. <br className="md:hidden"/>Nessuna sorpresa.</h1>

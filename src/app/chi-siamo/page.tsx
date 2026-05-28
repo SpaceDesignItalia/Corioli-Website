@@ -15,12 +15,9 @@ export const metadata: Metadata = {
 
 export default function ChiSiamoPage() {
   return (
-    <div className="pt-32 pb-24 bg-background">
+    <div className="pt-40 md:pt-48 pb-24 bg-background">
       
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-20 md:mb-32 text-center">
-         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-sm font-medium mb-6">
-            La Nostra Storia
-         </div>
          <h1 className="font-heading text-4xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
           Nati per risolvere <span className="text-brand-600">un'anomalia.</span>
         </h1>

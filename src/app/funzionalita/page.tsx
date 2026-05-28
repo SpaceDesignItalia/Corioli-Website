@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function FunzionalitaPage() {
   return (
-    <div className="pt-32 pb-24">
+    <div className="pt-40 md:pt-48 pb-24">
       
       {/* Header */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-20 md:mb-32 text-center">

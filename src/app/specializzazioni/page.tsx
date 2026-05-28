@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function SpecializzazioniPage() {
   return (
-    <div className="pt-32 pb-24 bg-background">
+    <div className="pt-40 md:pt-48 pb-24 bg-background">
       
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-20 text-center">
         <h1 className="font-heading text-4xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">

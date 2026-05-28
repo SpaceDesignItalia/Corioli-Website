@@ -53,7 +53,7 @@ export default function ContattiPage() {
   };
 
   return (
-    <div className="pt-32 pb-24 bg-background">
+    <div className="pt-40 md:pt-48 pb-24 bg-background">
       <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
         
         {/* Info Column */}
