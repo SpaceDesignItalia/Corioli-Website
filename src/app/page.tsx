@@ -314,7 +314,7 @@ export default function Home() {
               {/* Floating Badge - Stats ONLY */}
               <div className="absolute bottom-[10%] left-[50%] -translate-x-1/2 bg-white rounded-2xl shadow-card border border-gray-100 px-6 py-5 animate-float">
                 <div className="text-3xl font-black text-brand-800 leading-none">
-                  10.000+
+                  18.000+
                 </div>
                 <div className="text-[11px] text-gray-500 font-bold uppercase tracking-wider mt-1.5">
                   Pazienti gestiti
