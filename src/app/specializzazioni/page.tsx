@@ -45,7 +45,7 @@ export default function SpecializzazioniPage() {
               <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> Calcolo automatico della datazione</li>
               <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> Integrazione di curve e percentili fetali</li>
             </ul>
-            <Link href="/contatti" className="inline-flex items-center gap-2 bg-brand-50 text-brand-700 px-6 py-3 rounded-xl font-semibold hover:bg-brand-100 transition-colors w-fit">
+            <Link href="/download" className="inline-flex items-center gap-2 bg-brand-50 text-brand-700 px-6 py-3 rounded-xl font-semibold hover:bg-brand-100 transition-colors w-fit">
               Richiedi Demo Ginecologica <ArrowRight size={18} />
             </Link>
           </div>
