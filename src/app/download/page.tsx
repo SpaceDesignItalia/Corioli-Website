@@ -1,15 +1,16 @@
 "use client";
 
-import { Monitor, Apple, CheckCircle2 } from "lucide-react";
+import { Apple, CheckCircle2 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import posthog from "posthog-js";
 import { useState, useEffect } from "react";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
 
+const MS_STORE_URL = "https://apps.microsoft.com/store/detail/9P24WMFJW58N";
+
 export default function DownloadPage() {
   const [latestVersion, setLatestVersion] = useState<string | null>(null);
-  const [windowsDownloading, setWindowsDownloading] = useState(false);
-  const [downloadError, setDownloadError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/download/windows")
@@ -20,25 +21,8 @@ export default function DownloadPage() {
       .catch(() => {});
   }, []);
 
-  const handleWindowsDownload = async () => {
-    setDownloadError(null);
-    setWindowsDownloading(true);
-    posthog.capture("program_downloaded", { os: "windows" });
-
-    try {
-      const res = await fetch("/api/download/windows");
-      const data = await res.json();
-
-      if (!res.ok || !data.url) {
-        throw new Error(data.error ?? "Download non disponibile");
-      }
-
-      if (data.version) setLatestVersion(data.version);
-      window.location.href = data.url;
-    } catch {
-      setDownloadError("Impossibile avviare il download. Riprova tra poco.");
-      setWindowsDownloading(false);
-    }
+  const handleMsStoreClick = () => {
+    posthog.capture("program_downloaded", { os: "windows", source: "ms_store" });
   };
 
   return (
@@ -50,19 +34,24 @@ export default function DownloadPage() {
         </h1>
         
         <p className="text-lg sm:text-xl text-gray-600 mb-12 leading-relaxed max-w-2xl px-4">
-          Scarica l'applicazione per il tuo sistema operativo e trasforma il modo in cui gestisci il tuo ambulatorio. Installazione rapida e sicura.
+          Scarica l&apos;applicazione per il tuo sistema operativo e trasforma il modo in cui gestisci il tuo ambulatorio. Installazione rapida e sicura.
         </p>
 
+        {/* ── Download buttons ── */}
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 mb-16 w-full max-w-2xl justify-center z-20 px-4">
-          <button 
-            onClick={handleWindowsDownload}
-            disabled={windowsDownloading}
-            className="flex-1 bg-brand-800 text-white px-6 py-4 rounded-xl font-bold hover:bg-brand-950 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-3 group text-lg disabled:opacity-70 disabled:cursor-wait disabled:hover:translate-y-0"
+          {/* Microsoft Store */}
+          <a
+            href={MS_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleMsStoreClick}
+            className="flex-1 bg-brand-800 text-white px-6 py-4 rounded-xl font-bold hover:bg-brand-950 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-3 group text-lg"
           >
-            <Monitor size={24} className="group-hover:scale-110 transition-transform" />
-            {windowsDownloading ? "Avvio download..." : "Scarica per Windows"}
-          </button>
-          
+            <Image src="/ms-store-badge.svg" alt="Microsoft" width={24} height={24} className="group-hover:scale-110 transition-transform" />
+            Scarica per Windows
+          </a>
+
+          {/* Mac – coming soon */}
           <div className="flex-1 relative">
             <button 
               disabled
@@ -77,10 +66,11 @@ export default function DownloadPage() {
           </div>
         </div>
 
-        {downloadError && (
-          <p className="text-sm text-red-600 font-medium -mt-10 mb-10">{downloadError}</p>
-        )}
-
+        {/* Microsoft Store trust signal */}
+        <div className="flex items-center justify-center gap-2.5 mb-16 text-sm text-gray-400 font-medium">
+          <Image src="/ms-store-badge.svg" alt="" width={16} height={16} className="opacity-60" />
+          <span>Disponibile su <a href={MS_STORE_URL} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-brand-600 transition-colors">Microsoft Store</a> · Installazione sicura e verificata</span>
+        </div>
         {/* INTERACTIVE GALLERY */}
         <div className="w-full mt-6 sm:mt-10 relative">
           <ScreenshotGallery />
@@ -111,3 +101,4 @@ export default function DownloadPage() {
     </div>
   );
 }
+

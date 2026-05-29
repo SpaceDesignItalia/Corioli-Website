@@ -280,7 +280,7 @@ export default function Home() {
             </div>
             <p className="text-sm text-gray-400 font-medium">
               Nessuna carta di credito richiesta &bull; Prova gratuita di 90
-              giorni
+              giorni &bull; Disponibile su <a href="https://apps.microsoft.com/store/detail/9P24WMFJW58N" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-brand-600 transition-colors">Microsoft Store</a>
             </p>
           </div>
 
@@ -872,6 +872,15 @@ export default function Home() {
                  <Link href="/contatti" className="bg-white text-brand-900 px-8 py-4 rounded-xl font-bold hover:bg-brand-50 transition-colors shadow-lg">
                    Richiedi Demo Gratuita
                  </Link>
+               </div>
+               <div className="flex items-center justify-center gap-2 mt-6 text-sm text-brand-300 font-medium">
+                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4 opacity-70">
+                   <rect x="1" y="1" width="10" height="10" fill="#F25022"/>
+                   <rect x="13" y="1" width="10" height="10" fill="#7FBA00"/>
+                   <rect x="1" y="13" width="10" height="10" fill="#00A4EF"/>
+                   <rect x="13" y="13" width="10" height="10" fill="#FFB900"/>
+                 </svg>
+                 <span>Disponibile su <a href="https://apps.microsoft.com/store/detail/9P24WMFJW58N" target="_blank" rel="noopener noreferrer" className="text-brand-200 hover:text-white transition-colors underline underline-offset-2 decoration-brand-400/50">Microsoft Store</a></span>
                </div>
             </div>
           </div>
