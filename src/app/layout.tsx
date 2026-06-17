@@ -78,14 +78,7 @@ export const metadata: Metadata = {
       "Software gestionale medico per dottori e studi specialistici: cartella clinica elettronica, referti, calcolatori clinici e sicurezza GDPR.",
     url: siteUrl,
     siteName: "Corioli",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Corioli gestionale medico cloud per specialisti",
-      },
-    ],
+    // L'immagine e generata da app/opengraph-image.tsx (convenzione Next.js).
     locale: "it_IT",
     type: "website",
   },
@@ -94,7 +87,7 @@ export const metadata: Metadata = {
     title: "Corioli | Gestionale medico cloud per specialisti",
     description:
       "Cartella clinica elettronica, referti e calcolatori clinici per studi medici specialistici.",
-    images: ["/og-image.jpg"],
+    // L'immagine e generata da app/twitter-image.tsx (convenzione Next.js).
   },
 };
 
