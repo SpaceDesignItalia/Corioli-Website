@@ -40,7 +40,7 @@ export default function Home() {
   // Animate saved hours counter
   useEffect(() => {
     let start = 0;
-    const end = 240;
+    const end = 210;
     const duration = 2200;
     const incrementTime = duration / end;
 
@@ -396,7 +396,7 @@ export default function Home() {
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed">
               I medici italiani perdono molto tempo in operazioni ripetitive.
-              Corioli può restituirti fino a 240 ore l&apos;anno grazie a
+              Corioli può restituirti fino a 210 ore l&apos;anno grazie a
               calcolatori integrati che si aggiornano in tempo reale.
             </p>
           </div>
