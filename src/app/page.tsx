@@ -824,7 +824,7 @@ export default function Home() {
             </div>
             <div className="bg-white rounded-2xl p-7 border border-brand-100 shadow-soft">
               <h3 className="font-heading text-xl font-bold text-gray-900 mb-3">
-                Cartella clinica elettronica cloud
+                Cartella clinica elettronica
               </h3>
               <p className="text-gray-600 leading-relaxed">
                 I dati del paziente sono sempre ordinati, accessibili e
