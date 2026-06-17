@@ -1,6 +1,14 @@
 import { MetadataRoute } from 'next'
- 
+import { posts } from './blog/posts'
+
 export default function sitemap(): MetadataRoute.Sitemap {
+  const blogPosts: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: `https://corioli.it/blog/${post.slug}`,
+    lastModified: new Date(post.isoDate),
+    changeFrequency: 'yearly',
+    priority: 0.7,
+  }))
+
   return [
     {
       url: 'https://corioli.it',
@@ -68,53 +76,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
-    {
-      url: 'https://corioli.it/blog/gestionale-per-ginecologi-cosa-cercare',
-      lastModified: new Date('2025-02-05'),
-      changeFrequency: 'yearly',
-      priority: 0.7,
-    },
-    {
-      url: 'https://corioli.it/blog/come-sostituire-word-excel-studio-medico',
-      lastModified: new Date('2025-01-28'),
-      changeFrequency: 'yearly',
-      priority: 0.7,
-    },
-    {
-      url: 'https://corioli.it/blog/gestionale-medico-gdpr-cosa-deve-avere',
-      lastModified: new Date('2025-01-20'),
-      changeFrequency: 'yearly',
-      priority: 0.7,
-    },
-    {
-      url: 'https://corioli.it/blog/cos-e-cartella-clinica-elettronica-come-sceglierla',
-      lastModified: new Date('2025-01-15'),
-      changeFrequency: 'yearly',
-      priority: 0.7,
-    },
-    {
-      url: 'https://corioli.it/blog/migliori-software-gestionali-medici-italia',
-      lastModified: new Date('2025-01-10'),
-      changeFrequency: 'yearly',
-      priority: 0.7,
-    },
-    {
-      url: 'https://corioli.it/blog/come-digitalizzare-lo-studio-ginecologico',
-      lastModified: new Date('2024-05-24'),
-      changeFrequency: 'yearly',
-      priority: 0.6,
-    },
-    {
-      url: 'https://corioli.it/blog/gestionale-medico-vs-word-ginecologi',
-      lastModified: new Date('2024-05-12'),
-      changeFrequency: 'yearly',
-      priority: 0.6,
-    },
-    {
-      url: 'https://corioli.it/blog/cartella-clinica-elettronica-obbligatoria-2025',
-      lastModified: new Date('2024-05-03'),
-      changeFrequency: 'yearly',
-      priority: 0.6,
-    },
+    ...blogPosts,
   ]
 }
