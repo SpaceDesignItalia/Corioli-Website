@@ -53,7 +53,7 @@ export default function ChiSiamoPage() {
       <section className="py-24 max-w-7xl mx-auto px-6 md:px-12 text-center">
          <h2 className="font-heading text-3xl font-bold text-gray-900 mb-4">L'Eccellenza Multidisciplinare</h2>
          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-16">
-           Siamo un team ibrido: uniamo l'esperienza tecnologica della Silicon Valley con il rigore clinico dei migliori policlinici italiani.
+           Siamo un team che unisce sviluppatori, designer e medici specialisti. Costruiamo strumenti che nascono dalla pratica clinica reale, non da un modello generico adattato alla sanità.
          </p>
          
          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
