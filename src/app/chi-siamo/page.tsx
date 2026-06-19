@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Chi siamo",
@@ -77,6 +80,38 @@ export default function ChiSiamoPage() {
                </div>
                <h3 className="font-heading font-bold text-xl text-gray-900 mb-2">Validazione Clinica</h3>
                <p className="text-gray-600 text-sm leading-relaxed">Medici specialisti in attività che progettano i flussi logici e validano rigorosamente ogni singola funzionalità prima del rilascio.</p>
+            </div>
+         </div>
+      </section>
+
+      <section className="py-20 bg-white border-y border-gray-100">
+         <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+            <div className="relative rounded-3xl overflow-hidden shadow-card border border-gray-100 order-last md:order-first">
+               <Image
+                 src="/blog/corioli-congresso-miomi-stand.jpg"
+                 alt="Lo stand Corioli al congresso sui miomi uterini, con il roll-up 'Tu visiti. Corioli referta.'"
+                 width={1200}
+                 height={1600}
+                 sizes="(max-width: 768px) 100vw, 600px"
+                 className="w-full h-auto"
+               />
+            </div>
+            <div>
+               <div className="text-brand-600 font-bold text-sm uppercase tracking-wider mb-4">Sul campo, non solo online</div>
+               <h2 className="font-heading text-3xl font-bold text-gray-900 mb-6">Incontriamo i medici di persona</h2>
+               <p className="text-gray-600 text-lg mb-6 leading-relaxed">
+                 Non costruiamo Corioli a porte chiuse. Lo portiamo ai congressi, accanto ai ginecologi e agli ostetrici che lo usano ogni giorno: è lì che raccogliamo i dubbi, le richieste e le idee che diventano le prossime funzionalità.
+               </p>
+               <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+                 L'ultima tappa è stata il congresso sui miomi uterini, dove abbiamo passato una giornata intera allo stand a mostrare il software dal vivo. Te lo raccontiamo nel dettaglio sul blog.
+               </p>
+               <Link
+                 href="/blog/corioli-congresso-miomi-uterini-2026"
+                 className="inline-flex items-center gap-2 text-base font-semibold text-brand-600 hover:text-brand-800 transition-colors group"
+               >
+                 Leggi com'è andata al congresso
+                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+               </Link>
             </div>
          </div>
       </section>

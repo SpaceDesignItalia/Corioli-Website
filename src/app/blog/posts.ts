@@ -1,7 +1,19 @@
+// Immagine usata nell'articolo (copertina o dentro una sezione). Le dimensioni
+// servono a next/image per riservare lo spazio ed evitare layout shift.
+export type BlogImage = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  caption?: string;
+};
+
 export type BlogSection = {
   title: string;
   body: string;
   variant?: "text" | "comparison-table";
+  // Immagine opzionale mostrata sotto al testo della sezione.
+  image?: BlogImage;
 };
 
 export type FaqItem = {
@@ -22,6 +34,8 @@ export type BlogPost = {
   isoDate: string;
   category: string;
   lead: string;
+  // Immagine di copertina opzionale, mostrata sotto al titolo.
+  coverImage?: BlogImage;
   sections: BlogSection[];
   faq?: FaqItem[];
 };
@@ -31,12 +45,58 @@ export type BlogPost = {
 // Ordine: dal piu recente al meno recente.
 export const posts: BlogPost[] = [
   {
+    slug: "corioli-congresso-miomi-uterini-2026",
+    title: "Com'e andata: Corioli al congresso sui miomi uterini",
+    description:
+      "Il racconto della giornata di Corioli al congresso sui miomi uterini a Nana Bianca: lo stand, le demo dal vivo e i confronti con ginecologi e ostetrici sulla cartella clinica e sul referto in un click.",
+    excerpt:
+      "Eravamo allo stand del congresso sui miomi uterini, tra ginecologi e ostetrici: ecco com'e andata la giornata, cosa abbiamo mostrato e cosa ci portiamo a casa.",
+    date: "19 Giugno 2026",
+    isoDate: "2026-06-19",
+    category: "Eventi",
+    lead: "Ieri abbiamo portato Corioli al congresso sui miomi uterini, faccia a faccia con i medici per cui il software e pensato. Un'intera giornata allo stand, tra demo dal vivo e conversazioni con ginecologi e ostetrici: ecco com'e andata e cosa ci portiamo a casa.",
+    coverImage: {
+      src: "/blog/corioli-congresso-miomi-stand.jpg",
+      alt: "Lo stand Corioli al congresso sui miomi uterini, con il roll-up 'Tu visiti. Corioli referta.' e il tavolo con le brochure.",
+      width: 1200,
+      height: 1600,
+      caption:
+        "Lo stand Corioli al congresso: 'Tu visiti. Corioli referta.'",
+    },
+    sections: [
+      {
+        title: "Una giornata tra ginecologi e ostetrici",
+        body: "Come avevamo anticipato qui sul blog, il 18 giugno 2026 saremmo stati al congresso dedicato ai miomi uterini ospitato a Nana Bianca. Ci siamo andati davvero, e per noi e stata la giornata piu importante degli ultimi mesi: passare un'intera giornata allo stand, a parlare con i medici che ogni giorno usano - o potrebbero usare - un gestionale come il nostro.\n\nNon e la stessa cosa raccontare un software a distanza e mostrarlo dal vivo, con il medico che ti chiede 'e questo come lo gestisci?' mentre guarda lo schermo. E quel confronto diretto, tra una visita raccontata e un referto generato sotto i loro occhi, il motivo per cui eravamo li.",
+        image: {
+          src: "/blog/corioli-congresso-miomi-team.jpg",
+          alt: "Membro del team Corioli allo stand del congresso, accanto al roll-up dedicato a ginecologi e ostetrici.",
+          width: 1200,
+          height: 1600,
+          caption:
+            "Allo stand Corioli, pronti ad accogliere ginecologi e ostetrici.",
+        },
+      },
+      {
+        title: "Cosa abbiamo mostrato allo stand",
+        body: "Il filo conduttore dello stand era la domanda che campeggiava sul roll-up: quanta parte della visita finisce in burocrazia? La risposta che abbiamo mostrato dal vivo e semplice - tu visiti, Corioli referta. Abbiamo fatto vedere come si inserisce una misura una volta sola e come percentili, curve di crescita e referto completo si generino da soli, in un click.\n\nI temi piu apprezzati sono stati quelli che i medici toccano con mano ogni giorno: la cartella clinica pensata per ginecologia e ostetricia, la biometria e il Doppler con percentili automatici, l'import dei pazienti da MioDottore e Doctolib. E poi un punto che a Nana Bianca e tornato spesso: dal 31 marzo 2026 il FSE 2.0 e obbligatorio per le strutture private, e molti volevano capire se erano pronti.",
+      },
+      {
+        title: "Le conversazioni che ci portiamo a casa",
+        body: "Il valore di una giornata cosi non sono solo le demo, sono le domande. Tornano sempre le stesse, e per noi sono oro: quanto tempo recupero davvero a settimana? I dati delle mie pazienti dove finiscono e sono al sicuro? Riesco a confrontare le misure di un mioma o di una biometria nel tempo senza ricostruire tutto a memoria?\n\nSono esattamente le domande attorno a cui Corioli e nato. Sentirle ripetere da chi sta in ambulatorio ogni giorno e la conferma che stiamo lavorando sui problemi giusti - e l'elenco di spunti che ci riportiamo in ufficio e gia diventato lavoro per le prossime settimane.",
+      },
+      {
+        title: "Grazie a chi e passato a trovarci",
+        body: "Grazie a tutti i ginecologi e gli ostetrici che si sono fermati allo stand, hanno provato Corioli e ci hanno raccontato il loro modo di lavorare. Corioli e sviluppato in Italia, con i medici, e gestisce gia oltre 15.000 cartelle pazienti: giornate come questa sono il motivo per cui continua a migliorare.\n\nNon sei riuscito a passare? Puoi vedere Corioli dal vivo lo stesso: richiedi una demo gratuita di 15 minuti dalla pagina contatti e ti mostriamo come funziona nel tuo flusso clinico, con 90 giorni di prova senza impegno.",
+      },
+    ],
+  },
+  {
     slug: "miomi-uterini-storia-clinica-completa",
     title: "Miomi uterini: perche la storia clinica completa fa la differenza",
     description:
       "Nella gestione dei miomi uterini avere a portata di mano l'intera storia clinica della paziente migliora diagnosi, follow-up e decisioni. Come Corioli aiuta il ginecologo in ambulatorio.",
     excerpt:
-      "Dimensioni, sintomi e follow-up dei miomi vanno letti nel tempo: avere l'intera storia clinica a portata di mano migliora le decisioni. Vi aspettiamo al congresso a Nane Bianche.",
+      "Dimensioni, sintomi e follow-up dei miomi vanno letti nel tempo: avere l'intera storia clinica a portata di mano migliora le decisioni. Vi aspettiamo al congresso a Nana Bianca.",
     date: "17 Giugno 2026",
     isoDate: "2026-06-17",
     category: "Eventi",
@@ -44,7 +104,7 @@ export const posts: BlogPost[] = [
     sections: [
       {
         title: "Domani al congresso sui miomi: ci siamo anche noi",
-        body: "Domani, 18 giugno 2026, saremo al congresso dedicato ai miomi uterini ospitato a Nane Bianche. Per noi e l'occasione di confrontarci con ginecologi e ostetrici sul tema che ci sta piu a cuore: come la tecnologia, quando e progettata davvero intorno alla visita, puo migliorare la qualita del lavoro clinico invece di appesantirlo.\n\nI miomi sono un esempio perfetto. Sono frequentissimi, spesso asintomatici, ma quando contano richiedono decisioni delicate: sorvegliare, trattare farmacologicamente o operare. E ognuna di queste decisioni e migliore quando il medico ha davanti, in pochi secondi, tutto cio che e successo prima.",
+        body: "Domani, 18 giugno 2026, saremo al congresso dedicato ai miomi uterini ospitato a Nana Bianca. Per noi e l'occasione di confrontarci con ginecologi e ostetrici sul tema che ci sta piu a cuore: come la tecnologia, quando e progettata davvero intorno alla visita, puo migliorare la qualita del lavoro clinico invece di appesantirlo.\n\nI miomi sono un esempio perfetto. Sono frequentissimi, spesso asintomatici, ma quando contano richiedono decisioni delicate: sorvegliare, trattare farmacologicamente o operare. E ognuna di queste decisioni e migliore quando il medico ha davanti, in pochi secondi, tutto cio che e successo prima.",
       },
       {
         title: "Perche i miomi si gestiscono nel tempo, non in una visita",
@@ -56,7 +116,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Come Corioli mette la storia clinica al centro della visita",
-        body: "Corioli e un gestionale medico cloud pensato per la pratica clinica di ginecologi e ostetrici. La cartella ginecologica e ostetrica raccoglie anamnesi strutturata, diario delle visite con timeline, referti, ecografie e allegati in un unico ambiente consultabile in pochi clic. I valori - comprese le misure dei miomi - restano confrontabili nel tempo, cosi il follow-up smette di essere una ricostruzione a memoria.\n\nIl risultato e quello che raccontiamo al congresso: il medico arriva alla decisione con il quadro completo davanti, produce il referto senza copia-incolla e dedica piu attenzione alla paziente. Se domani sei a Nane Bianche, passa a trovarci: ti mostriamo come funziona sul campo.",
+        body: "Corioli e un gestionale medico cloud pensato per la pratica clinica di ginecologi e ostetrici. La cartella ginecologica e ostetrica raccoglie anamnesi strutturata, diario delle visite con timeline, referti, ecografie e allegati in un unico ambiente consultabile in pochi clic. I valori - comprese le misure dei miomi - restano confrontabili nel tempo, cosi il follow-up smette di essere una ricostruzione a memoria.\n\nIl risultato e quello che raccontiamo al congresso: il medico arriva alla decisione con il quadro completo davanti, produce il referto senza copia-incolla e dedica piu attenzione alla paziente. Se domani sei a Nana Bianca, passa a trovarci: ti mostriamo come funziona sul campo.",
       },
     ],
     faq: [
@@ -75,7 +135,7 @@ export const posts: BlogPost[] = [
       {
         question: "Dove posso vedere Corioli dal vivo?",
         answer:
-          "Saremo presenti al congresso sui miomi uterini a Nane Bianche il 18 giugno 2026, dove mostriamo come Corioli supporta il ginecologo in ambulatorio. In alternativa, puoi richiedere una demo gratuita di 15 minuti dalla pagina contatti del sito Corioli e provare il software nel tuo flusso clinico per 90 giorni.",
+          "Saremo presenti al congresso sui miomi uterini a Nana Bianca il 18 giugno 2026, dove mostriamo come Corioli supporta il ginecologo in ambulatorio. In alternativa, puoi richiedere una demo gratuita di 15 minuti dalla pagina contatti del sito Corioli e provare il software nel tuo flusso clinico per 90 giorni.",
       },
     ],
   },

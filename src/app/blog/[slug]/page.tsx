@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
@@ -111,6 +112,9 @@ export default async function BlogPostPage({
         datePublished: post.isoDate,
         dateModified: post.isoDate,
         inLanguage: "it-IT",
+        ...(post.coverImage
+          ? { image: `https://corioli.it${post.coverImage.src}` }
+          : {}),
         author: {
           "@type": "Organization",
           name: "Corioli",
@@ -201,6 +205,25 @@ export default async function BlogPostPage({
           </h1>
         </div>
 
+        {post.coverImage && (
+          <figure className="mb-12">
+            <Image
+              src={post.coverImage.src}
+              alt={post.coverImage.alt}
+              width={post.coverImage.width}
+              height={post.coverImage.height}
+              priority
+              sizes="(max-width: 768px) 100vw, 768px"
+              className="w-full h-auto rounded-2xl border border-gray-100 shadow-card"
+            />
+            {post.coverImage.caption && (
+              <figcaption className="mt-3 text-center text-sm text-gray-500">
+                {post.coverImage.caption}
+              </figcaption>
+            )}
+          </figure>
+        )}
+
         <div className="prose prose-lg prose-brand max-w-none text-gray-700 leading-relaxed">
           <p className="lead text-xl text-gray-600 mb-8 font-medium">
             {post.lead}
@@ -223,6 +246,23 @@ export default async function BlogPostPage({
                   {paragraph}
                 </p>
               ))}
+              {section.image && (
+                <figure className="my-8">
+                  <Image
+                    src={section.image.src}
+                    alt={section.image.alt}
+                    width={section.image.width}
+                    height={section.image.height}
+                    sizes="(max-width: 768px) 100vw, 768px"
+                    className="w-full h-auto rounded-2xl border border-gray-100 shadow-card"
+                  />
+                  {section.image.caption && (
+                    <figcaption className="mt-3 text-center text-sm text-gray-500">
+                      {section.image.caption}
+                    </figcaption>
+                  )}
+                </figure>
+              )}
               {section.variant === "comparison-table" && (
                 <div className="my-8 overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
                   <table className="w-full min-w-[640px] text-sm text-left">
