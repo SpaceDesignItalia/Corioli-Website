@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 // Immagine OpenGraph/social generata dinamicamente: sostituisce il vecchio
 // /og-image.jpg (mancante) ed e usata come anteprima per la home e le pagine
 // che non definiscono una propria immagine.
-export const alt = "Corioli — Gestionale medico cloud per specialisti";
+export const alt = "Corioli — Gestionale medico per specialisti";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -57,7 +57,7 @@ export default function Image() {
               maxWidth: "900px",
             }}
           >
-            Il gestionale medico cloud per specialisti
+            Il gestionale medico per specialisti
           </div>
           <div
             style={{

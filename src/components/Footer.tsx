@@ -17,7 +17,7 @@ export default function Footer() {
             />
           </Link>
           <p className="text-gray-500 text-sm leading-relaxed mb-6">
-            Il software gestionale cloud che restituisce tempo prezioso ai
+            Il software gestionale che restituisce tempo prezioso ai
             medici specialisti privati, migliorando la qualità del lavoro in
             ambulatorio.
           </p>
@@ -154,7 +154,7 @@ export default function Footer() {
         <p className="text-xs text-gray-400 leading-relaxed max-w-3xl">
           Corioli è un{" "}
           <strong className="font-medium text-gray-500">
-            software gestionale medico cloud
+            software gestionale medico per Windows
           </strong>{" "}
           per medici specialisti privati. Offre{" "}
           <Link

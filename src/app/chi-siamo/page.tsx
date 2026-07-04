@@ -5,13 +5,13 @@ import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Chi siamo",
-  description: "Corioli nasce per creare un gestionale medico davvero pensato per la pratica clinica: software cloud, design medico, cartella clinica elettronica e sicurezza per specialisti.",
+  description: "Corioli nasce per creare un gestionale medico davvero pensato per la pratica clinica: design medico, cartella clinica elettronica e dati al sicuro nello studio dello specialista.",
   alternates: {
     canonical: "/chi-siamo",
   },
   openGraph: {
     title: "Chi siamo | Corioli",
-    description: "Il team dietro Corioli, gestionale medico cloud per specialisti.",
+    description: "Il team dietro Corioli, gestionale medico per specialisti.",
     url: "https://corioli.it/chi-siamo",
   },
 };
@@ -65,7 +65,7 @@ export default function ChiSiamoPage() {
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
                </div>
                <h3 className="font-heading font-bold text-xl text-gray-900 mb-2">Tecnologia</h3>
-               <p className="text-gray-600 text-sm leading-relaxed">Sviluppatori con esperienza in ambito medtech cloud, dedicati alla creazione di architetture performanti, scalabili e ultra-sicure.</p>
+               <p className="text-gray-600 text-sm leading-relaxed">Sviluppatori con esperienza in ambito medtech, dedicati alla creazione di software performante, affidabile e sicuro per lo studio medico.</p>
             </div>
             <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-soft hover:shadow-card transition-shadow">
                <div className="w-14 h-14 bg-brand-50 rounded-xl mb-6 flex items-center justify-center text-brand-600">

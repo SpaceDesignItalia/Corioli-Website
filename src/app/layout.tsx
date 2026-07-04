@@ -22,11 +22,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: "Corioli",
   title: {
-    default: "Corioli | Gestionale medico cloud per specialisti",
+    default: "Corioli | Gestionale medico per specialisti",
     template: "%s | Corioli",
   },
   description:
-    "Corioli è il gestionale medico cloud per dottori e studi specialistici: cartella clinica elettronica, referti, calcolatori clinici, sicurezza GDPR e workflow per ginecologia, ostetricia e pediatria.",
+    "Corioli è il gestionale medico per dottori e studi specialistici: cartella clinica elettronica, referti, calcolatori clinici, dati salvati in locale nel tuo studio e conformità GDPR, con moduli per ginecologia, ostetricia e pediatria.",
   alternates: {
     canonical: "/",
   },
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     "gestionale studio medico",
     "software per dottori",
     "cartella clinica elettronica",
-    "cartella clinica cloud",
+    "software medico per Windows",
     "gestionale ambulatorio medico",
     "software gestionale ginecologi",
     "gestionale medico specialista",
@@ -73,9 +73,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Corioli | Gestionale medico cloud per specialisti",
+    title: "Corioli | Gestionale medico per specialisti",
     description:
-      "Software gestionale medico per dottori e studi specialistici: cartella clinica elettronica, referti, calcolatori clinici e sicurezza GDPR.",
+      "Software gestionale medico per dottori e studi specialistici: cartella clinica elettronica, referti, calcolatori clinici e dati al sicuro nel tuo studio.",
     url: siteUrl,
     siteName: "Corioli",
     // L'immagine e generata da app/opengraph-image.tsx (convenzione Next.js).
@@ -84,7 +84,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Corioli | Gestionale medico cloud per specialisti",
+    title: "Corioli | Gestionale medico per specialisti",
     description:
       "Cartella clinica elettronica, referti e calcolatori clinici per studi medici specialistici.",
     // L'immagine e generata da app/twitter-image.tsx (convenzione Next.js).
@@ -119,7 +119,7 @@ const structuredData = {
         "@id": `${siteUrl}/#organization`,
       },
       description:
-        "Sito ufficiale di Corioli, gestionale medico cloud per dottori e studi specialistici.",
+        "Sito ufficiale di Corioli, gestionale medico per dottori e studi specialistici.",
     },
     {
       "@type": "SoftwareApplication",
@@ -127,7 +127,7 @@ const structuredData = {
       name: "Corioli",
       url: siteUrl,
       applicationCategory: "MedicalBusinessSoftware",
-      operatingSystem: "Web",
+      operatingSystem: "Windows 10, Windows 11",
       inLanguage: "it-IT",
       offers: {
         "@type": "Offer",
@@ -140,13 +140,13 @@ const structuredData = {
         "@id": `${siteUrl}/#organization`,
       },
       description:
-        "Gestionale medico cloud per medici specialisti con cartella clinica elettronica, refertazione PDF, calcolatori clinici, backup e conformita GDPR.",
+        "Gestionale medico per specialisti con cartella clinica elettronica, refertazione PDF, calcolatori clinici e dati salvati in locale nello studio, nel rispetto del GDPR.",
       featureList: [
         "Cartella clinica elettronica per specialisti",
         "Refertazione PDF",
         "Calcolatori clinici per ginecologia, ostetricia e pediatria",
-        "Gestione pazienti cloud",
-        "Sicurezza, backup e conformita GDPR",
+        "Dati salvati in locale nello studio",
+        "Privacy by design e conformità GDPR",
       ],
     },
     {
@@ -158,7 +158,7 @@ const structuredData = {
           name: "Che cos'e Corioli?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Corioli e un gestionale medico cloud per dottori e studi specialistici, pensato per cartella clinica elettronica, referti, calcolatori clinici e gestione sicura dei dati sanitari.",
+            text: "Corioli è un gestionale medico per dottori e studi specialistici, pensato per cartella clinica elettronica, referti, calcolatori clinici e gestione sicura dei dati sanitari, salvati in locale nello studio.",
           },
         },
         {
@@ -166,7 +166,7 @@ const structuredData = {
           name: "Per quali medici e pensato Corioli?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Corioli nasce per medici specialisti privati, con moduli verticali per ginecologia, ostetricia e pediatria.",
+            text: "Corioli nasce per medici specialisti privati, con moduli verticali per ginecologia, ostetricia e pediatria. È compatibile con Windows 10 e Windows 11.",
           },
         },
         {
@@ -174,7 +174,7 @@ const structuredData = {
           name: "Corioli e conforme al GDPR?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Corioli e progettato con attenzione alla privacy, alla sicurezza dei dati sanitari, alla crittografia, ai backup e ai requisiti GDPR per studi medici.",
+            text: "Corioli è progettato secondo il principio di privacy by design: i dati clinici restano salvati in locale sul computer dello studio, non vengono trasmessi a server esterni e il medico ne mantiene il pieno controllo come unico titolare del trattamento.",
           },
         },
       ],

@@ -5,12 +5,12 @@ import FeaturesCta from "@/components/FeaturesCta";
 
 export const metadata: Metadata = {
   title: "Funzionalità gestionale medico",
-  description: "Scopri le funzionalità di Corioli: cartella clinica elettronica, anamnesi strutturata, refertazione PDF, calcolatori clinici, sicurezza cloud e GDPR per studi medici specialistici.",
+  description: "Scopri le funzionalità di Corioli: cartella clinica elettronica, anamnesi strutturata, refertazione PDF, calcolatori clinici e dati salvati in locale nel rispetto del GDPR.",
   alternates: {
     canonical: "/funzionalita",
   },
   openGraph: {
-    title: "Funzionalità Corioli | Gestionale medico cloud",
+    title: "Funzionalità Corioli | Gestionale medico per specialisti",
     description: "Cartella clinica elettronica, referti, calcolatori clinici e sicurezza GDPR per medici specialisti.",
     url: "https://corioli.it/funzionalita",
   },
@@ -181,19 +181,19 @@ export default function FunzionalitaPage() {
             </div>
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-6">Sicurezza e Privacy (GDPR)</h2>
             <p className="text-gray-600 text-lg mb-8 leading-relaxed">
-              I dati sanitari richiedono i massimi standard di sicurezza. La nostra infrastruttura cloud protegge te e i tuoi pazienti in ogni momento.
+              I dati sanitari richiedono i massimi standard di sicurezza. Con Corioli restano salvati in locale, nel tuo studio: nessuna trasmissione a server esterni, nessun accesso di terzi.
             </p>
             <Link href="/gdpr" className="inline-flex items-center gap-2 text-brand-600 font-medium hover:text-brand-700 transition-colors mb-8">
               Consulta la nostra pagina sulla conformità GDPR <ArrowRight size={16} />
             </Link>
             <div className="grid grid-cols-2 gap-6">
                <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
-                  <h4 className="font-bold text-gray-900 mb-1 text-sm">Crittografia Totale</h4>
-                  <p className="text-xs text-gray-500">Dati cifrati a riposo e in transito.</p>
+                  <h4 className="font-bold text-gray-900 mb-1 text-sm">Archiviazione Locale</h4>
+                  <p className="text-xs text-gray-500">I dati dei pazienti restano sul computer del tuo studio.</p>
                </div>
                <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
-                  <h4 className="font-bold text-gray-900 mb-1 text-sm">Backup Automatici</h4>
-                  <p className="text-xs text-gray-500">Copie georeplicate giornaliere in server europei.</p>
+                  <h4 className="font-bold text-gray-900 mb-1 text-sm">Nessun Accesso di Terzi</h4>
+                  <p className="text-xs text-gray-500">Corioli non raccoglie né trasmette i dati clinici dei tuoi pazienti.</p>
                </div>
             </div>
           </div>
@@ -204,7 +204,7 @@ export default function FunzionalitaPage() {
                <div className="relative z-10 bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6 max-w-xs w-full text-white">
                   <div className="flex items-center gap-3 mb-4">
                      <Lock size={18} className="text-brand-300" />
-                     <span className="text-sm font-medium">Connessione Sicura Attiva</span>
+                     <span className="text-sm font-medium">Archivio Locale Protetto</span>
                   </div>
                   <div className="h-1 bg-white/20 rounded-full overflow-hidden">
                      <div className="w-full h-full bg-brand-400"></div>

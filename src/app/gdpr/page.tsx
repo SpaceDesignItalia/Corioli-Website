@@ -3,13 +3,13 @@ import { Shield, Server, FileCheck, Lock } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Gestionale medico GDPR e sicurezza dati sanitari",
-  description: "Scopri come Corioli protegge dati sanitari, cartelle cliniche elettroniche e referti con sicurezza cloud, crittografia, backup e attenzione alla conformità GDPR.",
+  description: "Scopri l'approccio privacy by design di Corioli: dati sanitari salvati in locale nello studio, nessuna trasmissione a server esterni e conformità GDPR per medici specialisti.",
   alternates: {
     canonical: "/gdpr",
   },
   openGraph: {
     title: "Corioli GDPR | Sicurezza per gestionale medico",
-    description: "Privacy by design, crittografia, backup e controlli per dati sanitari e studi medici.",
+    description: "Privacy by design: dati sanitari in locale, sotto il pieno controllo del medico.",
     url: "https://corioli.it/gdpr",
   },
 };
@@ -32,7 +32,7 @@ export default function GDPRPage() {
         <div className="bg-white p-10 rounded-3xl border border-gray-100 shadow-soft mb-12">
           <h2 className="font-heading text-2xl font-bold mb-4 text-gray-900">Perché i medici scelgono Corioli per la compliance</h2>
           <p className="text-gray-600 leading-relaxed">
-            Trattare dati relativi alla salute (dati particolari ex art. 9 GDPR) richiede precauzioni tecniche e legali rigorose. Affidarsi a server locali o documenti Word non criptati è oggi uno dei principali rischi legali per i professionisti sanitari. Corioli risolve alla radice questa responsabilità.
+            Trattare dati relativi alla salute (dati particolari ex art. 9 GDPR) richiede precauzioni tecniche e legali rigorose. Corioli adotta l&apos;approccio più radicale possibile alla minimizzazione: i dati clinici dei tuoi pazienti non lasciano mai il tuo studio. Sono salvati in locale, sul computer o sulla rete dello studio, e Corioli non vi ha accesso in alcun modo.
           </p>
         </div>
 
@@ -42,32 +42,32 @@ export default function GDPRPage() {
             <div className="w-12 h-12 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center">
                <Lock size={24} />
             </div>
-            <h3 className="font-heading font-bold text-xl text-gray-900">Crittografia dei dati</h3>
-            <p className="text-gray-600 leading-relaxed text-sm">Tutti i dati sono cifrati in transito (TLS 1.3) e a riposo (AES-256). L'infrastruttura di chiavi assicura che solo tu abbia accesso in chiaro alle cartelle cliniche dei pazienti.</p>
+            <h3 className="font-heading font-bold text-xl text-gray-900">Archiviazione locale</h3>
+            <p className="text-gray-600 leading-relaxed text-sm">Tutti i dati clinici — visite, referti, calcoli biometrici — sono salvati esclusivamente sul computer o sulla rete locale del tuo studio. Nessun archivio su server esterni, nessuna copia fuori dal tuo controllo.</p>
           </div>
 
           <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm flex flex-col gap-4">
             <div className="w-12 h-12 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center">
                <FileCheck size={24} />
             </div>
-            <h3 className="font-heading font-bold text-xl text-gray-900">Data Processing Agreement</h3>
-            <p className="text-gray-600 leading-relaxed text-sm">Forniamo un contratto DPA precompilato e conforme al GDPR per regolamentare formalmente il nostro ruolo di Responsabili del Trattamento (Data Processors).</p>
+            <h3 className="font-heading font-bold text-xl text-gray-900">Tu sei l&apos;unico Titolare</h3>
+            <p className="text-gray-600 leading-relaxed text-sm">Poiché nessun dato clinico viene trasferito ai nostri sistemi, resti l&apos;unico Titolare del Trattamento dei dati dei tuoi pazienti: per il funzionamento standard del software non serve nemmeno stipulare un DPA con Corioli. Meno adempimenti, meno soggetti coinvolti.</p>
           </div>
 
           <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm flex flex-col gap-4">
             <div className="w-12 h-12 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center">
                <Shield size={24} />
             </div>
-            <h3 className="font-heading font-bold text-xl text-gray-900">Log di Accesso Auditabili</h3>
-            <p className="text-gray-600 leading-relaxed text-sm">Registriamo rigidamente ogni accesso e modifica al sistema, come richiesto specificamente dalle linee guida del Garante Privacy per i dossier sanitari elettronici.</p>
+            <h3 className="font-heading font-bold text-xl text-gray-900">Nessun accesso di terzi</h3>
+            <p className="text-gray-600 leading-relaxed text-sm">Corioli (l&apos;azienda) non raccoglie, non memorizza e non trasmette le informazioni cliniche o personali dei tuoi pazienti. Il rischio di violazioni lato fornitore è eliminato alla radice, perché i dati semplicemente non ci arrivano.</p>
           </div>
 
           <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm flex flex-col gap-4">
             <div className="w-12 h-12 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center">
                <Server size={24} />
             </div>
-            <h3 className="font-heading font-bold text-xl text-gray-900">Server in Unione Europea</h3>
-            <p className="text-gray-600 leading-relaxed text-sm">I nostri server (infrastruttura certificata ISO 27001, ISO 27017, ISO 27018) si trovano fisicamente in UE, evitando i complessi adempimenti per i trasferimenti extra-UE.</p>
+            <h3 className="font-heading font-bold text-xl text-gray-900">Nessun trasferimento extra-UE</h3>
+            <p className="text-gray-600 leading-relaxed text-sm">Con l&apos;archiviazione locale non esistono trasferimenti di dati clinici verso l&apos;estero, né i complessi adempimenti che ne derivano: i dati risiedono fisicamente dove lavori, nel tuo studio in Italia.</p>
           </div>
 
         </div>

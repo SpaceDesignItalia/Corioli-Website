@@ -16,7 +16,6 @@ import {
   ChevronRight,
 } from "lucide-react";
 import clsx from "clsx";
-import Image from "next/image";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"ostetricia" | "pediatria">(
@@ -37,20 +36,22 @@ export default function Home() {
     localStorage.setItem("corioli_dashboard_tab", activeTab);
   }, [activeTab]);
 
-  // Animate saved hours counter
+  // Animate saved hours counter (time-based so the duration holds regardless of render speed)
   useEffect(() => {
-    let start = 0;
     const end = 210;
     const duration = 2200;
-    const incrementTime = duration / end;
+    let raf: number;
+    const startTime = performance.now();
 
-    const timer = setInterval(() => {
-      start += 1;
-      setSavedHours(start);
-      if (start === end) clearInterval(timer);
-    }, incrementTime);
+    const step = (now: number) => {
+      const t = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setSavedHours(Math.round(end * eased));
+      if (t < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
 
-    return () => clearInterval(timer);
+    return () => cancelAnimationFrame(raf);
   }, []);
 
   const [gestationalWeeks, setGestationalWeeks] = useState(12);
@@ -214,38 +215,31 @@ export default function Home() {
   return (
     <div className="pt-32 pb-16">
       {/* Refined Two-Column Hero */}
-      <section className="relative max-w-7xl mx-auto px-6 md:px-12 pt-8 md:pt-16 pb-32 overflow-visible">
+      <section className="relative max-w-7xl mx-auto px-6 md:px-12 pt-4 md:pt-8 pb-24 overflow-visible">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content */}
           <div className="max-w-xl">
-            <div className="text-brand-700 font-bold text-[10px] md:text-xs tracking-[0.2em] uppercase mb-8 font-sans">
+            <div className="text-brand-700 font-bold text-[10px] md:text-xs tracking-[0.2em] uppercase mb-6 font-sans">
               SOFTWARE GESTIONALE MEDICO
             </div>
-            <h1 className="font-heading text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl text-gray-950 leading-[1.1] sm:leading-[1.0] mb-10 tracking-tight">
+            <h1 className="font-heading text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl text-gray-950 leading-[1.1] sm:leading-[1.0] mb-6 tracking-tight">
+              Il gestionale medico <br />
+              che rispetta <br />
               <span className="font-newsreader italic font-normal">
-                Il gestionale medico
-              </span>{" "}
-              <br />
-              <span className="relative">
-                che rispetta{" "}
-                <span className="font-newsreader italic font-normal">
-                  il tuo
-                </span>
-              </span>{" "}
-              <br />
-              <span className="font-newsreader italic font-normal">tempo</span>
+                il tuo tempo
+              </span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed font-sans max-w-[90%]">
-              Corioli è il software gestionale medico cloud per dottori e studi
+            <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed font-sans max-w-[90%]">
+              Corioli è il software gestionale medico per dottori e studi
               specialistici. Non adattato, non generico: una cartella clinica
               elettronica pensata per come lavori davvero.
             </p>
 
-            <ul className="flex flex-col gap-4 mb-12">
+            <ul className="flex flex-col gap-4 mb-8">
               {[
                 "Cartella clinica elettronica specializzata",
                 "Calcolatori clinici e strumenti nativi in visita",
-                "Cloud sicuro, backup e conformità GDPR",
+                "Dati salvati in locale, nel pieno rispetto del GDPR",
               ].map((item, i) => (
                 <li
                   key={i}
@@ -278,41 +272,116 @@ export default function Home() {
                 Scopri le funzionalità
               </Link>
             </div>
-            <p className="text-sm text-gray-400 font-medium">
+            <p className="text-sm text-gray-500 font-medium">
               Nessuna carta di credito richiesta &bull; Prova gratuita di 90
-              giorni &bull; Disponibile su <a href="https://apps.microsoft.com/store/detail/9P24WMFJW58N" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-brand-600 transition-colors">Microsoft Store</a>
+              giorni &bull; Disponibile su <a href="https://apps.microsoft.com/store/detail/9P24WMFJW58N" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-brand-600 transition-colors">Microsoft Store</a>
             </p>
           </div>
 
-          {/* Right Content - Abstract UI */}
-          <div className="relative flex justify-center lg:justify-center">
-            {/* Concentric Circles Background */}
-            <div className="relative w-full max-w-[450px] aspect-square flex items-center justify-center">
-              <div className="absolute inset-0 border border-gray-100 rounded-full scale-[1.0]"></div>
-              <div className="absolute inset-0 border border-gray-100 rounded-full scale-[0.8] opacity-60"></div>
-              <div className="absolute inset-0 border border-gray-100 rounded-full scale-[0.6] opacity-30"></div>
+          {/* Right Content - Time Dial Visual */}
+          <div className="relative flex justify-center">
+            <div className="relative w-full max-w-[420px] aspect-square">
+              {/* Soft glow */}
+              <div className="absolute -inset-10 bg-brand-100/50 rounded-full blur-3xl pointer-events-none"></div>
 
-              {/* Main Logo Sphere */}
-              <div className="relative w-56 h-56 md:w-64 md:h-64 bg-[#E6EFED] rounded-full flex items-center justify-center shadow-inner border border-brand-100/20 overflow-hidden">
-                <div className="w-40 h-40 md:w-48 md:h-48 bg-white/40 backdrop-blur-sm rounded-full flex items-center justify-center shadow-card border border-white/50">
-                  <span className="text-[10rem] md:text-[12rem] font-heading font-black text-[#1B4332] opacity-[0.08] select-none leading-none -translate-y-2">
-                    C
-                  </span>
-                </div>
-                {/* Inner center circle - LOGO SWIRL */}
-                <div className="absolute w-32 h-32 md:w-36 md:h-36 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center">
-                  <Image
-                    src="/logo_short.png"
-                    alt="Corioli"
-                    width={96}
-                    height={96}
-                    className="w-24 h-24"
+              {/* Outer faint ring */}
+              <div className="absolute -inset-4 sm:-inset-6 border border-brand-100/70 rounded-full"></div>
+
+              {/* Watch Face */}
+              <div className="absolute inset-1 sm:inset-2">
+                <div className="absolute inset-0 bg-white rounded-full border border-gray-100 shadow-[0_25px_70px_-20px_rgba(16,37,37,0.25)]"></div>
+
+                <svg viewBox="0 0 200 200" className="absolute inset-0 w-full h-full">
+                  <defs>
+                    <linearGradient
+                      id="heroArcGradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
+                      <stop offset="0%" stopColor="#5ba6a6" />
+                      <stop offset="100%" stopColor="#275858" />
+                    </linearGradient>
+                  </defs>
+
+                  {/* Tick marks, flush with the rim like a watch */}
+                  {Array.from({ length: 60 }).map((_, i) => {
+                    const isHour = i % 5 === 0;
+                    return (
+                      <line
+                        key={i}
+                        x1="100"
+                        y1={isHour ? 8 : 9.5}
+                        x2="100"
+                        y2={isHour ? 15 : 13}
+                        stroke={isHour ? "#8cc7c7" : "#e5e7eb"}
+                        strokeWidth={isHour ? 2.5 : 1}
+                        strokeLinecap="round"
+                        transform={`rotate(${i * 6} 100 100)`}
+                      />
+                    );
+                  })}
+
+                  {/* Track */}
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r="74"
+                    fill="none"
+                    stroke="#d9eeee"
+                    strokeWidth="6"
                   />
+                  {/* Progress arc, fills as the hours counter runs */}
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r="74"
+                    fill="none"
+                    stroke="url(#heroArcGradient)"
+                    strokeWidth="6"
+                    strokeLinecap="round"
+                    pathLength={100}
+                    strokeDasharray={100}
+                    strokeDashoffset={100 - (savedHours / 210) * 62}
+                    transform="rotate(-90 100 100)"
+                  />
+                  {/* Arc tip knob */}
+                  {(() => {
+                    const angle =
+                      2 * Math.PI * ((savedHours / 210) * 0.62) - Math.PI / 2;
+                    return (
+                      <circle
+                        cx={100 + 74 * Math.cos(angle)}
+                        cy={100 + 74 * Math.sin(angle)}
+                        r="5"
+                        fill="#ffffff"
+                        stroke="#2d6b6b"
+                        strokeWidth="2.5"
+                      />
+                    );
+                  })()}
+                </svg>
+
+                {/* Dial center */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                  <div className="w-10 h-10 bg-brand-50 rounded-full border border-brand-100 flex items-center justify-center text-brand-600 mb-4">
+                    <Clock size={18} />
+                  </div>
+                  <div className="text-6xl sm:text-7xl font-black text-gray-950 leading-none tracking-tight">
+                    {savedHours}
+                    <span className="text-3xl sm:text-4xl font-bold text-brand-500">
+                      h
+                    </span>
+                  </div>
+                  <div className="text-[11px] text-gray-500 font-bold uppercase tracking-[0.15em] mt-3">
+                    Restituite ogni anno
+                  </div>
                 </div>
               </div>
 
-              {/* Floating Badge - Stats ONLY */}
-              <div className="absolute bottom-[10%] left-[50%] -translate-x-1/2 bg-white rounded-2xl shadow-card border border-gray-100 px-6 py-5 animate-float">
+              {/* Floating Badge - Stats */}
+              <div className="absolute -bottom-4 -left-2 sm:-left-6 bg-white rounded-2xl shadow-card border border-gray-100 px-6 py-5 animate-float z-20">
                 <div className="text-3xl font-black text-brand-800 leading-none">
                   18.000+
                 </div>
@@ -372,8 +441,9 @@ export default function Home() {
               Sicurezza Dati (GDPR)
             </h3>
             <p className="text-gray-600 leading-relaxed">
-              Infrastruttura cloud europea, crittografia avanzata e gestione del
-              consenso integrata nativamente nel workflow.
+              I dati restano nel tuo studio: archiviazione locale, nessuna
+              trasmissione a server esterni e gestione del consenso integrata
+              nel workflow.
             </p>
           </div>
         </div>
@@ -828,8 +898,9 @@ export default function Home() {
               </h3>
               <p className="text-gray-600 leading-relaxed">
                 I dati del paziente sono sempre ordinati, accessibili e
-                protetti, con backup e attenzione alla conformità GDPR per
-                informazioni sanitarie sensibili.
+                protetti nel tuo studio, sotto il tuo controllo e con
+                attenzione alla conformità GDPR per informazioni sanitarie
+                sensibili.
               </p>
             </div>
             <div className="bg-white rounded-2xl p-7 border border-brand-100 shadow-soft">

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Demo gestionale medico",
-  description: "Prenota una demo gratuita di Corioli, il gestionale medico cloud per dottori e studi specialistici con cartella clinica elettronica, referti e sicurezza GDPR.",
+  description: "Prenota una demo gratuita di 15 minuti di Corioli, il gestionale medico per dottori e studi specialistici con cartella clinica elettronica, referti e dati al sicuro nello studio.",
   alternates: {
     canonical: "/contatti",
   },

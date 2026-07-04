@@ -158,8 +158,8 @@ export default function GinecologiaPage() {
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-10 text-balance">
             Corioli è il gestionale per ginecologi pensato per la visita
             specialistica: cartella ostetrica elettronica, calcolatori fetali e
-            referti PDF in un unico software ginecologia cloud, sicuro e
-            conforme al GDPR.
+            referti PDF in un unico software per ginecologia, sicuro e
+            conforme al GDPR, con i dati salvati nel tuo studio.
           </p>
           <Link
             href="/download"

@@ -18,7 +18,7 @@ type ComparisonRow = {
 const gynecologySoftwareComparison: ComparisonRow[] = [
   {
     name: "Corioli",
-    deployment: "Cloud",
+    deployment: "Desktop Windows — dati salvati in locale",
     fetalCalculators: "Sì — Hadlock, biometria, percentili, età gestazionale",
     obstetricRecord: "Sì — cartella ostetrica e ginecologica completa",
     freeTrial: "90 giorni, senza carta di credito",
