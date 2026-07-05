@@ -1,14 +1,34 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, MapPin, Phone, MessageSquare } from "lucide-react";
+import { Mail, MapPin, Phone, MessageSquare, Check } from "lucide-react";
 import Link from "next/link";
 import posthog from "posthog-js";
+
+const FieldCheck = ({ done }: { done: boolean }) =>
+  done ? (
+    <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-brand-600 text-white animate-pop-in">
+      <Check size={11} strokeWidth={3} />
+    </span>
+  ) : null;
 
 export default function ContattiPage() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState<string | null>(null);
+  const [completed, setCompleted] = useState({
+    nome: false,
+    email: false,
+    specializzazione: false,
+    messaggio: false,
+  });
+  const [emailError, setEmailError] = useState(false);
+
+  const markCompleted = (field: keyof typeof completed, value: boolean) =>
+    setCompleted((prev) => (prev[field] === value ? prev : { ...prev, [field]: value }));
+
+  const isEmailValid = (input: HTMLInputElement) =>
+    input.value.trim() !== "" && input.validity.valid;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,6 +64,8 @@ export default function ContattiPage() {
       posthog.identify(email, { name: nome, specializzazione });
       setSubmitted(true);
       form.reset();
+      setCompleted({ nome: false, email: false, specializzazione: false, messaggio: false });
+      setEmailError(false);
     } catch (err) {
       posthog.captureException(err);
       setSendError("Errore di rete. Controlla la connessione e riprova.");
@@ -131,32 +153,49 @@ export default function ContattiPage() {
                    
                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                      <div className="flex flex-col gap-2">
-                       <label htmlFor="nome" className="text-sm font-medium text-gray-700">Nome e Cognome *</label>
-                       <input type="text" id="nome" name="nome" required disabled={sending} className="bg-gray-50 border border-gray-200 rounded-xl p-3.5 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all text-sm disabled:opacity-60" />
+                       <label htmlFor="nome" className="text-sm font-medium text-gray-700 flex items-center gap-2">Nome e Cognome * <FieldCheck done={completed.nome} /></label>
+                       <input type="text" id="nome" name="nome" required disabled={sending} onChange={(e) => markCompleted("nome", e.target.value.trim().length >= 2)} className={`bg-gray-50 border rounded-xl p-3.5 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all text-sm disabled:opacity-60 ${completed.nome ? "border-brand-300" : "border-gray-200"}`} />
                      </div>
                      <div className="flex flex-col gap-2">
-                       <label htmlFor="email" className="text-sm font-medium text-gray-700">Email Professionale *</label>
-                       <input type="email" id="email" name="email" required disabled={sending} className="bg-gray-50 border border-gray-200 rounded-xl p-3.5 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all text-sm disabled:opacity-60" />
+                       <label htmlFor="email" className="text-sm font-medium text-gray-700 flex items-center gap-2">Email Professionale * <FieldCheck done={completed.email} /></label>
+                       <input
+                         type="email"
+                         id="email"
+                         name="email"
+                         required
+                         disabled={sending}
+                         aria-invalid={emailError}
+                         onChange={(e) => {
+                           const valid = isEmailValid(e.target);
+                           markCompleted("email", valid);
+                           if (valid || e.target.value.trim() === "") setEmailError(false);
+                         }}
+                         onBlur={(e) => setEmailError(e.target.value.trim() !== "" && !e.target.validity.valid)}
+                         className={`bg-gray-50 border rounded-xl p-3.5 focus:outline-none focus:ring-2 transition-all text-sm disabled:opacity-60 ${emailError ? "border-red-400 focus:border-red-400 focus:ring-red-100" : `focus:border-brand-500 focus:ring-brand-200 ${completed.email ? "border-brand-300" : "border-gray-200"}`}`}
+                       />
+                       {emailError ? (
+                         <p className="text-xs text-red-600 animate-pop-in" role="alert">Inserisci un indirizzo email valido (es. nome@studio.it)</p>
+                       ) : null}
                      </div>
                    </div>
 
                    <div className="flex flex-col gap-3">
-                     <label className="text-sm font-medium text-gray-700">Specializzazione *</label>
+                     <label className="text-sm font-medium text-gray-700 flex items-center gap-2">Specializzazione * <FieldCheck done={completed.specializzazione} /></label>
                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <label className="relative">
-                          <input type="radio" name="specializzazione" value="ginecologia" required disabled={sending} className="peer sr-only" />
+                          <input type="radio" name="specializzazione" value="ginecologia" required disabled={sending} onChange={() => markCompleted("specializzazione", true)} className="peer sr-only" />
                           <div className="p-3 text-sm text-center font-medium text-gray-600 border border-gray-200 rounded-xl cursor-pointer peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-700 hover:bg-gray-50 transition-all">
                              Ginecologia
                           </div>
                         </label>
                         <label className="relative">
-                          <input type="radio" name="specializzazione" value="pediatria" required disabled={sending} className="peer sr-only" />
+                          <input type="radio" name="specializzazione" value="pediatria" required disabled={sending} onChange={() => markCompleted("specializzazione", true)} className="peer sr-only" />
                           <div className="p-3 text-sm text-center font-medium text-gray-600 border border-gray-200 rounded-xl cursor-pointer peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-700 hover:bg-gray-50 transition-all">
                              Pediatria
                           </div>
                         </label>
                         <label className="relative">
-                          <input type="radio" name="specializzazione" value="altro" required disabled={sending} className="peer sr-only" />
+                          <input type="radio" name="specializzazione" value="altro" required disabled={sending} onChange={() => markCompleted("specializzazione", true)} className="peer sr-only" />
                           <div className="p-3 text-sm text-center font-medium text-gray-600 border border-gray-200 rounded-xl cursor-pointer peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-700 hover:bg-gray-50 transition-all">
                              Altro
                           </div>
@@ -165,8 +204,8 @@ export default function ContattiPage() {
                    </div>
 
                    <div className="flex flex-col gap-2">
-                     <label htmlFor="messaggio" className="text-sm font-medium text-gray-700">Note Aggiuntive</label>
-                     <textarea id="messaggio" name="messaggio" rows={3} disabled={sending} className="bg-gray-50 border border-gray-200 rounded-xl p-3.5 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all resize-none text-sm disabled:opacity-60" placeholder="Es. Utilizzo attualmente Word, vorrei capire come importare i dati storici..."></textarea>
+                     <label htmlFor="messaggio" className="text-sm font-medium text-gray-700 flex items-center gap-2">Note Aggiuntive <FieldCheck done={completed.messaggio} /></label>
+                     <textarea id="messaggio" name="messaggio" rows={3} disabled={sending} onChange={(e) => markCompleted("messaggio", e.target.value.trim().length > 0)} className={`bg-gray-50 border rounded-xl p-3.5 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all resize-none text-sm disabled:opacity-60 ${completed.messaggio ? "border-brand-300" : "border-gray-200"}`} placeholder="Es. Utilizzo attualmente Word, vorrei capire come importare i dati storici..."></textarea>
                    </div>
 
                    <div className="flex items-start gap-3 mt-2">

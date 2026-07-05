@@ -36,6 +36,16 @@ const config: Config = {
       boxShadow: {
         'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
         'card': '0 10px 30px -5px rgba(0, 0, 0, 0.08)',
+      },
+      keyframes: {
+        'pop-in': {
+          '0%': { opacity: '0', transform: 'scale(0.4)' },
+          '70%': { transform: 'scale(1.15)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+      },
+      animation: {
+        'pop-in': 'pop-in 0.25s ease-out both',
       }
     },
   },
