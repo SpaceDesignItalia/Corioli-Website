@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import { posts, postsBySlug } from "../posts";
+import { posts, postsBySlug, categorySlug } from "../posts";
 
 type ComparisonRow = {
   name: string;
@@ -55,6 +55,22 @@ export function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
+// Articoli correlati: prima quelli della stessa categoria, poi i piu recenti
+// come riempimento. Serve a dare a ogni articolo dei link interni in uscita,
+// altrimenti il blog resta una raccolta di pagine isolate.
+function getRelatedPosts(slug: string, limit = 3) {
+  const current = postsBySlug[slug];
+  if (!current) return [];
+
+  const others = posts.filter((post) => post.slug !== slug);
+  const sameCategory = others.filter(
+    (post) => post.category === current.category,
+  );
+  const rest = others.filter((post) => post.category !== current.category);
+
+  return [...sameCategory, ...rest].slice(0, limit);
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -85,6 +101,7 @@ export async function generateMetadata({
       type: "article",
       url: `https://corioli.it/blog/${slug}`,
       publishedTime: post.isoDate,
+      ...(post.updatedIso ? { modifiedTime: post.updatedIso } : {}),
       authors: ["Corioli"],
     },
   };
@@ -102,6 +119,8 @@ export default async function BlogPostPage({
     notFound();
   }
 
+  const relatedPosts = getRelatedPosts(slug);
+
   const articleStructuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -110,7 +129,7 @@ export default async function BlogPostPage({
         headline: post.title,
         description: post.description,
         datePublished: post.isoDate,
-        dateModified: post.isoDate,
+        dateModified: post.updatedIso ?? post.isoDate,
         inLanguage: "it-IT",
         ...(post.coverImage
           ? { image: `https://corioli.it${post.coverImage.src}` }
@@ -193,12 +212,20 @@ export default async function BlogPostPage({
 
         <div className="mb-12">
           <div className="flex items-center gap-4 mb-6">
-            <span className="text-xs font-bold uppercase text-brand-600 bg-brand-50 px-2.5 py-1 rounded-md">
+            <Link
+              href={`/blog/categoria/${categorySlug(post.category)}`}
+              className="text-xs font-bold uppercase text-brand-600 bg-brand-50 px-2.5 py-1 rounded-md hover:bg-brand-100 transition-colors no-underline"
+            >
               {post.category}
-            </span>
+            </Link>
             <span className="text-sm text-gray-500 font-medium">
               {post.date}
             </span>
+            {post.updated && (
+              <span className="text-sm text-gray-400 font-medium">
+                Aggiornato il {post.updated}
+              </span>
+            )}
           </div>
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
             {post.title}
@@ -322,8 +349,9 @@ export default async function BlogPostPage({
                   </table>
                   <p className="px-4 py-3 text-xs text-gray-500 bg-gray-50 border-t border-gray-100">
                     * Prezzi e funzionalità basati su informazioni pubbliche
-                    al 2025. Verificare sempre sul sito ufficiale del
-                    fornitore.
+                    consultate ad agosto 2026. I listini dei fornitori cambiano
+                    con frequenza: verificare sempre sul sito ufficiale prima
+                    di decidere.
                   </p>
                 </div>
               )}
@@ -353,6 +381,31 @@ export default async function BlogPostPage({
             </section>
           )}
         </div>
+
+        {relatedPosts.length > 0 && (
+          <section className="mt-16 pt-10 border-t border-gray-100">
+            <h2 className="font-heading text-2xl font-bold text-gray-900 mb-6">
+              Continua a leggere
+            </h2>
+            <ul className="grid grid-cols-1 sm:grid-cols-3 gap-5 list-none p-0 m-0">
+              {relatedPosts.map((related) => (
+                <li key={related.slug} className="m-0">
+                  <Link
+                    href={`/blog/${related.slug}`}
+                    className="group flex flex-col h-full p-6 bg-gray-50 rounded-2xl border border-gray-100 hover:border-brand-200 hover:bg-brand-50/50 transition-colors no-underline"
+                  >
+                    <span className="text-[11px] font-bold uppercase tracking-wide text-brand-600 mb-2">
+                      {related.category}
+                    </span>
+                    <span className="font-heading font-bold text-base text-gray-900 leading-snug group-hover:text-brand-700 transition-colors">
+                      {related.title}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         <div className="mt-16 pt-10 border-t border-gray-100">
           <div className="bg-brand-900 rounded-3xl p-10 text-center relative overflow-hidden">

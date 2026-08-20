@@ -51,3 +51,9 @@ body {
 .animate-bounce-slow {
   animation: bounce-slow 4s ease-in-out infinite;
 }
+
+/* Safari mostra il triangolino nativo del <summary> nonostante list-none:
+   serve la pseudo-classe webkit. Vale per gli accordion FAQ di home e /prezzi. */
+summary::-webkit-details-marker {
+  display: none;
+}

@@ -17,6 +17,56 @@ import {
 } from "lucide-react";
 import clsx from "clsx";
 
+// Le FAQ della home: mostrate in pagina e dichiarate come FAQPage nei dati
+// strutturati. Le due cose devono restare allineate, perche Google accetta il
+// markup FAQ solo se le stesse domande e risposte sono visibili all'utente.
+const homeFaqs = [
+  {
+    question: "Che cos'è Corioli?",
+    answer:
+      "Corioli è un gestionale medico per dottori e studi specialistici privati: cartella clinica elettronica, anamnesi strutturata, refertazione PDF e calcolatori clinici integrati nella visita. È un'applicazione desktop per Windows 10 e Windows 11 e i dati dei pazienti restano salvati in locale, sul computer dello studio.",
+  },
+  {
+    question: "Per quali medici è pensato Corioli?",
+    answer:
+      "Corioli nasce per i medici specialisti che lavorano in libera professione. La verticalizzazione attiva oggi è quella per ginecologia e ostetricia, con cartella ostetrica elettronica e calcolatori fetali; il modulo di pediatria è in sviluppo. È adatto a chi cerca un software clinico e non un gestionale amministrativo adattato alla sanità.",
+  },
+  {
+    question: "Dove vengono salvati i dati dei pazienti?",
+    answer:
+      "Sul computer dello studio. Corioli è progettato secondo il principio della privacy by design: le cartelle cliniche non vengono trasmesse a server esterni e il fornitore non vi accede in alcun modo. Il medico resta l'unico titolare del trattamento e, per l'uso standard del software, non serve un DPA con noi perché non esiste un responsabile esterno del trattamento.",
+  },
+  {
+    question: "Quanto costa Corioli?",
+    answer:
+      "Il Piano Specialista costa 19€ al mese, oppure 15€ al mese con fatturazione annuale, e include cartella clinica elettronica illimitata, anagrafica pazienti e refertazione PDF. I calcolatori clinici avanzati sono un modulo opzionale da 15€ al mese. La migrazione dei dati storici da Word, Excel o altri gestionali costa 29€ una tantum.",
+  },
+  {
+    question: "Posso provarlo prima di acquistarlo?",
+    answer:
+      "Sì. La prova gratuita dura 90 giorni, non richiede carta di credito e non prevede costi di attivazione né vincoli contrattuali. È pensata per essere usata nell'ambulatorio reale, così da valutare il software su un ciclo di visite completo.",
+  },
+  {
+    question: "Corioli include agenda e fatturazione?",
+    answer:
+      "Non ancora: agenda e fatturazione elettronica sono in sviluppo. Oggi Corioli copre la parte clinica della visita — cartella, anamnesi, calcolatori, referti e consensi — mentre per la gestione amministrativa e per gli adempimenti fiscali serve ancora uno strumento separato.",
+  },
+];
+
+const homeFaqStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://corioli.it/#faq",
+  mainEntity: homeFaqs.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"ostetricia" | "pediatria">(
     "ostetricia",
@@ -910,7 +960,14 @@ export default function Home() {
               <p className="text-gray-600 leading-relaxed">
                 I moduli verticali includono strumenti clinici come datazione,
                 curve di crescita, percentili, BMI, Hadlock e refertazione
-                specializzata.
+                specializzata.{" "}
+                <Link
+                  href="/ginecologia"
+                  className="text-brand-600 font-medium hover:text-brand-700 underline underline-offset-2 decoration-brand-300"
+                >
+                  Scopri il gestionale per ginecologi
+                </Link>
+                .
               </p>
             </div>
             <div className="bg-white rounded-2xl p-7 border border-brand-100 shadow-soft">
@@ -923,6 +980,53 @@ export default function Home() {
                 alla relazione clinica.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ — stesso pattern accordion di /prezzi: le risposte restano nel DOM
+          anche da chiuse, quindi i dati strutturati FAQPage restano validi. */}
+      <section className="py-24">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(homeFaqStructuredData).replace(/</g, "\\u003c"),
+          }}
+        />
+        <div className="max-w-3xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-12">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Domande frequenti su Corioli
+            </h2>
+            <p className="text-lg text-gray-600">
+              Quello che i medici ci chiedono più spesso prima di scegliere un
+              gestionale medico.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3">
+            {homeFaqs.map((item) => (
+              <details
+                key={item.question}
+                className="group bg-white rounded-2xl border border-gray-100 shadow-soft px-6 py-5 open:shadow-card transition-shadow"
+                onToggle={(e) => {
+                  if ((e.target as HTMLDetailsElement).open) {
+                    posthog.capture("home_faq_opened", {
+                      question: item.question,
+                    });
+                  }
+                }}
+              >
+                <summary className="font-bold text-gray-900 cursor-pointer list-none flex items-center justify-between gap-4">
+                  {item.question}
+                  <span className="text-brand-600 shrink-0 transition-transform group-open:rotate-90">
+                    <ArrowRight size={18} />
+                  </span>
+                </summary>
+                <p className="text-gray-600 leading-relaxed mt-3 text-sm md:text-base">
+                  {item.answer}
+                </p>
+              </details>
+            ))}
           </div>
         </div>
       </section>

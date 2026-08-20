@@ -57,6 +57,14 @@ export default function Footer() {
             </li>
             <li>
               <Link
+                href="/ginecologia"
+                className="hover:text-brand-600 transition-colors"
+              >
+                Gestionale per ginecologi
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/prezzi"
                 className="hover:text-brand-600 transition-colors"
               >

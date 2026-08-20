@@ -32,6 +32,15 @@ export type BlogPost = {
   // Stessa data in formato ISO 8601 (es. "2025-02-05"), usata per structured
   // data, OpenGraph e sitemap. NON sostituire con la stringa italiana.
   isoDate: string;
+  // Data ISO dell'ultima revisione sostanziale, se l'articolo e stato
+  // aggiornato dopo la pubblicazione. Alimenta dateModified nei dati
+  // strutturati e lastModified nella sitemap, mentre isoDate resta la data di
+  // pubblicazione originale: sovrascrivere isoDate falserebbe la storia del
+  // contenuto. Ometterlo quando l'articolo non e mai stato rivisto.
+  updatedIso?: string;
+  // Etichetta leggibile dell'aggiornamento (es. "20 Agosto 2026"), mostrata
+  // accanto alla data di pubblicazione. Va tenuta allineata a updatedIso.
+  updated?: string;
   category: string;
   lead: string;
   // Immagine di copertina opzionale, mostrata sotto al titolo.
@@ -44,6 +53,214 @@ export type BlogPost = {
 // (/blog), la sitemap e le immagini OpenGraph derivano tutte da qui.
 // Ordine: dal più recente al meno recente.
 export const posts: BlogPost[] = [
+  {
+    slug: "sistema-tessera-sanitaria-invio-dati-annuale",
+    title: "Sistema Tessera Sanitaria: l'invio dei dati è diventato annuale",
+    description:
+      "Dalle spese sostenute dal 2025 la trasmissione al Sistema Tessera Sanitaria è annuale, entro il 31 gennaio dell'anno successivo. Cosa cambia per il medico privato e come arrivare preparati alla scadenza.",
+    excerpt:
+      "Addio invio semestrale: il Sistema TS è passato alla cadenza annuale. Sembra una semplificazione, ma concentra dodici mesi di documenti in una sola scadenza. Ecco come organizzarsi.",
+    date: "18 Agosto 2026",
+    isoDate: "2026-08-18",
+    category: "Normativa",
+    lead: "Per anni il calendario del medico libero professionista ha avuto due appuntamenti fissi con il Sistema Tessera Sanitaria: settembre e gennaio. Il decreto correttivo ha cambiato le carte in tavola e oggi l'invio è annuale. Sulla carta è una semplificazione; nella pratica, per chi non tiene i documenti in ordine durante l'anno, può trasformarsi in una scadenza molto più pesante di prima.",
+    sections: [
+      {
+        title: "Cosa è cambiato: da due invii all'anno a uno solo",
+        body: "Fino alle spese del 2024 la trasmissione dei dati al Sistema Tessera Sanitaria seguiva una cadenza semestrale: entro il 30 settembre andavano inviate le spese sostenute da gennaio a giugno, ed entro il 31 gennaio dell'anno successivo quelle del secondo semestre. Due finestre, due momenti di lavoro amministrativo, due occasioni per accorgersi che qualcosa non tornava.\n\nCon il decreto correttivo (D.Lgs. n. 81 del 12 giugno 2025) l'obbligo semestrale è stato eliminato. Per le spese sanitarie sostenute a partire dal 1° gennaio 2025 la trasmissione avviene con cadenza annuale, entro il 31 gennaio dell'anno successivo a quello di sostenimento della spesa.\n\nIn concreto: i dati relativi alle spese del 2025 andavano trasmessi entro il 2 febbraio 2026 — il 31 gennaio cadeva di sabato e la scadenza è slittata al primo giorno lavorativo utile. I dati delle spese del 2026 vanno trasmessi entro il 31 gennaio 2027. L'obbligo riguarda medici chirurghi e professionisti sanitari, oltre a farmacie, parafarmacie e strutture sanitarie accreditate.",
+      },
+      {
+        title: "Perché una scadenza sola non è necessariamente più facile",
+        body: "L'invio annuale riduce gli adempimenti da due a uno, e questa è una buona notizia. Ma sposta anche tutto il carico su un'unica finestra di gennaio, e cambia la natura dell'errore possibile.\n\nCon la cadenza semestrale, un dato sbagliato inserito a marzo emergeva a settembre: sei mesi di distanza, ancora recuperabili con un po' di memoria e qualche ricerca. Con la cadenza annuale, una ricevuta emessa a febbraio viene verificata undici mesi dopo, quando ricostruire il contesto di quella prestazione è molto più difficile. Se il codice fiscale della paziente era incompleto, se l'importo non corrisponde, se la prestazione era esente o meno: sono dettagli che a gennaio dell'anno dopo si recuperano solo se qualcuno li ha registrati bene sul momento.\n\nC'è poi un tema puramente pratico di volume. Un ambulatorio specialistico con due o tre giorni di visite a settimana produce facilmente diverse centinaia di documenti fiscali in dodici mesi. Ricontrollarli tutti nelle ultime due settimane di gennaio, mentre l'attività clinica prosegue normalmente, è un esercizio che invita agli errori.",
+      },
+      {
+        title: "Cosa serve davvero: dati corretti alla fonte",
+        body: "La lezione operativa è semplice e vale a prescindere dal software che usi: la scadenza di gennaio si vince a marzo, a giugno e a ottobre. Se ogni prestazione viene registrata con anagrafica completa e importo corretto nel momento in cui avviene, l'invio annuale diventa un'operazione di verifica; se invece i dati vengono ricostruiti a posteriori da un blocchetto di ricevute e da un file Excel compilato a intermittenza, diventa un lavoro di archeologia.\n\nI punti su cui vale la pena essere rigorosi durante l'anno sono pochi ma decisivi. L'anagrafica del paziente deve essere completa e verificata al primo accesso, codice fiscale compreso: è la chiave su cui si aggancia tutto il resto. Ogni prestazione deve essere collegata alla persona giusta, senza omonimie risolte a occhio. La natura della prestazione va annotata quando è fresca, perché è quella a determinare il trattamento corretto ai fini della detraibilità. E l'opposizione del paziente all'invio dei dati, quando espressa, va tracciata subito e in modo inequivocabile.\n\nUn'ultima nota di metodo: la trasmissione vera e propria al Sistema TS resta un adempimento fiscale, che nella maggior parte degli studi passa dal commercialista o dal software di fatturazione. Il gestionale clinico non lo sostituisce. Quello che può fare — ed è la parte che di solito si rompe — è garantire che i dati anagrafici e lo storico delle prestazioni siano ordinati, univoci e consultabili quando serve ricostruire un anno intero di attività.",
+      },
+      {
+        title: "Il legame con il resto degli adempimenti digitali",
+        body: "Il passaggio all'invio annuale non è un episodio isolato: si inserisce in un movimento più ampio che sta chiedendo agli studi privati di lavorare con dati strutturati anziché con documenti sciolti. Nello stesso periodo è arrivato l'obbligo di alimentazione del Fascicolo Sanitario Elettronico 2.0 anche per il privato, che richiede referti prodotti come documenti digitali coerenti e completi.\n\nSono adempimenti diversi, con destinatari e finalità diverse — uno fiscale, l'altro clinico — ma poggiano sullo stesso prerequisito: un archivio in cui ogni paziente esiste una volta sola, ogni prestazione è collegata a chi l'ha ricevuta e nulla dipende dalla memoria di chi ha scritto. Chi ha già messo ordine su questo fronte affronta entrambe le scadenze come una verifica. Chi non l'ha fatto le affronta due volte, ogni volta da capo.\n\nÈ il motivo per cui in Corioli l'anagrafica è unica e ogni visita resta legata alla scheda della paziente, con lo storico consultabile per data: non perché il software si occupi degli invii fiscali, ma perché quando arriva gennaio la domanda a cui devi rispondere è sempre la stessa — che cosa ho fatto, a chi, e quando — e la risposta deve essere già scritta da qualche parte.",
+      },
+    ],
+    faq: [
+      {
+        question: "Qual è la scadenza per l'invio dei dati al Sistema Tessera Sanitaria?",
+        answer:
+          "Dalle spese sostenute a partire dal 1° gennaio 2025 la trasmissione è annuale, entro il 31 gennaio dell'anno successivo. Per le spese del 2025 la scadenza è stata il 2 febbraio 2026, perché il 31 gennaio cadeva di sabato; per le spese del 2026 la scadenza è il 31 gennaio 2027. Verifica sempre le indicazioni aggiornate dell'Agenzia delle Entrate e del portale Sistema TS, perché proroghe e slittamenti tecnici non sono rari.",
+      },
+      {
+        question: "L'invio semestrale è stato davvero eliminato?",
+        answer:
+          "Sì. Il decreto correttivo D.Lgs. n. 81 del 12 giugno 2025 ha eliminato l'obbligo di trasmissione semestrale, sostituendolo con la cadenza annuale per le spese sostenute dal 2025 in poi. Fino alle spese del 2024 restava in vigore il doppio appuntamento del 30 settembre e del 31 gennaio.",
+      },
+      {
+        question: "Chi è obbligato a trasmettere i dati al Sistema TS?",
+        answer:
+          "L'obbligo riguarda medici chirurghi e odontoiatri, gli altri professionisti sanitari, le farmacie e parafarmacie e le strutture sanitarie accreditate al Servizio Sanitario Nazionale. Per il singolo specialista in libera professione l'adempimento riguarda le prestazioni sanitarie fatturate a persone fisiche.",
+      },
+      {
+        question: "Corioli si occupa dell'invio al Sistema Tessera Sanitaria?",
+        answer:
+          "No. La trasmissione al Sistema TS è un adempimento fiscale che passa dal software di fatturazione o dal commercialista, e Corioli non lo sostituisce: agenda e fatturazione elettronica non sono oggi tra le funzionalità disponibili. Corioli lavora sul livello sotto, quello clinico: anagrafica unica e verificata, storico delle visite ordinato per paziente e referti coerenti, così che ricostruire un anno di attività non dipenda da fogli sparsi.",
+      },
+    ],
+  },
+  {
+    slug: "conservazione-cartella-clinica-studio-privato",
+    title: "Per quanto tempo conservare la cartella clinica nello studio privato",
+    description:
+      "Nessuna norma fissa un termine preciso per la cartella clinica del libero professionista. Cosa dice il Garante Privacy, perché dieci anni è il riferimento più usato e come impostare una politica di conservazione difendibile.",
+    excerpt:
+      "Quanto vanno tenuti i dati clinici di un paziente in uno studio privato? La risposta non è nel codice: è una scelta che il medico deve motivare. Ecco i criteri per farlo bene.",
+    date: "11 Agosto 2026",
+    isoDate: "2026-08-11",
+    category: "Normativa",
+    lead: "È una delle domande che ricorrono più spesso quando uno specialista mette ordine nel proprio archivio: per quanto tempo devo conservare le cartelle dei pazienti? Molti si aspettano un numero secco scritto da qualche parte. Non c'è — almeno non per lo studio privato — e capire perché aiuta a prendere una decisione consapevole invece di accumulare tutto per sempre.",
+    sections: [
+      {
+        title: "La differenza tra ospedale e studio privato",
+        body: "Il punto di partenza è distinguere due situazioni che vengono spesso confuse. Per le cartelle cliniche ospedaliere e delle case di cura, insieme ai relativi referti, la conservazione è illimitata: sono documenti che fanno parte della memoria sanitaria della struttura e non si distruggono.\n\nPer il medico libero professionista non convenzionato la situazione è diversa: nessuna norma stabilisce espressamente che debba conservare la 'cartella clinica privata' dei propri pazienti e la documentazione allegata, né per quanto tempo. Questo non significa che ci si possa comportare come si vuole. Significa che la decisione ricade sul medico in quanto titolare del trattamento, e che va motivata.\n\nÈ una responsabilità in più, non una libertà. Il GDPR chiede che i tempi di conservazione siano definiti in anticipo e coerenti con la finalità del trattamento, non lasciati all'inerzia. Un archivio che cresce all'infinito perché nessuno ha mai deciso quando fermarsi non è conforme: è semplicemente non gestito.",
+      },
+      {
+        title: "Perché dieci anni è il riferimento più usato",
+        body: "In assenza di un termine di legge, la prassi più diffusa e più difendibile è ancorare la conservazione al termine di prescrizione ordinaria, che nell'ipotesi più ampia è di dieci anni. Il ragionamento è lineare: il medico conserva la documentazione clinica anche per poter tutelare i propri diritti e la propria difesa in caso di contestazioni future, e finché quella possibilità esiste la finalità di conservazione è attuale.\n\nÈ un criterio che regge perché lega il tempo di conservazione a una ragione concreta e verificabile, non a una preferenza personale. E funziona in entrambe le direzioni: giustifica il fatto che i dati siano ancora lì dopo otto anni, e giustifica il fatto che vengano cancellati dopo dodici.\n\nAttenzione però a non trattarlo come un automatismo universale. Il principio generale enunciato dal Garante resta che i dati vanno conservati per il tempo necessario al perseguimento della finalità per cui sono stati raccolti, e ci sono situazioni in cui quel tempo è ragionevolmente diverso: un percorso di cura ancora in corso, una documentazione rilevante per la storia clinica di lungo periodo della paziente, un contenzioso aperto che congela qualsiasi cancellazione. La politica di conservazione dovrebbe prevedere questi casi invece di ignorarli.",
+      },
+      {
+        title: "Come si scrive una politica di conservazione che sta in piedi",
+        body: "Non serve un documento lungo. Serve un documento che esista e che descriva scelte reali. Quattro elementi bastano a renderlo utile.\n\nIl primo è il termine ordinario: quanti anni conservi la documentazione clinica dopo l'ultimo contatto con il paziente, e perché hai scelto quel numero. Il secondo sono le eccezioni: i casi in cui il termine si allunga (contenzioso in corso, obblighi specifici) o si accorcia, definiti in anticipo e non decisi caso per caso. Il terzo è il momento della verifica: una data ricorrente — una volta l'anno è sufficiente — in cui si controlla cosa ha superato il termine, invece di aspettare che qualcuno se ne accorga. Il quarto è il modo in cui la cancellazione avviene concretamente, inclusi i backup, che è il punto in cui quasi tutte le politiche di conservazione si rompono.\n\nQuest'ultimo aspetto merita attenzione. Cancellare una cartella dall'archivio principale mentre la stessa cartella continua a esistere in dieci copie di backup accumulate negli anni significa non averla cancellata. Una politica di backup con rotazione definita — copie che vengono sovrascritte o eliminate dopo un periodo stabilito — non serve solo a risparmiare spazio: è ciò che rende la cancellazione effettiva.",
+      },
+      {
+        title: "Perché l'archivio digitale rende tutto questo praticabile",
+        body: "Su carta, applicare una politica di conservazione è teoricamente possibile e praticamente raro. Significa scorrere fisicamente un archivio, individuare i fascicoli oltre il termine, estrarli e distruggerli in modo sicuro. Nella maggior parte degli studi questo non succede mai, e l'archivio cresce fino a esaurire lo spazio disponibile.\n\nIn un archivio digitale la stessa operazione diventa una interrogazione: quali pazienti non hanno contatti da più di N anni. Da lì la revisione annuale è un'ora di lavoro invece di un progetto rimandato a tempo indeterminato. È una di quelle differenze che non si notano il primo anno e diventano evidenti al settimo.\n\nC'è anche un vantaggio meno ovvio, che riguarda chi sceglie l'archiviazione locale. Quando i dati clinici restano sul computer dello studio e non transitano da server di terzi, il perimetro della conservazione è netto: sai esattamente dove sono le copie, chi può accedervi e cosa succede quando decidi di cancellarle. Non devi verificare le politiche di retention di un fornitore né chiederti quanto a lungo un provider mantenga i propri backup. In cambio, l'onere di eseguire quei backup — e di gestirne la rotazione — è interamente tuo: è il rovescio della medaglia dell'archiviazione locale, e va affrontato con un piano preciso.",
+      },
+    ],
+    faq: [
+      {
+        question: "Per quanto tempo deve conservare le cartelle un medico libero professionista?",
+        answer:
+          "Nessuna norma fissa un termine espresso per la cartella clinica del libero professionista non convenzionato. Spetta al medico, in quanto titolare del trattamento, definire il periodo in base alla finalità. La prassi più diffusa è ancorarlo al termine di prescrizione ordinaria di dieci anni, che consente al medico di tutelare i propri diritti in caso di contestazioni. La scelta va documentata, non lasciata all'inerzia.",
+      },
+      {
+        question: "Le cartelle cliniche ospedaliere seguono le stesse regole?",
+        answer:
+          "No. Per le cartelle cliniche ospedaliere e delle case di cura, insieme ai relativi referti, la conservazione è illimitata: sono documenti che non vengono distrutti. La flessibilità di cui si parla riguarda esclusivamente la documentazione prodotta dal professionista privato nel proprio studio.",
+      },
+      {
+        question: "Devo cancellare i dati anche dai backup?",
+        answer:
+          "Sì, altrimenti la cancellazione non è effettiva. È il punto in cui la maggior parte delle politiche di conservazione fallisce: la cartella sparisce dall'archivio principale ma sopravvive in copie di backup accumulate negli anni. La soluzione pratica è una rotazione definita dei backup, con copie sovrascritte o eliminate dopo un periodo stabilito, coerente con il termine di conservazione dichiarato.",
+      },
+      {
+        question: "Un gestionale aiuta a rispettare i tempi di conservazione?",
+        answer:
+          "Aiuta a renderli praticabili. In un archivio digitale individuare i pazienti senza contatti da oltre N anni è una ricerca, mentre su carta è una revisione fisica dell'archivio che nella pratica quasi nessuno esegue. Il gestionale non decide la politica al posto tuo — quella resta una scelta del titolare del trattamento — ma trasforma la verifica periodica in un'operazione di routine invece che in un progetto rimandato.",
+      },
+    ],
+  },
+  {
+    slug: "backup-studio-medico-regola-3-2-1",
+    title: "Backup dello studio medico: la regola 3-2-1 applicata all'ambulatorio",
+    description:
+      "Se i dati clinici sono salvati in locale, il backup è responsabilità del medico. Come applicare la regola 3-2-1 in uno studio privato, cosa cifrare e perché un backup mai testato non è un backup.",
+    excerpt:
+      "L'archiviazione locale mette i dati sotto il tuo controllo e, insieme, sotto la tua responsabilità. Ecco come costruire un backup serio senza diventare un sistemista.",
+    date: "30 Luglio 2026",
+    isoDate: "2026-07-30",
+    category: "Gestione Studio",
+    lead: "Chi sceglie un gestionale con archiviazione locale lo fa quasi sempre per una ragione precisa: vuole che i dati delle pazienti restino nello studio e non su server di terzi. È una scelta legittima e, dal punto di vista della minimizzazione, la più radicale. Ma va detto con onestà: sposta sul medico un onere che nel cloud è del fornitore. Quell'onere si chiama backup, e ignorarlo è il modo più veloce per trasformare un vantaggio in un disastro.",
+    sections: [
+      {
+        title: "Cosa può andare storto davvero",
+        body: "Quando si parla di backup la mente va al guasto del disco, che è in effetti lo scenario classico. Ma nella pratica di uno studio medico gli incidenti più frequenti sono altri tre, e nessuno di questi è risolto da un semplice disco di scorta.\n\nIl primo è il ransomware. Un allegato aperto per distrazione cifra tutti i file raggiungibili dal computer — e se il disco di backup è collegato in permanenza tramite USB, cifra anche quello. È il motivo per cui una copia costantemente connessa non è una copia sicura.\n\nIl secondo è l'errore umano: una cartella eliminata per sbaglio, una modifica sbagliata salvata sopra il dato corretto. Qui il problema non è la perdita del disco ma il tempo: se il backup viene sovrascritto ogni notte e l'errore viene scoperto dopo cinque giorni, l'unica copia disponibile contiene già il dato sbagliato. Servono versioni multiple nel tempo, non una sola copia sempre aggiornata.\n\nIl terzo è il furto o l'incendio dello studio. È lo scenario più raro e quello che azzera tutto insieme: computer e disco di backup si trovano nella stessa stanza e spariscono nello stesso momento. È esattamente il motivo per cui esiste la regola che segue.",
+      },
+      {
+        title: "La regola 3-2-1, tradotta per un ambulatorio",
+        body: "La regola 3-2-1 è lo standard di riferimento in materia di backup e si riassume così: tre copie dei dati, su due supporti diversi, di cui una conservata fuori sede. Applicata a uno studio medico non richiede infrastrutture complesse.\n\nLe tre copie sono il dato originale sul computer dello studio, più due copie di backup. Non conta come copia il file duplicato in un'altra cartella dello stesso disco: se il disco muore o viene cifrato, se ne vanno entrambi.\n\nI due supporti diversi servono a non dipendere da un singolo punto di rottura. In pratica: il disco interno del computer più un disco esterno, oppure un NAS dello studio. L'importante è che il secondo supporto non resti collegato in permanenza — si connette per il backup e si scollega — proprio per proteggerlo dal ransomware.\n\nLa copia fuori sede è quella che quasi tutti saltano, ed è quella che salva nei casi peggiori. Per uno studio medico può essere un secondo disco cifrato custodito altrove e ruotato con cadenza regolare, oppure un servizio di backup remoto. Qui va posta una condizione non negoziabile: se la copia fuori sede finisce su un servizio online, quei dati sono dati sanitari e vanno cifrati prima di uscire dallo studio, con una chiave che resta in tuo possesso. Diversamente hai reintrodotto dalla finestra il trasferimento a terzi che avevi escluso dalla porta, e il fornitore di quel servizio diventa un responsabile del trattamento da regolare con un contratto.",
+      },
+      {
+        title: "Cifratura: il livello che rende il backup difendibile",
+        body: "Un disco esterno con dieci anni di cartelle cliniche, non cifrato, dimenticato in una borsa su un treno, è una violazione di dati personali con tutto quello che ne consegue. Lo stesso disco, cifrato con una password robusta, è un oggetto inutilizzabile per chi lo trova.\n\nSu Windows lo strumento nativo è BitLocker, disponibile nelle edizioni Pro ed Enterprise, che consente di cifrare sia il disco di sistema sia le unità rimovibili tramite BitLocker To Go. È la configurazione minima ragionevole per qualsiasi supporto che esce dallo studio, e vale la pena estenderla anche al disco del computer principale: un portatile sottratto dall'ambulatorio senza cifratura del disco espone l'intero archivio, indipendentemente dalla password di accesso a Windows.\n\nLa chiave di ripristino va conservata da qualche parte che non sia il computer cifrato — è un errore ricorrente e le sue conseguenze sono definitive. Un supporto separato, o un gestore di password affidabile, sono entrambe soluzioni accettabili; un file di testo sul desktop non lo è.",
+      },
+      {
+        title: "Il backup che non hai mai ripristinato non è un backup",
+        body: "È la parte che si salta sempre, ed è quella che distingue un backup reale da un backup presunto. Un processo automatico che gira ogni notte e produce file può fallire silenziosamente per mesi: un percorso cambiato, un disco pieno, un servizio che non riparte dopo un aggiornamento. Nessuno se ne accorge finché non serve.\n\nL'unico modo per saperlo è provare. Una volta ogni sei mesi, prendi il backup e ripristina i dati su una macchina diversa o in una cartella separata: verifica che i file ci siano davvero, che si aprano, che l'archivio sia completo e non tronco. Mezz'ora di lavoro due volte l'anno, con un beneficio sproporzionato rispetto al costo.\n\nVale la pena scrivere anche due righe di procedura: dove si trovano le copie, ogni quanto vengono fatte, chi le esegue, dove sta la chiave di ripristino e quali sono i passaggi per rimettere in piedi lo studio. Se l'unica persona che conosce la risposta è in ferie il giorno in cui il computer non si accende, la procedura non esiste. E se ti stai chiedendo se ne valga la pena: il criterio pratico è quanti giorni di attività clinica saresti disposto a perdere. Se la risposta è nessuno, il piano va scritto adesso, non dopo il primo incidente.",
+      },
+    ],
+    faq: [
+      {
+        question: "Che cos'è la regola 3-2-1 del backup?",
+        answer:
+          "È lo standard di riferimento per la protezione dei dati: tre copie delle informazioni, conservate su due supporti diversi, di cui una custodita fuori sede. In uno studio medico si traduce nel dato sul computer, una copia su disco esterno o NAS che non resta collegato in permanenza, e una terza copia cifrata conservata altrove.",
+      },
+      {
+        question: "Con un gestionale locale il backup è responsabilità mia?",
+        answer:
+          "Sì, ed è il rovescio della medaglia dell'archiviazione locale. Quando i dati clinici restano sul computer dello studio, nessun fornitore esegue backup al posto tuo: dischi cifrati, copie periodiche protette e test di ripristino ricadono sul medico. In cambio ottieni che i dati non transitino da server di terzi e che il perimetro di chi può accedervi sia netto.",
+      },
+      {
+        question: "Posso usare un servizio cloud per la copia fuori sede?",
+        answer:
+          "Puoi, a una condizione: i dati sanitari vanno cifrati prima di lasciare lo studio, con una chiave che resta in tuo possesso. Se carichi cartelle cliniche in chiaro su un servizio online hai reintrodotto un trasferimento a terzi, e quel fornitore diventa un responsabile del trattamento da regolare contrattualmente. Con la cifratura lato client il servizio custodisce un archivio che non è in grado di leggere.",
+      },
+      {
+        question: "Ogni quanto va testato il ripristino?",
+        answer:
+          "Una verifica ogni sei mesi è un compromesso ragionevole per uno studio privato. Un backup automatico può fallire silenziosamente per mesi — percorso cambiato, disco pieno, servizio non riavviato — e l'unico modo per accorgersene prima dell'emergenza è ripristinare davvero i dati su una macchina o una cartella diversa e controllare che l'archivio sia completo e apribile.",
+      },
+    ],
+  },
+  {
+    slug: "consenso-informato-digitale-studio-medico",
+    title: "Consenso informato: cosa dice la legge 219/2017 e come gestirlo senza carta",
+    description:
+      "La legge 219/2017 impone che il consenso informato sia documentato e inserito nella cartella clinica. Come raccoglierlo e archiviarlo in formato digitale in uno studio specialistico privato.",
+    excerpt:
+      "Il consenso informato non è un modulo da far firmare in fretta: è un atto che la legge vuole documentato e collegato alla cartella clinica. Ecco cosa serve e come smettere di gestirlo su carta.",
+    date: "21 Luglio 2026",
+    isoDate: "2026-07-21",
+    category: "Normativa",
+    lead: "In molti studi il consenso informato vive una doppia vita: da un lato è considerato un adempimento formale da sbrigare in sala d'attesa, dall'altro è il primo documento che viene cercato — spesso senza trovarlo — quando emerge una contestazione. La legge 219/2017 lo tratta come parte integrante della relazione di cura, e prescrive con precisione dove deve finire.",
+    sections: [
+      {
+        title: "Cosa prescrive la legge 219/2017",
+        body: "La legge 22 dicembre 2017, n. 219 ha dato al consenso informato una disciplina organica. Il passaggio operativamente più rilevante per lo studio privato è l'articolo 1, comma 4: il consenso informato, acquisito nei modi e con gli strumenti più consoni alle condizioni del paziente, è documentato in forma scritta o attraverso videoregistrazioni oppure, per la persona con disabilità, attraverso dispositivi che le consentano di comunicare.\n\nLa norma prosegue con l'indicazione che pesa di più sull'organizzazione dell'archivio: il consenso informato, in qualunque forma espresso, è inserito nella cartella clinica e nel fascicolo sanitario elettronico.\n\nDue conseguenze pratiche. La prima è che la forma scritta non è l'unica ammessa — la legge apre esplicitamente a modalità alternative da adattare alle condizioni del paziente — ma la documentazione è sempre necessaria: un consenso raccolto solo a voce e non documentato è, dal punto di vista probatorio, un consenso che non esiste. La seconda è che il documento non è un foglio autonomo da conservare a parte: deve stare dentro la cartella clinica, collegato al paziente e alla prestazione.",
+      },
+      {
+        title: "Dove si rompe il flusso cartaceo",
+        body: "Il modulo cartaceo firmato è la modalità più diffusa e, in astratto, perfettamente conforme. I problemi nascono in quello che succede dopo la firma.\n\nIl primo è la separazione fisica dal resto della documentazione. Il consenso finisce in un raccoglitore ordinato per data mentre la cartella della paziente sta altrove: sono due archivi paralleli che la legge vorrebbe uno solo. Quando serve recuperare il consenso di una prestazione di tre anni fa, la ricerca dipende dalla memoria di chi ha archiviato.\n\nIl secondo è il controllo di completezza. Con un flusso cartaceo nessuno verifica sistematicamente che ogni prestazione che lo richiedeva abbia il proprio consenso firmato: l'assenza si scopre quando qualcuno la cerca, cioè nel momento peggiore.\n\nIl terzo è la gestione delle versioni. I moduli di consenso vengono aggiornati nel tempo, e in un archivio cartaceo capita di trovare la versione vecchia ancora in uso mesi dopo la revisione, semplicemente perché sono rimaste copie stampate nel cassetto. Ricostruire quale versione dell'informativa sia stata effettivamente sottoposta a una paziente in una certa data diventa impossibile.",
+      },
+      {
+        title: "Come funziona un consenso gestito nel gestionale",
+        body: "Spostare il consenso dentro il gestionale non cambia il contenuto del documento né la sostanza dell'obbligo: cambia il fatto che il documento nasca già collegato alla persona e alla prestazione, invece di dover essere ricongiunto a mano.\n\nIl flusso tipico è questo. Il modulo esiste come modello nel software, in una versione unica e aggiornata, così che nessuno usi per errore un'informativa superata. Al momento della visita il consenso viene generato per quella paziente, con i suoi dati già compilati dall'anagrafica: si elimina la trascrizione manuale e con essa gli errori di trascrizione. Una volta acquisito, il documento resta agganciato alla scheda della paziente e compare nel suo storico insieme a visite e referti — che è esattamente ciò che la legge chiede quando prescrive l'inserimento in cartella clinica. Recuperarlo tre anni dopo è una ricerca per nome, non una battuta di caccia in un raccoglitore.\n\nÈ il modo in cui Corioli gestisce il consenso informato: come parte della cartella clinica elettronica, non come allegato separato. Va detto con precisione cosa questo significa e cosa no: il software garantisce che il documento sia prodotto correttamente, collegato alla paziente e sempre reperibile nello storico. La validità giuridica della sottoscrizione dipende invece dalla modalità di firma che scegli di adottare, ed è un piano distinto — con implicazioni diverse a seconda che si usi una firma autografa su copia stampata poi acquisita, o una firma elettronica di livello adeguato.",
+      },
+      {
+        title: "Consenso al trattamento e consenso alla cura: non confonderli",
+        body: "Vale la pena chiarire un equivoco che ricorre spesso, perché genera moduli confusi e archivi disordinati. Il consenso informato di cui parla la legge 219/2017 riguarda l'atto sanitario: è l'adesione consapevole della paziente al trattamento proposto, dopo essere stata informata su natura, benefici, rischi e alternative.\n\nIl consenso al trattamento dei dati personali disciplinato dal GDPR è un'altra cosa, e risponde a una domanda diversa: come possono essere trattati i suoi dati e per quali finalità. Va peraltro ricordato che nel contesto sanitario il trattamento dei dati per finalità di cura si fonda normalmente su basi giuridiche diverse dal consenso, cosa che rende ancora meno sensato accorpare i due documenti in un unico foglio da far firmare.\n\nIn pratica: teneteli distinti, con testi separati e finalità dichiarate in modo chiaro. Un unico modulo che mescola l'informativa clinica e quella privacy indebolisce entrambe, perché rende difficile dimostrare che la paziente sia stata effettivamente informata su ciascuna delle due cose. Sono anche documenti con cicli di vita diversi: l'informativa privacy si aggiorna quando cambiano i trattamenti, il consenso alla cura si rinnova quando cambia la prestazione proposta.",
+      },
+    ],
+    faq: [
+      {
+        question: "Il consenso informato deve essere per forza scritto?",
+        answer:
+          "L'articolo 1, comma 4 della legge 219/2017 prevede che il consenso sia documentato in forma scritta oppure attraverso videoregistrazioni o, per la persona con disabilità, tramite dispositivi che le consentano di comunicare. La forma scritta non è quindi l'unica ammessa, ma la documentazione è sempre necessaria: un consenso raccolto solo a voce e non documentato non è dimostrabile.",
+      },
+      {
+        question: "Dove va conservato il consenso informato?",
+        answer:
+          "La legge è esplicita: il consenso informato, in qualunque forma espresso, è inserito nella cartella clinica e nel fascicolo sanitario elettronico. Non è quindi un documento da archiviare a parte in un raccoglitore separato, ma parte integrante della documentazione clinica della paziente.",
+      },
+      {
+        question: "Consenso informato e consenso privacy sono la stessa cosa?",
+        answer:
+          "No, e conviene tenerli su documenti distinti. Il consenso informato della legge 219/2017 riguarda l'adesione consapevole della paziente al trattamento sanitario proposto. Il consenso privacy riguarda il trattamento dei dati personali secondo il GDPR — trattamento che, per le finalità di cura, si fonda peraltro normalmente su basi giuridiche diverse dal consenso. Accorparli in un unico modulo indebolisce entrambi.",
+      },
+      {
+        question: "Un consenso gestito nel gestionale ha valore legale?",
+        answer:
+          "Il gestionale garantisce che il documento sia prodotto nella versione corretta, compilato con i dati della paziente e conservato dentro la sua cartella clinica, come la legge richiede. La validità della sottoscrizione dipende però dalla modalità di firma adottata: una firma autografa su copia stampata e poi acquisita, o una firma elettronica di livello adeguato, hanno effetti probatori diversi. È una scelta da valutare con il proprio consulente in base al tipo di prestazione.",
+      },
+    ],
+  },
   {
     slug: "fse-2-0-obbligo-studi-privati-cosa-fare",
     title: "FSE 2.0 obbligatorio per gli studi privati: cosa deve fare lo specialista",
@@ -359,13 +576,15 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "gestionale-per-ginecologi-cosa-cercare",
-    title: "Gestionale per ginecologi: cosa cercare nel 2025",
+    title: "Gestionale per ginecologi: cosa cercare nel 2026",
     description:
       "Guida alla scelta del gestionale medico per ginecologi: funzionalità cliniche, calcolatori ostetrici, cartella ostetrica elettronica, GDPR e differenze rispetto ai software generici.",
     excerpt:
       "Funzionalità cliniche, calcolatori ostetrici, cartella ostetrica elettronica e GDPR: tutto quello che serve davvero a un ginecologo in ambulatorio.",
     date: "5 Febbraio 2025",
     isoDate: "2025-02-05",
+    updated: "20 Agosto 2026",
+    updatedIso: "2026-08-20",
     category: "Ginecologia",
     lead: "Un ginecologo ha esigenze cliniche molto specifiche che un software generico non può soddisfare. Dalla biometria fetale alla curva di crescita, dalla cartella ostetrica al consenso informato: ogni visita richiede strumenti pensati per la specializzazione.",
     sections: [
@@ -515,13 +734,15 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "migliori-software-gestionali-medici-italia",
-    title: "Migliori software gestionali per medici in Italia (2025)",
+    title: "Migliori software gestionali per medici in Italia (2026)",
     description:
-      "Guida ai migliori software gestionali per medici in Italia nel 2025: cosa valutare, differenze tra soluzioni generiche e verticali, e perché la specializzazione fa la differenza.",
+      "Guida ai migliori software gestionali per medici in Italia nel 2026: cosa valutare, differenze tra soluzioni generiche e verticali, e perché la specializzazione fa la differenza.",
     excerpt:
       "Cosa distingue un gestionale generico da uno verticale, cosa valutare prima di scegliere e come orientarsi tra cloud e dati salvati in locale.",
     date: "10 Gennaio 2025",
     isoDate: "2025-01-10",
+    updated: "20 Agosto 2026",
+    updatedIso: "2026-08-20",
     category: "Confronto",
     lead: "Scegliere il gestionale medico giusto non è facile: l'offerta è ampia, i prezzi variano molto e i dettagli che contano davvero emergono solo durante l'uso clinico quotidiano. Questa guida ti aiuta a orientarti.",
     sections: [
@@ -597,13 +818,15 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "cartella-clinica-elettronica-obbligatoria-2025",
-    title: "Cartella clinica elettronica: cosa cambia nel 2025?",
+    title: "Cartella clinica elettronica: cosa cambia nel 2026?",
     description:
-      "Cosa valutare nel 2025 quando si sceglie una cartella clinica elettronica per studio medico: sicurezza, GDPR, backup, accessi e controllo dei dati.",
+      "Cosa valutare nel 2026 quando si sceglie una cartella clinica elettronica per studio medico: sicurezza, GDPR, backup, accessi e controllo dei dati.",
     excerpt:
-      "Tutte le novità normative e i requisiti GDPR che gli specialisti privati devono conoscere per essere in regola l'anno prossimo.",
+      "I requisiti GDPR e le novità normative che gli specialisti privati devono conoscere per scegliere una cartella clinica elettronica in regola.",
     date: "3 Maggio 2024",
     isoDate: "2024-05-03",
+    updated: "20 Agosto 2026",
+    updatedIso: "2026-08-20",
     category: "Normativa",
     lead: "La gestione digitale dei dati sanitari richiede sempre più attenzione a privacy, sicurezza e tracciabilità. Per gli studi medici privati, la cartella clinica elettronica deve essere scelta con criteri clinici e tecnici.",
     sections: [
@@ -625,4 +848,104 @@ export const posts: BlogPost[] = [
 
 export const postsBySlug: Record<string, BlogPost> = Object.fromEntries(
   posts.map((post) => [post.slug, post]),
+);
+
+// --- Categorie -------------------------------------------------------------
+
+// Slug URL-safe di una categoria ("Gestione Studio" -> "gestione-studio").
+// Usata da /blog/categoria/[slug] e dalla sitemap: unica fonte, cosi i due
+// non possono divergere.
+export function categorySlug(category: string): string {
+  return category
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+// Testi delle pagine di categoria. Ogni voce alimenta title, description e
+// intro di /blog/categoria/[slug]: sono pagine indicizzabili, quindi il testo
+// deve essere specifico e non una formula ripetuta con la parola sostituita.
+export const categoryMeta: Record<
+  string,
+  { title: string; description: string; intro: string }
+> = {
+  Normativa: {
+    title: "Normativa sanitaria per lo studio privato",
+    description:
+      "FSE 2.0, GDPR, Sistema Tessera Sanitaria, consenso informato e conservazione della documentazione clinica: gli obblighi che riguardano il medico specialista in libera professione.",
+    intro:
+      "Gli adempimenti che toccano davvero lo studio privato, spiegati senza gergo: cosa prescrive la norma, cosa cambia nella pratica quotidiana e da dove conviene iniziare.",
+  },
+  Ostetricia: {
+    title: "Ostetricia: calcoli e refertazione in ambulatorio",
+    description:
+      "Età gestazionale, datazione della gravidanza, biometria e stima del peso fetale con Hadlock: guide pratiche per la visita ostetrica e per una refertazione coerente.",
+    intro:
+      "Guide pratiche sui calcoli che accompagnano la visita ostetrica, con attenzione ai margini di errore e agli errori di trascrizione che si annidano tra ecografo e referto.",
+  },
+  Pediatria: {
+    title: "Pediatria: percentili e curve di crescita",
+    description:
+      "Come leggere e calcolare correttamente percentili di crescita, curve OMS e BMI pediatrico, evitando gli errori di interpretazione più comuni in ambulatorio.",
+    intro:
+      "Come si leggono davvero i percentili di crescita, perché conta la traiettoria più della singola misura e quali scorciatoie è meglio evitare.",
+  },
+  Ginecologia: {
+    title: "Ginecologia: software e gestione dello studio",
+    description:
+      "Come scegliere un gestionale per ginecologi, cosa distingue un software verticale da uno generico e quali strumenti clinici servono davvero in ambulatorio.",
+    intro:
+      "Cosa serve a uno studio di ginecologia per lavorare bene: strumenti clinici nativi, cartella strutturata e referti che non nascono da copia-incolla.",
+  },
+  "Gestione Studio": {
+    title: "Gestione dello studio medico",
+    description:
+      "Digitalizzazione dell'ambulatorio, sostituzione di Word ed Excel, backup e organizzazione dell'archivio clinico: come far funzionare meglio uno studio specialistico.",
+    intro:
+      "Organizzazione, archivio e strumenti: gli aspetti pratici che decidono quanto tempo lo studio passa sull'amministrazione invece che sulla clinica.",
+  },
+  Confronto: {
+    title: "Confronti tra software gestionali medici",
+    description:
+      "Confronti tra i principali gestionali medici disponibili in Italia: funzionalità cliniche, modelli di prezzo, architettura cloud o locale e criteri di scelta.",
+    intro:
+      "Confronti ragionati tra le soluzioni sul mercato italiano, con i criteri che contano davvero durante l'uso clinico quotidiano.",
+  },
+  Guide: {
+    title: "Guide al software per studi medici",
+    description:
+      "Guide introduttive per orientarsi tra cartella clinica elettronica, gestionali medici e digitalizzazione dello studio specialistico privato.",
+    intro:
+      "Le basi, spiegate per chi parte da zero: cos'è una cartella clinica elettronica, come si sceglie e cosa aspettarsi dal passaggio al digitale.",
+  },
+  Tecnologia: {
+    title: "Tecnologia per lo studio medico",
+    description:
+      "Strumenti digitali per l'ambulatorio specialistico: dai limiti di Word e Excel per i referti alle soluzioni pensate per la pratica clinica.",
+    intro:
+      "Perché gli strumenti generici si rompono quando incontrano la clinica, e cosa cambia con software costruiti per la visita.",
+  },
+  Eventi: {
+    title: "Eventi e congressi",
+    description:
+      "Corioli ai congressi e agli incontri con ginecologi e ostetrici: cosa abbiamo mostrato, cosa ci siamo portati a casa e i temi clinici emersi.",
+    intro:
+      "Dove incontriamo i medici che usano Corioli, e le conversazioni cliniche che finiscono per orientare il prodotto.",
+  },
+};
+
+// Elenco ordinato delle categorie effettivamente usate dagli articoli, con il
+// numero di post: alimenta i filtri della griglia e le pagine di categoria.
+export const categories = [...new Set(posts.map((post) => post.category))]
+  .sort((a, b) => a.localeCompare(b, "it"))
+  .map((name) => ({
+    name,
+    slug: categorySlug(name),
+    count: posts.filter((post) => post.category === name).length,
+  }));
+
+export const categoryBySlug: Record<string, string> = Object.fromEntries(
+  categories.map((category) => [category.slug, category.name]),
 );

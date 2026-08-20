@@ -33,10 +33,14 @@ export const metadata: Metadata = {
 const softwareStructuredData = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
+  // @id esplicito: il layout dichiara gia un SoftwareApplication per il
+  // prodotto (#software). Senza un id distinto i due nodi risultano due entita
+  // sovrapposte per lo stesso software.
+  "@id": "https://corioli.it/ginecologia#software-ginecologia",
   name: "Corioli — Gestionale per Ginecologi",
   url: "https://corioli.it/ginecologia",
   applicationCategory: "MedicalBusinessSoftware",
-  operatingSystem: "Web",
+  operatingSystem: "Windows 10, Windows 11",
   inLanguage: "it-IT",
   offers: {
     "@type": "Offer",
@@ -60,6 +64,54 @@ const softwareStructuredData = {
     name: "Corioli",
     url: "https://corioli.it",
   },
+};
+
+// Domande frequenti mostrate in pagina e replicate come FAQPage nei dati
+// strutturati: le stesse risposte devono restare allineate nei due punti.
+const faqs = [
+  {
+    question: "Quanto costa un gestionale per ginecologi?",
+    answer:
+      "In Italia i gestionali medici vanno da circa 10€ al mese per soluzioni generaliste fino a 99€-499€ al mese per piattaforme pensate per poliambulatori. Corioli parte da 15€ al mese con fatturazione annuale (19€ al mese senza vincolo) e include cartella clinica elettronica illimitata, anagrafica pazienti e refertazione PDF. I calcolatori clinici avanzati sono un modulo opzionale da 15€ al mese, inclusi nei primi 90 giorni di prova.",
+  },
+  {
+    question: "I dati delle pazienti dove vengono salvati?",
+    answer:
+      "Restano sul computer dello studio. Corioli è un'applicazione desktop per Windows con archiviazione locale: le cartelle cliniche non vengono trasmesse a server esterni e il fornitore non vi accede in alcun modo. Il medico resta l'unico titolare del trattamento e, per l'uso standard del software, non serve stipulare un DPA con noi perché non esiste un responsabile esterno del trattamento.",
+  },
+  {
+    question: "Quali calcolatori fetali sono inclusi?",
+    answer:
+      "Età gestazionale e datazione della gravidanza (ultima mestruazione e datazione ecografica), biometria fetale con BPD, HC, AC e FL, stima del peso fetale con la formula di Hadlock, percentili e curve di crescita. Sono nativi nella visita: il risultato finisce direttamente nel referto, senza passare da app esterne o calcolatrici sullo smartphone.",
+  },
+  {
+    question: "Posso provare Corioli prima di acquistarlo?",
+    answer:
+      "Sì. La prova gratuita dura 90 giorni, non richiede carta di credito e non prevede costi di attivazione né vincoli contrattuali. È pensata per essere usata nell'ambulatorio reale, con pazienti veri, così da valutare il software su un ciclo di visite completo e non su una demo di quindici minuti.",
+  },
+  {
+    question: "Corioli gestisce anche agenda e fatturazione?",
+    answer:
+      "Non ancora: agenda e fatturazione elettronica sono in sviluppo. Oggi Corioli copre la parte clinica della visita — cartella, anamnesi, calcolatori, referti e consensi — mentre per la gestione amministrativa serve ancora uno strumento separato. È un limite da considerare se cerchi una soluzione unica per clinica e contabilità.",
+  },
+  {
+    question: "Posso migrare i dati da Word, Excel o da un altro gestionale?",
+    answer:
+      "Sì. Il servizio di migrazione dei dati storici costa 29€ una tantum e copre archivi Word, Excel e i formati esportabili dai gestionali più diffusi. È un passaggio consigliato prima di iniziare, così lo storico delle pazienti resta consultabile dentro la cartella clinica invece di rimanere in cartelle separate sul disco.",
+  },
+];
+
+const faqStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
 };
 
 const painPoints = [
@@ -146,6 +198,12 @@ export default function GinecologiaPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(softwareStructuredData).replace(/</g, "\\u003c"),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqStructuredData).replace(/</g, "\\u003c"),
         }}
       />
 
@@ -326,6 +384,36 @@ export default function GinecologiaPage() {
           </div>
         </section>
 
+        {/* FAQ */}
+        <section className="py-20 md:py-28 bg-white border-y border-gray-100">
+          <div className="max-w-3xl mx-auto px-6 md:px-12">
+            <div className="text-center mb-12">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Domande frequenti sul gestionale per ginecologi
+              </h2>
+              <p className="text-gray-600">
+                Le risposte che i ginecologi ci chiedono più spesso prima di
+                scegliere un software per la ginecologia.
+              </p>
+            </div>
+            <dl className="flex flex-col gap-6">
+              {faqs.map((item) => (
+                <div
+                  key={item.question}
+                  className="p-6 md:p-8 bg-gray-50 rounded-2xl border border-gray-100"
+                >
+                  <dt className="font-heading font-bold text-lg text-gray-900 mb-3">
+                    {item.question}
+                  </dt>
+                  <dd className="text-gray-600 leading-relaxed text-sm md:text-base">
+                    {item.answer}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+
         {/* Internal links footer */}
         <section className="max-w-4xl mx-auto px-6 md:px-12 pt-8 border-t border-gray-100">
           <nav
@@ -355,6 +443,24 @@ export default function GinecologiaPage() {
               className="hover:text-brand-600 transition-colors"
             >
               Guida alla scelta del gestionale
+            </Link>
+            <Link
+              href="/blog/stima-peso-fetale-hadlock-guida-pratica"
+              className="hover:text-brand-600 transition-colors"
+            >
+              Stima del peso fetale con Hadlock
+            </Link>
+            <Link
+              href="/blog/calcolo-eta-gestazionale-settimane-gravidanza"
+              className="hover:text-brand-600 transition-colors"
+            >
+              Calcolo dell'età gestazionale
+            </Link>
+            <Link
+              href="/gdpr"
+              className="hover:text-brand-600 transition-colors"
+            >
+              Sicurezza e GDPR
             </Link>
           </nav>
         </section>

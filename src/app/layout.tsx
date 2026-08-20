@@ -57,6 +57,15 @@ export const metadata: Metadata = {
     "software pediatria",
     "gestionale medico GDPR",
     "gestionale medico Italia",
+    "gestionale medico offline",
+    "gestionale medico senza cloud",
+    "software medico dati in locale",
+    "cartella ostetrica elettronica",
+    "software refertazione medica",
+    "consenso informato digitale",
+    "conservazione cartella clinica",
+    "backup studio medico",
+    "alternativa a Word per referti medici",
   ],
   authors: [{ name: "Corioli" }],
   creator: "Corioli",
@@ -100,6 +109,20 @@ const structuredData = {
       name: "Corioli",
       url: siteUrl,
       logo: `${siteUrl}/logo_short.png`,
+      vatID: "IT07420400488",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Sesto Fiorentino",
+        addressRegion: "FI",
+        addressCountry: "IT",
+      },
+      // Profili ufficiali: aiutano i motori a collegare il sito all'entita
+      // Corioli invece di trattarli come account omonimi scollegati.
+      sameAs: [
+        "https://www.linkedin.com/company/corioli",
+        "https://www.instagram.com/corioli.it",
+        "https://www.youtube.com/channel/UCZhXFRRBXnyjidLI1umX7YQ",
+      ],
       contactPoint: {
         "@type": "ContactPoint",
         email: "info@corioli.it",
@@ -149,38 +172,13 @@ const structuredData = {
         "Privacy by design e conformità GDPR",
       ],
     },
-    {
-      "@type": "FAQPage",
-      "@id": `${siteUrl}/#faq`,
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "Che cos'e Corioli?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Corioli è un gestionale medico per dottori e studi specialistici, pensato per cartella clinica elettronica, referti, calcolatori clinici e gestione sicura dei dati sanitari, salvati in locale nello studio.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Per quali medici e pensato Corioli?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Corioli nasce per medici specialisti privati, con moduli verticali per ginecologia, ostetricia e pediatria. È compatibile con Windows 10 e Windows 11.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Corioli e conforme al GDPR?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Corioli è progettato secondo il principio di privacy by design: i dati clinici restano salvati in locale sul computer dello studio, non vengono trasmessi a server esterni e il medico ne mantiene il pieno controllo come unico titolare del trattamento.",
-          },
-        },
-      ],
-    },
   ],
 };
+// Nota: i dati strutturati FAQPage NON stanno qui. Google richiede che le
+// domande siano visibili nella pagina che le dichiara, mentre il layout viene
+// applicato a tutto il sito: il markup finiva su pagine prive di FAQ e andava
+// in conflitto con le FAQPage dei singoli articoli. Ora vivono nella home
+// (src/app/page.tsx) e nelle pagine che mostrano davvero le domande.
 
 export default function RootLayout({
   children,

@@ -138,12 +138,12 @@ export default function ContattiPage() {
                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                      </svg>
                    </div>
-                   <h3 className="font-heading text-3xl font-bold text-gray-900 mb-4">Richiesta inviata!</h3>
+                   <h2 className="font-heading text-3xl font-bold text-gray-900 mb-4">Richiesta inviata!</h2>
                    <p className="text-gray-600 max-w-sm">Grazie per il tuo interesse. Un nostro consulente ti contatterà a breve all'indirizzo email indicato.</p>
                  </div>
                ) : (
                  <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-                   <h3 className="font-heading text-2xl font-bold text-gray-900 mb-2">Richiedi una Demo Gratuita</h3>
+                   <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2">Richiedi una Demo Gratuita</h2>
 
                    {sendError ? (
                      <p className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-xl px-4 py-3" role="alert">

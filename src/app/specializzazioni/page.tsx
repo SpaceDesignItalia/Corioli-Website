@@ -36,7 +36,11 @@ export default function SpecializzazioniPage() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 border border-green-100 text-green-700 text-xs font-bold mb-6 w-fit">
               <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span> ATTIVO ORA
             </div>
-            <h2 className="font-heading text-3xl font-bold text-gray-900 mb-4">Ginecologia & Ostetricia</h2>
+            <h2 className="font-heading text-3xl font-bold text-gray-900 mb-4">
+              <Link href="/ginecologia" className="hover:text-brand-600 transition-colors">
+                Ginecologia &amp; Ostetricia
+              </Link>
+            </h2>
             <p className="text-gray-600 mb-8 leading-relaxed">
               Il nostro modulo di punta, sviluppato e validato clinicamente da specialisti delle migliori strutture italiane. Progettato per ottimizzare le visite ostetriche e ginecologiche.
             </p>
@@ -45,9 +49,14 @@ export default function SpecializzazioniPage() {
               <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> Calcolo automatico della datazione</li>
               <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> Integrazione di curve e percentili fetali</li>
             </ul>
-            <Link href="/download" className="inline-flex items-center gap-2 bg-brand-50 text-brand-700 px-6 py-3 rounded-xl font-semibold hover:bg-brand-100 transition-colors w-fit">
-              Richiedi Demo Ginecologica <ArrowRight size={18} />
-            </Link>
+            <div className="flex flex-wrap items-center gap-3">
+              <Link href="/ginecologia" className="inline-flex items-center gap-2 bg-brand-50 text-brand-700 px-6 py-3 rounded-xl font-semibold hover:bg-brand-100 transition-colors w-fit">
+                Scopri il gestionale per ginecologi <ArrowRight size={18} />
+              </Link>
+              <Link href="/download" className="inline-flex items-center gap-2 text-brand-700 px-4 py-3 rounded-xl font-semibold hover:text-brand-800 transition-colors w-fit">
+                Prova gratuita <ChevronRight size={18} />
+              </Link>
+            </div>
           </div>
           <div className="md:w-[45%] bg-brand-50 p-8 flex items-center justify-center relative border-t md:border-t-0 md:border-l border-gray-100">
              {/* Visual abstraction of gynecology/obstetrics tool */}

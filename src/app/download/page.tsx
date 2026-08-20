@@ -9,6 +9,84 @@ import ScreenshotGallery from "@/components/ScreenshotGallery";
 
 const MS_STORE_URL = "https://apps.microsoft.com/store/detail/9P24WMFJW58N";
 
+const requisiti = [
+  {
+    voce: "Sistema operativo",
+    valore: "Windows 10 o Windows 11 (64 bit)",
+  },
+  {
+    voce: "Spazio su disco",
+    valore:
+      "Circa 500 MB per l'applicazione, più lo spazio per il tuo archivio clinico",
+  },
+  {
+    voce: "Connessione",
+    valore:
+      "Serve per scaricare e aggiornare l'app. Le visite si registrano anche offline: i dati sono sul computer",
+  },
+  {
+    voce: "Mac e Linux",
+    valore: "Non supportati al momento",
+  },
+];
+
+const passaggi = [
+  {
+    titolo: "Scarica dal Microsoft Store",
+    testo:
+      "L'installazione passa dallo store ufficiale Microsoft, quindi il pacchetto è firmato e verificato e gli aggiornamenti arrivano in automatico. Non devi disattivare avvisi di sicurezza né scaricare eseguibili da fonti esterne.",
+  },
+  {
+    titolo: "Apri Corioli e configura lo studio",
+    testo:
+      "Al primo avvio imposti i dati dello studio e l'intestazione che comparirà sui referti PDF. È il passaggio che rende i documenti pronti all'uso fin dalla prima visita.",
+  },
+  {
+    titolo: "Scegli dove salvare l'archivio",
+    testo:
+      "I dati clinici restano sul computer dello studio o sulla rete locale: decidi tu la cartella. È anche il momento giusto per impostare il backup, perché con l'archiviazione locale è una responsabilità tua.",
+  },
+];
+
+const downloadFaqs = [
+  {
+    question: "Corioli è disponibile per Mac?",
+    answer:
+      "Non ancora. Oggi Corioli è un'applicazione desktop per Windows 10 e Windows 11 a 64 bit. Se lavori su Mac, al momento non c'è una versione utilizzabile: preferiamo dirlo chiaramente piuttosto che farti installare qualcosa che non funziona.",
+  },
+  {
+    question: "La prova di 90 giorni richiede la carta di credito?",
+    answer:
+      "No. Scarichi l'applicazione e la usi per 90 giorni senza inserire dati di pagamento, senza costi di attivazione e senza vincoli contrattuali. Alla fine del periodo decidi se attivare un piano: se non lo fai, non ti viene addebitato nulla.",
+  },
+  {
+    question: "Serve una connessione a internet per usarlo?",
+    answer:
+      "Serve per scaricare l'applicazione e per riceverne gli aggiornamenti. Il lavoro clinico quotidiano invece non dipende dalla connessione: i dati sono salvati sul computer dello studio, quindi puoi registrare visite e generare referti anche se la linea non funziona.",
+  },
+  {
+    question: "Dove finiscono i dati delle pazienti dopo l'installazione?",
+    answer:
+      "Sul computer su cui installi Corioli, o sulla rete locale dello studio se scegli quel percorso. Le cartelle cliniche non vengono trasmesse a server esterni e noi non vi accediamo in alcun modo. Il rovescio della medaglia è che backup e sicurezza del computer restano a carico tuo.",
+  },
+  {
+    question: "Posso importare l'archivio che ho già?",
+    answer:
+      "Sì. Il servizio di migrazione dei dati storici costa 29€ una tantum e copre archivi Word, Excel e i formati esportabili dai gestionali più diffusi. Conviene farlo prima di iniziare, così lo storico delle pazienti è già dentro la cartella clinica dalla prima visita.",
+  },
+];
+
+const downloadStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://corioli.it/download#faq",
+  mainEntity: downloadFaqs.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+
 export default function DownloadPage() {
   const [latestVersion, setLatestVersion] = useState<string | null>(null);
 
@@ -96,6 +174,105 @@ export default function DownloadPage() {
         <p className="text-sm text-gray-500 mt-8 font-medium">
           Versione {latestVersion ?? "…"} • <Link href="/contatti" className="text-brand-600 hover:underline">Serve aiuto?</Link>
         </p>
+
+        {/* ── Requisiti di sistema ── */}
+        <section className="w-full max-w-3xl mt-24 text-left">
+          <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center">
+            Requisiti di sistema
+          </h2>
+          <dl className="bg-white border border-gray-100 shadow-soft rounded-2xl divide-y divide-gray-100 overflow-hidden">
+            {requisiti.map((item) => (
+              <div
+                key={item.voce}
+                className="flex flex-col sm:flex-row gap-1 sm:gap-6 px-6 py-5"
+              >
+                <dt className="font-semibold text-gray-900 sm:w-52 shrink-0">
+                  {item.voce}
+                </dt>
+                <dd className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                  {item.valore}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
+        {/* ── Come installare ── */}
+        <section className="w-full max-w-3xl mt-20 text-left">
+          <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+            Come installare Corioli in tre passaggi
+          </h2>
+          <ol className="flex flex-col gap-5 list-none p-0 m-0">
+            {passaggi.map((passo, i) => (
+              <li
+                key={passo.titolo}
+                className="flex gap-5 bg-white border border-gray-100 shadow-soft rounded-2xl p-6"
+              >
+                <span className="shrink-0 w-9 h-9 rounded-xl bg-brand-50 text-brand-700 font-bold flex items-center justify-center">
+                  {i + 1}
+                </span>
+                <div>
+                  <h3 className="font-heading font-bold text-lg text-gray-900 mb-2">
+                    {passo.titolo}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+                    {passo.testo}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        {/* ── FAQ ── */}
+        <section className="w-full max-w-3xl mt-20 text-left">
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(downloadStructuredData).replace(/</g, "\\u003c"),
+            }}
+          />
+          <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+            Domande frequenti sul download
+          </h2>
+          <dl className="flex flex-col gap-4">
+            {downloadFaqs.map((item) => (
+              <div
+                key={item.question}
+                className="bg-white border border-gray-100 shadow-soft rounded-2xl p-6"
+              >
+                <dt className="font-heading font-bold text-lg text-gray-900 mb-2">
+                  {item.question}
+                </dt>
+                <dd className="text-gray-600 leading-relaxed text-sm sm:text-base">
+                  {item.answer}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
+        {/* ── Link correlati ── */}
+        <nav
+          aria-label="Link correlati"
+          className="w-full max-w-3xl mt-16 pt-8 border-t border-gray-100 flex flex-wrap justify-center gap-6 text-sm font-medium text-gray-500"
+        >
+          <Link href="/funzionalita" className="hover:text-brand-600 transition-colors">
+            Tutte le funzionalità
+          </Link>
+          <Link href="/ginecologia" className="hover:text-brand-600 transition-colors">
+            Gestionale per ginecologi
+          </Link>
+          <Link href="/prezzi" className="hover:text-brand-600 transition-colors">
+            Prezzi e piani
+          </Link>
+          <Link href="/gdpr" className="hover:text-brand-600 transition-colors">
+            Sicurezza e GDPR
+          </Link>
+          <Link href="/blog/backup-studio-medico-regola-3-2-1" className="hover:text-brand-600 transition-colors">
+            Come impostare il backup
+          </Link>
+        </nav>
 
       </div>
     </div>

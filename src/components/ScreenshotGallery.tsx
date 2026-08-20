@@ -1,21 +1,52 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import NextImage from "next/image";
 import { Image as ImageIcon, Maximize2, X, Minus } from "lucide-react";
 
+// label = testo della tab (breve). alt = descrizione per screen reader e
+// Google Immagini, quindi piu esplicita. width/height sono le dimensioni reali
+// del PNG: servono a next/image per riservare lo spazio ed evitare layout shift.
 const screenshots = [
-  { id: "dashboard", label: "Dashboard", image: "/screenshots/dashboard.png" },
-  { id: "ostetrica", label: "Visita Ostetrica", image: "/screenshots/ostetrica.png" },
+  {
+    id: "dashboard",
+    label: "Dashboard",
+    image: "/screenshots/dashboard.png",
+    alt: "Dashboard del gestionale medico Corioli con l'elenco delle visite in programma e i pazienti recenti",
+    width: 2400,
+    height: 1522,
+  },
+  {
+    id: "ostetrica",
+    label: "Visita Ostetrica",
+    image: "/screenshots/ostetrica.png",
+    alt: "Cartella ostetrica elettronica di Corioli con biometria fetale, stima del peso con Hadlock ed età gestazionale",
+    width: 1654,
+    height: 1949,
+  },
   {
     id: "ginecologica",
     label: "Visita Ginecologica",
     image: "/screenshots/ginecologica.png",
+    alt: "Scheda della visita ginecologica nel software Corioli, con anamnesi strutturata e referto compilabile",
+    width: 1654,
+    height: 1190,
   },
-  { id: "paziente", label: "Scheda Paziente", image: "/screenshots/paziente.png" },
+  {
+    id: "paziente",
+    label: "Scheda Paziente",
+    image: "/screenshots/paziente.png",
+    alt: "Scheda paziente della cartella clinica elettronica Corioli con lo storico completo delle visite",
+    width: 2400,
+    height: 1524,
+  },
   {
     id: "impostazioni",
     label: "Impostazioni",
     image: "/screenshots/impostazioni.png",
+    alt: "Impostazioni di Corioli per personalizzare i template dei referti PDF e i dati dello studio medico",
+    width: 1654,
+    height: 2667,
   },
 ];
 
@@ -205,16 +236,22 @@ export default function ScreenshotGallery() {
                       : "opacity-0 z-0 pointer-events-none"
                   }`}
                 >
-                  <img
+                  <NextImage
                     src={screen.image}
-                    alt={screen.label}
+                    alt={screen.alt}
+                    width={screen.width}
+                    height={screen.height}
                     onClick={() => !isFullscreen && setIsFullscreen(true)}
                     className={`h-auto object-top transition-all duration-500 ${
                       isFullscreen
                         ? "w-full cursor-default"
                         : "w-full cursor-zoom-in"
                     }`}
+                    // Solo lo screenshot della tab attiva e prioritario: gli
+                    // altri restano lazy finche l'utente non cambia tab.
+                    priority={activeTab === screen.id}
                     loading={activeTab === screen.id ? "eager" : "lazy"}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1400px) 90vw, 1280px"
                   />
                 </div>
               ))}
