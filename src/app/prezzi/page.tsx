@@ -1,199 +1,191 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
-import clsx from "clsx";
+import {
+  ArrowRight,
+  Calculator,
+  Check,
+  FileCheck,
+  FileText,
+  FolderInput,
+  MessageCircle,
+  PenLine,
+  RefreshCw,
+  ShieldCheck,
+  Stethoscope,
+} from "lucide-react";
 import posthog from "posthog-js";
+import { PRICE_MONTHLY, TRIAL_DAYS, pricingFaqs } from "./faqs";
 
-const faqs = [
+const included = [
   {
-    q: "La prova gratuita richiede la carta di credito?",
-    a: "No. Attivi i 90 giorni di prova senza inserire alcun metodo di pagamento: al termine decidi liberamente se abbonarti.",
+    icon: FileText,
+    title: "Cartella clinica illimitata",
+    text: "Pazienti, visite e anamnesi senza limiti di numero.",
   },
   {
-    q: "Cosa succede alla fine dei 90 giorni?",
-    a: "Nessun addebito automatico: non avendo la tua carta, non possiamo addebitarti nulla. Se Corioli ti ha convinto, scegli il piano mensile o annuale. I dati inseriti durante la prova restano tuoi, salvati sul tuo computer.",
+    icon: Calculator,
+    title: "Calcolatori clinici avanzati",
+    text: "Hadlock, percentili fetali, curve di crescita, indici cardiologici.",
   },
   {
-    q: "I calcolatori clinici avanzati sono inclusi?",
-    a: "Sono inclusi per tutti i 90 giorni di prova, così li testi nel tuo flusso reale. Dopo, restano disponibili come modulo opzionale a 15€/mese: lo aggiungi solo se ti serve davvero.",
+    icon: FileCheck,
+    title: "Referti PDF personalizzabili",
+    text: "Modelli riutilizzabili, pronti da stampare o consegnare.",
   },
   {
-    q: "Posso disdire quando voglio?",
-    a: "Sì. Non ci sono vincoli contrattuali né costi di attivazione: il piano mensile si disdice in qualsiasi momento, quello annuale semplicemente non si rinnova.",
+    icon: Stethoscope,
+    title: "Tutte le edizioni specialistiche",
+    text: "Ginecologia e ostetricia, cardiologia: stesso prezzo.",
   },
   {
-    q: "Dove vengono salvati i dati dei miei pazienti?",
-    a: "In locale, sul computer o sulla rete del tuo studio. Corioli non raccoglie né trasmette i dati clinici dei tuoi pazienti: ne mantieni il pieno controllo, in linea con il GDPR.",
+    icon: PenLine,
+    title: "Ricette, certificati, richieste",
+    text: "In PDF dai tuoi modelli, con firma e timbro dello studio.",
   },
   {
-    q: "Posso importare i dati dal mio archivio attuale?",
-    a: "Sì. Con il servizio di migrazione dati storici (29€ una tantum) importiamo il tuo archivio da Word, Excel, carta o altri gestionali, così non riparti da zero.",
+    icon: RefreshCw,
+    title: "Aggiornamenti inclusi",
+    text: "Ogni nuova versione arriva senza costi aggiuntivi.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Dati salvati nel tuo studio",
+    text: "In locale, con blocco tramite PIN, Windows Hello o Touch ID.",
+  },
+  {
+    icon: MessageCircle,
+    title: "Supporto in italiano",
+    text: "Via chat ed email, dal team che sviluppa Corioli.",
   },
 ];
 
 export default function PricingPage() {
-  const [annual, setAnnual] = useState(true);
-
   return (
     <div className="pt-40 md:pt-48 pb-24 bg-background">
 
-      <div className="text-center mb-12 max-w-7xl mx-auto px-6 md:px-12">
-        <h1 className="font-heading text-4xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">Piani chiari. <br className="md:hidden"/>Nessuna sorpresa.</h1>
+      <div className="text-center mb-16 max-w-7xl mx-auto px-6 md:px-12">
+        <h1 className="font-heading text-4xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
+          Un prezzo solo. <br className="md:hidden" />Tutto incluso.
+        </h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Un solo piano completo, da provare per 90 giorni nel tuo ambulatorio
-          reale. I moduli extra si aggiungono solo se ti servono.
+          {PRICE_MONTHLY}€ al mese per tutto Corioli: niente moduli a pagamento,
+          niente piani da confrontare, niente extra che scopri dopo. Lo provi
+          gratis per {TRIAL_DAYS} giorni nel tuo ambulatorio reale.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium text-gray-600">
-          <span className="inline-flex items-center gap-1.5"><Check size={16} className="text-brand-600" /> 90 giorni gratis</span>
+          <span className="inline-flex items-center gap-1.5"><Check size={16} className="text-brand-600" /> {TRIAL_DAYS} giorni gratis</span>
           <span className="inline-flex items-center gap-1.5"><Check size={16} className="text-brand-600" /> Nessuna carta di credito</span>
           <span className="inline-flex items-center gap-1.5"><Check size={16} className="text-brand-600" /> Disdici quando vuoi</span>
         </div>
       </div>
 
-      <div className="flex justify-center mb-16 px-6">
-        <div className="bg-gray-100 p-1 rounded-xl flex items-center border border-gray-200 w-full max-w-xs sm:w-auto">
-          <button
-            className={clsx("flex-1 sm:flex-none px-4 sm:px-6 py-2.5 rounded-lg text-sm font-medium transition-colors text-center", !annual ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-900")}
-            onClick={() => { setAnnual(false); posthog.capture("pricing_billing_toggled", { billing_period: "mensile" }); }}
-          >
-            Mensile
-          </button>
-          <button
-            className={clsx("flex-1 sm:flex-none px-4 sm:px-6 py-2.5 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2", annual ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-900")}
-            onClick={() => { setAnnual(true); posthog.capture("pricing_billing_toggled", { billing_period: "annuale" }); }}
-          >
-            Annuale <span className="bg-brand-100 text-brand-700 px-2 py-0.5 rounded-full text-xs font-bold">-20%</span>
-          </button>
-        </div>
-      </div>
+      <div className="max-w-6xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
 
-      <div className="max-w-6xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
-        {/* Main Plan */}
-        <div className="lg:col-span-5 bg-white rounded-3xl shadow-card border border-gray-100 p-8 md:p-12 relative overflow-hidden">
+        {/* Piano unico */}
+        <div className="lg:col-span-5 bg-white rounded-3xl shadow-card border-2 border-brand-200 p-8 md:p-10 relative overflow-hidden flex flex-col">
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand-50 rounded-bl-full -z-0"></div>
 
-          <div className="relative z-10">
-             <h2 className="text-2xl font-heading font-bold text-gray-900 mb-2">Piano Specialista</h2>
-             <p className="text-gray-500 text-sm mb-8">La gestione clinica senza compromessi.</p>
+          <div className="relative z-10 flex flex-col flex-1">
+            <span className="inline-flex w-fit items-center bg-brand-100 text-brand-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-6">
+              Tutto incluso
+            </span>
+            <h2 className="text-2xl font-heading font-bold text-gray-900 mb-2">Abbonamento Corioli</h2>
+            <p className="text-gray-500 text-sm mb-8">Tutto il software, per un solo prezzo.</p>
 
-             <div className="mb-2 flex items-baseline gap-3">
-               {annual && (
-                 <span className="text-2xl font-heading font-bold text-gray-400 line-through">19€</span>
-               )}
-               <span className="text-6xl font-heading font-bold text-gray-900">{annual ? "15" : "19"}€</span>
-               <span className="text-gray-500 font-medium">/ mese</span>
-             </div>
-             <p className="text-sm text-gray-500 mb-8">
-               {annual
-                 ? "Con fatturazione annuale (180€/anno): risparmi 48€ rispetto al mensile."
-                 : "Con fatturazione mensile: nessun vincolo, disdici quando vuoi."}
-             </p>
+            <div className="mb-2 flex items-baseline gap-2">
+              <span className="text-7xl font-heading font-bold text-gray-900 tracking-tight">{PRICE_MONTHLY}€</span>
+              <span className="text-gray-500 font-medium">/ mese</span>
+            </div>
+            <p className="text-sm text-gray-500 mb-8">
+              Senza vincoli: disdici quando vuoi.
+            </p>
 
-             <Link
-               href="/download"
-               className="block w-full bg-brand-600 text-white text-center py-4 rounded-xl font-bold hover:bg-brand-700 transition-colors mb-3 shadow-soft hover:shadow-md"
-               onClick={() => posthog.capture("pricing_cta_clicked", { billing_period: annual ? "annuale" : "mensile", price: annual ? 15 : 19 })}
-             >
-               Inizia la prova gratuita di 90 giorni
-             </Link>
-             <p className="text-xs text-gray-400 text-center mb-10">
-               Senza carta di credito &middot; Nessun addebito automatico
-             </p>
+            <Link
+              href="/download"
+              className="block w-full bg-brand-600 text-white text-center py-4 rounded-xl font-bold hover:bg-brand-700 transition-colors mb-3 shadow-soft hover:shadow-md"
+              onClick={() => posthog.capture("pricing_cta_clicked", { price: PRICE_MONTHLY })}
+            >
+              Inizia la prova gratuita di {TRIAL_DAYS} giorni
+            </Link>
+            <p className="text-xs text-gray-400 text-center">
+              Senza carta di credito &middot; Nessun addebito automatico
+            </p>
 
-             <ul className="flex flex-col gap-4 text-sm text-gray-700">
-               {[
-                 { text: "Cartella clinica elettronica illimitata" },
-                 { text: "Anagrafica pazienti illimitata" },
-                 { text: "Refertazione in formato PDF" },
-                 { text: "Calcolatori clinici avanzati inclusi nella prova" },
-                 { text: "Dati salvati in locale, nel tuo studio" },
-                 { text: "Conformità privacy e GDPR completa" },
-                 { text: "Supporto prioritario in italiano via chat/email" },
-               ].map((feature, i) => (
-                 <li key={i} className="flex items-start gap-3">
-                   <Check size={18} className="text-brand-500 shrink-0 mt-0.5" />
-                   <span className="font-medium">{feature.text}</span>
-                 </li>
-               ))}
-             </ul>
-
-             <div className="mt-10 pt-6 border-t border-gray-100 text-xs text-gray-500 leading-relaxed">
-               <strong className="text-gray-700">18.000+ pazienti gestiti</strong> &middot; Validato
-               in una clinica con 10 specialisti &middot; Sviluppato in Italia
-               con i medici
-             </div>
+            <div className="mt-auto pt-8">
+              <p className="text-sm text-gray-600 leading-relaxed mb-6">
+                Meno di una singola visita al mese, per lo strumento che usi
+                tutto il giorno.
+              </p>
+              <div className="pt-6 border-t border-gray-100 text-xs text-gray-500 leading-relaxed">
+                <strong className="text-gray-700">18.000+ pazienti gestiti</strong> &middot; Validato
+                in una clinica con 10 specialisti &middot; Sviluppato in Italia
+                con i medici
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Add-ons */}
-        <div className="lg:col-span-7 flex flex-col gap-4">
-          <div className="pl-2 mb-2">
-            <h3 className="font-heading text-2xl font-bold text-gray-900 mb-1">Moduli Opzionali</h3>
-            <p className="text-sm text-gray-500">Si attivano solo su tua richiesta: nessun costo nascosto.</p>
-          </div>
-
-          <div className="bg-white rounded-2xl p-6 border border-brand-100 shadow-soft flex flex-col sm:flex-row justify-between sm:items-center gap-4 hover:border-brand-200 transition-colors">
-            <div>
-              <h4 className="font-bold text-gray-900 text-lg mb-1 flex items-center gap-2 flex-wrap">
-                Calcolatori Clinici Avanzati
-                <span className="bg-brand-100 text-brand-700 px-2 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wide">Incluso nella prova</span>
-              </h4>
-              <p className="text-sm text-gray-500">Percentili, stime, curve di crescita (Hadlock, OMS). Gratis per i 90 giorni di prova.</p>
-            </div>
-            <div className="text-brand-700 font-medium whitespace-nowrap bg-brand-50 px-3 py-1.5 rounded-lg border border-brand-100 text-sm text-center">
-               poi 15€/mese
-            </div>
-          </div>
-
-          <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-soft flex flex-col sm:flex-row justify-between sm:items-center gap-4 hover:border-brand-200 transition-colors">
-            <div>
-              <h4 className="font-bold text-gray-900 text-lg mb-1">Multi-utente (Team)</h4>
-              <p className="text-sm text-gray-500">Aggiungi collaboratore o segreteria con permessi dedicati.</p>
-            </div>
-            <div className="text-brand-700 font-medium whitespace-nowrap bg-brand-50 px-3 py-1.5 rounded-lg border border-brand-100 text-sm text-center">
-               +15€/mese per utente
-            </div>
-          </div>
-
-          <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-soft flex flex-col sm:flex-row justify-between sm:items-center gap-4 hover:border-brand-200 transition-colors">
-            <div>
-              <h4 className="font-bold text-gray-900 text-lg mb-1">Migrazione Dati Storici</h4>
-              <p className="text-sm text-gray-500">Importiamo il tuo archivio da Word, Excel o dal vecchio gestionale: non riparti da zero.</p>
-            </div>
-            <div className="text-gray-700 font-medium whitespace-nowrap bg-gray-100 px-3 py-1.5 rounded-lg border border-gray-200 text-sm text-center">
-               29€ una tantum
-            </div>
-          </div>
-
-          <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-soft flex flex-col sm:flex-row justify-between sm:items-center gap-4 hover:border-brand-200 transition-colors">
-            <div>
-              <h4 className="font-bold text-gray-900 text-lg mb-1">Template PDF Su Misura</h4>
-              <p className="text-sm text-gray-500">Personalizzazione avanzata del layout di stampa referti.</p>
-            </div>
-            <div className="text-gray-700 font-medium whitespace-nowrap bg-gray-100 px-3 py-1.5 rounded-lg border border-gray-200 text-sm text-center">
-               19€ una tantum
-            </div>
-          </div>
-
-          <p className="text-sm text-gray-500 pl-2 mt-2 leading-relaxed">
-            Per fare due conti: il piano annuale con i calcolatori attivi costa
-            30€ al mese — meno di una singola visita, per uno strumento che usi
-            tutto il giorno.
+        {/* Cosa include */}
+        <div className="lg:col-span-7 bg-white rounded-3xl shadow-soft border border-gray-100 p-8 md:p-10">
+          <h2 className="font-heading text-2xl font-bold text-gray-900 mb-1">Cosa include</h2>
+          <p className="text-sm text-gray-500 mb-8">
+            Tutto, dal primo giorno di prova. Nessuna funzione si sblocca pagando di più.
           </p>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6">
+            {included.map(({ icon: Icon, title, text }) => (
+              <li key={title} className="flex items-start gap-3">
+                <span className="w-10 h-10 rounded-xl bg-brand-50 border border-brand-100 text-brand-600 flex items-center justify-center shrink-0">
+                  <Icon size={18} />
+                </span>
+                <div>
+                  <h3 className="font-bold text-gray-900 text-sm mb-0.5">{title}</h3>
+                  <p className="text-sm text-gray-500 leading-snug">{text}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
 
+      </div>
+
+      {/* Migrazione dati: l'unico servizio fuori abbonamento */}
+      <div className="max-w-6xl mx-auto px-6 md:px-12 mt-8">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-soft p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+          <span className="w-12 h-12 rounded-xl bg-gray-100 border border-gray-200 text-gray-700 flex items-center justify-center shrink-0">
+            <FolderInput size={22} />
+          </span>
+          <div className="flex-1">
+            <h2 className="font-heading font-bold text-gray-900 text-xl mb-2 flex items-center gap-3 flex-wrap">
+              Migrazione dei dati storici
+              <span className="bg-gray-100 text-gray-700 border border-gray-200 px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wide">
+                Su preventivo
+              </span>
+            </h2>
+            <p className="text-sm md:text-base text-gray-600 leading-relaxed">
+              Importiamo il tuo archivio da Word, Excel, carta o dal vecchio
+              gestionale, così non riparti da zero. Il costo dipende dal formato
+              e dalla dimensione dell&apos;archivio: raccontaci come è organizzato
+              e ti mandiamo un preventivo senza impegno.
+            </p>
+          </div>
+          <Link
+            href="/contatti?richiesta=migrazione"
+            className="inline-flex items-center justify-center gap-2 border border-brand-200 text-brand-700 bg-brand-50 px-6 py-3.5 rounded-xl font-bold hover:bg-brand-100 hover:border-brand-300 transition-colors whitespace-nowrap"
+            onClick={() => posthog.capture("pricing_migration_quote_clicked")}
+          >
+            Richiedi un preventivo <ArrowRight size={18} />
+          </Link>
+        </div>
       </div>
 
       {/* FAQ */}
-      <section className="max-w-3xl mx-auto px-6 md:px-12 mt-24">
+      <section className="max-w-6xl mx-auto px-6 md:px-12 mt-24">
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-10 text-center">
           Domande frequenti sui prezzi
         </h2>
-        <div className="flex flex-col gap-3">
-          {faqs.map((faq, i) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-start">
+          {pricingFaqs.map((faq, i) => (
             <details
               key={i}
               className="group bg-white rounded-2xl border border-gray-100 shadow-soft px-6 py-5 open:shadow-card transition-shadow"
@@ -224,8 +216,9 @@ export default function PricingPage() {
               Provalo nel tuo studio, senza rischi.
             </h2>
             <p className="text-brand-100 text-lg mb-8 max-w-2xl mx-auto">
-              90 giorni di prova completa, senza carta di credito. Oppure
-              guardalo prima in azione con una demo di 15 minuti.
+              {TRIAL_DAYS} giorni di prova completa, senza carta di credito. Poi{" "}
+              {PRICE_MONTHLY}€ al mese, tutto incluso. Oppure guardalo prima in
+              azione con una demo di 15 minuti.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link

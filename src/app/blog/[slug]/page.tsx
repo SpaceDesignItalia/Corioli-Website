@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
+import FaqList from "@/components/FaqList";
+import { SITE_URL, pageOpenGraph } from "@/lib/seo";
 import { posts, postsBySlug, categorySlug } from "../posts";
 
 type ComparisonRow = {
@@ -21,8 +23,8 @@ const gynecologySoftwareComparison: ComparisonRow[] = [
     deployment: "Desktop Windows — dati salvati in locale",
     fetalCalculators: "Sì — Hadlock, biometria, percentili, età gestazionale",
     obstetricRecord: "Sì — cartella ostetrica e ginecologica completa",
-    freeTrial: "90 giorni, senza carta di credito",
-    price: "da 15€/mese (piano annuale)",
+    freeTrial: "30 giorni, senza carta di credito",
+    price: "30€/mese, tutto incluso",
     highlight: true,
   },
   {
@@ -90,12 +92,19 @@ export async function generateMetadata({
   }
 
   return {
-    title: post.title,
+    // Il template del layout aggiunge " | Corioli" (10 caratteri): sui titoli
+    // lunghi spingerebbe oltre i ~60 che Google mostra, tagliando la parte
+    // che descrive l'articolo invece del marchio.
+    title: post.title.length > 52 ? { absolute: post.title } : post.title,
     description: post.description,
     alternates: {
       canonical: `/blog/${slug}`,
     },
     openGraph: {
+      // L'immagine arriva da opengraph-image.tsx dell'articolo: qui solo i
+      // campi del layout che un openGraph di pagina altrimenti cancella.
+      siteName: pageOpenGraph.siteName,
+      locale: pageOpenGraph.locale,
       title: post.title,
       description: post.description,
       type: "article",
@@ -126,28 +135,36 @@ export default async function BlogPostPage({
     "@graph": [
       {
         "@type": "Article",
+        "@id": `${SITE_URL}/blog/${slug}#articolo`,
         headline: post.title,
         description: post.description,
+        ...(post.keyPoints?.length
+          ? { abstract: post.keyPoints.join(" ") }
+          : {}),
+        articleSection: post.category,
         datePublished: post.isoDate,
         dateModified: post.updatedIso ?? post.isoDate,
         inLanguage: "it-IT",
-        ...(post.coverImage
-          ? { image: `https://corioli.it${post.coverImage.src}` }
+        isAccessibleForFree: true,
+        // Senza copertina, l'immagine è quella generata per l'anteprima
+        // social: Google chiede un'immagine per i risultati di tipo articolo.
+        image: post.coverImage
+          ? `${SITE_URL}${post.coverImage.src}`
+          : `${SITE_URL}/blog/${slug}/opengraph-image`,
+        // Stessa entità dichiarata nel layout: autore ed editore sono Corioli,
+        // non un'organizzazione omonima descritta di nuovo.
+        author: { "@id": `${SITE_URL}/#organization` },
+        publisher: { "@id": `${SITE_URL}/#organization` },
+        ...(post.sources?.length
+          ? {
+              citation: post.sources.map((source) => ({
+                "@type": "CreativeWork",
+                name: source.title,
+                ...(source.url ? { url: source.url } : {}),
+              })),
+            }
           : {}),
-        author: {
-          "@type": "Organization",
-          name: "Corioli",
-          url: "https://corioli.it",
-        },
-        publisher: {
-          "@type": "Organization",
-          name: "Corioli",
-          logo: {
-            "@type": "ImageObject",
-            url: "https://corioli.it/logo_short.png",
-          },
-        },
-        mainEntityOfPage: `https://corioli.it/blog/${slug}`,
+        mainEntityOfPage: `${SITE_URL}/blog/${slug}`,
       },
       {
         "@type": "BreadcrumbList",
@@ -205,7 +222,7 @@ export default async function BlogPostPage({
       <div className="max-w-3xl mx-auto px-6 md:px-12">
         <Link
           href="/blog"
-          className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-brand-600 transition-colors mb-12"
+          className="inline-flex items-center gap-2 py-1 text-sm font-medium text-gray-500 hover:text-brand-600 transition-colors mb-12"
         >
           <ArrowLeft size={16} /> Torna agli articoli
         </Link>
@@ -256,12 +273,27 @@ export default async function BlogPostPage({
             {post.lead}
           </p>
 
-          <div className="my-10 p-8 bg-brand-50 rounded-2xl border border-brand-100">
-            <p className="italic text-brand-900 font-heading text-xl mb-0">
-              "Un gestionale medico utile non archivia soltanto dati: deve
-              aiutare il medico a lavorare meglio durante la visita."
-            </p>
-          </div>
+          {/* Prima c'era una citazione generica, identica in tutti gli
+              articoli. Il riquadro "In breve" risponde subito alla domanda del
+              titolo: è la parte che lettori frettolosi e assistenti leggono. */}
+          {post.keyPoints && post.keyPoints.length > 0 && (
+            <aside
+              aria-labelledby="in-breve"
+              className="my-10 p-6 md:p-8 bg-brand-50 rounded-2xl border border-brand-100"
+            >
+              <h2 id="in-breve" className="font-heading text-sm font-bold uppercase tracking-wide text-brand-700 mt-0 mb-4">
+                In breve
+              </h2>
+              <ul className="flex flex-col gap-3 m-0 p-0 list-none">
+                {post.keyPoints.map((point) => (
+                  <li key={point} className="flex items-start gap-3 m-0 text-base text-gray-800 leading-relaxed">
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand-500 shrink-0 mt-2.5" />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          )}
 
           {post.sections.map((section) => (
             <section key={section.title}>
@@ -363,21 +395,37 @@ export default async function BlogPostPage({
               <h2 className="font-heading text-2xl font-bold mt-12 mb-6 text-gray-900">
                 Domande frequenti
               </h2>
-              <dl className="flex flex-col gap-6">
-                {post.faq.map((item) => (
-                  <div
-                    key={item.question}
-                    className="p-6 bg-gray-50 rounded-2xl border border-gray-100"
-                  >
-                    <dt className="font-heading font-bold text-lg text-gray-900 mb-3">
-                      {item.question}
-                    </dt>
-                    <dd className="text-gray-700 leading-relaxed mb-0">
-                      {item.answer}
-                    </dd>
-                  </div>
+              {/* Due colonne solo da lg, allargando il blocco oltre la colonna del
+                  testo: a 672px le risposte lunghe diventerebbero strisce. */}
+              <div className="lg:-mx-24 xl:-mx-40">
+                <FaqList items={post.faq} variant="muted" className="md:columns-1 lg:columns-2" />
+              </div>
+            </section>
+          )}
+
+          {post.sources && post.sources.length > 0 && (
+            <section>
+              <h2 className="font-heading text-xl font-bold mt-12 mb-4 text-gray-900">
+                Fonti
+              </h2>
+              <ol className="flex flex-col gap-2 pl-5 m-0 list-decimal text-sm text-gray-600 leading-relaxed">
+                {post.sources.map((source) => (
+                  <li key={source.title} className="m-0 pl-1">
+                    {source.url ? (
+                      <a
+                        href={source.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-600 hover:text-brand-700 underline underline-offset-2 decoration-gray-300 hover:decoration-brand-300"
+                      >
+                        {source.title}
+                      </a>
+                    ) : (
+                      source.title
+                    )}
+                  </li>
                 ))}
-              </dl>
+              </ol>
             </section>
           )}
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Mail, MapPin, Phone, MessageSquare, Check } from "lucide-react";
 import Link from "next/link";
 import posthog from "posthog-js";
@@ -12,7 +13,24 @@ const FieldCheck = ({ done }: { done: boolean }) =>
     </span>
   ) : null;
 
+// /prezzi porta qui con ?richiesta=migrazione: stesso form, ma la richiesta
+// arriva come preventivo e non come demo. useSearchParams vuole un boundary
+// Suspense per non rendere dinamica l'intera pagina: il fallback prerenderizzato
+// è il form demo, poi il client applica il parametro.
 export default function ContattiPage() {
+  return (
+    <Suspense fallback={<ContattiContent isMigrationQuote={false} />}>
+      <ContattiFromParams />
+    </Suspense>
+  );
+}
+
+function ContattiFromParams() {
+  const isMigrationQuote = useSearchParams().get("richiesta") === "migrazione";
+  return <ContattiContent isMigrationQuote={isMigrationQuote} />;
+}
+
+function ContattiContent({ isMigrationQuote }: { isMigrationQuote: boolean }) {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState<string | null>(null);
@@ -45,7 +63,13 @@ export default function ContattiPage() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nome, email, specializzazione, messaggio }),
+        body: JSON.stringify({
+          nome,
+          email,
+          specializzazione,
+          messaggio,
+          richiesta: isMigrationQuote ? "migrazione" : "demo",
+        }),
       });
       const data = (await res.json().catch(() => ({}))) as { error?: string };
       if (!res.ok) {
@@ -54,12 +78,14 @@ export default function ContattiPage() {
         posthog.capture("demo_request_failed", {
           error: errorMsg,
           specializzazione,
+          richiesta: isMigrationQuote ? "migrazione" : "demo",
         });
         return;
       }
       posthog.capture("demo_request_submitted", {
         specializzazione,
         has_note: Boolean(messaggio),
+        richiesta: isMigrationQuote ? "migrazione" : "demo",
       });
       posthog.identify(email, { name: nome, specializzazione });
       setSubmitted(true);
@@ -139,11 +165,24 @@ export default function ContattiPage() {
                      </svg>
                    </div>
                    <h2 className="font-heading text-3xl font-bold text-gray-900 mb-4">Richiesta inviata!</h2>
-                   <p className="text-gray-600 max-w-sm">Grazie per il tuo interesse. Un nostro consulente ti contatterà a breve all'indirizzo email indicato.</p>
+                   <p className="text-gray-600 max-w-sm">
+                     {isMigrationQuote
+                       ? "Grazie. Valutiamo il tuo archivio e ti mandiamo il preventivo all'indirizzo email indicato."
+                       : "Grazie per il tuo interesse. Un nostro consulente ti contatterà a breve all'indirizzo email indicato."}
+                   </p>
                  </div>
                ) : (
                  <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-                   <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2">Richiedi una Demo Gratuita</h2>
+                   <div className="mb-2">
+                     <h2 className="font-heading text-2xl font-bold text-gray-900">
+                       {isMigrationQuote ? "Preventivo migrazione dati" : "Richiedi una Demo Gratuita"}
+                     </h2>
+                     {isMigrationQuote ? (
+                       <p className="text-sm text-gray-500 mt-2 leading-relaxed">
+                         Descrivi il tuo archivio attuale: non inviare dati dei pazienti, bastano formato e dimensioni.
+                       </p>
+                     ) : null}
+                   </div>
 
                    {sendError ? (
                      <p className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-xl px-4 py-3" role="alert">
@@ -181,11 +220,17 @@ export default function ContattiPage() {
 
                    <div className="flex flex-col gap-3">
                      <label className="text-sm font-medium text-gray-700 flex items-center gap-2">Specializzazione * <FieldCheck done={completed.specializzazione} /></label>
-                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                         <label className="relative">
                           <input type="radio" name="specializzazione" value="ginecologia" required disabled={sending} onChange={() => markCompleted("specializzazione", true)} className="peer sr-only" />
                           <div className="p-3 text-sm text-center font-medium text-gray-600 border border-gray-200 rounded-xl cursor-pointer peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-700 hover:bg-gray-50 transition-all">
                              Ginecologia
+                          </div>
+                        </label>
+                        <label className="relative">
+                          <input type="radio" name="specializzazione" value="cardiologia" required disabled={sending} onChange={() => markCompleted("specializzazione", true)} className="peer sr-only" />
+                          <div className="p-3 text-sm text-center font-medium text-gray-600 border border-gray-200 rounded-xl cursor-pointer peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-700 hover:bg-gray-50 transition-all">
+                             Cardiologia
                           </div>
                         </label>
                         <label className="relative">
@@ -204,8 +249,20 @@ export default function ContattiPage() {
                    </div>
 
                    <div className="flex flex-col gap-2">
-                     <label htmlFor="messaggio" className="text-sm font-medium text-gray-700 flex items-center gap-2">Note Aggiuntive <FieldCheck done={completed.messaggio} /></label>
-                     <textarea id="messaggio" name="messaggio" rows={3} disabled={sending} onChange={(e) => markCompleted("messaggio", e.target.value.trim().length > 0)} className={`bg-gray-50 border rounded-xl p-3.5 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all resize-none text-sm disabled:opacity-60 ${completed.messaggio ? "border-brand-300" : "border-gray-200"}`} placeholder="Es. Utilizzo attualmente Word, vorrei capire come importare i dati storici..."></textarea>
+                     <label htmlFor="messaggio" className="text-sm font-medium text-gray-700 flex items-center gap-2">{isMigrationQuote ? "Il tuo archivio" : "Note Aggiuntive"} <FieldCheck done={completed.messaggio} /></label>
+                     <textarea
+                       id="messaggio"
+                       name="messaggio"
+                       rows={isMigrationQuote ? 4 : 3}
+                       disabled={sending}
+                       onChange={(e) => markCompleted("messaggio", e.target.value.trim().length > 0)}
+                       className={`bg-gray-50 border rounded-xl p-3.5 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all resize-none text-sm disabled:opacity-60 ${completed.messaggio ? "border-brand-300" : "border-gray-200"}`}
+                       placeholder={
+                         isMigrationQuote
+                           ? "Es. Circa 3.000 pazienti in un file Excel più le visite in documenti Word, dal 2012 a oggi..."
+                           : "Es. Utilizzo attualmente Word, vorrei capire come importare i dati storici..."
+                       }
+                     ></textarea>
                    </div>
 
                    <div className="flex items-start gap-3 mt-2">
@@ -216,7 +273,7 @@ export default function ContattiPage() {
                    </div>
 
                    <button type="submit" disabled={sending} className="w-full bg-brand-600 text-white py-4 rounded-xl font-bold hover:bg-brand-700 transition-all shadow-md hover:shadow-lg mt-2 disabled:opacity-60 disabled:pointer-events-none">
-                     {sending ? "Invio in corso…" : "Invia Richiesta"}
+                     {sending ? "Invio in corso…" : isMigrationQuote ? "Richiedi il preventivo" : "Invia Richiesta"}
                    </button>
                  </form>
                )}

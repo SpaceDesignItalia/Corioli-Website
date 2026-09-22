@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { LOGO_RATIO, logoDataUri } from "@/lib/brand";
 import { posts, postsBySlug } from "../posts";
 
 // Immagine OpenGraph per-articolo: mostra titolo e categoria del post, cosi
@@ -21,6 +22,7 @@ export default async function Image({
 
   const title = post?.title ?? "Blog Corioli";
   const category = post?.category ?? "Approfondimenti";
+  const logo = await logoDataUri("corioli-logo.svg");
 
   return new ImageResponse(
     (
@@ -54,18 +56,13 @@ export default async function Image({
             justifyContent: "space-between",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              color: "#2d6b6b",
-              fontSize: 32,
-              fontWeight: 800,
-              letterSpacing: "0.04em",
-            }}
-          >
-            ● CORIOLI
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element -- Satori vuole <img> */}
+          <img
+            src={logo}
+            alt=""
+            width={Math.round(56 * LOGO_RATIO)}
+            height={56}
+          />
           <div
             style={{
               display: "flex",

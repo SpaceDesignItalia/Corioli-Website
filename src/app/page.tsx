@@ -24,12 +24,12 @@ const homeFaqs = [
   {
     question: "Che cos'è Corioli?",
     answer:
-      "Corioli è un gestionale medico per dottori e studi specialistici privati: cartella clinica elettronica, anamnesi strutturata, refertazione PDF e calcolatori clinici integrati nella visita. È un'applicazione desktop per Windows 10 e Windows 11 e i dati dei pazienti restano salvati in locale, sul computer dello studio.",
+      "Corioli è un gestionale medico per dottori e studi specialistici privati: cartella clinica elettronica, anamnesi strutturata, refertazione PDF e calcolatori clinici integrati nella visita. È un'applicazione desktop per Windows e macOS e i dati dei pazienti restano salvati in locale, sul computer dello studio.",
   },
   {
     question: "Per quali medici è pensato Corioli?",
     answer:
-      "Corioli nasce per i medici specialisti che lavorano in libera professione. La verticalizzazione attiva oggi è quella per ginecologia e ostetricia, con cartella ostetrica elettronica e calcolatori fetali; il modulo di pediatria è in sviluppo. È adatto a chi cerca un software clinico e non un gestionale amministrativo adattato alla sanità.",
+      "Corioli nasce per i medici specialisti che lavorano in libera professione. La verticalizzazione attiva oggi è quella per ginecologia e ostetricia, con cartella ostetrica elettronica e calcolatori fetali. L'edizione per la cardiologia — con moduli per elettrocardiogramma, ecocardiogramma e TC coronarica — viene rilasciata a ottobre 2026, mentre il modulo di pediatria è ancora in sviluppo. È adatto a chi cerca un software clinico e non un gestionale amministrativo adattato alla sanità.",
   },
   {
     question: "Dove vengono salvati i dati dei pazienti?",
@@ -39,12 +39,12 @@ const homeFaqs = [
   {
     question: "Quanto costa Corioli?",
     answer:
-      "Il Piano Specialista costa 19€ al mese, oppure 15€ al mese con fatturazione annuale, e include cartella clinica elettronica illimitata, anagrafica pazienti e refertazione PDF. I calcolatori clinici avanzati sono un modulo opzionale da 15€ al mese. La migrazione dei dati storici da Word, Excel o altri gestionali costa 29€ una tantum.",
+      "Corioli costa 30€ al mese, tutto incluso: cartella clinica elettronica illimitata, anagrafica pazienti, refertazione PDF e calcolatori clinici avanzati, senza moduli a pagamento né costi di attivazione. La migrazione dei dati storici da Word, Excel o altri gestionali è un servizio facoltativo su preventivo.",
   },
   {
     question: "Posso provarlo prima di acquistarlo?",
     answer:
-      "Sì. La prova gratuita dura 90 giorni, non richiede carta di credito e non prevede costi di attivazione né vincoli contrattuali. È pensata per essere usata nell'ambulatorio reale, così da valutare il software su un ciclo di visite completo.",
+      "Sì. La prova gratuita dura 30 giorni, non richiede carta di credito e non prevede costi di attivazione né vincoli contrattuali. È pensata per essere usata nell'ambulatorio reale, così da valutare il software su un ciclo di visite completo.",
   },
   {
     question: "Corioli include agenda e fatturazione?",
@@ -67,8 +67,33 @@ const homeFaqStructuredData = {
   })),
 };
 
+// Peso fetale mediano (g) per settimana, 20-40: stessi valori della tabella di
+// Hadlock nell'app (Corioli, src/utils/fetalGrowthCentiles.ts), così il widget
+// mostra quello che il medico vede davvero in visita.
+const HADLOCK_P50_GRAMS: Record<number, number> = {
+  20: 331, 21: 398, 22: 472, 23: 558, 24: 653, 25: 761, 26: 881, 27: 1013,
+  28: 1160, 29: 1320, 30: 1493, 31: 1681, 32: 1882, 33: 2098, 34: 2327,
+  35: 2570, 36: 2826, 37: 3097, 38: 3375, 39: 3657, 40: 3944,
+};
+
+// Tracciato ECG del widget di cardiologia: tre complessi PQRST in un viewBox
+// 100x100 (linea isoelettrica a y=60). Il nastro animato ne affianca due copie.
+const ECG_BEAT_WIDTH = 100 / 3;
+const ECG_PATH = [0, 1, 2]
+  .map((i) => {
+    const x = (dx: number) => (i * ECG_BEAT_WIDTH + dx).toFixed(2);
+    return [
+      `${i === 0 ? "M" : "L"} ${x(0)},60`,
+      `L ${x(4)},60 Q ${x(6.5)},51 ${x(9)},60`, // onda P
+      `L ${x(12)},60 L ${x(13)},65 L ${x(15)},14 L ${x(17)},74 L ${x(18.5)},60`, // QRS
+      `L ${x(21)},60 Q ${x(24.5)},46 ${x(28)},60`, // tratto ST e onda T
+      `L ${x(ECG_BEAT_WIDTH)},60`,
+    ].join(" ");
+  })
+  .join(" ");
+
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<"ostetricia" | "pediatria">(
+  const [activeTab, setActiveTab] = useState<"ostetricia" | "cardiologia">(
     "ostetricia",
   );
   const [savedHours, setSavedHours] = useState(0);
@@ -76,7 +101,7 @@ export default function Home() {
   // Load active tab from localStorage
   useEffect(() => {
     const saved = localStorage.getItem("corioli_dashboard_tab");
-    if (saved === "ostetricia" || saved === "pediatria") {
+    if (saved === "ostetricia" || saved === "cardiologia") {
       setActiveTab(saved);
     }
   }, []);
@@ -104,9 +129,10 @@ export default function Home() {
     return () => cancelAnimationFrame(raf);
   }, []);
 
-  const [gestationalWeeks, setGestationalWeeks] = useState(12);
+  const [gestationalWeeks, setGestationalWeeks] = useState(20);
   const [gestationalDays, setGestationalDays] = useState(3);
-  const [percentile, setPercentile] = useState(45);
+  const [heartRate, setHeartRate] = useState(72);
+  const [egfr, setEgfr] = useState(78);
   const [bmi, setBmi] = useState(22.4);
   const [barHeights, setBarHeights] = useState([20, 35, 55, 75, 95]);
   const [bmiGraph, setBmiGraph] = useState([20, 25, 40, 65, 85]);
@@ -120,13 +146,17 @@ export default function Home() {
     "Flussimetria Arteria Ombelicale...",
     "Grafico Crescita Fetale...",
   ];
-  const toolsPed = [
-    "Percentili Peso e Altezza (OMS)...",
-    "Target Genetico (Altezza da genitori)...",
-    "Grafico Andamento Altezza...",
-    "Calcolo BMI Pediatrico...",
+  // Solo indici che l'app di cardiologia calcola davvero (README di
+  // CorioliGenerale, "Indici calcolati"). SCORE2 è disattivato: non va qui.
+  const toolsCardio = [
+    "QTc secondo Bazett...",
+    "CHA2DS2-VASc e HAS-BLED...",
+    "eGFR CKD-EPI 2021 e stadio KDIGO...",
+    "LDL Friedewald e Colesterolo non-HDL...",
+    "HOMA-IR...",
+    "Fascia Agatston del Calcium Score...",
   ];
-  const currentTools = activeTab === "ostetricia" ? toolsOst : toolsPed;
+  const currentTools = activeTab === "ostetricia" ? toolsOst : toolsCardio;
 
   const [currentToolIndex, setCurrentToolIndex] = useState(0);
   const [typedText, setTypedText] = useState("");
@@ -137,17 +167,25 @@ export default function Home() {
     const interval = setInterval(() => {
       setGestationalDays((prev) => {
         if (prev === 6) {
-          setGestationalWeeks((w) => (w >= 40 ? 12 : w + 1));
+          setGestationalWeeks((w) => (w >= 40 ? 20 : w + 1));
           return 0;
         }
         return prev + 1;
       });
 
-      setPercentile((prev) => {
+      setHeartRate((prev) => {
+        let diff = Math.floor(Math.random() * 3) - 1; // -1 to +1
+        let next = prev + diff;
+        if (next < 68) next = 68;
+        if (next > 76) next = 76;
+        return next;
+      });
+
+      setEgfr((prev) => {
         let diff = Math.floor(Math.random() * 5) - 2; // -2 to +2
         let next = prev + diff;
-        if (next < 5) next = 5;
-        if (next > 95) next = 95;
+        if (next < 52) next = 52;
+        if (next > 96) next = 96;
         return next;
       });
 
@@ -200,26 +238,27 @@ export default function Home() {
             border: "border-orange-500/30",
           };
 
-  const percStatus =
-    percentile < 10
+  // Stadi KDIGO della filtrazione glomerulare (mL/min/1,73 m²).
+  const egfrStatus =
+    egfr >= 90
       ? {
-          label: "Sottopeso",
-          color: "text-blue-300",
-          bg: "bg-blue-500/20",
-          border: "border-blue-500/30",
+          label: "G1 · Normale",
+          color: "text-green-300",
+          bg: "bg-green-500/20",
+          border: "border-green-500/30",
         }
-      : percentile > 90
+      : egfr >= 60
         ? {
-            label: "Sovrappeso",
-            color: "text-orange-300",
-            bg: "bg-orange-500/20",
-            border: "border-orange-500/30",
-          }
-        : {
-            label: "Normopeso",
+            label: "G2 · Lieve riduzione",
             color: "text-green-300",
             bg: "bg-green-500/20",
             border: "border-green-500/30",
+          }
+        : {
+            label: "G3a · Lieve-moderata",
+            color: "text-orange-300",
+            bg: "bg-orange-500/20",
+            border: "border-orange-500/30",
           };
 
   // Typewriter effect
@@ -251,16 +290,25 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typedText, isDeleting, currentToolIndex]);
 
-  // Derived Pediatric Values
-  const p = (gestationalWeeks - 12) / 28; // 0 to 1
-  const pedMonths = Math.floor(p * 36);
-  const pedHeight = 50 + 46 * Math.pow(p, 0.7);
-  const pedWeight = 3.3 + 11 * Math.pow(p, 0.6);
-  const pedLeft =
-    Math.pow(1 - p, 2) * 10 + 2 * (1 - p) * p * 40 + Math.pow(p, 2) * 90;
-  const pedBottom =
-    100 -
-    (Math.pow(1 - p, 2) * 80 + 2 * (1 - p) * p * 30 + Math.pow(p, 2) * 15);
+  // Peso fetale stimato del widget: mediana interpolata fra una settimana e
+  // l'altra. Prima era una formula inventata che a 12 settimane dava 141 g.
+  const nextWeekWeight =
+    HADLOCK_P50_GRAMS[Math.min(gestationalWeeks + 1, 40)];
+  const fetalWeight = Math.round(
+    HADLOCK_P50_GRAMS[gestationalWeeks] +
+      ((nextWeekWeight - HADLOCK_P50_GRAMS[gestationalWeeks]) *
+        gestationalDays) /
+        7,
+  );
+  // DPP coerente con l'epoca mostrata: oggi + i giorni che mancano a 40+0.
+  const dueDate = new Date(
+    Date.now() +
+      (280 - (gestationalWeeks * 7 + gestationalDays)) * 24 * 60 * 60 * 1000,
+  ).toLocaleDateString("it-IT", { day: "numeric", month: "short", year: "numeric" });
+
+  // QTc secondo Bazett (QT / √RR, RR in secondi), come nell'app di cardiologia.
+  const QT_MS = 380;
+  const qtc = Math.round(QT_MS / Math.sqrt(60 / heartRate));
 
   return (
     <div className="pt-32 pb-16">
@@ -275,9 +323,7 @@ export default function Home() {
             <h1 className="font-heading text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl text-gray-950 leading-[1.1] sm:leading-[1.0] mb-6 tracking-tight">
               Il gestionale medico <br />
               che rispetta <br />
-              <span className="font-newsreader italic font-normal">
-                il tuo tempo
-              </span>
+              <span className="text-brand-600">il tuo tempo</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed font-sans max-w-[90%]">
               Corioli è il software gestionale medico per dottori e studi
@@ -289,7 +335,7 @@ export default function Home() {
               {[
                 "Cartella clinica elettronica specializzata",
                 "Calcolatori clinici e strumenti nativi in visita",
-                "Dati salvati in locale, nel pieno rispetto del GDPR",
+                "Dati salvati nel pieno rispetto del GDPR",
               ].map((item, i) => (
                 <li
                   key={i}
@@ -323,7 +369,7 @@ export default function Home() {
               </Link>
             </div>
             <p className="text-sm text-gray-500 font-medium">
-              Nessuna carta di credito richiesta &bull; Prova gratuita di 90
+              Nessuna carta di credito richiesta &bull; Prova gratuita di 30
               giorni &bull; Disponibile su <a href="https://apps.microsoft.com/store/detail/9P24WMFJW58N" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-brand-600 transition-colors">Microsoft Store</a>
             </p>
           </div>
@@ -332,7 +378,9 @@ export default function Home() {
           <div className="relative flex justify-center">
             <div className="relative w-full max-w-[420px] aspect-square">
               {/* Soft glow */}
-              <div className="absolute -inset-10 bg-brand-100/50 rounded-full blur-3xl pointer-events-none"></div>
+              {/* -inset-4 sotto sm: con -inset-10 l'alone usciva di 16px dal
+                  padding della pagina e su iOS la home scorreva di lato. */}
+              <div className="absolute -inset-4 sm:-inset-10 bg-brand-100/50 rounded-full blur-3xl pointer-events-none"></div>
 
               {/* Outer faint ring */}
               <div className="absolute -inset-4 sm:-inset-6 border border-brand-100/70 rounded-full"></div>
@@ -561,10 +609,10 @@ export default function Home() {
                   Ginecologia & Ostetricia
                 </button>
                 <button
-                  onClick={() => { setActiveTab("pediatria"); posthog.capture("dashboard_tab_switched", { tab: "pediatria" }); }}
-                  className={`flex-1 py-1.5 rounded-lg text-[11px] font-bold tracking-wider uppercase transition-all duration-300 ${activeTab === "pediatria" ? "bg-brand-600 text-white shadow-md" : "text-brand-400 hover:text-brand-200"}`}
+                  onClick={() => { setActiveTab("cardiologia"); posthog.capture("dashboard_tab_switched", { tab: "cardiologia" }); }}
+                  className={`flex-1 py-1.5 rounded-lg text-[11px] font-bold tracking-wider uppercase transition-all duration-300 ${activeTab === "cardiologia" ? "bg-brand-600 text-white shadow-md" : "text-brand-400 hover:text-brand-200"}`}
                 >
-                  Pediatria
+                  Cardiologia
                 </button>
               </div>
 
@@ -608,8 +656,10 @@ export default function Home() {
                           d
                         </span>
                       </div>
-                      <div className="text-[11px] text-brand-300">
-                        DPP: 12 Giu 2024
+                      {/* La data dipende dal giorno in cui si apre la pagina: il
+                          prerender statico e il client possono non coincidere. */}
+                      <div className="text-[11px] text-brand-300" suppressHydrationWarning>
+                        DPP: {dueDate}
                       </div>
                     </div>
 
@@ -618,12 +668,10 @@ export default function Home() {
                       <div className="relative z-10 flex justify-between items-start gap-2">
                         <div className="min-w-0">
                           <div className="text-gray-400 text-[10px] font-bold uppercase tracking-wider mb-1">
-                            Stima Crescita (Hadlock)
+                            Peso fetale (Hadlock)
                           </div>
                           <div className="text-xl sm:text-2xl font-bold text-gray-900 transition-all duration-300">
-                            {Math.floor(
-                              Math.pow(gestationalWeeks / 40, 3) * 3400 + 50,
-                            )}
+                            {fetalWeight.toLocaleString("it-IT")}
                             <span className="text-sm text-gray-500 font-normal">
                               g
                             </span>
@@ -683,7 +731,7 @@ export default function Home() {
 
                         {/* Moving and Scaling Fetus Icon exactly tracking the median curve */}
                         {(() => {
-                          const t = (gestationalWeeks - 12) / 28;
+                          const t = (gestationalWeeks - 20) / 20;
                           const left = 120 * t - 20 * t * t;
                           const bottom = 50 * t * t + 20 * t;
                           return (
@@ -758,44 +806,47 @@ export default function Home() {
                   </>
                 ) : (
                   <>
-                    {/* Pediatric Calc 1 - Target Genetico */}
+                    {/* Cardio Calc 1 - CHA2DS2-VASc */}
                     <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 sm:p-5 border border-white/10 flex flex-col justify-center relative overflow-hidden group">
-                      <div className="text-brand-100 text-xs font-bold uppercase tracking-wider mb-2 relative z-10">
-                        Target Genetico
+                      <div className="text-brand-100 text-xs font-bold tracking-wider mb-2 relative z-10">
+                        CHA2DS2-VASc
                       </div>
-                      <div className="flex items-end gap-2 mb-2 relative z-10">
-                        <div className="text-2xl sm:text-3xl font-bold text-white transition-all duration-300">
-                          178
+                      <div className="flex items-end gap-2 mb-2 relative z-10 flex-wrap">
+                        <div className="text-2xl sm:text-3xl font-bold text-white">
+                          3
                           <span className="text-base sm:text-lg font-normal text-brand-300">
-                            .5 cm
+                            {" "}punti
                           </span>
                         </div>
+                        <div className="text-xs font-bold text-brand-300 mb-1.5">
+                          HAS-BLED 1
+                        </div>
                       </div>
-                      <div className="text-[11px] text-brand-300 relative z-10 flex items-center gap-1">
-                        Formula di Tanner
+                      <div className="text-[11px] text-brand-300 relative z-10">
+                        Fibrillazione atriale
                       </div>
                     </div>
 
-                    {/* Pediatric Calc 2 - Graph */}
+                    {/* Cardio Calc 2 - ECG */}
                     <div className="bg-white rounded-xl p-4 sm:p-5 shadow-card flex flex-col justify-between sm:row-span-2 relative overflow-hidden">
                       <div className="relative z-10 flex justify-between items-start gap-2">
                         <div className="min-w-0">
                           <div className="text-gray-400 text-[10px] font-bold uppercase tracking-wider mb-1">
-                            Andamento Altezza
+                            Elettrocardiogramma
                           </div>
                           <div className="text-xl sm:text-2xl font-bold text-gray-900 transition-all duration-300">
-                            {pedHeight.toFixed(1)}
+                            {heartRate}
                             <span className="text-sm text-gray-500 font-normal">
-                              cm
+                              {" "}bpm
                             </span>
                           </div>
                           <div className="text-xs text-brand-600 font-semibold mt-1">
-                            a {pedMonths} Mesi
+                            QTc {qtc} ms (Bazett)
                           </div>
                         </div>
                       </div>
 
-                      {/* Graph */}
+                      {/* Graph - ECG trace scrolling on grid paper */}
                       <div className="w-full flex-1 min-h-[11rem] sm:min-h-[9.5rem] lg:min-h-[140px] mt-4 sm:mt-6 relative z-10 border-l-2 border-b-2 border-gray-100">
                         <div className="absolute inset-0 flex flex-col justify-between opacity-40 pointer-events-none">
                           <div className="w-full h-px bg-gray-200"></div>
@@ -806,78 +857,51 @@ export default function Home() {
                           <div className="h-full w-px bg-gray-200"></div>
                           <div className="h-full w-px bg-gray-200"></div>
                           <div className="h-full w-px bg-gray-200"></div>
+                          <div className="h-full w-px bg-gray-200"></div>
                         </div>
 
-                        <svg
-                          className="absolute inset-0 w-full h-full touch-none"
-                          preserveAspectRatio="none"
-                          viewBox="0 0 100 100"
-                        >
-                          <path
-                            d="M 0,90 Q 50,50 100,10"
-                            fill="none"
-                            stroke="#e2e8f0"
-                            strokeWidth="2"
-                            strokeDasharray="4 4"
-                          />
-                          <path
-                            d="M 10,80 Q 40,30 90,15"
-                            fill="none"
-                            stroke="#14b8a6"
-                            strokeWidth="3"
-                            className="opacity-60"
-                          />
-                        </svg>
-
-                        {/* Plotting points - Previous Visits */}
-                        {/* Historical point 1 (p=0.1) */}
-                        <div
-                          className="absolute w-2 h-2 rounded-full bg-brand-300 -translate-x-1/2 translate-y-1/2"
-                          style={{ left: "16.1%", bottom: "28.3%" }}
-                        ></div>
-                        {/* Historical point 2 (p=0.3) */}
-                        <div
-                          className="absolute w-2 h-2 rounded-full bg-brand-400 -translate-x-1/2 translate-y-1/2"
-                          style={{ left: "29.8%", bottom: "43.2%" }}
-                        ></div>
-                        {/* Historical point 3 (p=0.6) */}
-                        <div
-                          className="absolute w-2 h-2 rounded-full bg-brand-500 -translate-x-1/2 translate-y-1/2"
-                          style={{ left: "53.2%", bottom: "63.4%" }}
-                        ></div>
-
-                        {/* Current Animated Dot tracking exactly the green bezier curve (M 10,80 Q 40,30 90,15) */}
-                        <div
-                          className="absolute w-3 h-3 rounded-full bg-brand-600 ring-4 ring-brand-100 transition-all duration-700 ease-out z-20"
-                          style={{
-                            left: `${pedLeft}%`,
-                            bottom: `${pedBottom}%`,
-                            transform: "translate(-50%, 50%)",
-                          }}
-                        ></div>
+                        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+                          <div className="flex h-full w-[200%] animate-ecg-scroll motion-reduce:animate-none">
+                            {[0, 1].map((copy) => (
+                              <svg
+                                key={copy}
+                                className="h-full w-1/2 shrink-0"
+                                preserveAspectRatio="none"
+                                viewBox="0 0 100 100"
+                              >
+                                <path
+                                  d={ECG_PATH}
+                                  fill="none"
+                                  stroke="#14b8a6"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  vectorEffect="non-scaling-stroke"
+                                />
+                              </svg>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Pediatric Calc 3 - Peso OMS with Sparkline */}
+                    {/* Cardio Calc 3 - eGFR with Sparkline */}
                     <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 sm:p-5 border border-white/10 flex flex-col justify-center relative overflow-hidden group">
-                      <div className="text-brand-100 text-xs font-bold uppercase tracking-wider mb-2 relative z-10">
-                        Peso (OMS)
+                      <div className="text-brand-100 text-xs font-bold tracking-wider mb-2 relative z-10">
+                        eGFR (CKD-EPI 2021)
                       </div>
                       <div className="flex items-end gap-2 mb-2 relative z-10 flex-wrap">
                         <div className="text-xl sm:text-2xl font-bold text-white transition-all duration-300">
-                          {pedWeight.toFixed(1)}{" "}
+                          {egfr}{" "}
                           <span className="text-sm font-normal text-brand-300">
-                            kg
+                            mL/min/1,73 m²
                           </span>
-                        </div>
-                        <div className="text-xs font-bold text-brand-300 transition-all duration-300 mb-1.5">
-                          {percentile}° perc.
                         </div>
                       </div>
                       <div
-                        className={`relative z-10 inline-flex px-2 py-0.5 rounded-full ${percStatus.bg} ${percStatus.color} text-[10px] font-bold w-fit border ${percStatus.border} transition-colors duration-300`}
+                        className={`relative z-10 inline-flex px-2 py-0.5 rounded-full ${egfrStatus.bg} ${egfrStatus.color} text-[10px] font-bold w-fit border ${egfrStatus.border} transition-colors duration-300`}
                       >
-                        {percStatus.label}
+                        {egfrStatus.label}
                       </div>
 
                       {/* Mini animated chart background */}
@@ -955,19 +979,26 @@ export default function Home() {
             </div>
             <div className="bg-white rounded-2xl p-7 border border-brand-100 shadow-soft">
               <h3 className="font-heading text-xl font-bold text-gray-900 mb-3">
-                Ideale per ginecologia, ostetricia e pediatria
+                Ideale per ginecologia, ostetricia e cardiologia
               </h3>
               <p className="text-gray-600 leading-relaxed">
                 I moduli verticali includono strumenti clinici come datazione,
-                curve di crescita, percentili, BMI, Hadlock e refertazione
+                curve di crescita, percentili, Hadlock, QTc, eGFR e refertazione
                 specializzata.{" "}
                 <Link
                   href="/ginecologia"
                   className="text-brand-600 font-medium hover:text-brand-700 underline underline-offset-2 decoration-brand-300"
                 >
-                  Scopri il gestionale per ginecologi
+                  Gestionale per ginecologi
+                </Link>{" "}
+                ·{" "}
+                <Link
+                  href="/cardiologia"
+                  className="text-brand-600 font-medium hover:text-brand-700 underline underline-offset-2 decoration-brand-300"
+                >
+                  gestionale per cardiologi
                 </Link>
-                .
+                , in arrivo a ottobre 2026.
               </p>
             </div>
             <div className="bg-white rounded-2xl p-7 border border-brand-100 shadow-soft">
@@ -993,7 +1024,7 @@ export default function Home() {
             __html: JSON.stringify(homeFaqStructuredData).replace(/</g, "\\u003c"),
           }}
         />
-        <div className="max-w-3xl mx-auto px-6 md:px-12">
+        <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="text-center mb-12">
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Domande frequenti su Corioli
@@ -1003,7 +1034,7 @@ export default function Home() {
               gestionale medico.
             </p>
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-start">
             {homeFaqs.map((item) => (
               <details
                 key={item.question}
@@ -1038,7 +1069,7 @@ export default function Home() {
             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-600 rounded-full blur-[80px] opacity-50 transform translate-x-1/2 -translate-y-1/2"></div>
             <div className="relative z-10">
                <h2 className="font-heading text-3xl md:text-5xl font-bold text-white mb-6">
-                 Pronto ad ottimizzare il tuo studio?
+                 Pronto a ottimizzare il tuo studio?
                </h2>
                <p className="text-brand-100 text-lg mb-10 max-w-2xl mx-auto">
                  Unisciti ai professionisti che hanno già scelto la semplicità e la sicurezza di Corioli per la loro pratica quotidiana.

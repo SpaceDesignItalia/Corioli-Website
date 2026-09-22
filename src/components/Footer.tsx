@@ -9,11 +9,12 @@ export default function Footer() {
         <div className="md:col-span-12 lg:col-span-4 pr-8">
           <Link href="/" className="inline-block mb-6">
             <Image
-              src="/logo_long.png"
-              alt="Corioli Logo"
-              width={280}
-              height={80}
-              className="h-20 w-auto"
+              src="/corioli-logo.svg"
+              alt="Corioli"
+              width={395}
+              height={120}
+              className="h-10 w-auto"
+              unoptimized
             />
           </Link>
           <p className="text-gray-500 text-sm leading-relaxed mb-6">
@@ -38,11 +39,11 @@ export default function Footer() {
           <h4 className="font-heading font-semibold text-gray-900 mb-6">
             Prodotto
           </h4>
-          <ul className="flex flex-col gap-4 text-gray-500 text-sm">
+          <ul className="flex flex-col gap-2 text-gray-500 text-sm">
             <li>
               <Link
                 href="/funzionalita"
-                className="hover:text-brand-600 transition-colors"
+                className="inline-block py-1.5 hover:text-brand-600 transition-colors"
               >
                 Funzionalità gestionale medico
               </Link>
@@ -50,7 +51,7 @@ export default function Footer() {
             <li>
               <Link
                 href="/specializzazioni"
-                className="hover:text-brand-600 transition-colors"
+                className="inline-block py-1.5 hover:text-brand-600 transition-colors"
               >
                 Specializzazioni mediche
               </Link>
@@ -58,15 +59,23 @@ export default function Footer() {
             <li>
               <Link
                 href="/ginecologia"
-                className="hover:text-brand-600 transition-colors"
+                className="inline-block py-1.5 hover:text-brand-600 transition-colors"
               >
                 Gestionale per ginecologi
               </Link>
             </li>
             <li>
               <Link
+                href="/cardiologia"
+                className="inline-block py-1.5 hover:text-brand-600 transition-colors"
+              >
+                Gestionale per cardiologi
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/prezzi"
-                className="hover:text-brand-600 transition-colors"
+                className="inline-block py-1.5 hover:text-brand-600 transition-colors"
               >
                 Prezzi
               </Link>
@@ -74,7 +83,7 @@ export default function Footer() {
             <li>
               <Link
                 href="/download"
-                className="hover:text-brand-600 transition-colors"
+                className="inline-block py-1.5 hover:text-brand-600 transition-colors"
               >
                 Inizia la prova
               </Link>
@@ -86,11 +95,11 @@ export default function Footer() {
           <h4 className="font-heading font-semibold text-gray-900 mb-6">
             Approfondimenti
           </h4>
-          <ul className="flex flex-col gap-4 text-gray-500 text-sm">
+          <ul className="flex flex-col gap-2 text-gray-500 text-sm">
             <li>
               <Link
                 href="/blog/gestionale-per-ginecologi-cosa-cercare"
-                className="hover:text-brand-600 transition-colors"
+                className="inline-block py-1.5 hover:text-brand-600 transition-colors"
               >
                 Gestionale per ginecologi
               </Link>
@@ -98,7 +107,7 @@ export default function Footer() {
             <li>
               <Link
                 href="/blog/cos-e-cartella-clinica-elettronica-come-sceglierla"
-                className="hover:text-brand-600 transition-colors"
+                className="inline-block py-1.5 hover:text-brand-600 transition-colors"
               >
                 Cartella clinica elettronica
               </Link>
@@ -106,15 +115,23 @@ export default function Footer() {
             <li>
               <Link
                 href="/blog/gestionale-medico-gdpr-cosa-deve-avere"
-                className="hover:text-brand-600 transition-colors"
+                className="inline-block py-1.5 hover:text-brand-600 transition-colors"
               >
                 Gestionale medico e GDPR
               </Link>
             </li>
             <li>
               <Link
+                href="/glossario"
+                className="inline-block py-1.5 hover:text-brand-600 transition-colors"
+              >
+                Glossario
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/blog"
-                className="hover:text-brand-600 transition-colors"
+                className="inline-block py-1.5 hover:text-brand-600 transition-colors"
               >
                 Tutti gli articoli
               </Link>
@@ -126,11 +143,11 @@ export default function Footer() {
           <h4 className="font-heading font-semibold text-gray-900 mb-6">
             Azienda
           </h4>
-          <ul className="flex flex-col gap-4 text-gray-500 text-sm">
+          <ul className="flex flex-col gap-2 text-gray-500 text-sm">
             <li>
               <Link
                 href="/chi-siamo"
-                className="hover:text-brand-600 transition-colors"
+                className="inline-block py-1.5 hover:text-brand-600 transition-colors"
               >
                 Chi Siamo
               </Link>
@@ -138,7 +155,7 @@ export default function Footer() {
             <li>
               <Link
                 href="/gdpr"
-                className="hover:text-brand-600 transition-colors"
+                className="inline-block py-1.5 hover:text-brand-600 transition-colors"
               >
                 Sicurezza e GDPR
               </Link>
@@ -146,13 +163,13 @@ export default function Footer() {
             <li>
               <Link
                 href="/privacy-policy"
-                className="hover:text-brand-600 transition-colors"
+                className="inline-block py-1.5 hover:text-brand-600 transition-colors"
               >
                 Privacy Policy
               </Link>
             </li>
             <li>
-              <CookiePreferencesButton className="hover:text-brand-600 transition-colors text-left" />
+              <CookiePreferencesButton className="inline-block py-1.5 hover:text-brand-600 transition-colors text-left" />
             </li>
           </ul>
         </div>
@@ -167,16 +184,23 @@ export default function Footer() {
           per medici specialisti privati. Offre{" "}
           <Link
             href="/funzionalita"
-            className="underline underline-offset-2 hover:text-brand-600 transition-colors"
+            className="inline-block py-1 underline underline-offset-2 hover:text-brand-600 transition-colors"
           >
             cartella clinica elettronica
           </Link>
           ,{" "}
           <Link
             href="/specializzazioni"
-            className="underline underline-offset-2 hover:text-brand-600 transition-colors"
+            className="inline-block py-1 underline underline-offset-2 hover:text-brand-600 transition-colors"
           >
             gestionale per ginecologi e ostetrici
+          </Link>
+          ,{" "}
+          <Link
+            href="/cardiologia"
+            className="inline-block py-1 underline underline-offset-2 hover:text-brand-600 transition-colors"
+          >
+            software per l&apos;ambulatorio cardiologico
           </Link>
           , refertazione PDF, calcolatori clinici e sicurezza GDPR. Sede legale:
           Sesto Fiorentino (FI), Italia.

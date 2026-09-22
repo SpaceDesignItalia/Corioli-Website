@@ -114,7 +114,9 @@ export default function ScreenshotGallery() {
 
       <div className="relative mx-auto w-full max-w-[1200px] group mt-4 aspect-video sm:aspect-auto sm:h-[600px] md:h-[750px] lg:h-[850px] px-2 sm:px-0">
         {!isFullscreen && (
-          <div className="absolute -right-16 top-1/2 -translate-y-1/2 hidden xl:flex flex-col items-center gap-2 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          // Da 2xl e non da xl: a 1280px la galleria (max 1200px) lascia meno
+          // dei 64px che servono all'indicatore e la pagina scorreva di lato.
+          <div className="absolute -right-16 top-1/2 -translate-y-1/2 hidden 2xl:flex flex-col items-center gap-2 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
             <span className="text-xs font-bold tracking-widest uppercase rotate-90 mb-8 text-brand-500">
               Scorri
             </span>

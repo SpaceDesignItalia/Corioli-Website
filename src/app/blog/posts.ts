@@ -21,6 +21,14 @@ export type FaqItem = {
   answer: string;
 };
 
+// Fonte citata in fondo all'articolo e dichiarata come `citation` nel JSON-LD.
+// Negli articoli clinici è obbligatoria: una formula o una soglia senza la
+// fonte da cui viene è esattamente ciò che rimproveriamo ai calcolatori altrui.
+export type BlogSource = {
+  title: string;
+  url?: string;
+};
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -43,6 +51,13 @@ export type BlogPost = {
   updated?: string;
   category: string;
   lead: string;
+  // Risposta in breve, mostrata subito dopo il lead. 3-5 frasi autosufficienti
+  // con i numeri essenziali: è il blocco che motori di ricerca e assistenti
+  // estraggono per primo, quindi deve rispondere alla domanda del titolo anche
+  // letto da solo. Stessi valori del corpo dell'articolo e del glossario.
+  keyPoints?: string[];
+  // Fonti primarie (linee guida, articoli originali, testi di legge).
+  sources?: BlogSource[];
   // Immagine di copertina opzionale, mostrata sotto al titolo.
   coverImage?: BlogImage;
   sections: BlogSection[];
@@ -53,6 +68,439 @@ export type BlogPost = {
 // (/blog), la sitemap e le immagini OpenGraph derivano tutte da qui.
 // Ordine: dal più recente al meno recente.
 export const posts: BlogPost[] = [
+  {
+    slug: "cha2ds2-vasc-cha2ds2-va-has-bled-calcolo",
+    title: "CHA2DS2-VASc, CHA2DS2-VA e HAS-BLED: come si calcolano",
+    description:
+      "Come si calcolano CHA2DS2-VASc e HAS-BLED, perché l'ESC nel 2024 è passata al CHA2DS2-VA e perché il rischio emorragico non serve a negare l'anticoagulante.",
+    excerpt:
+      "Le linee guida ESC 2024 hanno tolto il sesso dal punteggio tromboembolico e ribadito che l'HAS-BLED non serve a escludere l'anticoagulante. Il calcolo voce per voce, con gli errori più comuni.",
+    date: "22 Settembre 2026",
+    isoDate: "2026-09-22",
+    category: "Cardiologia",
+    lead: "Pochi calcoli si fanno tante volte in un ambulatorio cardiologico quanto il CHA2DS2-VASc, e pochi si sbagliano in modi così prevedibili: un'età ricopiata male, un'ipertensione contata nel punteggio sbagliato, un INR labile attribuito a chi prende un anticoagulante diretto. Nel 2024 le linee guida europee hanno anche cambiato il punteggio di riferimento. Questa è la versione aggiornata del calcolo, voce per voce, con quello che il numero dice e quello che non dice.",
+    keyPoints: [
+      "Il CHA2DS2-VASc va da 0 a 9 punti: scompenso, ipertensione, diabete, malattia vascolare ed età fra 65 e 74 anni valgono 1 punto; età di 75 anni o più e ictus, TIA o tromboembolia pregressi valgono 2 punti; il sesso femminile 1 punto.",
+      "Le linee guida ESC 2024 sulla fibrillazione atriale adottano il CHA2DS2-VA, cioè lo stesso punteggio senza il sesso: anticoagulazione raccomandata da 2 punti in su (classe I), da considerare con 1 punto (classe IIa).",
+      "L'HAS-BLED va da 0 a 9 punti e non serve a decidere se anticoagulare: serve a trovare i fattori di rischio emorragico correggibili e a rivedere più spesso chi ha 3 punti o più.",
+      "Età e sesso vanno presi dall'anagrafica e i fattori di rischio dall'anamnesi: ricopiarli a mano in un calcolatore esterno è l'origine della maggior parte degli errori.",
+    ],
+    sections: [
+      {
+        title: "Dal CHA2DS2-VASc al CHA2DS2-VA: cosa è cambiato nel 2024",
+        body: "Il CHA2DS2-VASc è stato proposto nel 2010 per stimare il rischio di ictus e tromboembolia nei pazienti con fibrillazione atriale non valvolare, ed è diventato in pochi anni il punteggio di riferimento. Fra le sue voci c'era il sesso femminile, che aggiungeva un punto.\n\nCon il tempo è diventato chiaro che quel punto non si comporta come gli altri. Il sesso femminile non è un fattore di rischio indipendente: pesa soprattutto in presenza di altri fattori e nelle età più avanzate, cioè in pazienti che hanno già indicazione all'anticoagulazione. Il risultato pratico era una doppia soglia, due punti per gli uomini e tre per le donne, che complicava la lettura senza cambiare le decisioni.\n\nLe linee guida ESC 2024 sulla fibrillazione atriale ne hanno tratto la conseguenza: il punteggio raccomandato è il CHA2DS2-VA, identico al precedente meno la voce sul sesso, con una soglia unica per tutti. L'anticoagulazione orale è raccomandata con un punteggio di 2 o più (classe I) e va considerata con un punteggio di 1 (classe IIa). Le stesse linee guida ammettono strumenti di rischio validati localmente, e le linee guida nordamericane del 2023 ragionano sul rischio annuale stimato con un punteggio validato, fra cui il CHA2DS2-VASc. Nella pratica i due punteggi convivono: l'importante è dichiarare quale si sta usando, perché lo stesso paziente può avere due numeri diversi.",
+      },
+      {
+        title: "Il calcolo voce per voce",
+        body: "Queste sono le voci del CHA2DS2-VA con i rispettivi punti. Il CHA2DS2-VASc è lo stesso elenco con in più il sesso femminile.\n\nScompenso cardiaco, 1 punto: segni e sintomi di scompenso qualunque sia la frazione di eiezione, oppure una disfunzione ventricolare sinistra asintomatica con frazione di eiezione pari o inferiore al 40%. Ipertensione, 1 punto: pressione ripetutamente superiore a 140/90 mmHg oppure terapia antipertensiva in corso. Età di 75 anni o più, 2 punti. Diabete mellito, 1 punto. Ictus, TIA o tromboembolia arteriosa pregressi, 2 punti. Malattia vascolare, 1 punto: infarto o coronaropatia documentata, arteriopatia periferica, placca aortica complessa. Età fra 65 e 74 anni, 1 punto. Nel CHA2DS2-VASc si aggiunge 1 punto per il sesso femminile, e il massimo passa da 8 a 9.\n\nUn esempio. Una donna di 72 anni, ipertesa in terapia e diabetica, senza altri fattori: ipertensione 1, diabete 1, età fra 65 e 74 anni 1, per un CHA2DS2-VA di 3. Con il CHA2DS2-VASc il totale sarebbe 4. Con entrambi i punteggi l'anticoagulazione è raccomandata.\n\nL'esempio in cui la differenza si vede è un altro: la stessa donna a 66 anni, senza ipertensione né diabete. Il CHA2DS2-VASc vale 2 (età e sesso), il CHA2DS2-VA vale 1. Con le regole del 2020 un 2 in una donna significava «da considerare», esattamente come oggi un 1 per chiunque. Il cambio di punteggio non sposta la decisione: toglie una regola da ricordare.",
+      },
+      {
+        title: "HAS-BLED: un punteggio per correggere, non per escludere",
+        body: "L'HAS-BLED stima il rischio di sanguinamento maggiore nel paziente anticoagulato. Le voci sono: ipertensione non controllata, con pressione sistolica sopra 160 mmHg (1 punto); funzione renale alterata e funzione epatica alterata (1 punto ciascuna); ictus pregresso (1); storia di sanguinamento o predisposizione, come un'anemia (1); INR labile, che vale solo per chi assume un antagonista della vitamina K (1); età superiore a 65 anni (1); farmaci che aumentano il rischio, come antiaggreganti o antinfiammatori, e consumo di alcol a rischio (1 punto ciascuno). Il massimo è 9, e da 3 punti in su il rischio si considera alto.\n\nL'uso sbagliato più diffuso dell'HAS-BLED è trattarlo come una controindicazione: punteggio alto, niente anticoagulante. Le linee guida ESC 2024 dicono il contrario. Il punteggio serve a due cose: individuare i fattori su cui si può intervenire, come la pressione non controllata, un INR instabile, un antinfiammatorio che si può sospendere o l'alcol, e programmare controlli più ravvicinati per chi ha un punteggio di 3 o più. Il rischio emorragico si riduce correggendo quei fattori, non togliendo la protezione dall'ictus a chi ne ha indicazione.\n\nPer questo, davanti a un HAS-BLED, conviene guardare le voci prima del totale. Un 3 fatto di età, ictus pregresso e insufficienza renale è un dato da tenere presente; un 3 in cui due punti vengono da una pressione non controllata e da un antiaggregante senza indicazione è una lista di cose da fare.",
+      },
+      {
+        title: "Gli errori che si ripetono",
+        body: "Il primo è ricopiare età e sesso. Sono gli unici dati del punteggio che non richiedono un giudizio clinico, e proprio per questo nessuno li ricontrolla: un paziente passato da 74 a 75 anni fra un controllo e l'altro guadagna un punto, e se il calcolatore lo prende da un campo scritto a mano l'anno prima quel punto non arriva. Il posto giusto da cui leggerli è l'anagrafica.\n\nIl secondo è confondere le due ipertensioni. Nel CHA2DS2-VA conta l'ipertensione come diagnosi, anche se ben controllata dalla terapia. Nell'HAS-BLED conta solo quella non controllata. Lo stesso paziente iperteso ben compensato ha un punto nel primo punteggio e zero nel secondo, e non è un'incoerenza.\n\nIl terzo è l'INR labile attribuito a chi è in terapia con un anticoagulante diretto: la voce ha senso solo con gli antagonisti della vitamina K, dove il tempo nel range terapeutico si misura.\n\nIl quarto riguarda il perimetro. I due punteggi valgono per la fibrillazione atriale non valvolare: con una protesi valvolare meccanica o una stenosi mitralica moderata o severa l'indicazione all'anticoagulazione non passa da qui. E calcolarli per un paziente che non ha mai avuto una fibrillazione atriale documentata produce un numero che non significa niente, ma che, una volta scritto in un referto, qualcuno leggerà.",
+      },
+      {
+        title: "Cosa scrivere nel referto",
+        body: "Nel referto di solito basta il totale, con l'indicazione del punteggio usato: «CHA2DS2-VA 3» dice già tutto a un collega, e le voci che lo compongono sono comunque nell'anamnesi. Scrivere CHA2DS2-VASc o CHA2DS2-VA non è un dettaglio formale, perché lo stesso paziente può avere due numeri diversi.\n\nAccanto ai punteggi conviene riportare i dati da cui dipende la scelta della dose dell'anticoagulante: età, peso, creatinina e funzione renale. Per alcuni anticoagulanti diretti la dose si decide sulla clearance della creatinina stimata con Cockcroft-Gault, non sull'eGFR: se nel referto c'è solo uno dei due valori, chi legge deve ricalcolare l'altro.\n\nInfine, la data. Il rischio tromboembolico cambia con l'età e con le nuove diagnosi, e le linee guida chiedono di rivalutarlo nel tempo. Un punteggio senza data di calcolo è un punteggio di cui non si sa se è ancora valido.",
+      },
+      {
+        title: "Come lo gestisce un gestionale cardiologico",
+        body: "Quasi tutti i dati che servono a questi punteggi sono già nella visita: età e sesso nell'anagrafica, ipertensione, diabete, scompenso e malattia vascolare fra i fattori di rischio, la creatinina fra gli esami di laboratorio. Un calcolatore separato obbliga a ricopiarli; un gestionale che li rilegge da dove stanno elimina l'errore alla radice.\n\nIn Corioli Cardiologia, in arrivo a ottobre 2026, il modulo della fibrillazione atriale funziona così: età e sesso arrivano dall'anagrafica e non sono caselle da spuntare, gli altri fattori dal pannello dei fattori di rischio della visita, e i due punteggi compaiono in un riquadro con la fonte accanto. Il punteggio calcolato è il CHA2DS2-VASc; quando un punto deriva solo dal sesso femminile l'applicazione lo segnala, e togliendolo si ottiene il CHA2DS2-VA. L'HAS-BLED distingue le voci su cui si può intervenire, e il software non propone né sconsiglia l'anticoagulazione: la decisione resta del medico.\n\nNel referto finisce solo il totale, accanto a peso, creatinina, età ed eGFR. E il modulo si stampa solo se il medico ha dichiarato la fibrillazione atriale: i punteggi si calcolano da età, sesso e fattori di rischio, quindi senza quell'interruttore comparirebbero su ogni referto.",
+      },
+    ],
+    faq: [
+      {
+        question: "Che differenza c'è fra CHA2DS2-VASc e CHA2DS2-VA?",
+        answer:
+          "Il CHA2DS2-VA è il CHA2DS2-VASc senza il punto per il sesso femminile. Le linee guida ESC 2024 sulla fibrillazione atriale lo hanno adottato perché il sesso femminile non è un fattore di rischio indipendente e costringeva a usare soglie diverse per uomini e donne. Con il CHA2DS2-VA la soglia è unica: anticoagulazione raccomandata da 2 punti, da considerare con 1.",
+      },
+      {
+        question: "Con quale punteggio si inizia l'anticoagulante nella fibrillazione atriale?",
+        answer:
+          "Secondo le linee guida ESC 2024, con un CHA2DS2-VA di 2 o più l'anticoagulazione orale è raccomandata, con 1 va considerata, con 0 in genere non è indicata. Il punteggio orienta la decisione ma non la sostituisce: contano anche il rischio emorragico, le preferenze del paziente e le condizioni che il punteggio non considera. Con protesi valvolari meccaniche o stenosi mitralica moderata o severa il punteggio non si applica.",
+      },
+      {
+        question: "Un HAS-BLED alto è una controindicazione all'anticoagulante?",
+        answer:
+          "No. Le linee guida ESC 2024 indicano di non usare i punteggi di rischio emorragico per decidere se iniziare o sospendere l'anticoagulazione. Un HAS-BLED di 3 o più significa che il paziente va seguito più da vicino e che bisogna cercare e correggere i fattori modificabili, come pressione non controllata, farmaci non necessari, alcol o INR instabile.",
+      },
+      {
+        question: "L'HAS-BLED si calcola anche con gli anticoagulanti diretti?",
+        answer:
+          "Sì, ma la voce sull'INR labile riguarda solo chi è in terapia con un antagonista della vitamina K, perché è lì che il tempo nel range terapeutico si misura. Per chi assume un anticoagulante diretto quella voce resta a zero, e il punteggio massimo raggiungibile scende di conseguenza.",
+      },
+      {
+        question: "Ogni quanto va ricalcolato il punteggio tromboembolico?",
+        answer:
+          "A ogni controllo in cui cambia qualcosa che il punteggio considera: un compleanno che fa passare di fascia d'età, una nuova diagnosi di ipertensione o diabete, un evento vascolare. Le linee guida ESC 2024 chiedono una rivalutazione periodica del rischio, perché un paziente a basso rischio oggi può non esserlo fra un anno.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Van Gelder IC, Rienstra M, Bunting KV, et al. 2024 ESC Guidelines for the management of atrial fibrillation developed in collaboration with EACTS. Eur Heart J. 2024;45(36):3314-3414.",
+        url: "https://doi.org/10.1093/eurheartj/ehae176",
+      },
+      {
+        title:
+          "Lip GYH, Nieuwlaat R, Pisters R, Lane DA, Crijns HJGM. Refining clinical risk stratification for predicting stroke and thromboembolism in atrial fibrillation using a novel risk factor-based approach: the Euro Heart Survey on atrial fibrillation. Chest. 2010;137(2):263-272.",
+      },
+      {
+        title:
+          "Pisters R, Lane DA, Nieuwlaat R, de Vos CB, Crijns HJGM, Lip GYH. A novel user-friendly score (HAS-BLED) to assess 1-year risk of major bleeding in patients with atrial fibrillation: the Euro Heart Survey. Chest. 2010;138(5):1093-1100.",
+      },
+    ],
+  },
+  {
+    slug: "qtc-bazett-calcolo-limiti",
+    title: "QTc con Bazett: come si calcola e quando non fidarsi",
+    description:
+      "Formula di Bazett con un esempio, soglie di QT lungo e corto, perché sopra i 100 bpm il QTc viene sovrastimato e quando conviene confrontarlo con Fridericia.",
+    excerpt:
+      "La correzione del QT più usata è anche quella che sbaglia di più agli estremi di frequenza. Formula, esempi numerici, soglie e cosa scrivere nel referto perché il valore sia confrontabile.",
+    date: "22 Settembre 2026",
+    isoDate: "2026-09-22",
+    category: "Cardiologia",
+    lead: "Il QT si accorcia quando il cuore accelera: per confrontarlo fra un tracciato e l'altro, o con una soglia, va corretto per la frequenza. La correzione di Bazett è la più usata da un secolo, è quella che calcolano quasi tutti gli elettrocardiografi ed è anche quella che sbaglia di più proprio dove il QT interessa di più. Qui trovi la formula con un esempio, i limiti con i numeri, le soglie e cosa scrivere nel referto.",
+    keyPoints: [
+      "Formula di Bazett: QTc = QT / √RR, con l'intervallo RR in secondi (RR = 60 / frequenza). Con un QT di 400 ms a 78 bpm il QTc è 456 ms.",
+      "Bazett sovrastima il QTc alle frequenze alte e lo sottostima alle basse: fuori da una finestra indicativa di 50-100 bpm conviene confrontarlo con Fridericia, che usa la radice cubica dell'RR.",
+      "Secondo le raccomandazioni AHA/ACCF/HRS del 2009 il QTc è prolungato sopra i 450 ms negli uomini e da 460 ms in su nelle donne, ed è corto a 390 ms o meno.",
+      "Sopra i 500 ms il rischio di aritmie ventricolari, torsione di punta compresa, cresce in modo netto: è la soglia a cui si rivalutano i farmaci che allungano il QT.",
+      "Un QTc nel referto è confrontabile solo se accanto ci sono QT misurato, frequenza e formula usata.",
+    ],
+    sections: [
+      {
+        title: "Perché il QT va corretto",
+        body: "L'intervallo QT misura, dall'inizio del QRS alla fine dell'onda T, la durata della depolarizzazione e della ripolarizzazione ventricolare. Dipende dalla frequenza: quando il ciclo cardiaco si accorcia, si accorcia anche il QT. Un QT di 400 ms può essere normale a 60 battiti al minuto e lungo a 100.\n\nLa correzione serve a riportare il valore a quello che si avrebbe a 60 bpm, cioè con un intervallo RR di un secondo, così da confrontare due tracciati registrati a frequenze diverse o applicare una soglia unica. È una normalizzazione matematica, non una misura: e come ogni normalizzazione funziona bene vicino al punto di riferimento e peggio man mano che ci si allontana.",
+      },
+      {
+        title: "La formula di Bazett, con un esempio",
+        body: "La formula proposta da Bazett nel 1920 divide il QT per la radice quadrata dell'intervallo RR espresso in secondi: QTc = QT / √RR. Se hai la frequenza e non l'RR, lo ricavi così: RR = 60 / frequenza.\n\nUn esempio con numeri da ambulatorio: QT 400 ms, frequenza 78 bpm. L'RR è 60 / 78 = 0,769 secondi, la sua radice quadrata è 0,877, e 400 / 0,877 dà un QTc di 456 ms. In un uomo è appena sopra la soglia di prolungamento, in una donna appena sotto.\n\nDue dettagli pratici. L'RR va in secondi, non in millisecondi: con 769 al posto di 0,769 il risultato esce sbagliato di un fattore superiore a trenta. E a 60 bpm l'RR vale 1 e il QTc coincide con il QT misurato: è un buon controllo mentale per capire se un calcolatore sta facendo il conto giusto.",
+      },
+      {
+        title: "Dove Bazett sbaglia, con i numeri",
+        body: "Il limite di Bazett è noto: la radice quadrata corregge troppo quando la frequenza è alta e troppo poco quando è bassa. Si vede bene confrontandola con la formula di Fridericia, che usa la radice cubica dell'RR: QTc = QT / ∛RR.\n\nA 120 bpm, con un QT di 320 ms, Bazett dà un QTc di 453 ms, Fridericia di 403. Lo stesso tracciato è prolungato per un uomo con la prima formula e normale con la seconda: 50 ms di differenza che vengono solo dalla scelta della formula. A 48 bpm, con un QT di 460 ms, succede il contrario: Bazett dà 411 ms, Fridericia 427, e il rischio è di sottostimare un QT che si sta davvero allungando.\n\nPer questo Bazett si considera affidabile in una finestra indicativa fra 50 e 100 bpm, e fuori da lì il risultato va confrontato con Fridericia o con correzioni lineari come quella di Framingham, QT + 0,154 × (1 − RR) con i valori in secondi, o di Hodges, QT + 1,75 × (frequenza − 60) con il QT in millisecondi. Negli studi sugli effetti dei farmaci sul QT si preferisce di norma Fridericia. Nessuna formula è perfetta per tutti; quello che non va bene è usarne una senza sapere quale.",
+      },
+      {
+        title: "Le soglie: QT lungo e QT corto",
+        body: "Le raccomandazioni AHA/ACCF/HRS del 2009 per la standardizzazione dell'elettrocardiogramma definiscono prolungato un QTc superiore a 450 ms negli uomini e pari o superiore a 460 ms nelle donne, e corto un QTc pari o inferiore a 390 ms. Sono soglie per l'adulto; in età pediatrica i riferimenti sono diversi.\n\nSopra i 500 ms il rischio di aritmie ventricolari, compresa la torsione di punta, aumenta in modo netto, ed è il valore oltre il quale si rivaluta ogni farmaco che allunga il QT. Anche un aumento di 60 ms o più rispetto al valore di base dopo l'introduzione di un farmaco è un segnale da non ignorare, a prescindere dal valore assoluto.\n\nUna soglia però è solo una riga. Un QTc di 452 ms in un uomo è formalmente prolungato con Bazett, ma se la frequenza è 105 bpm lo stesso tracciato può risultare normale con Fridericia. La soglia va letta insieme alla formula e alla frequenza.",
+      },
+      {
+        title: "Misurare bene prima di correggere",
+        body: "La correzione non ripara una misura sbagliata. Il QT si misura dall'inizio del QRS alla fine dell'onda T, nella derivazione in cui è più lungo, spesso la II o le precordiali V2-V3, e la fine della T si individua di solito con il metodo della tangente, tracciata sulla parte discendente dell'onda fino alla linea di base. L'onda U, quando è distinta dalla T, non va inclusa.\n\nAlcune situazioni rendono il valore meno affidabile a prescindere dalla formula. Con un ritmo irregolare, come nella fibrillazione atriale, RR e QT cambiano da un battito all'altro: si misurano su più battiti e si usa un valore medio, sapendo che il risultato resta approssimativo. Con un QRS allargato, per esempio in un blocco di branca, una parte del QT è occupata dalla depolarizzazione e il QTc risulta allungato senza che lo sia la ripolarizzazione; in quei casi si guarda anche l'intervallo JT.\n\nInfine, il valore dell'elettrocardiografo. La misura automatica è un buon punto di partenza ma va verificata, e la formula usata dall'apparecchio non è sempre Bazett: se il QTc stampato sul tracciato non coincide con il tuo, la prima cosa da controllare è quale correzione ha applicato.",
+      },
+      {
+        title: "Cosa scrivere nel referto",
+        body: "Un QTc scritto da solo non è confrontabile con quello del controllo successivo, soprattutto se nel frattempo è cambiata la frequenza. Nel referto conviene riportare il QT misurato, la frequenza cardiaca, la formula usata e il QTc risultante: quattro numeri, una riga.\n\nIn Corioli Cardiologia, in arrivo a ottobre 2026, il modulo ECG ha campi separati per PR, QRS, QT e asse; il QTc secondo Bazett si calcola mentre si compila, con la formula indicata accanto al risultato e un avviso quando la frequenza è fuori dalla finestra 50-100 bpm. Nel referto l'elettrocardiogramma esce come tabella, e il QTc è in grassetto solo se è fuori dai limiti: nessun giudizio scritto accanto, perché a leggere il foglio è un medico.",
+      },
+    ],
+    faq: [
+      {
+        question: "Qual è la formula del QTc di Bazett?",
+        answer:
+          "QTc = QT / √RR, con il QT in millisecondi e l'intervallo RR in secondi. L'RR si ricava dalla frequenza: RR = 60 / frequenza. Per esempio, con un QT di 400 ms a 78 bpm l'RR è 0,769 secondi e il QTc risulta 456 ms.",
+      },
+      {
+        question: "Quale formula usare quando la frequenza è alta?",
+        answer:
+          "Sopra i 100 bpm Bazett tende a sovrastimare il QTc. Conviene confrontarlo con Fridericia, che divide il QT per la radice cubica dell'RR e risente meno della frequenza: a 120 bpm, con un QT di 320 ms, Bazett dà 453 ms e Fridericia 403. Negli studi sugli effetti dei farmaci sul QT Fridericia è la correzione preferita.",
+      },
+      {
+        question: "Qual è il valore normale del QTc?",
+        answer:
+          "Nell'adulto, secondo le raccomandazioni AHA/ACCF/HRS del 2009, il QTc è prolungato sopra i 450 ms negli uomini e da 460 ms in su nelle donne, ed è corto a 390 ms o meno. Oltre i 500 ms il rischio di aritmie ventricolari aumenta in modo netto. I valori vanno letti sapendo con quale formula il QTc è stato calcolato.",
+      },
+      {
+        question: "Si può calcolare il QTc in fibrillazione atriale?",
+        answer:
+          "Sì, con cautela. Con un ritmo irregolare QT e RR cambiano da un battito all'altro: si misurano su più battiti consecutivi e si usa un valore medio. Il risultato è meno affidabile che in ritmo sinusale, e con Bazett l'errore cresce se la frequenza media è alta.",
+      },
+      {
+        question: "Perché il QTc dell'elettrocardiografo è diverso dal mio?",
+        answer:
+          "Le cause più comuni sono due: l'apparecchio misura il QT in automatico, con un algoritmo che può individuare la fine dell'onda T in un punto diverso, e non sempre usa la formula di Bazett. Prima di confrontare i valori conviene verificare la misura del QT sul tracciato e controllare quale correzione ha applicato l'elettrocardiografo.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Rautaharju PM, Surawicz B, Gettes LS. AHA/ACCF/HRS Recommendations for the Standardization and Interpretation of the Electrocardiogram. Part IV: the ST segment, T and U waves, and the QT interval. Circulation. 2009;119(10):e241-e250.",
+        url: "https://www.ahajournals.org/doi/10.1161/circulationaha.108.191096",
+      },
+      {
+        title:
+          "Drew BJ, Ackerman MJ, Funk M, et al. Prevention of torsade de pointes in hospital settings: a scientific statement from the American Heart Association and the American College of Cardiology Foundation. Circulation. 2010;121(8):1047-1060.",
+      },
+      {
+        title:
+          "Bazett HC. An analysis of the time-relations of electrocardiograms. Heart. 1920;7:353-370.",
+      },
+      {
+        title:
+          "Fridericia LS. Die Systolendauer im Elektrokardiogramm bei normalen Menschen und bei Herzkranken. Acta Med Scand. 1920;53:469-486.",
+      },
+      {
+        title:
+          "Sagie A, Larson MG, Goldberg RJ, Bengtson JR, Levy D. An improved method for adjusting the QT interval for heart rate (the Framingham Heart Study). Am J Cardiol. 1992;70(7):797-801.",
+      },
+    ],
+  },
+  {
+    slug: "flussimetria-arteria-ombelicale-pi-percentili",
+    title: "Flussimetria dell'arteria ombelicale: PI, IR e percentili",
+    description:
+      "Flussimetria ombelicale: come si misurano PI e IR, come si legge il percentile per epoca gestazionale e cosa significa un flusso diastolico assente.",
+    excerpt:
+      "Il PI ombelicale non ha una soglia fissa: scende con l'epoca gestazionale e va letto come percentile. Formule, esecuzione della misura, curve FMF e ruolo nella restrizione di crescita.",
+    date: "22 Settembre 2026",
+    isoDate: "2026-09-22",
+    category: "Ostetricia",
+    lead: "La flussimetria dell'arteria ombelicale è uno degli esami Doppler più eseguiti in ostetricia, e uno di quelli che più spesso finiscono nel referto come un numero senza contesto. Un indice di pulsatilità di 1,05 può essere perfettamente atteso o meritare attenzione: dipende dalla settimana di gestazione. Qui trovi le formule, come si esegue la misura, come si legge il percentile e perché questo esame pesa nella diagnosi di restrizione di crescita.",
+    keyPoints: [
+      "L'indice di pulsatilità (PI) è la differenza fra velocità sistolica e diastolica divisa per la velocità media; l'indice di resistenza (IR) è la stessa differenza divisa per la velocità sistolica.",
+      "Entrambi diminuiscono con l'avanzare della gravidanza: nelle curve della Fetal Medicine Foundation il PI mediano scende da circa 1,22 a 20 settimane a circa 0,80 a 40, quindi il valore va letto come percentile per l'epoca gestazionale.",
+      "Un PI sopra il 95° percentile indica resistenze placentari aumentate; un flusso diastolico assente o invertito è il reperto più grave.",
+      "Il PI ombelicale entra nella definizione di consenso della restrizione di crescita fetale e nel rapporto cerebro-placentare, che lo confronta con il PI dell'arteria cerebrale media.",
+    ],
+    sections: [
+      {
+        title: "Che cosa misura",
+        body: "Il Doppler dell'arteria ombelicale descrive la resistenza che il sangue fetale incontra nella circolazione placentare. In una gravidanza normale, man mano che la placenta matura e il suo letto vascolare si sviluppa, le resistenze diminuiscono: il flusso durante la diastole aumenta e gli indici calano.\n\nQuando la placenta funziona male, per un'alterazione della sua vascolarizzazione come accade tipicamente nelle forme precoci di restrizione di crescita, le resistenze restano alte o aumentano. Il primo segno è un indice sopra i valori attesi per l'epoca; nelle forme più gravi il flusso in diastole si riduce fino ad annullarsi o a invertirsi.",
+      },
+      {
+        title: "Le formule: PI, IR e rapporto S/D",
+        body: "Dall'onda di velocità si leggono tre valori: la velocità sistolica di picco (S), la velocità telediastolica (D) e la velocità media nel ciclo. Con questi si calcolano gli indici.\n\nL'indice di pulsatilità è PI = (S − D) / velocità media. L'indice di resistenza è IR = (S − D) / S. Il rapporto S/D, ancora diffuso, divide semplicemente la velocità sistolica per quella diastolica.\n\nIl PI è il più usato per una ragione pratica: resta informativo anche quando il flusso diastolico è assente. Con D uguale a zero l'IR vale 1 in ogni caso e il rapporto S/D non è definito, mentre il PI continua a distinguere un'onda dall'altra. Per questo le curve di riferimento più recenti e le definizioni di consenso sono espresse in PI.",
+      },
+      {
+        title: "Come si esegue la misura",
+        body: "La misura si esegue su un'ansa libera del funicolo, a feto fermo e senza movimenti respiratori, con un angolo di insonazione il più possibile vicino a zero. Si registra una sequenza di onde regolari e simili fra loro, di norma da tre a dieci, e gli indici si calcolano sulla loro media.\n\nIl punto di campionamento conta: vicino all'inserzione fetale del funicolo gli indici sono più alti che vicino a quella placentare, e le curve di riferimento sono costruite su una sede precisa. Riportare dove è stata fatta la misura non è un eccesso di zelo: è ciò che rende il valore confrontabile con quello dell'ecografia successiva.",
+      },
+      {
+        title: "Leggere il valore: percentili, non soglie",
+        body: "Siccome gli indici scendono con l'epoca gestazionale, un valore isolato non dice nulla senza la settimana. Le curve più utilizzate oggi sono quelle della Fetal Medicine Foundation, pubblicate nel 2019 su oltre 72.000 gravidanze: il PI mediano passa da circa 1,22 a 20 settimane a circa 1,01 a 30 e a circa 0,80 a 40.\n\nUn esempio: a 28+5 settimane un PI di 1,05 cade poco sopra il 50° percentile, cioè dove ci si aspetta. Lo stesso 1,05 a 38 settimane sarebbe intorno al 90°. Per questo il referto dovrebbe riportare il percentile, o almeno l'epoca gestazionale accanto al valore.\n\nIl riferimento è il 95° percentile: un PI oltre questa soglia indica resistenze aumentate. Vale però la pena sapere che le curve non sono standardizzate: le linee guida ISUOG del 2020 segnalano che, fra i lavori più citati, il valore soglia del 95° percentile del PI ombelicale varia del 20-40%. È un altro motivo per dichiarare nel referto quali curve si stanno usando. Poi ci sono i quadri qualitativi, che contano più di qualunque percentile: il flusso diastolico assente e quello invertito sono i segni più gravi di compromissione placentare e cambiano da soli la gestione della gravidanza.",
+      },
+      {
+        title: "Il ruolo nella restrizione di crescita fetale",
+        body: "La definizione di consenso della restrizione di crescita fetale, pubblicata nel 2016 con un processo Delphi, usa il Doppler ombelicale in entrambe le forme.\n\nNella forma precoce, prima delle 32 settimane, basta da solo un flusso diastolico assente nell'arteria ombelicale, oppure una circonferenza addominale o un peso stimato sotto il 3° percentile; in alternativa, circonferenza addominale o peso stimato sotto il 10° percentile associati a un PI ombelicale oltre il 95° o a un PI delle arterie uterine oltre il 95°. Nella forma tardiva, dalle 32 settimane in poi, il criterio Doppler è un PI ombelicale oltre il 95° percentile oppure un rapporto cerebro-placentare sotto il 5°, da associare ad almeno un altro criterio di crescita (peso o circonferenza addominale sotto il 10° percentile, oppure un attraversamento dei canali di crescita superiore a due quartili).\n\nIl rapporto cerebro-placentare divide il PI dell'arteria cerebrale media per quello ombelicale. Quando la placenta non basta, il feto ridistribuisce il flusso verso il cervello: le resistenze cerebrali scendono, quelle placentari salgono, e il rapporto cala. È spesso il primo segno nelle forme tardive, in cui il Doppler ombelicale può restare nei limiti fino a ridosso del termine.",
+      },
+      {
+        title: "Cosa scrivere nel referto",
+        body: "Un referto di flussimetria ombelicale completo dice dove è stata fatta la misura, riporta il PI e, se lo si usa, l'IR con il percentile per l'epoca gestazionale, e descrive il flusso diastolico: presente, ridotto, assente o invertito. Se sono state misurate anche l'arteria cerebrale media o le arterie uterine, i loro valori e il rapporto cerebro-placentare vanno accanto, con le curve di riferimento usate.\n\nIn Corioli la flussimetria del cordone ombelicale è un blocco della visita ostetrica: inserisci PI e IR, e l'applicazione mostra il percentile per l'epoca gestazionale con una barra grafica fra il 5° e il 95°. Per il PI le curve sono quelle della Fetal Medicine Foundation. L'arteria cerebrale media e il rapporto cerebro-placentare, oggi, si descrivono nel testo del referto con i modelli: non hanno un calcolatore dedicato.",
+      },
+    ],
+    faq: [
+      {
+        question: "Qual è il valore normale del PI dell'arteria ombelicale?",
+        answer:
+          "Non esiste un valore normale unico, perché il PI diminuisce con l'epoca gestazionale. Nelle curve della Fetal Medicine Foundation il PI mediano è circa 1,22 a 20 settimane, 1,01 a 30 e 0,80 a 40. Un valore si considera nella norma fra il 5° e il 95° percentile per la settimana in cui è misurato.",
+      },
+      {
+        question: "Che differenza c'è fra indice di pulsatilità e indice di resistenza?",
+        answer:
+          "Entrambi partono dalla differenza fra velocità sistolica e diastolica: il PI la divide per la velocità media, l'IR per la velocità sistolica. Il PI è preferito perché resta informativo anche quando il flusso diastolico è assente, mentre in quel caso l'IR vale sempre 1.",
+      },
+      {
+        question: "Cosa significa flusso diastolico assente nell'arteria ombelicale?",
+        answer:
+          "Significa che alla fine della diastole il sangue nell'arteria ombelicale smette di scorrere verso la placenta, perché le resistenze placentari sono molto aumentate. Insieme al flusso invertito è il reperto Doppler ombelicale più grave e, prima delle 32 settimane, basta da solo a definire una restrizione di crescita fetale precoce secondo il consenso Delphi del 2016.",
+      },
+      {
+        question: "Che cos'è il rapporto cerebro-placentare?",
+        answer:
+          "È il PI dell'arteria cerebrale media diviso per il PI dell'arteria ombelicale. Un valore sotto il 5° percentile indica una ridistribuzione del flusso verso il cervello fetale ed è uno dei criteri della restrizione di crescita tardiva, dopo le 32 settimane.",
+      },
+      {
+        question: "La misura va fatta vicino al feto o alla placenta?",
+        answer:
+          "Di norma su un'ansa libera del funicolo. Gli indici sono più alti vicino all'inserzione fetale e più bassi vicino a quella placentare, quindi la sede va indicata nel referto e deve essere coerente con quella delle curve di riferimento usate.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Ciobanu A, Wright A, Syngelaki A, Wright D, Akolekar R, Nicolaides KH. Fetal Medicine Foundation reference ranges for umbilical artery and middle cerebral artery pulsatility index and cerebroplacental ratio. Ultrasound Obstet Gynecol. 2019;53(4):465-472.",
+        url: "https://doi.org/10.1002/uog.20157",
+      },
+      {
+        title:
+          "Gordijn SJ, Beune IM, Thilaganathan B, et al. Consensus definition of fetal growth restriction: a Delphi procedure. Ultrasound Obstet Gynecol. 2016;48(3):333-339.",
+        url: "https://doi.org/10.1002/uog.15884",
+      },
+      {
+        title:
+          "Lees CC, Stampalija T, Baschat AA, et al. ISUOG Practice Guidelines: diagnosis and management of small-for-gestational-age fetus and fetal growth restriction. Ultrasound Obstet Gynecol. 2020;56(2):298-312.",
+        url: "https://doi.org/10.1002/uog.22134",
+      },
+    ],
+  },
+  {
+    slug: "gestionale-medico-locale-o-cloud",
+    title: "Gestionale medico locale o in cloud: come scegliere",
+    description:
+      "Gestionale medico installato in studio o in cloud: cosa cambia per GDPR e DPA, backup, accesso da più sedi, lavoro senza internet e uscita dal fornitore.",
+    excerpt:
+      "Non è una scelta fra moderno e antiquato: sono due architetture con rischi diversi, gestiti da persone diverse. Le differenze che contano e le cinque domande per decidere.",
+    date: "22 Settembre 2026",
+    isoDate: "2026-09-22",
+    category: "Guide",
+    lead: "Quando si sceglie un gestionale medico, la domanda «cloud o locale?» arriva di solito tardi, dopo le funzionalità e il prezzo, e viene liquidata con uno slogan: il cloud è moderno, il locale è sicuro, o viceversa. In realtà è la scelta che decide chi custodisce i dati sanitari dei tuoi pazienti, chi risponde se qualcosa va storto e cosa succede il giorno in cui vorrai cambiare software. Vale la pena farla per prima, e con le informazioni giuste.",
+    keyPoints: [
+      "Con un gestionale in cloud l'archivio sta sui server del fornitore, che tratta i dati per tuo conto: è responsabile del trattamento e serve un accordo scritto ai sensi dell'articolo 28 del GDPR.",
+      "Con un gestionale installato in studio l'archivio sta sul tuo computer o sulla rete dello studio: per l'uso ordinario non c'è un responsabile esterno, ma backup e sicurezza della macchina sono interamente a tuo carico.",
+      "Il cloud conviene a chi lavora su più sedi o più dispositivi; l'installazione locale a chi lavora in uno studio, vuole il controllo diretto dei dati e non vuole dipendere dalla connessione.",
+      "In entrambi i casi il medico resta titolare del trattamento: nessuna architettura rende conforme al GDPR da sola.",
+      "Prima di firmare, chiedi sempre come si esportano tutti i dati e in che formato.",
+    ],
+    sections: [
+      {
+        title: "Due architetture, non due livelli di qualità",
+        body: "Un gestionale in cloud, o SaaS, è un'applicazione a cui accedi dal browser o da un'app: il programma e l'archivio stanno sui server del fornitore, e il tuo computer serve a visualizzarli. Un gestionale installato in studio è un programma che gira sul tuo computer e salva l'archivio lì, o su un server nella rete dello studio.\n\nEntrambi possono essere ben fatti o mal fatti, sicuri o insicuri, costosi o economici. Quello che cambia davvero è la posizione dei dati, e da quella discendono tre cose: chi ha la responsabilità di proteggerli, cosa succede quando manca la connessione e quanto è facile portarli via. Sono queste tre cose da valutare, non l'etichetta.",
+      },
+      {
+        title: "Cosa cambia per il GDPR",
+        body: "I dati sanitari sono categorie particolari di dati ai sensi dell'articolo 9 del GDPR. Il medico o la struttura che li raccoglie è titolare del trattamento in entrambi i casi: decide finalità e mezzi e deve adottare misure di sicurezza adeguate, come chiede l'articolo 32. Nessun software sposta questa responsabilità.\n\nCon il cloud si aggiunge un soggetto. Il fornitore conserva e gestisce i dati per tuo conto, quindi è responsabile del trattamento: serve un contratto o un atto che lo nomini tale, con i contenuti previsti dall'articolo 28. Vanno verificati anche gli eventuali sub-responsabili, per esempio il provider dell'infrastruttura su cui il fornitore appoggia il servizio, e dove stanno fisicamente i server: se i dati escono dallo Spazio economico europeo si applicano le regole sui trasferimenti del capo V del regolamento.\n\nCon l'installazione locale, per l'uso ordinario, quel soggetto non c'è: il fornitore consegna il programma ma non vede i dati. Con un'eccezione da tenere presente: se il fornitore accede al tuo computer per un'assistenza remota e in quel momento può vedere l'archivio, sta trattando dati per tuo conto, e quella situazione va regolata.",
+      },
+      {
+        title: "Backup e continuità: chi fa cosa",
+        body: "Nel cloud il backup è compito del fornitore, ed è uno dei vantaggi reali di questa architettura. Ma «il fornitore fa il backup» non basta come risposta: conviene chiedere ogni quanto, dove sono conservate le copie, in quanto tempo si ripristina un archivio e se puoi ottenere tu stesso una copia completa dei tuoi dati.\n\nIn locale il backup è compito tuo, e non è un dettaglio. Un buon gestionale installato fa copie automatiche, ma se stanno sullo stesso disco del programma proteggono da un errore o da un file danneggiato, non da un guasto del computer, da un furto o da un ransomware. Per quelli serve una copia fuori dalla macchina, e meglio ancora una fuori dallo studio: è la regola 3-2-1, tre copie, su due supporti diversi, una delle quali altrove.\n\nIn entrambi i casi la domanda da farsi è la stessa: se domani mattina il computer non si accende, o il servizio non risponde, quanto tempo passa prima di poter tornare a lavorare con lo storico dei pazienti?",
+      },
+      {
+        title: "Sedi, dispositivi e connessione",
+        body: "Il cloud dà il meglio quando si lavora in più posti: due studi, un poliambulatorio, visite a domicilio, un collaboratore che deve vedere le stesse cartelle da un altro computer. Tutti vedono lo stesso archivio aggiornato, senza configurare nulla.\n\nL'installazione locale dà il meglio quando si lavora in uno studio e la connessione non è garantita, o non si vuole che il lavoro clinico ne dipenda: visite, calcoli e referti funzionano anche se la linea cade. Usarla su più sedi è possibile, ma richiede una rete configurata o archivi separati, ed è un lavoro che nel cloud non c'è.\n\nConta anche il dispositivo. Molti gestionali in cloud si usano da tablet e telefono; quelli installati di solito richiedono un computer. Se in visita lavori con il portatile sulla scrivania è una differenza che non pesa; se ti sposti fra più ambulatori con un tablet, pesa molto.",
+      },
+      {
+        title: "Costi e uscita dal fornitore",
+        body: "I modelli di prezzo oggi si somigliano: quasi tutti sono in abbonamento, in cloud come in locale. Le differenze stanno altrove. Nel cloud il canone cresce spesso con il numero di utenti o di sedi, e i moduli aggiuntivi possono cambiare molto il costo su tre anni. In locale va messo in conto l'hardware, cioè un computer affidabile e un disco esterno o un NAS per i backup, e il tempo, tuo o di un tecnico, per occuparsene.\n\nIl costo che si dimentica è quello di uscita. Un giorno potresti voler cambiare software, e quel giorno conterà una cosa sola: poter esportare tutto, anagrafiche, visite, referti e allegati, in un formato leggibile. Nel cloud i dati stanno sui server del fornitore e l'esportazione dipende da quello che il servizio prevede; in locale il file è sul tuo computer, ma resta da capire se un altro programma è in grado di leggerlo. In entrambi i casi è una domanda da fare prima di firmare, non dopo.",
+      },
+      {
+        title: "Le cinque domande per decidere",
+        body: "Dove stanno fisicamente i dati dei miei pazienti, e chi può accedervi? Se è un servizio in cloud, esiste un accordo di nomina a responsabile del trattamento e dove sono i server? Chi fa il backup, dove sono le copie e quanto tempo serve per ripristinare l'archivio? Posso lavorare quando la connessione non c'è, e mi serve farlo? Come esporto tutti i miei dati, in che formato, e quanto costa farlo?\n\nNon c'è una risposta giusta per tutti. Un poliambulatorio con più medici e più sedi ha buone ragioni per scegliere il cloud; uno specialista che lavora nel suo studio e vuole tenere l'archivio sotto controllo diretto ha buone ragioni per l'installazione locale. Quello che conta è scegliere sapendo quali rischi si prendono e chi li gestisce.",
+      },
+      {
+        title: "Dove si colloca Corioli",
+        body: "Corioli è un gestionale medico installato: un'applicazione desktop per Windows e macOS che salva l'archivio sul computer dello studio. Le cartelle cliniche non vengono trasmesse ai nostri server e non vi accediamo; verso di noi vanno solo i dati della licenza e i messaggi che scrivi in chat all'assistenza. Per l'uso ordinario non serve un accordo di nomina a responsabile del trattamento.\n\nIl rovescio, detto chiaramente: l'applicazione fa copie automatiche ogni giorno e prima di ogni importazione o ripristino, ma stanno sullo stesso disco, e la copia fuori dal computer, da esportare dalle impostazioni, resta compito dello studio. E non c'è una sincronizzazione automatica fra computer diversi: se lavori su più sedi con lo stesso archivio, oggi Corioli non è lo strumento giusto.",
+      },
+    ],
+    faq: [
+      {
+        question: "Un gestionale medico in cloud è conforme al GDPR?",
+        answer:
+          "Un software non è conforme o non conforme da solo: la conformità riguarda il trattamento, di cui il medico resta titolare. Un gestionale in cloud può essere usato in modo conforme se il fornitore è nominato responsabile del trattamento con un accordo ai sensi dell'articolo 28, se le misure di sicurezza sono adeguate e se gli eventuali trasferimenti di dati fuori dallo Spazio economico europeo rispettano le regole del regolamento.",
+      },
+      {
+        question: "Con un gestionale installato in studio serve il DPA con il fornitore?",
+        answer:
+          "Per l'uso ordinario no, perché il fornitore non tratta i dati dei pazienti: l'archivio resta sul computer dello studio. Se però il fornitore accede al computer per un'assistenza remota e può vedere i dati, in quella situazione li tratta per conto del medico, e il rapporto va regolato.",
+      },
+      {
+        question: "Il cloud è più sicuro del computer dello studio?",
+        answer:
+          "Dipende da chi gestisce cosa. Un buon fornitore cloud ha misure di sicurezza e backup professionali, ma concentra i dati di molti studi in un unico punto e aggiunge un soggetto nella catena. Un computer dello studio ben gestito, con backup fuori sede e aggiornamenti regolari, può essere molto sicuro; uno trascurato no. La sicurezza dipende dalle misure, non dall'etichetta.",
+      },
+      {
+        question: "Posso usare un gestionale installato su più computer?",
+        answer:
+          "Sì, ma richiede di mettere l'archivio in rete o di lavorare con archivi separati. Se più medici o più sedi devono vedere lo stesso archivio in tempo reale, un gestionale in cloud è di solito la soluzione più semplice.",
+      },
+      {
+        question: "Cosa succede ai miei dati se il fornitore chiude?",
+        answer:
+          "Con un gestionale installato l'archivio resta sul tuo computer, ma serve un modo per leggerlo o esportarlo senza il programma. Con un servizio in cloud i dati stanno sui server del fornitore: il contratto dovrebbe prevederne la restituzione in un formato leggibile e la successiva cancellazione. In entrambi i casi conviene verificarlo prima di iniziare.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Regolamento (UE) 2016/679 del Parlamento europeo e del Consiglio (GDPR), in particolare articoli 9, 28 e 32 e capo V.",
+        url: "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+      },
+      {
+        title:
+          "European Data Protection Board. Linee guida 07/2020 sui concetti di titolare del trattamento e di responsabile del trattamento ai sensi del GDPR, versione 2.0, 2021.",
+      },
+    ],
+  },
+  {
+    slug: "gestionale-per-cardiologi-cosa-cercare",
+    title: "Gestionale per cardiologi: cosa deve saper fare davvero",
+    description:
+      "ECG, ecocardiogramma, calcium score, QTc, eGFR, CHA2DS2-VASc: cosa distingue un software pensato per l'ambulatorio cardiologico da un gestionale generico, e le domande da fare prima di sceglierlo.",
+    excerpt:
+      "Un gestionale cardiologico non si giudica dall'archivio pazienti, ma da come si comporta quando devi refertare un ECG e un eco in dieci minuti. Ecco i criteri che contano.",
+    date: "7 Settembre 2026",
+    isoDate: "2026-09-07",
+    updated: "22 Settembre 2026",
+    updatedIso: "2026-09-22",
+    category: "Cardiologia",
+    lead: "La domanda con cui inizia quasi ogni valutazione di un gestionale è sbagliata. Non è «dove archivio i pazienti»: quello lo fa qualsiasi software, compreso un elenco di cartelle su Windows. La domanda utile è un'altra — quando ho davanti una persona, un tracciato ECG e un ecocardiografo, quanto tempo passa fra l'ultima misura e un referto pronto da consegnare? È lì che i gestionali generici si vedono, ed è lì che si decide se lo strumento ti fa risparmiare mezz'ora al giorno o te la fa perdere.",
+    keyPoints: [
+      "Un gestionale cardiologico si riconosce dalle misure strutturate: ECG, ecocardiogramma e TC coronarica devono essere campi con unità di misura, non testo libero, altrimenti non si possono confrontare fra un controllo e l'altro.",
+      "I calcoli (QTc, eGFR con CKD-EPI, LDL secondo Friedewald, CHA2DS2-VASc, HAS-BLED) vanno fatti dentro la visita, a partire dai dati già inseriti, con la formula e i limiti di applicabilità indicati accanto al risultato.",
+      "Gli indici devono restare suggerimenti: un software che li scrive da solo nelle conclusioni del referto fa un'interpretazione che spetta al medico.",
+      "Prima di scegliere conviene guardare un PDF reale prodotto dal software, chiedere dove sono archiviati i dati e come si esportano.",
+    ],
+    sections: [
+      {
+        title: "Il referto cardiologico è scarno per scelta, non per pigrizia",
+        body: "Chi arriva alla cardiologia da altre branche fa fatica a crederci, ma è una caratteristica del mestiere: i referti cardiologici sono volutamente essenziali. In un ambulatorio con visite ravvicinate — a maggior ragione in convenzione — il referto deve dire l'indispensabile e dirlo in fretta. Il medico che lo riceve, spesso il curante o un collega, cerca tre cose: i numeri degli esami strumentali, la conclusione e la terapia.\n\nQuesto ha una conseguenza pratica che quasi nessun software generico rispetta. Un gestionale che ti obbliga a compilare venti campi per stampare mezza pagina non è più accurato: è più lento. Al contrario, un gestionale che lascia tutto a testo libero ti fa risparmiare due minuti in scrittura e te ne fa perdere dieci sei mesi dopo, quando vuoi sapere com'era la frazione di eiezione al controllo precedente e devi riaprire il PDF di allora.\n\nIl punto di equilibrio è un altro: pochi campi, ma strutturati dove serve. Le misure sono dati, la conclusione è prosa. Chi progetta il software deve sapere quali sono le une e quali le altre.",
+      },
+      {
+        title: "Misure strutturate: la differenza pratica",
+        body: "Prendi un ecocardiogramma transtoracico. Le misure che finiscono nel referto sono sempre quelle: DTD e DTS, setto interventricolare, parete posteriore, frazione di eiezione, atrio sinistro, radice aortica, aorta ascendente, TAPSE, PAPs, rapporto E/A ed E/e'. Sono una dozzina di numeri con la loro unità di misura e il loro intervallo di normalità.\n\nSe quei numeri vivono dentro una frase — «FE 58%, AS 38 mm, TAPSE 21 mm» — sono testo. Il software non sa che 58 è una percentuale, non sa che quel valore ha un significato clinico, non può dirti come è cambiato dal controllo dell'anno scorso e non può metterlo in una tabella leggibile nel PDF. Se invece ogni misura è un campo, tutto questo diventa possibile senza che tu faccia nulla di diverso mentre scrivi.\n\nVale lo stesso per l'elettrocardiogramma — ritmo, PR, QRS, QT, asse — e per la TC coronarica, dove il calcium score, la fascia Agatston e il CAD-RADS sono classificazioni codificate, non aggettivi. La domanda da fare a chi ti vende un gestionale è secca: questi sono campi o è un editor di testo con un titolo sopra?",
+      },
+      {
+        title: "I calcoli devono stare dove sta il dato",
+        body: "Il QTc si calcola dal QT e dalla frequenza. L'eGFR dalla creatinina, dall'età e dal sesso. L'LDL secondo Friedewald da colesterolo totale, HDL e trigliceridi. Il CHA2DS2-VASc da una lista di fattori di rischio che hai già raccolto in anamnesi. Sono tutti calcoli che il software ha davanti agli occhi nel momento in cui compili la visita.\n\nEppure la routine più diffusa è ancora: apro il browser, cerco un calcolatore, ricopio i valori, leggo il risultato, torno nel referto e lo trascrivo. Quattro passaggi manuali, ognuno dei quali può sbagliarsi, e alla fine nessuno di quei calcoli resta agganciato alla visita: se fra un anno ti chiedi con che creatinina avevi stimato quel filtrato, la risposta non è da nessuna parte.\n\nUn gestionale cardiologico serio calcola in linea, mentre scrivi, e conserva sia il risultato sia i valori da cui è nato. Non è una comodità: è la differenza fra un numero verificabile e un numero di cui ti devi fidare a memoria.",
+      },
+      {
+        title: "Un calcolatore che non dice da dove viene il numero non è utile",
+        body: "Qui viene la parte che di solito nelle brochure non c'è. Ogni formula clinica ha una fonte, e ha dei limiti di applicabilità. La Friedewald non vale con trigliceridi ≥ 400 mg/dL. Il QTc secondo Bazett diventa inaffidabile fuori dalla finestra 50-100 bpm. L'HOMA-IR ha senso solo su un prelievo a digiuno. Il CKD-EPI 2021 esiste in versione con e senza coefficiente etnico, e la scelta non è indifferente.\n\nUn software che ti mostra un numero e basta ti sta nascondendo tutto questo. Quello che dovresti pretendere è che accanto a ogni indice ci sia la formula usata e, quando esiste, il limite applicato — e che il valore resti un suggerimento in un riquadro a parte, senza finire scritto in automatico dentro il referto. L'interpretazione è un atto medico e deve restare tua: se il software compila da solo le conclusioni, il giorno in cui sbaglia lo firmi tu.\n\nC'è anche un corollario scomodo, ed è il modo migliore per capire chi hai davanti: chiedi cosa succede quando i coefficienti di uno score non sono verificabili. La risposta onesta è disattivare il calcolo e dire perché. È esattamente la scelta che abbiamo fatto in Corioli con lo SCORE2: la pipeline è implementata e coperta da test, ma i coefficienti pubblicati stanno solo nel materiale supplementare della linea guida e non è stato possibile riscontrarli sulla fonte primaria. L'applicazione mostra il motivo invece di un numero di rischio potenzialmente sbagliato. Un fornitore che invece ti restituisce sempre un risultato, qualunque cosa succeda, ti sta dicendo qualcosa su come tratta il resto.",
+      },
+      {
+        title: "Il referto è anche il modo in cui il tuo lavoro viene visto",
+        body: "C'è una funzione del referto cardiologico che si sottovaluta sempre: è il documento che esce dallo studio. Lo legge il paziente, lo legge il medico curante, spesso finisce in mano a un collega di un'altra struttura. È il pezzo di lavoro tuo che circola.\n\nDa qui discende un criterio molto concreto per valutare un gestionale: guarda il PDF che produce, non l'interfaccia che ti mostrano in demo. Con una decina di sezioni e una dozzina di misure per ogni esame strumentale, una riga continua di valori separati da punti diventa illeggibile in A4. Le misure vogliono stare in tabella, e ogni esame vuole la sua intestazione ben visibile: chi legge deve trovare l'ecocardiogramma a colpo d'occhio, senza scorrere la pagina alla ricerca di una parola in grassetto.\n\nSono dettagli tipografici, e sembrano secondari rispetto alla clinica. Ma sono la ragione per cui un referto viene letto fino in fondo o scorso di sfuggita.",
+      },
+      {
+        title: "Dove finiscono i dati, e chi risponde se succede qualcosa",
+        body: "Un gestionale cardiologico gestisce dati sanitari, che il GDPR colloca fra le categorie particolari dell'articolo 9. La domanda «dove sono archiviati» non è un dettaglio tecnico, perché cambia chi fa cosa nella catena delle responsabilità.\n\nCon una soluzione cloud, il fornitore tratta i dati per tuo conto: sei titolare del trattamento, lui è responsabile esterno, e serve un accordo scritto ai sensi dell'articolo 28. Vanno verificati dove stanno i server, chi può accedervi, cosa succede ai dati se chiudi il contratto o se il fornitore chiude l'attività. Sono domande legittime, e un fornitore serio ha le risposte pronte per iscritto.\n\nCon un'applicazione desktop ad archivio locale la catena si accorcia: i dati stanno sul computer dello studio, il fornitore non vi accede e non esiste un responsabile esterno del trattamento da nominare per l'uso ordinario. In cambio, il backup diventa interamente responsabilità tua — che è un onere reale, non una nota a piè di pagina. Nessuna delle due architetture è giusta in assoluto: cambiano i rischi e cambia chi li gestisce. Quello che non va bene è sceglierla senza sapere quale delle due si sta comprando.",
+      },
+      {
+        title: "Le domande da fare prima di decidere",
+        body: "Se devi valutare un gestionale per il tuo ambulatorio cardiologico, questa è la lista che vale più di qualsiasi confronto di funzionalità sul sito del fornitore.\n\nLe misure di ECG, ecocardiogramma e TC coronarica sono campi strutturati o testo libero? I calcoli — QTc, eGFR, LDL, CHA2DS2-VASc, HAS-BLED — stanno dentro la visita o vanno fatti altrove? Accanto a ogni indice compare la formula usata e il limite di applicabilità? Gli indici vengono scritti automaticamente nel referto o restano un suggerimento? Posso vedere un PDF reale prodotto dal software, non uno screenshot dell'interfaccia? Dove sono archiviati i dati e, se sono in cloud, esiste un accordo ex articolo 28 e dove stanno i server? Posso esportare tutto e in che formato, il giorno in cui volessi cambiare strumento? La prova gratuita dura abbastanza da coprire un ciclo di controlli veri, o sono quindici giorni?\n\nUn'ultima cosa, che vale a prescindere dal software scelto: chi ha definito i requisiti clinici. Un gestionale cardiologico scritto senza un cardiologo che dica come si referta davvero — in che ordine, con quanti campi, cosa entra nel PDF e cosa no — si riconosce entro la prima settimana d'uso. Le decisioni che contano sono tutte piccole e tutte cliniche: se l'anamnesi viene prima o dopo il motivo della visita, se i punteggi vanno stampati per esteso o solo nel totale, se un blocco che serve di rado deve restare aperto o collassato. Nessuna di queste si indovina da fuori.",
+      },
+    ],
+    faq: [
+      {
+        question: "Che cosa distingue un gestionale cardiologico da uno generico?",
+        answer:
+          "La struttura dei dati clinici. Un gestionale generico archivia pazienti e documenti; uno cardiologico tratta le misure di ECG, ecocardiogramma e TC coronarica come campi con una loro unità e un loro intervallo, calcola gli indici derivati dentro la visita e produce un referto in cui gli esami strumentali sono leggibili in tabella. La differenza si vede quando devi confrontare due controlli a distanza di mesi: con il testo libero devi riaprire i vecchi PDF, con i campi strutturati il dato è già confrontabile.",
+      },
+      {
+        question: "Quali calcoli servono davvero in un ambulatorio cardiologico?",
+        answer:
+          "Quelli che nascono da valori che hai già inserito: QTc dal QT e dalla frequenza, eGFR con CKD-EPI dalla creatinina con età e sesso, LDL secondo Friedewald e colesterolo non-HDL dal profilo lipidico, HOMA-IR su prelievo a digiuno, fascia Agatston dal calcium score, CHA2DS2-VASc e HAS-BLED dai fattori di rischio raccolti in anamnesi. Il criterio non è la quantità di calcolatori, ma se il risultato resta agganciato alla visita insieme ai valori da cui è stato ottenuto.",
+      },
+      {
+        question: "Un gestionale può calcolare il rischio cardiovascolare al posto mio?",
+        answer:
+          "Può calcolare un punteggio, non può stratificare al posto tuo. Gli score di rischio sono modelli con una popolazione di derivazione, una finestra di età e dei limiti di applicabilità, e il loro risultato va integrato con il quadro clinico complessivo e con quello che l'imaging mostra. Un software che presenta il punteggio come conclusione, e non come uno degli elementi, sta facendo un'operazione che non gli compete: l'interpretazione resta un atto medico.",
+      },
+      {
+        question: "È meglio un gestionale cardiologico in cloud o installato in studio?",
+        answer:
+          "Dipende da come lavori. Il cloud serve se accedi da più sedi o da più dispositivi, ma comporta un responsabile esterno del trattamento, un accordo ex articolo 28 del GDPR e la verifica di dove stanno i server e di cosa succede ai dati alla fine del contratto. L'installazione locale tiene i dati sanitari nello studio e accorcia la catena delle responsabilità, ma lascia interamente a te il backup. Nessuna delle due è migliore in assoluto: sono rischi diversi, gestiti da persone diverse.",
+      },
+      {
+        question: "Corioli ha un modulo per la cardiologia?",
+        answer:
+          "Sì. Corioli Cardiologia viene rilasciata al pubblico a ottobre 2026: elettrocardiogramma, pressione arteriosa ed esami di laboratorio in ogni visita, e moduli da attivare quando servono per ecocardiogramma, TC coronarica, test ergometrico, Holter ECG e pressorio, Doppler dei tronchi sovraaortici, scompenso e fibrillazione atriale. Gli indici calcolati hanno sempre la formula in chiaro, i pazienti si possono raggruppare per progetto di ricerca e i referti PDF riportano gli esami strumentali in tabella. I requisiti clinici sono dettati da un cardiologo. I dati restano in locale sul computer dello studio e l'archivio è separato da quello dell'edizione per la ginecologia.",
+      },
+    ],
+  },
   {
     slug: "sistema-tessera-sanitaria-invio-dati-annuale",
     title: "Sistema Tessera Sanitaria: l'invio dei dati è diventato annuale",
@@ -462,7 +910,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Grazie a chi e passato a trovarci",
-        body: "Grazie a tutti i ginecologi e gli ostetrici che si sono fermati allo stand, hanno provato Corioli e ci hanno raccontato il loro modo di lavorare. Corioli è sviluppato in Italia, con i medici, e gestisce già oltre 15.000 cartelle pazienti: giornate come questa sono il motivo per cui continua a migliorare.\n\nNon sei riuscito a passare? Puoi vedere Corioli dal vivo lo stesso: richiedi una demo gratuita di 15 minuti dalla pagina contatti e ti mostriamo come funziona nel tuo flusso clinico, con 90 giorni di prova senza impegno.",
+        body: "Grazie a tutti i ginecologi e gli ostetrici che si sono fermati allo stand, hanno provato Corioli e ci hanno raccontato il loro modo di lavorare. Corioli è sviluppato in Italia, con i medici, e gestisce già oltre 15.000 cartelle pazienti: giornate come questa sono il motivo per cui continua a migliorare.\n\nNon sei riuscito a passare? Puoi vedere Corioli dal vivo lo stesso: richiedi una demo gratuita di 15 minuti dalla pagina contatti e ti mostriamo come funziona nel tuo flusso clinico, con 30 giorni di prova senza impegno.",
       },
     ],
   },
@@ -511,7 +959,7 @@ export const posts: BlogPost[] = [
       {
         question: "Dove posso vedere Corioli dal vivo?",
         answer:
-          "Saremo presenti al congresso sui miomi uterini a Nana Bianca il 18 giugno 2026, dove mostriamo come Corioli supporta il ginecologo in ambulatorio. In alternativa, puoi richiedere una demo gratuita di 15 minuti dalla pagina contatti del sito Corioli e provare il software nel tuo flusso clinico per 90 giorni.",
+          "Saremo presenti al congresso sui miomi uterini a Nana Bianca il 18 giugno 2026, dove mostriamo come Corioli supporta il ginecologo in ambulatorio. In alternativa, puoi richiedere una demo gratuita di 15 minuti dalla pagina contatti del sito Corioli e provare il software nel tuo flusso clinico per 30 giorni.",
       },
     ],
   },
@@ -583,8 +1031,8 @@ export const posts: BlogPost[] = [
       "Funzionalità cliniche, calcolatori ostetrici, cartella ostetrica elettronica e GDPR: tutto quello che serve davvero a un ginecologo in ambulatorio.",
     date: "5 Febbraio 2025",
     isoDate: "2025-02-05",
-    updated: "20 Agosto 2026",
-    updatedIso: "2026-08-20",
+    updated: "22 Settembre 2026",
+    updatedIso: "2026-09-22",
     category: "Ginecologia",
     lead: "Un ginecologo ha esigenze cliniche molto specifiche che un software generico non può soddisfare. Dalla biometria fetale alla curva di crescita, dalla cartella ostetrica al consenso informato: ogni visita richiede strumenti pensati per la specializzazione.",
     sections: [
@@ -602,16 +1050,16 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Corioli per ginecologi e ostetrici",
-        body: "Corioli nasce specificamente per ginecologia e ostetricia, sviluppato con la consulenza di specialisti delle migliori strutture italiane. Include tutti gli strumenti clinici elencati sopra, una cartella ostetrica elettronica completa, referti PDF personalizzabili e un approccio privacy by design: i dati delle pazienti restano salvati in locale, nel tuo studio, sotto il tuo esclusivo controllo. La prova gratuita di 90 giorni permette di valutarlo nel proprio flusso clinico reale.",
+        body: "Corioli nasce specificamente per ginecologia e ostetricia, sviluppato con la consulenza di specialisti delle migliori strutture italiane. Include tutti gli strumenti clinici elencati sopra, una cartella ostetrica elettronica completa, referti PDF personalizzabili e un approccio privacy by design: i dati delle pazienti restano salvati in locale, nel tuo studio, sotto il tuo esclusivo controllo. La prova gratuita di 30 giorni permette di valutarlo nel proprio flusso clinico reale.",
       },
       {
         title: "Confronto tra i principali software ginecologici in Italia",
         variant: "comparison-table",
-        body: "Scegliere un gestionale per ginecologi significa confrontare soluzioni molto diverse tra loro: alcune nascono per la gestione amministrativa dello studio e aggiungono moduli clinici in un secondo momento, altre sono verticali e pensate fin dall'inizio per la visita ostetrica e ginecologica. In Italia, tra i nomi più citati in ambulatorio troviamo Corioli, ArzaMed, Gynobase e WindDoctor. Nessuno di questi software è 'migliore in assoluto': la scelta dipende da quanto peso dai agli strumenti clinici nativi rispetto alla fatturazione elettronica, al numero di utenti e al budget mensile dello studio.\n\nArzaMed è una soluzione cloud consolidata, molto orientata alla gestione complessiva di studi e poliambulatori: agenda, fatturazione sanitaria, integrazione con il Sistema Tessera Sanitaria e cartella clinica ginecologica personalizzabile. È una scelta solida per chi gestisce team numerosi, ma il canone parte da 99€ al mese per due utenti — un investimento significativo per il libero professionista che lavora da solo.\n\nGynobase è storico nel panorama italiano: offre gestione di anagrafiche, visite ginecologiche e visite in gravidanza, con la possibilità di usare una versione desktop offline (Gynobase Portable) quando la connessione non è disponibile. L'interfaccia è essenziale e funzionale, ma i calcolatori fetali avanzati e l'esperienza utente moderna non sono il suo punto di forza principale.\n\nWindDoctor propone un gestionale cloud accessibile, con piani a partire da 10€ al mese e una prova gratuita limitata. Copre appuntamenti, cartelle cliniche digitali e fatturazione, ma resta un software generalista: per la biometria fetale, i percentili Hadlock e una cartella ostetrica strutturata il medico dovrà spesso integrare strumenti esterni.\n\nCorioli si colloca come alternativa verticale: nato per ginecologia e ostetricia, integra cartella ostetrica elettronica, calcolatori fetali (Hadlock, biometria, percentili, età gestazionale), referti PDF e consenso informato digitale in un unico flusso clinico. Il piano base parte da 15€ al mese con prova gratuita di 90 giorni — un posizionamento pensato per lo specialista privato che vuole strumenti clinici professionali senza il costo di un gestionale enterprise.\n\nLa tabella seguente riassume le differenze principali. I prezzi indicativi sono quelli pubblicati sui siti ufficiali al 2025 e possono variare in base a moduli aggiuntivi, numero di utenti e promozioni in corso.",
+        body: "Scegliere un gestionale per ginecologi significa confrontare soluzioni molto diverse tra loro: alcune nascono per la gestione amministrativa dello studio e aggiungono moduli clinici in un secondo momento, altre sono verticali e pensate fin dall'inizio per la visita ostetrica e ginecologica. In Italia, tra i nomi più citati in ambulatorio troviamo Corioli, ArzaMed, Gynobase e WindDoctor. Nessuno di questi software è 'migliore in assoluto': la scelta dipende da quanto peso dai agli strumenti clinici nativi rispetto alla fatturazione elettronica, al numero di utenti e al budget mensile dello studio.\n\nArzaMed è una soluzione cloud consolidata, molto orientata alla gestione complessiva di studi e poliambulatori: agenda, fatturazione sanitaria, integrazione con il Sistema Tessera Sanitaria e cartella clinica ginecologica personalizzabile. È una scelta solida per chi gestisce team numerosi, ma il canone parte da 99€ al mese per due utenti — un investimento significativo per il libero professionista che lavora da solo.\n\nGynobase è storico nel panorama italiano: offre gestione di anagrafiche, visite ginecologiche e visite in gravidanza, con la possibilità di usare una versione desktop offline (Gynobase Portable) quando la connessione non è disponibile. L'interfaccia è essenziale e funzionale, ma i calcolatori fetali avanzati e l'esperienza utente moderna non sono il suo punto di forza principale.\n\nWindDoctor propone un gestionale cloud accessibile, con piani a partire da 10€ al mese e una prova gratuita limitata. Copre appuntamenti, cartelle cliniche digitali e fatturazione, ma resta un software generalista: per la biometria fetale, i percentili Hadlock e una cartella ostetrica strutturata il medico dovrà spesso integrare strumenti esterni.\n\nCorioli si colloca come alternativa verticale: nato per ginecologia e ostetricia, integra cartella ostetrica elettronica, calcolatori fetali (Hadlock, biometria, percentili, età gestazionale), referti PDF e consenso informato digitale in un unico flusso clinico. Costa 30€ al mese, tutto incluso, con prova gratuita di 30 giorni — un posizionamento pensato per lo specialista privato che vuole strumenti clinici professionali senza il costo di un gestionale enterprise.\n\nLa tabella seguente riassume le differenze principali. I prezzi indicativi sono quelli pubblicati sui siti ufficiali al 2025 e possono variare in base a moduli aggiuntivi, numero di utenti e promozioni in corso.",
       },
       {
         title: "Quanto costa un gestionale per ginecologi?",
-        body: "Il costo di un gestionale per ginecologi dipende dal modello commerciale scelto dal fornitore e dalle funzionalità incluse nel canone base. Conoscere le tre tipologie di pricing più diffuse aiuta a evitare sorprese e a calcolare il costo reale su 12 mesi, non solo quello del primo mese promozionale.\n\nIl modello più comune oggi è l'abbonamento mensile (SaaS cloud): paghi un canone fisso ogni mese e ottieni accesso al software, aggiornamenti automatici, backup e assistenza. I vantaggi sono prevedibilità, nessun investimento iniziale in server o licenze e la possibilità di disdire se il software non si adatta al tuo flusso. I canoni variano da circa 10€ al mese per soluzioni generaliste con funzionalità limitate, fino a 99€-499€ al mese per gestionali enterprise pensati per poliambulatori con molti utenti. Per un ginecologo in libera professione, la fascia utile si colloca generalmente tra 15€ e 50€ al mese per un software verticale completo.\n\nEsiste ancora, soprattutto tra software più datati, il modello a licenza perpetua: paghi una tantum per il software e lo installi sul tuo computer. Il costo iniziale può sembrare conveniente, ma di solito non include aggiornamenti, assistenza continuativa e adeguamenti normativi — voci che, sommate nel tempo, spesso superano l'abbonamento. Attenzione a non confondere il modello di pagamento con l'architettura: un software installato in studio può benissimo essere in abbonamento con aggiornamenti continui, ed è un vantaggio quando vuoi che i dati restino sotto il tuo controllo.\n\nIl modello freemium prevede una versione base gratuita con limiti (numero di pazienti, documenti o funzionalità) e piani a pagamento per sbloccare il pieno potenziale. WindDoctor, ad esempio, offre una prova gratuita con 12 documenti annui; Gynobase permette di registrarsi e testare il servizio. Attenzione: un piano freemium può andare bene per valutare l'interfaccia, ma raramente copre le esigenze cliniche di un ambulatorio ostetrico attivo con decine di visite settimanali.\n\nQuando calcoli il budget, considera anche i costi nascosti: moduli extra per calcolatori clinici avanzati, migrazione dati storici, personalizzazione template PDF, utenti aggiuntivi per segreteria o collaboratori. Un gestionale a 19€ al mese che richiede 15€ extra per i percentili fetali e 29€ una tantum per la migrazione costa di più di un software a 15€ con tutto incluso.\n\nCorioli adotta un modello di abbonamento trasparente: il Piano Specialista include cartella clinica elettronica illimitata, anagrafica pazienti, refertazione PDF e un'impostazione privacy by design con i dati salvati in locale nello studio. Il canone è di 19€ al mese (o 15€/mese con fatturazione annuale). I calcolatori clinici avanzati — percentili, stime Hadlock, curve di crescita — sono disponibili come modulo opzionale a 15€/mese, con i primi 90 giorni inclusi nel periodo di prova. La migrazione dati storici da Word, Excel o altri gestionali costa 29€ una tantum. Non ci sono costi di attivazione né vincoli contrattuali: puoi provare Corioli gratuitamente per 90 giorni, senza carta di credito, e valutarlo nel tuo ambulatorio reale prima di decidere.",
+        body: "Il costo di un gestionale per ginecologi dipende dal modello commerciale scelto dal fornitore e dalle funzionalità incluse nel canone base. Conoscere le tre tipologie di pricing più diffuse aiuta a evitare sorprese e a calcolare il costo reale su 12 mesi, non solo quello del primo mese promozionale.\n\nIl modello più comune oggi è l'abbonamento mensile (SaaS cloud): paghi un canone fisso ogni mese e ottieni accesso al software, aggiornamenti automatici, backup e assistenza. I vantaggi sono prevedibilità, nessun investimento iniziale in server o licenze e la possibilità di disdire se il software non si adatta al tuo flusso. I canoni variano da circa 10€ al mese per soluzioni generaliste con funzionalità limitate, fino a 99€-499€ al mese per gestionali enterprise pensati per poliambulatori con molti utenti. Per un ginecologo in libera professione, la fascia utile si colloca generalmente tra 15€ e 50€ al mese per un software verticale completo.\n\nEsiste ancora, soprattutto tra software più datati, il modello a licenza perpetua: paghi una tantum per il software e lo installi sul tuo computer. Il costo iniziale può sembrare conveniente, ma di solito non include aggiornamenti, assistenza continuativa e adeguamenti normativi — voci che, sommate nel tempo, spesso superano l'abbonamento. Attenzione a non confondere il modello di pagamento con l'architettura: un software installato in studio può benissimo essere in abbonamento con aggiornamenti continui, ed è un vantaggio quando vuoi che i dati restino sotto il tuo controllo.\n\nIl modello freemium prevede una versione base gratuita con limiti (numero di pazienti, documenti o funzionalità) e piani a pagamento per sbloccare il pieno potenziale. WindDoctor, ad esempio, offre una prova gratuita con 12 documenti annui; Gynobase permette di registrarsi e testare il servizio. Attenzione: un piano freemium può andare bene per valutare l'interfaccia, ma raramente copre le esigenze cliniche di un ambulatorio ostetrico attivo con decine di visite settimanali.\n\nQuando calcoli il budget, considera anche i costi nascosti: moduli extra per calcolatori clinici avanzati, migrazione dati storici, personalizzazione template PDF, utenti aggiuntivi per segreteria o collaboratori. Un canone d'ingresso basso a cui si sommano moduli per i percentili fetali, utenti aggiuntivi e personalizzazioni può finire per costare più di un software con un prezzo unico e tutto incluso.\n\nCorioli adotta un modello di abbonamento trasparente: un solo prezzo, 30€ al mese, tutto incluso. Il canone comprende cartella clinica elettronica illimitata, anagrafica pazienti, refertazione PDF, calcolatori clinici avanzati — percentili, stime Hadlock, curve di crescita — e un'impostazione privacy by design con i dati salvati in locale nello studio. Non esistono moduli a pagamento da aggiungere dopo. L'unico servizio a parte è la migrazione dei dati storici da Word, Excel o altri gestionali, facoltativa e su preventivo. Non ci sono costi di attivazione né vincoli contrattuali: puoi provare Corioli gratuitamente per 30 giorni, senza carta di credito, e valutarlo nel tuo ambulatorio reale prima di decidere.",
       },
     ],
     faq: [
@@ -623,7 +1071,7 @@ export const posts: BlogPost[] = [
       {
         question: "Posso migrare i dati dal mio vecchio software?",
         answer:
-          "Sì. Corioli include un servizio di migrazione dati storici che permette di trasferire l'archivio pazienti da Word, Excel, carta o altri gestionali medici. Il costo è di 29€ una tantum e copre l'importazione dell'anagrafica e dei dati clinici principali. Il team di Corioli ti guida nel processo: non devi fare da solo export manuali o conversioni di formato. Molti ginecologi che passano da Word o da software datati come Gynobase completano la migrazione in pochi giorni, continuando a lavorare in parallelo finché l'archivio non è completamente operativo nel nuovo gestionale.",
+          "Sì. Corioli include un servizio di migrazione dati storici che permette di trasferire l'archivio pazienti da Word, Excel, carta o altri gestionali medici. Il costo è su preventivo, in base al formato e alla dimensione dell'archivio, e copre l'importazione dell'anagrafica e dei dati clinici principali. Il team di Corioli ti guida nel processo: non devi fare da solo export manuali o conversioni di formato. Molti ginecologi che passano da Word o da software datati come Gynobase completano la migrazione in pochi giorni, continuando a lavorare in parallelo finché l'archivio non è completamente operativo nel nuovo gestionale.",
       },
       {
         question: "È conforme al GDPR?",
@@ -633,12 +1081,12 @@ export const posts: BlogPost[] = [
       {
         question: "Quante pazienti posso gestire?",
         answer:
-          "Con il Piano Specialista di Corioli non ci sono limiti al numero di pazienti gestibili: l'anagrafica e la cartella clinica elettronica sono illimitate. Puoi archiviare l'intero storico del tuo ambulatorio — visite ginecologiche, gravidanze in corso e concluse, referti, consensi — senza costi aggiuntivi legati al volume. A differenza di alcuni gestionali freemium che limitano i contatti in rubrica o i documenti annuali, Corioli è pensato per studi specialistici con flussi clinici intensi. Se lavori in team, puoi aggiungere collaboratori o segreteria con il modulo Multi-utente (+15€/mese per utente aggiuntivo).",
+          "Con l'abbonamento Corioli non ci sono limiti al numero di pazienti gestibili: l'anagrafica e la cartella clinica elettronica sono illimitate. Puoi archiviare l'intero storico del tuo ambulatorio — visite ginecologiche, gravidanze in corso e concluse, referti, consensi — senza costi aggiuntivi legati al volume. A differenza di alcuni gestionali freemium che limitano i contatti in rubrica o i documenti annuali, Corioli è pensato per studi specialistici con flussi clinici intensi. Se lavori in team con collaboratori o segreteria, scrivici e ti aiutiamo a configurare Corioli per lo studio.",
       },
       {
         question: "C'è assistenza in italiano?",
         answer:
-          "Sì. Corioli offre supporto prioritario in italiano via chat ed email, con un team che conosce il contesto clinico della ginecologia e dell'ostetricia — non un call center generico. Durante la prova gratuita di 90 giorni hai accesso allo stesso livello di assistenza dei clienti attivi, così puoi risolvere dubbi operativi mentre valuti il software nel tuo ambulatorio. Per richieste di configurazione avanzata, personalizzazione template PDF o migrazione dati, il team è raggiungibile anche telefonicamente. Corioli ha sede in Italia (Sesto Fiorentino, FI) e sviluppa il software in collaborazione con ginecologi italiani.",
+          "Sì. Corioli offre supporto in italiano via chat ed email, con un team che conosce il contesto clinico della ginecologia e dell'ostetricia — non un call center generico. Durante la prova gratuita di 30 giorni hai accesso allo stesso livello di assistenza dei clienti attivi, così puoi risolvere dubbi operativi mentre valuti il software nel tuo ambulatorio. Per richieste di configurazione avanzata, personalizzazione template PDF o migrazione dati, il team è raggiungibile anche telefonicamente. Corioli ha sede in Italia (Sesto Fiorentino, FI) e sviluppa il software in collaborazione con ginecologi italiani.",
       },
     ],
   },
@@ -891,6 +1339,13 @@ export const categoryMeta: Record<
       "Come leggere e calcolare correttamente percentili di crescita, curve OMS e BMI pediatrico, evitando gli errori di interpretazione più comuni in ambulatorio.",
     intro:
       "Come si leggono davvero i percentili di crescita, perché conta la traiettoria più della singola misura e quali scorciatoie è meglio evitare.",
+  },
+  Cardiologia: {
+    title: "Cardiologia: refertazione e software per l'ambulatorio",
+    description:
+      "Refertazione di ECG ed ecocardiogramma, indici calcolati, calcium score e scelta del gestionale: guide per chi lavora in un ambulatorio cardiologico.",
+    intro:
+      "Come si tiene insieme un referto cardiologico rapido e dei dati che restino confrontabili nel tempo, senza affidarsi a calcolatori sparsi e a documenti di testo.",
   },
   Ginecologia: {
     title: "Ginecologia: software e gestione dello studio",

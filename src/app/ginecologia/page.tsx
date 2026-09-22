@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/seo";
 import Link from "next/link";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
+import FaqList from "@/components/FaqList";
 import {
   ArrowRight,
   Check,
@@ -18,14 +20,15 @@ export const metadata: Metadata = {
       "Gestionale per Ginecologi | Software Ginecologia e Ostetricia — Corioli",
   },
   description:
-    "Software gestionale per ginecologi e ostetrici. Cartella clinica elettronica, calcolatori fetali e referti PDF. Prova gratuita 90 giorni.",
+    "Software gestionale per ginecologi e ostetrici. Cartella clinica elettronica, calcolatori fetali e referti PDF. Prova gratuita 30 giorni.",
   alternates: {
     canonical: "/ginecologia",
   },
   openGraph: {
+    ...pageOpenGraph,
     title: "Gestionale per Ginecologi | Software Ginecologia e Ostetricia — Corioli",
     description:
-      "Software gestionale per ginecologi e ostetrici. Cartella clinica elettronica, calcolatori fetali e referti PDF. Prova gratuita 90 giorni.",
+      "Software gestionale per ginecologi e ostetrici. Cartella clinica elettronica, calcolatori fetali e referti PDF. Prova gratuita 30 giorni.",
     url: "https://corioli.it/ginecologia",
   },
 };
@@ -40,15 +43,15 @@ const softwareStructuredData = {
   name: "Corioli — Gestionale per Ginecologi",
   url: "https://corioli.it/ginecologia",
   applicationCategory: "MedicalBusinessSoftware",
-  operatingSystem: "Windows 10, Windows 11",
+  operatingSystem: "Windows 10, Windows 11, macOS 10.13+",
   inLanguage: "it-IT",
   offers: {
     "@type": "Offer",
-    price: "15",
+    price: "30",
     priceCurrency: "EUR",
     url: "https://corioli.it/prezzi",
     availability: "https://schema.org/InStock",
-    description: "Prova gratuita di 90 giorni, senza carta di credito",
+    description: "Prova gratuita di 30 giorni, senza carta di credito",
   },
   description:
     "Software gestionale per ginecologi e ostetrici con cartella ostetrica elettronica, calcolatori fetali Hadlock, referti PDF e consenso informato digitale.",
@@ -72,7 +75,7 @@ const faqs = [
   {
     question: "Quanto costa un gestionale per ginecologi?",
     answer:
-      "In Italia i gestionali medici vanno da circa 10€ al mese per soluzioni generaliste fino a 99€-499€ al mese per piattaforme pensate per poliambulatori. Corioli parte da 15€ al mese con fatturazione annuale (19€ al mese senza vincolo) e include cartella clinica elettronica illimitata, anagrafica pazienti e refertazione PDF. I calcolatori clinici avanzati sono un modulo opzionale da 15€ al mese, inclusi nei primi 90 giorni di prova.",
+      "In Italia i gestionali medici vanno da circa 10€ al mese per soluzioni generaliste fino a 99€-499€ al mese per piattaforme pensate per poliambulatori. Corioli costa 30€ al mese, tutto incluso: cartella clinica elettronica illimitata, anagrafica pazienti, refertazione PDF e calcolatori fetali avanzati, senza moduli a pagamento né costi di attivazione.",
   },
   {
     question: "I dati delle pazienti dove vengono salvati?",
@@ -87,7 +90,7 @@ const faqs = [
   {
     question: "Posso provare Corioli prima di acquistarlo?",
     answer:
-      "Sì. La prova gratuita dura 90 giorni, non richiede carta di credito e non prevede costi di attivazione né vincoli contrattuali. È pensata per essere usata nell'ambulatorio reale, con pazienti veri, così da valutare il software su un ciclo di visite completo e non su una demo di quindici minuti.",
+      "Sì. La prova gratuita dura 30 giorni, non richiede carta di credito e non prevede costi di attivazione né vincoli contrattuali. È pensata per essere usata nell'ambulatorio reale, con pazienti veri, così da valutare il software su un ciclo di visite completo e non su una demo di quindici minuti.",
   },
   {
     question: "Corioli gestisce anche agenda e fatturazione?",
@@ -97,7 +100,7 @@ const faqs = [
   {
     question: "Posso migrare i dati da Word, Excel o da un altro gestionale?",
     answer:
-      "Sì. Il servizio di migrazione dei dati storici costa 29€ una tantum e copre archivi Word, Excel e i formati esportabili dai gestionali più diffusi. È un passaggio consigliato prima di iniziare, così lo storico delle pazienti resta consultabile dentro la cartella clinica invece di rimanere in cartelle separate sul disco.",
+      "Sì. La migrazione dei dati storici è un servizio su preventivo, calcolato in base al formato e alla dimensione dell'archivio, e copre Word, Excel e i formati esportabili dai gestionali più diffusi. È un passaggio consigliato prima di iniziare, così lo storico delle pazienti resta consultabile dentro la cartella clinica invece di rimanere in cartelle separate sul disco.",
   },
 ];
 
@@ -170,7 +173,7 @@ const genericComparison = [
   { feature: "Consenso informato digitale nativo", corioli: true, generic: false },
   { feature: "Progettato per ginecologia e ostetricia", corioli: true, generic: false },
   { feature: "Agenda e fatturazione", corioli: "In sviluppo", generic: true },
-  { feature: "Prova gratuita 90 giorni", corioli: true, generic: "Variabile" },
+  { feature: "Prova gratuita 30 giorni", corioli: true, generic: "Variabile" },
 ];
 
 function ComparisonCell({ value }: { value: boolean | string }) {
@@ -362,7 +365,7 @@ export default function GinecologiaPage() {
                   <Download size={28} className="text-white" />
                 </div>
                 <h2 className="font-heading font-bold text-3xl md:text-4xl text-white mb-4">
-                  Prova gratuita di 90 giorni
+                  Prova gratuita di 30 giorni
                 </h2>
                 <p className="text-brand-100 text-lg mb-2 max-w-xl mx-auto">
                   Nessuna carta di credito richiesta. Usa Corioli nel tuo
@@ -370,8 +373,7 @@ export default function GinecologiaPage() {
                   cartella ostetrica elettronica complete.
                 </p>
                 <p className="text-brand-200 text-sm mb-10">
-                  Piano Specialista da 15€/mese con fatturazione annuale ·
-                  disdici quando vuoi
+                  30€/mese, tutto incluso · disdici quando vuoi
                 </p>
                 <Link
                   href="/download"
@@ -386,7 +388,7 @@ export default function GinecologiaPage() {
 
         {/* FAQ */}
         <section className="py-20 md:py-28 bg-white border-y border-gray-100">
-          <div className="max-w-3xl mx-auto px-6 md:px-12">
+          <div className="max-w-6xl mx-auto px-6 md:px-12">
             <div className="text-center mb-12">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Domande frequenti sul gestionale per ginecologi
@@ -396,21 +398,7 @@ export default function GinecologiaPage() {
                 scegliere un software per la ginecologia.
               </p>
             </div>
-            <dl className="flex flex-col gap-6">
-              {faqs.map((item) => (
-                <div
-                  key={item.question}
-                  className="p-6 md:p-8 bg-gray-50 rounded-2xl border border-gray-100"
-                >
-                  <dt className="font-heading font-bold text-lg text-gray-900 mb-3">
-                    {item.question}
-                  </dt>
-                  <dd className="text-gray-600 leading-relaxed text-sm md:text-base">
-                    {item.answer}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            <FaqList items={faqs} variant="muted" />
           </div>
         </section>
 
@@ -422,43 +410,49 @@ export default function GinecologiaPage() {
           >
             <Link
               href="/funzionalita"
-              className="hover:text-brand-600 transition-colors"
+              className="inline-block py-1 hover:text-brand-600 transition-colors"
             >
               Funzionalità
             </Link>
             <Link
+              href="/cardiologia"
+              className="inline-block py-1 hover:text-brand-600 transition-colors"
+            >
+              Gestionale per cardiologi
+            </Link>
+            <Link
               href="/prezzi"
-              className="hover:text-brand-600 transition-colors"
+              className="inline-block py-1 hover:text-brand-600 transition-colors"
             >
               Prezzi
             </Link>
             <Link
               href="/download"
-              className="hover:text-brand-600 transition-colors"
+              className="inline-block py-1 hover:text-brand-600 transition-colors"
             >
               Download
             </Link>
             <Link
               href="/blog/gestionale-per-ginecologi-cosa-cercare"
-              className="hover:text-brand-600 transition-colors"
+              className="inline-block py-1 hover:text-brand-600 transition-colors"
             >
               Guida alla scelta del gestionale
             </Link>
             <Link
               href="/blog/stima-peso-fetale-hadlock-guida-pratica"
-              className="hover:text-brand-600 transition-colors"
+              className="inline-block py-1 hover:text-brand-600 transition-colors"
             >
               Stima del peso fetale con Hadlock
             </Link>
             <Link
               href="/blog/calcolo-eta-gestazionale-settimane-gravidanza"
-              className="hover:text-brand-600 transition-colors"
+              className="inline-block py-1 hover:text-brand-600 transition-colors"
             >
               Calcolo dell'età gestazionale
             </Link>
             <Link
               href="/gdpr"
-              className="hover:text-brand-600 transition-colors"
+              className="inline-block py-1 hover:text-brand-600 transition-colors"
             >
               Sicurezza e GDPR
             </Link>

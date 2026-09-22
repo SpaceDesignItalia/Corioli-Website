@@ -1,14 +1,14 @@
 import { MetadataRoute } from 'next'
 import { posts, categorySlug } from './blog/posts'
+import { SITE_URL, STATIC_PAGES_UPDATED } from '@/lib/seo'
 
-const BASE = 'https://corioli.it'
+const BASE = SITE_URL
 
-// Data dell'ultima revisione sostanziale delle pagine statiche. È volutamente
-// una costante e non `new Date()`: rigenerare la sitemap a ogni build faceva
-// dichiarare "modificata oggi" anche per pagine ferme da mesi, e un lastmod
+// La data dell'ultima revisione sostanziale delle pagine statiche vive in
+// src/lib/seo.ts, perché la usano anche i dati strutturati: se il lastmod della
+// sitemap e il dateModified dello schema divergono, i due segnali di freschezza
+// si contraddicono. È volutamente una costante e non `new Date()`: un lastmod
 // sempre aggiornato è un segnale che Google impara a ignorare.
-// Aggiornala quando modifichi davvero il contenuto delle pagine.
-const STATIC_PAGES_UPDATED = '2026-08-20'
 
 type StaticEntry = {
   path: string
@@ -22,9 +22,12 @@ const staticPages: StaticEntry[] = [
   { path: '/funzionalita', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/specializzazioni', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/ginecologia', changeFrequency: 'monthly', priority: 0.9 },
+  { path: '/cardiologia', changeFrequency: 'monthly', priority: 0.9 },
   { path: '/prezzi', changeFrequency: 'monthly', priority: 0.8 },
-  { path: '/chi-siamo', changeFrequency: 'monthly', priority: 0.7 },
+  // Allineata a PAGE_UPDATED in src/app/chi-siamo/page.tsx.
+  { path: '/chi-siamo', changeFrequency: 'monthly', priority: 0.7, lastModified: '2026-09-23' },
   { path: '/blog', changeFrequency: 'weekly', priority: 0.7 },
+  { path: '/glossario', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/contatti', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/download', changeFrequency: 'monthly', priority: 0.9 },
   { path: '/privacy-policy', changeFrequency: 'yearly', priority: 0.5 },

@@ -43,9 +43,17 @@ const config: Config = {
           '70%': { transform: 'scale(1.15)' },
           '100%': { opacity: '1', transform: 'scale(1)' },
         },
+        // Tracciato ECG della home: il nastro contiene due copie identiche,
+        // spostarlo di metà larghezza chiude il ciclo senza salti.
+        'ecg-scroll': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
       },
       animation: {
         'pop-in': 'pop-in 0.25s ease-out both',
+        // 3 battiti ogni 2,5 s = 72 bpm, la frequenza attorno a cui oscilla il widget.
+        'ecg-scroll': 'ecg-scroll 2.5s linear infinite',
       }
     },
   },

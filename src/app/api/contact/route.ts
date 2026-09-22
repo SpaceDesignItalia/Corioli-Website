@@ -24,10 +24,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Dati mancanti" }, { status: 400 });
   }
 
-  const { nome, email, specializzazione, messaggio } = body as Record<
+  const { nome, email, specializzazione, messaggio, richiesta } = body as Record<
     string,
     unknown
   >;
+  const isMigrationQuote = richiesta === "migrazione";
 
   if (typeof nome !== "string" || !nome.trim()) {
     return NextResponse.json({ error: "Nome obbligatorio" }, { status: 400 });
@@ -62,7 +63,7 @@ export async function POST(req: NextRequest) {
     posthog.capture({
       distinctId: email.trim(),
       event: "contact_form_submitted",
-      properties: { specializzazione, has_note: Boolean(note), skip_email: true },
+      properties: { specializzazione, has_note: Boolean(note), richiesta: isMigrationQuote ? "migrazione" : "demo", skip_email: true },
     });
     posthog.identify({ distinctId: email.trim(), properties: { name: nome.trim(), specializzazione } });
     return NextResponse.json({ ok: true });
@@ -116,10 +117,12 @@ export async function POST(req: NextRequest) {
   });
 
   const from = SMTP_FROM ?? `"Sito Corioli" <${SMTP_USER}>`;
-  const subject = `[Corioli] Richiesta demo — ${nome.trim()}`;
+  const requestLabel = isMigrationQuote ? "Preventivo migrazione dati" : "Richiesta demo";
+  const subject = `[Corioli] ${requestLabel} — ${nome.trim()}`;
   const text = [
     `Nuova richiesta dal modulo contatti.`,
     ``,
+    `Tipo: ${requestLabel}`,
     `Nome: ${nome.trim()}`,
     `Email: ${email.trim()}`,
     `Specializzazione: ${specializzazione}`,
@@ -130,6 +133,7 @@ export async function POST(req: NextRequest) {
   const html = `
     <p>Nuova richiesta dal modulo <strong>Contatti</strong> (sito Corioli).</p>
     <ul>
+      <li><strong>Tipo:</strong> ${requestLabel}</li>
       <li><strong>Nome:</strong> ${escapeHtml(nome.trim())}</li>
       <li><strong>Email:</strong> ${escapeHtml(email.trim())}</li>
       <li><strong>Specializzazione:</strong> ${escapeHtml(specializzazione)}</li>
@@ -159,7 +163,7 @@ export async function POST(req: NextRequest) {
   posthog.capture({
     distinctId: email.trim(),
     event: "contact_form_submitted",
-    properties: { specializzazione, has_note: Boolean(note) },
+    properties: { specializzazione, has_note: Boolean(note), richiesta: isMigrationQuote ? "migrazione" : "demo" },
   });
   posthog.identify({ distinctId: email.trim(), properties: { name: nome.trim(), specializzazione } });
 

@@ -1,24 +1,80 @@
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/seo";
 import Link from "next/link";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronRight, Bell } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Gestionale medico per ginecologia, ostetricia e pediatria",
-  description: "Corioli è il gestionale medico specializzato per ginecologi, ostetrici e pediatri: moduli verticali, cartella clinica elettronica, curve, percentili e referti.",
+  title: "Gestionale medico per ginecologia, cardiologia e pediatria",
+  description: "Le edizioni di Corioli per specialità: ginecologia e ostetricia disponibile, cardiologia da ottobre 2026, pediatria in sviluppo. Cosa contiene ciascuna.",
   alternates: {
     canonical: "/specializzazioni",
   },
   openGraph: {
+    ...pageOpenGraph,
     title: "Specializzazioni Corioli | Gestionale medico verticale",
-    description: "Software gestionale medico per ginecologia, ostetricia e pediatria, con strumenti clinici integrati.",
+    description: "Software gestionale medico per ginecologia, ostetricia, cardiologia e pediatria, con strumenti clinici integrati.",
     url: "https://corioli.it/specializzazioni",
   },
+};
+
+// ItemList delle verticalizzazioni: dichiara a motori e assistenti quali branche
+// sono coperte e in che stato, evitando che debbano dedurlo dai badge grafici.
+const specializzazioniStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://corioli.it" },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Specializzazioni",
+          item: "https://corioli.it/specializzazioni",
+        },
+      ],
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://corioli.it/specializzazioni#moduli",
+      name: "Moduli verticali di Corioli per specializzazione medica",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Ginecologia e ostetricia — disponibile",
+          url: "https://corioli.it/ginecologia",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Cardiologia — in arrivo a ottobre 2026",
+          url: "https://corioli.it/cardiologia",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Pediatria — in sviluppo",
+          url: "https://corioli.it/specializzazioni#pediatria",
+        },
+      ],
+    },
+  ],
 };
 
 export default function SpecializzazioniPage() {
   return (
     <div className="pt-40 md:pt-48 pb-24 bg-background">
-      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(specializzazioniStructuredData).replace(
+            /</g,
+            "\\u003c",
+          ),
+        }}
+      />
+
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-20 text-center">
         <h1 className="font-heading text-4xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
           L'eccellenza richiede <span className="text-brand-600">specializzazione.</span>
@@ -83,11 +139,75 @@ export default function SpecializzazioniPage() {
           </div>
         </div>
 
+        {/* Cardiologia */}
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-card flex flex-col md:flex-row overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          <div className="md:w-[55%] p-10 md:p-12 flex flex-col justify-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-100 text-amber-700 text-xs font-bold mb-6 w-fit uppercase tracking-wide">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span> In arrivo · ottobre 2026
+            </div>
+            <h2 className="font-heading text-3xl font-bold text-gray-900 mb-4">
+              <Link href="/cardiologia" className="hover:text-brand-600 transition-colors">
+                Cardiologia
+              </Link>
+            </h2>
+            <p className="text-gray-600 mb-8 leading-relaxed">
+              Un'edizione dedicata all'ambulatorio cardiologico, sviluppata insieme a un team di cardiologi che ne dettano i requisiti clinici. La visita è divisa in otto sezioni e i moduli strumentali sono misure vere, non campi di testo libero.
+            </p>
+            <ul className="flex flex-col gap-3 text-sm font-medium text-gray-700 mb-8">
+              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> Elettrocardiogramma, ecocardiogramma e TC coronarica</li>
+              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> QTc, eGFR, LDL, CHA2DS2-VASc e HAS-BLED calcolati in visita</li>
+              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> Referto PDF con gli esami strumentali in tabella</li>
+            </ul>
+            <div className="flex flex-wrap items-center gap-3">
+              <Link href="/cardiologia" className="inline-flex items-center gap-2 bg-brand-50 text-brand-700 px-6 py-3 rounded-xl font-semibold hover:bg-brand-100 transition-colors w-fit">
+                Scopri il gestionale per cardiologi <ArrowRight size={18} />
+              </Link>
+              <Link href="/contatti" className="inline-flex items-center gap-2 text-brand-700 px-4 py-3 rounded-xl font-semibold hover:text-brand-800 transition-colors w-fit">
+                <Bell size={16} /> Avvisami al lancio
+              </Link>
+            </div>
+          </div>
+          <div className="md:w-[45%] bg-brand-50 p-8 flex items-center justify-center relative border-t md:border-t-0 md:border-l border-gray-100">
+             {/* Rappresentazione del modulo strumentale cardiologico */}
+             <div className="w-full max-w-sm bg-white rounded-xl shadow-md border border-gray-200 p-6">
+                <div className="flex justify-between items-center mb-4 pb-3 border-b border-gray-100">
+                   <div className="text-xs font-bold text-gray-500 uppercase tracking-wide">Esami strumentali</div>
+                   <div className="text-[10px] bg-brand-100 text-brand-700 px-2 py-0.5 rounded-full font-bold">ECG + ECO</div>
+                </div>
+                <div className="h-12 mb-4 -mx-1">
+                  <svg viewBox="0 0 200 40" className="w-full h-full" preserveAspectRatio="none" aria-hidden="true">
+                    <path
+                      d="M0,26 H22 l4,-2 4,4 3,-16 4,26 4,-12 H60 H82 l4,-2 4,4 3,-16 4,26 4,-12 H120 H142 l4,-2 4,4 3,-16 4,26 4,-12 H200"
+                      fill="none"
+                      stroke="#3d8a8a"
+                      strokeWidth="1.6"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+                <div className="flex flex-col gap-3">
+                   <div className="flex justify-between items-center">
+                     <span className="text-sm font-medium text-gray-700">Frazione di eiezione (FE)</span>
+                     <div className="bg-gray-50 border border-gray-200 rounded px-2 py-1 text-xs text-gray-900 font-medium">58 %</div>
+                   </div>
+                   <div className="flex justify-between items-center">
+                     <span className="text-sm font-medium text-gray-700">Intervallo QT</span>
+                     <div className="bg-gray-50 border border-gray-200 rounded px-2 py-1 text-xs text-gray-900 font-medium">396 ms</div>
+                   </div>
+                   <div className="mt-2 pt-3 border-t border-gray-100 flex justify-between items-center bg-brand-50/50 -mx-6 -mb-6 px-6 py-4 rounded-b-xl">
+                     <span className="text-xs text-gray-500 font-medium">QTc (Bazett)</span>
+                     <span className="text-sm font-bold text-brand-700 flex items-center gap-1">414 ms <span className="text-xs font-normal text-brand-500">(calcolato)</span></span>
+                   </div>
+                </div>
+             </div>
+          </div>
+        </div>
+
         {/* Pediatria */}
-        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm flex flex-col md:flex-row overflow-hidden opacity-70 grayscale-[30%]">
+        <div id="pediatria" className="bg-white rounded-3xl border border-gray-100 shadow-sm flex flex-col md:flex-row overflow-hidden opacity-70 grayscale-[30%] scroll-mt-32">
           <div className="md:w-[55%] p-10 md:p-12 flex flex-col justify-center">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 border border-gray-200 text-gray-600 text-xs font-bold mb-6 w-fit">
-              <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span> PROSSIMAMENTE (2026)
+              <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span> IN SVILUPPO
             </div>
             <h2 className="font-heading text-3xl font-bold text-gray-900 mb-4">Pediatria</h2>
             <p className="text-gray-600 mb-8 leading-relaxed">

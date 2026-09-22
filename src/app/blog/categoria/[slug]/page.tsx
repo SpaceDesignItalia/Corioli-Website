@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/seo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
@@ -44,6 +45,7 @@ export async function generateMetadata({
       canonical: `/blog/categoria/${slug}`,
     },
     openGraph: {
+      ...pageOpenGraph,
       title: `${category.meta.title} | Corioli`,
       description: category.meta.description,
       url: `https://corioli.it/blog/categoria/${slug}`,

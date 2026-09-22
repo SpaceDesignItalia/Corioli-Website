@@ -55,13 +55,16 @@ export default function Header() {
               : "opacity-100 translate-y-0",
           )}
         >
-          <Link href="/" className="flex items-center gap-2">
+          {/* Il contenitore tiene l'altezza della riga di prima (h-20/h-24):
+              il vecchio PNG aveva molto bianco attorno, l'SVG no. */}
+          <Link href="/" className="flex items-center gap-2 h-20 md:h-24">
             <Image
-              src="/logo_long.png"
-              alt="Corioli Logo"
-              width={280}
-              height={80}
-              className="h-20 md:h-24 w-auto"
+              src="/corioli-logo.svg"
+              alt="Corioli"
+              width={395}
+              height={120}
+              className="h-10 md:h-12 w-auto"
+              unoptimized
               priority
             />
           </Link>

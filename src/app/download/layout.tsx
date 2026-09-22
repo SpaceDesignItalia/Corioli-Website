@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Download gestionale medico per Windows",
-  description: "Scarica Corioli, il gestionale medico per Windows dedicato a dottori e studi specialistici. Inizia subito la prova gratuita di 90 giorni e ottimizza il tuo ambulatorio.",
+  description: "Scarica Corioli per Windows dal Microsoft Store o richiedi l'installazione assistita su Mac. 30 giorni di prova gratuita, senza carta di credito.",
   alternates: {
     canonical: "/download",
   },
   openGraph: {
+    ...pageOpenGraph,
     title: "Download | Corioli gestionale medico",
     description: "Scarica l'applicazione Corioli per il tuo sistema operativo. Installazione rapida e sicura.",
     url: "https://corioli.it/download",

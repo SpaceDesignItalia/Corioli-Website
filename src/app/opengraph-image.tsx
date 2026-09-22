@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { LOGO_RATIO, logoDataUri } from "@/lib/brand";
 
 // Immagine OpenGraph/social generata dinamicamente: sostituisce il vecchio
 // /og-image.jpg (mancante) ed e usata come anteprima per la home e le pagine
@@ -7,7 +8,9 @@ export const alt = "Corioli — Gestionale medico per specialisti";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function Image() {
+export default async function Image() {
+  const logo = await logoDataUri("corioli-logo-su-scuro.svg");
+
   return new ImageResponse(
     (
       <div
@@ -35,18 +38,13 @@ export default function Image() {
             opacity: 0.55,
           }}
         />
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            color: "#8cc7c7",
-            fontSize: 34,
-            fontWeight: 700,
-            letterSpacing: "0.05em",
-          }}
-        >
-          ● CORIOLI
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element -- Satori vuole <img> */}
+        <img
+          src={logo}
+          alt=""
+          width={Math.round(64 * LOGO_RATIO)}
+          height={64}
+        />
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
@@ -69,7 +67,7 @@ export default function Image() {
             }}
           >
             Cartella clinica elettronica, referti e calcolatori clinici per
-            ginecologia, ostetricia e pediatria.
+            ginecologia, ostetricia e cardiologia.
           </div>
         </div>
         <div

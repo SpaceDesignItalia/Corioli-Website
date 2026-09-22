@@ -6,6 +6,7 @@ import Link from "next/link";
 import posthog from "posthog-js";
 import { useState, useEffect } from "react";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
+import FaqList from "@/components/FaqList";
 
 const MS_STORE_URL = "https://apps.microsoft.com/store/detail/9P24WMFJW58N";
 
@@ -25,8 +26,9 @@ const requisiti = [
       "Serve per scaricare e aggiornare l'app. Le visite si registrano anche offline: i dati sono sul computer",
   },
   {
-    voce: "Mac e Linux",
-    valore: "Non supportati al momento",
+    voce: "Mac",
+    valore:
+      "macOS 10.13 o superiore. La versione per Mac non passa dal Mac App Store: la installiamo insieme in una breve call",
   },
 ];
 
@@ -52,12 +54,12 @@ const downloadFaqs = [
   {
     question: "Corioli è disponibile per Mac?",
     answer:
-      "Non ancora. Oggi Corioli è un'applicazione desktop per Windows 10 e Windows 11 a 64 bit. Se lavori su Mac, al momento non c'è una versione utilizzabile: preferiamo dirlo chiaramente piuttosto che farti installare qualcosa che non funziona.",
+      "Sì, su richiesta. Su Windows l'installazione passa dal Microsoft Store ed è completamente autonoma; su Mac no, quindi preferiamo seguirti invece di lasciarti un file e basta. Scrivici dalla pagina contatti e fissiamo una breve call: installiamo l'applicazione insieme e da lì in poi lavori normalmente. Requisito: macOS 10.13 o superiore.",
   },
   {
-    question: "La prova di 90 giorni richiede la carta di credito?",
+    question: "La prova di 30 giorni richiede la carta di credito?",
     answer:
-      "No. Scarichi l'applicazione e la usi per 90 giorni senza inserire dati di pagamento, senza costi di attivazione e senza vincoli contrattuali. Alla fine del periodo decidi se attivare un piano: se non lo fai, non ti viene addebitato nulla.",
+      "No. Scarichi l'applicazione e la usi per 30 giorni senza inserire dati di pagamento, senza costi di attivazione e senza vincoli contrattuali. Alla fine del periodo decidi se attivare un piano: se non lo fai, non ti viene addebitato nulla.",
   },
   {
     question: "Serve una connessione a internet per usarlo?",
@@ -72,7 +74,7 @@ const downloadFaqs = [
   {
     question: "Posso importare l'archivio che ho già?",
     answer:
-      "Sì. Il servizio di migrazione dei dati storici costa 29€ una tantum e copre archivi Word, Excel e i formati esportabili dai gestionali più diffusi. Conviene farlo prima di iniziare, così lo storico delle pazienti è già dentro la cartella clinica dalla prima visita.",
+      "Sì. La migrazione dei dati storici è un servizio su preventivo, calcolato in base al formato e alla dimensione dell'archivio, e copre Word, Excel e i formati esportabili dai gestionali più diffusi. Conviene farlo prima di iniziare, così lo storico delle pazienti è già dentro la cartella clinica dalla prima visita.",
   },
 ];
 
@@ -103,6 +105,12 @@ export default function DownloadPage() {
     posthog.capture("program_downloaded", { os: "windows", source: "ms_store" });
   };
 
+  // Su Mac non c'e un download diretto: l'evento traccia la richiesta di
+  // installazione assistita, non un'installazione avvenuta.
+  const handleMacRequestClick = () => {
+    posthog.capture("mac_install_requested", { os: "macos", source: "download_page" });
+  };
+
   return (
     <div className="pt-40 md:pt-48 pb-24 bg-gradient-to-b from-brand-50/40 to-background min-h-screen flex flex-col items-center">
       <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 flex flex-col items-center text-center">
@@ -112,7 +120,7 @@ export default function DownloadPage() {
         </h1>
         
         <p className="text-lg sm:text-xl text-gray-600 mb-12 leading-relaxed max-w-2xl px-4">
-          Scarica l&apos;applicazione per il tuo sistema operativo e trasforma il modo in cui gestisci il tuo ambulatorio. Installazione rapida e sicura.
+          Su Windows scarichi e installi in autonomia dal Microsoft Store. Su Mac ti seguiamo noi: una breve call e sei operativo, con gli stessi 30 giorni di prova.
         </p>
 
         {/* ── Download buttons ── */}
@@ -129,25 +137,34 @@ export default function DownloadPage() {
             Scarica per Windows
           </a>
 
-          {/* Mac – coming soon */}
+          {/* Mac – installazione assistita. Non e un download diretto: su Mac
+              seguiamo il primo avvio in call invece di lasciare un file. */}
           <div className="flex-1 relative">
-            <button 
-              disabled
-              className="w-full h-full bg-white text-gray-400 border-2 border-gray-100 px-6 py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-3 text-lg cursor-not-allowed"
+            <Link
+              href="/contatti"
+              onClick={handleMacRequestClick}
+              className="w-full h-full bg-white text-brand-800 border-2 border-brand-100 px-6 py-4 rounded-xl font-bold transition-all shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-brand-300 flex items-center justify-center gap-3 group text-lg"
             >
-              <Apple size={24} />
-              Scarica per Mac
-            </button>
-            <div className="absolute -top-3 -right-2 sm:-right-4 bg-gray-800 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg shadow-md border border-gray-700">
-              Disponibile nel 2026
+              <Apple size={24} className="group-hover:scale-110 transition-transform" />
+              Richiedi per Mac
+            </Link>
+            <div className="absolute -top-3 -right-2 sm:-right-4 bg-brand-700 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg shadow-md border border-brand-600">
+              Installazione assistita
             </div>
           </div>
         </div>
 
-        {/* Microsoft Store trust signal */}
-        <div className="flex items-center justify-center gap-2.5 mb-16 text-sm text-gray-400 font-medium">
-          <Image src="/ms-store-badge.svg" alt="" width={16} height={16} className="opacity-60" />
-          <span>Disponibile su <a href={MS_STORE_URL} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-brand-600 transition-colors">Microsoft Store</a> · Installazione sicura e verificata</span>
+        {/* Nota per i due sistemi: il segnale di fiducia dello store vale solo
+            per Windows, quindi la riga Mac dice cosa succede davvero. */}
+        <div className="flex flex-col items-center gap-2.5 mb-16 text-sm text-gray-400 font-medium">
+          <div className="flex items-center justify-center gap-2.5">
+            <Image src="/ms-store-badge.svg" alt="" width={16} height={16} className="opacity-60" />
+            <span>Windows: disponibile su <a href={MS_STORE_URL} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-brand-600 transition-colors">Microsoft Store</a> · Installazione sicura e verificata</span>
+          </div>
+          <div className="flex items-start justify-center gap-2.5 text-center px-4">
+            <Apple size={15} className="opacity-60 shrink-0 mt-[3px]" />
+            <span>Mac: la configuriamo insieme in una breve call, così parti già impostato · <Link href="/contatti" className="text-gray-500 hover:text-brand-600 transition-colors">prenota l&apos;installazione</Link></span>
+          </div>
         </div>
         {/* INTERACTIVE GALLERY */}
         <div className="w-full mt-6 sm:mt-10 relative">
@@ -162,7 +179,7 @@ export default function DownloadPage() {
             </li>
             <li className="flex items-center gap-3">
               <CheckCircle2 size={20} className="text-brand-500 shrink-0" />
-              <span className="font-semibold text-base sm:text-lg">90 giorni di prova</span>
+              <span className="font-semibold text-base sm:text-lg">30 giorni di prova</span>
             </li>
             <li className="flex items-center gap-3">
               <CheckCircle2 size={20} className="text-brand-500 shrink-0" />
@@ -200,7 +217,7 @@ export default function DownloadPage() {
         {/* ── Come installare ── */}
         <section className="w-full max-w-3xl mt-20 text-left">
           <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
-            Come installare Corioli in tre passaggi
+            Come installare Corioli su Windows in tre passaggi
           </h2>
           <ol className="flex flex-col gap-5 list-none p-0 m-0">
             {passaggi.map((passo, i) => (
@@ -222,10 +239,40 @@ export default function DownloadPage() {
               </li>
             ))}
           </ol>
+
+          {/* ── E su Mac ── */}
+          <div className="mt-8 bg-brand-50/60 border border-brand-100 rounded-2xl p-6 md:p-8">
+            <div className="flex gap-5">
+              <span className="shrink-0 w-9 h-9 rounded-xl bg-white text-brand-700 flex items-center justify-center border border-brand-100">
+                <Apple size={18} />
+              </span>
+              <div>
+                <h3 className="font-heading font-bold text-lg text-gray-900 mb-2">
+                  E su Mac?
+                </h3>
+                <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-4">
+                  La versione per macOS c&apos;è, ma non passa dal Mac App Store
+                  come quella per Windows passa dal Microsoft Store. Per questo
+                  non la lasciamo come file da scaricare e arrangiarsi:
+                  fissiamo una breve call con un nostro operatore e installiamo
+                  l&apos;applicazione insieme. Alla fine della chiamata sei
+                  operativo, con gli stessi 30 giorni di prova. Serve macOS 10.13
+                  o superiore.
+                </p>
+                <Link
+                  href="/contatti"
+                  onClick={handleMacRequestClick}
+                  className="inline-flex items-center gap-2 bg-brand-700 text-white px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-brand-800 transition-colors"
+                >
+                  Prenota l&apos;installazione su Mac
+                </Link>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* ── FAQ ── */}
-        <section className="w-full max-w-3xl mt-20 text-left">
+        <section className="w-full max-w-6xl mt-20 text-left">
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
@@ -235,21 +282,7 @@ export default function DownloadPage() {
           <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
             Domande frequenti sul download
           </h2>
-          <dl className="flex flex-col gap-4">
-            {downloadFaqs.map((item) => (
-              <div
-                key={item.question}
-                className="bg-white border border-gray-100 shadow-soft rounded-2xl p-6"
-              >
-                <dt className="font-heading font-bold text-lg text-gray-900 mb-2">
-                  {item.question}
-                </dt>
-                <dd className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                  {item.answer}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <FaqList items={downloadFaqs} />
         </section>
 
         {/* ── Link correlati ── */}
@@ -257,19 +290,22 @@ export default function DownloadPage() {
           aria-label="Link correlati"
           className="w-full max-w-3xl mt-16 pt-8 border-t border-gray-100 flex flex-wrap justify-center gap-6 text-sm font-medium text-gray-500"
         >
-          <Link href="/funzionalita" className="hover:text-brand-600 transition-colors">
+          <Link href="/funzionalita" className="inline-block py-1 hover:text-brand-600 transition-colors">
             Tutte le funzionalità
           </Link>
-          <Link href="/ginecologia" className="hover:text-brand-600 transition-colors">
+          <Link href="/ginecologia" className="inline-block py-1 hover:text-brand-600 transition-colors">
             Gestionale per ginecologi
           </Link>
-          <Link href="/prezzi" className="hover:text-brand-600 transition-colors">
+          <Link href="/cardiologia" className="inline-block py-1 hover:text-brand-600 transition-colors">
+            Gestionale per cardiologi
+          </Link>
+          <Link href="/prezzi" className="inline-block py-1 hover:text-brand-600 transition-colors">
             Prezzi e piani
           </Link>
-          <Link href="/gdpr" className="hover:text-brand-600 transition-colors">
+          <Link href="/gdpr" className="inline-block py-1 hover:text-brand-600 transition-colors">
             Sicurezza e GDPR
           </Link>
-          <Link href="/blog/backup-studio-medico-regola-3-2-1" className="hover:text-brand-600 transition-colors">
+          <Link href="/blog/backup-studio-medico-regola-3-2-1" className="inline-block py-1 hover:text-brand-600 transition-colors">
             Come impostare il backup
           </Link>
         </nav>

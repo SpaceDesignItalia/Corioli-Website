@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageOpenGraph } from "@/lib/seo";
 import Link from "next/link";
 import BlogGrid from "@/components/BlogGrid";
 import { posts, categories } from "./posts";
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
     canonical: "/blog",
   },
   openGraph: {
+    ...pageOpenGraph,
     title: "Blog Corioli | Gestionale medico e studio digitale",
     description: "Risorse per medici specialisti su software gestionale, cartella clinica elettronica, referti e sicurezza GDPR.",
     url: "https://corioli.it/blog",
