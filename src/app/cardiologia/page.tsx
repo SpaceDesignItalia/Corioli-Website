@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { pageOpenGraph } from "@/lib/seo";
+import { MS_STORE_URL } from "@/lib/ms-store";
 import Link from "next/link";
 import FaqList from "@/components/FaqList";
+import { MacRequestLink, RicordaEdizione, StoreLink } from "@/components/DownloadLinks";
 import {
   Activity,
   AlertTriangle,
+  Apple,
   ArrowRight,
-  Bell,
   Calculator,
-  CalendarClock,
   Check,
+  CheckCircle2,
   Clock,
   FileText,
   HeartPulse,
@@ -17,20 +20,13 @@ import {
   Users,
 } from "lucide-react";
 
-// Data di rilascio pubblico del modulo. Vive qui come costante perche compare
-// nel badge, nel corpo della pagina, nelle FAQ e nei dati strutturati: tenerla
-// in un punto solo evita che le quattro copie divergano quando si sposta.
-const RELEASE_LABEL = "ottobre 2026";
-// È annunciato solo il mese: availabilityStarts vuole una data, quindi il primo.
-const RELEASE_ISO = "2026-10-01";
-
 export const metadata: Metadata = {
   title: {
     absolute:
       "Gestionale per Cardiologi | Software Cardiologia e Refertazione ECG — Corioli",
   },
   description:
-    "Gestionale per cardiologi: cartella cardiologica, referto ECG ed ecocardiogramma, TC coronarica e indici calcolati. In arrivo a ottobre 2026.",
+    "Gestionale per cardiologi: cartella cardiologica, referto ECG ed ecocardiogramma, TC coronarica e indici calcolati. Scaricalo dal Microsoft Store.",
   keywords: [
     "gestionale per cardiologi",
     "software cardiologia",
@@ -55,7 +51,7 @@ export const metadata: Metadata = {
     title:
       "Gestionale per Cardiologi | Software Cardiologia e Refertazione ECG — Corioli",
     description:
-      "Cartella clinica cardiologica, referto ECG ed ecocardiogramma, TC coronarica e indici calcolati in un unico software desktop. In arrivo a ottobre 2026.",
+      "Cartella clinica cardiologica, referto ECG ed ecocardiogramma, TC coronarica e indici calcolati in un unico software desktop. Disponibile sul Microsoft Store, con 30 giorni di prova.",
     url: "https://corioli.it/cardiologia",
   },
 };
@@ -73,15 +69,15 @@ const softwareStructuredData = {
   applicationSubCategory: "Cartella clinica elettronica per cardiologia",
   operatingSystem: "Windows 10, Windows 11, macOS 10.13+",
   inLanguage: "it-IT",
+  // La scheda Store e il download vero: /download e solo la pagina che la
+  // presenta insieme a quella della ginecologia.
+  downloadUrl: MS_STORE_URL.cardiologia,
   offers: {
     "@type": "Offer",
     price: "30",
     priceCurrency: "EUR",
     url: "https://corioli.it/prezzi",
-    // PreOrder + availabilityStarts: il modulo esiste ma non e ancora
-    // distribuito. Dichiararlo InStock come le altre pagine sarebbe falso.
-    availability: "https://schema.org/PreOrder",
-    availabilityStarts: RELEASE_ISO,
+    availability: "https://schema.org/InStock",
     description: "Prova gratuita di 30 giorni, senza carta di credito",
   },
   description:
@@ -135,14 +131,14 @@ const breadcrumbStructuredData = {
 // le due copie devono restare allineate.
 const faqs = [
   {
-    question: "Quando esce il gestionale per cardiologi di Corioli?",
+    question: "Come si scarica il gestionale per cardiologi di Corioli?",
     answer:
-      "Il modulo di cardiologia viene rilasciato al pubblico a ottobre 2026. È già un'applicazione funzionante, sviluppata insieme a un team di cardiologi che ne dettano i requisiti clinici, e in questa fase stiamo chiudendo la distribuzione e la messa a punto del referto stampato. Chi si iscrive alla lista d'attesa dalla pagina contatti riceve il link di download appena disponibile.",
+      "Dal Microsoft Store: Corioli Cardiologia è un'applicazione per Windows 10 e Windows 11 che si installa in autonomia e si aggiorna da sola, con 30 giorni di prova gratuita senza carta di credito. Su Mac (macOS 10.13 o superiore) la installiamo insieme a te in una breve call. È un'applicazione distinta da Corioli per la ginecologia, sviluppata insieme a un team di cardiologi che ne dettano i requisiti clinici.",
   },
   {
     question: "Che cosa contiene la visita cardiologica in Corioli?",
     answer:
-      "Un solo tipo di visita, diviso in otto sezioni come si lavora in ambulatorio: anamnesi, descrizione del problema e dati clinici, esame obiettivo, elettrocardiogramma, ecocardiogramma, TC coronarica, accertamenti, conclusioni e terapia. L'anamnesi viene prima del motivo della visita, perché la storia del paziente va letta prima della domanda che lo ha portato lì. Nella colonna laterale restano sempre visibili parametri vitali, peso con BMI, esami di laboratorio e indici calcolati.",
+      "Un solo tipo di visita, come in ambulatorio. Alla prima apertura contiene l'essenziale: anamnesi, motivo della visita, esami ematochimici, terapia in atto, pressione arteriosa ed elettrocardiogramma, esame obiettivo, rischio cardiovascolare, accertamenti e conclusioni. Ecocardiogramma, TC coronarica, test ergometrico, Holter ECG e pressorio, Doppler dei tronchi sovraaortici, scompenso e fibrillazione atriale si accendono uno per uno dalle impostazioni. L'anamnesi viene prima del motivo della visita, perché la storia del paziente va letta prima della domanda che lo ha portato lì.",
   },
   {
     question: "Quali misure gestisce il modulo ecocardiogramma?",
@@ -196,8 +192,8 @@ const inBreve = [
       "Cardiologi liberi professionisti, ambulatori cardiologici e centri di diagnostica.",
   },
   {
-    label: "Disponibile da",
-    value: `${RELEASE_LABEL}, con prova gratuita di 30 giorni.`,
+    label: "Dove si scarica",
+    value: "Dal Microsoft Store, con prova gratuita di 30 giorni.",
   },
   {
     label: "Dove stanno i dati",
@@ -237,55 +233,115 @@ const painPoints = [
   },
 ];
 
-// Le otto sezioni della visita, nell'ordine reale dell'applicazione.
+// La visita nell'ordine del referto, come la trova il medico alla prima
+// apertura (README di CorioliGenerale, "La visita cardiologica"). Gli esami
+// strumentali non sono qui: sono moduli da accendere, elencati a parte.
 const sezioniVisita = [
   {
     numero: "01",
+    title: "Variabili cliniche",
+    description:
+      "Parametri vitali, peso con BMI e fattori di rischio: cambiano a ogni controllo, e restano a vista nella colonna laterale.",
+  },
+  {
+    numero: "02",
     title: "Anamnesi",
     description:
       "Campo unico oppure sezioni multiple configurabili — familiare, fisiologica, patologica, chirurgica, farmacologica, allergica, abitudini di vita — più le sezioni personalizzate dello studio. Sta prima del motivo della visita, sia in maschera che nel PDF.",
   },
   {
-    numero: "02",
-    title: "Descrizione del problema e dati clinici",
+    numero: "03",
+    title: "Motivo della visita",
     description:
       "La domanda che ha portato il paziente in ambulatorio, letta dopo la sua storia clinica e non prima.",
   },
   {
-    numero: "03",
-    title: "Esame obiettivo",
-    description:
-      "Rilievi della visita, con i modelli di refertazione riutilizzabili per le formulazioni ricorrenti.",
-  },
-  {
     numero: "04",
-    title: "Elettrocardiogramma",
+    title: "Esami ematochimici",
     description:
-      "Ritmo, PR, QRS, QT, asse elettrico, QTc calcolato secondo Bazett e referto testuale.",
+      "Raggruppati per ragionamento clinico: burden aterogeno, profilo infiammatorio, metabolismo glucidico con HOMA-IR, funzione renale con eGFR.",
   },
   {
     numero: "05",
-    title: "Ecocardiogramma",
+    title: "Terapia in atto",
     description:
-      "DTD e DTS, setto interventricolare, parete posteriore, frazione di eiezione, atrio sinistro, radice aortica, aorta ascendente, TAPSE, PAPs, E/A ed E/e', con referto.",
+      "Quella che il paziente assume all'arrivo, distinta dalla terapia consigliata. Alla visita nuova arriva copiata dall'ultima: si corregge solo quello che è cambiato.",
   },
   {
     numero: "06",
-    title: "TC coronarica",
+    title: "Pressione arteriosa ed elettrocardiogramma",
     description:
-      "Data e struttura dell'esame, calcium score con fascia Agatston, CAD-RADS con modificatori, burden di placca, segmenti SCCT, stenosi massima, FFR-TC e sintesi del referto radiologico. Il blocco è collassabile: i campi sono molti e servono di rado.",
+      "Pressione in clinostatismo e ortostatismo; ECG con ritmo, PR, QRS, QT, asse elettrico, QTc calcolato secondo Bazett e referto testuale.",
   },
   {
     numero: "07",
+    title: "Esame obiettivo",
+    description:
+      "Rilievi della visita, con i modelli di refertazione riutilizzabili per le formulazioni ricorrenti. Dopo, nel referto, escono gli esami strumentali accesi, una fascia ciascuno.",
+  },
+  {
+    numero: "08",
+    title: "Inquadramento clinico",
+    description:
+      "Il rischio cardiovascolare, con la classe dichiarata dal medico e l'obiettivo lipidico che ne discende; scompenso e fibrillazione atriale quando i loro moduli sono accesi.",
+  },
+  {
+    numero: "09",
     title: "Accertamenti",
     description:
       "Esami richiesti e in programma, con le richieste di esame generate come documento stampabile.",
   },
   {
-    numero: "08",
+    numero: "10",
     title: "Conclusioni e terapia",
     description:
       "Sintesi clinica, terapia e schemi dietetici fra i modelli di terapia: mediterranea, iposodica, ipercolesterolemia, ipertrigliceridemia, scompenso.",
+  },
+];
+
+// I moduli che partono spenti e si accendono dalle impostazioni
+// (utils/moduliVisita.ts di CorioliGenerale). Scompenso e fibrillazione
+// atriale l'app li segnala come ancora in revisione con il referente clinico:
+// la pagina lo dice allo stesso modo.
+const moduliOpzionali = [
+  {
+    title: "Ecocardiogramma",
+    description:
+      "DTD e DTS, setto interventricolare, parete posteriore, frazione di eiezione, atrio sinistro, radice aortica, aorta ascendente, TAPSE, PAPs, E/A ed E/e', con referto.",
+  },
+  {
+    title: "TC coronarica",
+    description:
+      "Calcium score con fascia Agatston, CAD-RADS con modificatori, burden di placca, segmenti SCCT, stenosi massima, FFR-TC e sintesi del referto radiologico.",
+  },
+  {
+    title: "Test ergometrico",
+    description: "Carico, METS e frequenza raggiunta al test da sforzo.",
+  },
+  {
+    title: "Holter ECG",
+    description: "Frequenze delle 24 ore, extrasistoli e pause.",
+  },
+  {
+    title: "Holter pressorio",
+    description: "Medie delle 24 ore, diurne e notturne, e calo notturno.",
+  },
+  {
+    title: "Doppler dei tronchi sovraaortici",
+    description:
+      "Spessore medio-intimale, stenosi massima con la sede, placche e assi vertebrali.",
+  },
+  {
+    title: "Scompenso cardiaco",
+    description:
+      "Fenotipo per frazione di eiezione, classe NYHA e NT-proBNP. Porta con sé l'ecocardiogramma, da cui legge la FE.",
+    inRevisione: true,
+  },
+  {
+    title: "Fibrillazione atriale",
+    description:
+      "CHA2DS2-VASc, HAS-BLED e clearance della creatinina secondo Cockcroft-Gault.",
+    inRevisione: true,
   },
 ];
 
@@ -306,13 +362,13 @@ const features = [
     icon: FileText,
     title: "Referto pensato per essere letto da un collega",
     description:
-      "Referto di visita, ricetta, certificato e richiesta di esame come documenti PDF. Le sezioni hanno un'intestazione su barra grigia e le misure stanno in tabella: con otto sezioni e una dozzina di valori per modulo, la riga continua separata da punti era illeggibile.",
+      "Referto di visita, ricetta, certificato e richiesta di esame come documenti PDF. Le sezioni hanno un'intestazione su barra grigia e le misure stanno in tabella: con una dozzina di valori per modulo, la riga continua separata da punti era illeggibile.",
   },
   {
     icon: HeartPulse,
     title: "Scompenso e fibrillazione atriale",
     description:
-      "Fenotipi dello scompenso aggiornati a ESC 2026 — dove HFmrEF non esiste più e il confine passa a una frazione di eiezione del 50% — con classe NYHA e NT-proBNP. Per la fibrillazione atriale CHA2DS2-VASc e HAS-BLED, che leggono ipertensione e diabete dal pannello dei fattori di rischio invece di richiederli di nuovo.",
+      "Fenotipi dello scompenso aggiornati a ESC 2026 — dove HFmrEF non esiste più e il confine passa a una frazione di eiezione del 50% — con classe NYHA e NT-proBNP. Per la fibrillazione atriale CHA2DS2-VASc e HAS-BLED, che leggono ipertensione e diabete dal pannello dei fattori di rischio invece di richiederli di nuovo, e la clearance di Cockcroft-Gault per la dose degli anticoagulanti diretti. Sono due moduli da accendere, che l'app segnala come ancora in revisione con il team di cardiologi.",
   },
   {
     icon: Users,
@@ -347,6 +403,11 @@ const indici = [
     nota: "Richiede età e sesso",
   },
   {
+    nome: "Clearance della creatinina",
+    formula: "Cockcroft-Gault, con il peso corporeo",
+    nota: "Nel modulo fibrillazione atriale, per la dose dei DOAC",
+  },
+  {
     nome: "HOMA-IR",
     formula: "(glicemia × insulinemia) / 405",
     nota: "Solo su prelievo a digiuno",
@@ -358,8 +419,8 @@ const indici = [
   },
   {
     nome: "Fascia calcium score",
-    formula: "Fasce Agatston 0 / 1-99 / 100-399 / ≥ 400",
-    nota: "Descrittiva, non diagnostica",
+    formula: "Fasce Agatston 0 / 1-99 / 100-299 / ≥ 300",
+    nota: "Soglia severa impostabile a 400; descrittiva, non diagnostica",
   },
   {
     nome: "CHA2DS2-VASc",
@@ -427,6 +488,7 @@ function ComparisonCell({ value }: { value: boolean | string }) {
 export default function CardiologiaPage() {
   return (
     <>
+      <RicordaEdizione edizione="cardiologia" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -453,7 +515,7 @@ export default function CardiologiaPage() {
         {/* Hero */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 mb-20 md:mb-28 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-xs font-bold mb-8 w-fit mx-auto uppercase tracking-wider">
-            <CalendarClock size={14} /> In arrivo · {RELEASE_LABEL}
+            <CheckCircle2 size={14} /> Disponibile sul Microsoft Store
           </div>
           <h1 className="font-heading text-4xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight text-balance">
             Gestionale per Cardiologi
@@ -466,12 +528,14 @@ export default function CardiologiaPage() {
             tuo studio.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/contatti"
-              className="inline-flex items-center gap-2 bg-brand-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-700 transition-colors shadow-soft hover:shadow-md text-base"
+            <StoreLink
+              edizione="cardiologia"
+              location="cardiologia_hero"
+              className="inline-flex items-center gap-3 bg-brand-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-700 transition-colors shadow-soft hover:shadow-md text-base"
             >
-              <Bell size={18} /> Avvisami al lancio
-            </Link>
+              <Image src="/ms-store-badge.svg" alt="Microsoft" width={20} height={20} />
+              Scarica per Windows
+            </StoreLink>
             <Link
               href="#funzionalita"
               className="inline-flex items-center gap-2 text-brand-700 px-6 py-4 rounded-xl font-semibold hover:text-brand-800 transition-colors"
@@ -479,6 +543,19 @@ export default function CardiologiaPage() {
               Guarda cosa contiene <ArrowRight size={18} />
             </Link>
           </div>
+          <p className="text-sm text-gray-500 mt-6 flex flex-col sm:flex-row sm:justify-center gap-1 sm:gap-2">
+            <span>30 giorni di prova gratuita, senza carta di credito</span>
+            <span aria-hidden="true" className="hidden sm:inline">·</span>
+            <span>
+              Su Mac{" "}
+              <Link
+                href="/download#cardiologia"
+                className="text-brand-600 hover:text-brand-700 underline underline-offset-2 decoration-brand-300"
+              >
+                con installazione assistita
+              </Link>
+            </span>
+          </p>
         </section>
 
         {/* In breve: risposte secche, utili a chi arriva da una ricerca o da un
@@ -536,17 +613,17 @@ export default function CardiologiaPage() {
           </div>
         </section>
 
-        {/* La visita in otto sezioni */}
+        {/* La visita: la parte sempre presente, poi i moduli da accendere */}
         <section id="funzionalita" className="py-20 md:py-28 scroll-mt-32">
           <div className="max-w-5xl mx-auto px-6 md:px-12">
             <div className="text-center mb-16">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                La visita cardiologica in otto sezioni
+                La visita cardiologica: essenziale all'apertura, completa quando serve
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
-                Un solo tipo di visita, come in ambulatorio. L'ordine delle
-                sezioni è quello chiesto dal cardiologo che ha dettato i
-                requisiti del modulo, non quello comodo al software.
+                Un solo tipo di visita, come in ambulatorio, nell'ordine in cui
+                esce nel referto. L'ordine e i contenuti li ha dettati un team
+                di cardiologi, non la comodità del software.
               </p>
             </div>
             <ol className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -572,7 +649,40 @@ export default function CardiologiaPage() {
                 </li>
               ))}
             </ol>
-            <p className="text-sm text-gray-500 leading-relaxed mt-8 max-w-2xl mx-auto text-center">
+
+            <div className="mt-16">
+              <h3 className="font-heading text-2xl font-bold text-gray-900 mb-3 text-center">
+                Moduli da accendere quando servono
+              </h3>
+              <p className="text-gray-600 max-w-2xl mx-auto text-center mb-8">
+                Partono spenti e si accendono uno per uno dalle impostazioni: la
+                maschera resta corta per le visite che si refertano in poche
+                righe. Un modulo spento ma compilato in una visita passata
+                resta visibile in quella visita.
+              </p>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {moduliOpzionali.map((modulo) => (
+                  <li
+                    key={modulo.title}
+                    className="bg-gray-50 rounded-2xl border border-gray-100 p-5"
+                  >
+                    <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                      <h4 className="font-bold text-gray-900">{modulo.title}</h4>
+                      {modulo.inRevisione ? (
+                        <span className="text-xs font-semibold text-amber-800 bg-amber-50 border border-amber-200 rounded-full px-2.5 py-0.5">
+                          In revisione
+                        </span>
+                      ) : null}
+                    </div>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      {modulo.description}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <p className="text-sm text-gray-500 leading-relaxed mt-10 max-w-2xl mx-auto text-center">
               Nella colonna di sinistra restano sempre a vista i parametri vitali
               (pressione arteriosa, frequenza cardiaca, fumo), il peso con il
               BMI, gli esami di laboratorio con gli indici calcolati e le
@@ -737,7 +847,7 @@ export default function CardiologiaPage() {
           </div>
         </section>
 
-        {/* Lista d'attesa */}
+        {/* Download */}
         <section className="py-20 md:py-28">
           <div className="max-w-4xl mx-auto px-6 md:px-12">
             <div className="bg-brand-900 rounded-3xl p-10 md:p-14 text-center relative overflow-hidden">
@@ -747,22 +857,33 @@ export default function CardiologiaPage() {
                   <HeartPulse size={28} className="text-white" />
                 </div>
                 <h2 className="font-heading font-bold text-3xl md:text-4xl text-white mb-4">
-                  Disponibile da {RELEASE_LABEL}
+                  Prova Corioli Cardiologia per 30 giorni
                 </h2>
                 <p className="text-brand-100 text-lg mb-2 max-w-xl mx-auto">
-                  Lasciaci la tua email e ti scriviamo il giorno del rilascio,
-                  con il link di download e i 30 giorni di prova gratuita già
-                  attivi. Nessuna carta di credito, nessun vincolo.
+                  Scaricala dal Microsoft Store e usala in ambulatorio senza
+                  carta di credito e senza vincoli. Su Mac la installiamo
+                  insieme a te in una breve call.
                 </p>
                 <p className="text-brand-200 text-sm mb-10">
                   30€/mese, tutto incluso · disdici quando vuoi
                 </p>
-                <Link
-                  href="/contatti"
-                  className="inline-flex items-center gap-2 bg-white text-brand-900 px-8 py-4 rounded-xl font-bold hover:bg-brand-50 transition-colors shadow-md text-base"
-                >
-                  Iscriviti alla lista d'attesa <ArrowRight size={20} />
-                </Link>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <StoreLink
+                    edizione="cardiologia"
+                    location="cardiologia_cta"
+                    className="inline-flex items-center gap-3 bg-white text-brand-900 px-8 py-4 rounded-xl font-bold hover:bg-brand-50 transition-colors shadow-md text-base"
+                  >
+                    <Image src="/ms-store-badge.svg" alt="Microsoft" width={20} height={20} />
+                    Scarica per Windows
+                  </StoreLink>
+                  <MacRequestLink
+                    edizione="cardiologia"
+                    location="cardiologia_cta"
+                    className="inline-flex items-center gap-2 border border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition-colors text-base"
+                  >
+                    <Apple size={20} /> Richiedi per Mac
+                  </MacRequestLink>
+                </div>
               </div>
             </div>
           </div>
@@ -816,6 +937,18 @@ export default function CardiologiaPage() {
               className="inline-block py-1 hover:text-brand-600 transition-colors"
             >
               Come scegliere un gestionale cardiologico
+            </Link>
+            <Link
+              href="/blog/calcium-score-cad-rads-tc-coronarica"
+              className="inline-block py-1 hover:text-brand-600 transition-colors"
+            >
+              Calcium score e CAD-RADS 2.0
+            </Link>
+            <Link
+              href="/blog/egfr-ckd-epi-cockcroft-gault-doac"
+              className="inline-block py-1 hover:text-brand-600 transition-colors"
+            >
+              eGFR o Cockcroft-Gault
             </Link>
             <Link href="/gdpr" className="inline-block py-1 hover:text-brand-600 transition-colors">
               Sicurezza e GDPR

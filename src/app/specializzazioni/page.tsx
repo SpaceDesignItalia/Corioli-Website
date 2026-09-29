@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { pageOpenGraph } from "@/lib/seo";
 import Link from "next/link";
-import { ArrowRight, ChevronRight, Bell } from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Gestionale medico per ginecologia, cardiologia e pediatria",
-  description: "Le edizioni di Corioli per specialità: ginecologia e ostetricia disponibile, cardiologia da ottobre 2026, pediatria in sviluppo. Cosa contiene ciascuna.",
+  description: "Le edizioni di Corioli per specialità: ginecologia e ostetricia e cardiologia disponibili, pediatria in sviluppo. Cosa contiene ciascuna.",
   alternates: {
     canonical: "/specializzazioni",
   },
@@ -48,7 +48,7 @@ const specializzazioniStructuredData = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Cardiologia — in arrivo a ottobre 2026",
+          name: "Cardiologia — disponibile",
           url: "https://corioli.it/cardiologia",
         },
         {
@@ -142,8 +142,8 @@ export default function SpecializzazioniPage() {
         {/* Cardiologia */}
         <div className="bg-white rounded-3xl border border-gray-100 shadow-card flex flex-col md:flex-row overflow-hidden hover:shadow-xl transition-shadow duration-300">
           <div className="md:w-[55%] p-10 md:p-12 flex flex-col justify-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-100 text-amber-700 text-xs font-bold mb-6 w-fit uppercase tracking-wide">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span> In arrivo · ottobre 2026
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 border border-green-100 text-green-700 text-xs font-bold mb-6 w-fit">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span> ATTIVO ORA
             </div>
             <h2 className="font-heading text-3xl font-bold text-gray-900 mb-4">
               <Link href="/cardiologia" className="hover:text-brand-600 transition-colors">
@@ -151,7 +151,7 @@ export default function SpecializzazioniPage() {
               </Link>
             </h2>
             <p className="text-gray-600 mb-8 leading-relaxed">
-              Un'edizione dedicata all'ambulatorio cardiologico, sviluppata insieme a un team di cardiologi che ne dettano i requisiti clinici. La visita è divisa in otto sezioni e i moduli strumentali sono misure vere, non campi di testo libero.
+              Un'edizione dedicata all'ambulatorio cardiologico, sviluppata insieme a un team di cardiologi che ne dettano i requisiti clinici. La visita parte essenziale e gli esami strumentali si accendono quando servono: sono misure vere, non campi di testo libero.
             </p>
             <ul className="flex flex-col gap-3 text-sm font-medium text-gray-700 mb-8">
               <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> Elettrocardiogramma, ecocardiogramma e TC coronarica</li>
@@ -162,8 +162,8 @@ export default function SpecializzazioniPage() {
               <Link href="/cardiologia" className="inline-flex items-center gap-2 bg-brand-50 text-brand-700 px-6 py-3 rounded-xl font-semibold hover:bg-brand-100 transition-colors w-fit">
                 Scopri il gestionale per cardiologi <ArrowRight size={18} />
               </Link>
-              <Link href="/contatti" className="inline-flex items-center gap-2 text-brand-700 px-4 py-3 rounded-xl font-semibold hover:text-brand-800 transition-colors w-fit">
-                <Bell size={16} /> Avvisami al lancio
+              <Link href="/download#cardiologia" className="inline-flex items-center gap-2 text-brand-700 px-4 py-3 rounded-xl font-semibold hover:text-brand-800 transition-colors w-fit">
+                Prova gratuita <ChevronRight size={18} />
               </Link>
             </div>
           </div>

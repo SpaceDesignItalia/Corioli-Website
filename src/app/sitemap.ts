@@ -25,7 +25,7 @@ const staticPages: StaticEntry[] = [
   { path: '/cardiologia', changeFrequency: 'monthly', priority: 0.9 },
   { path: '/prezzi', changeFrequency: 'monthly', priority: 0.8 },
   // Allineata a PAGE_UPDATED in src/app/chi-siamo/page.tsx.
-  { path: '/chi-siamo', changeFrequency: 'monthly', priority: 0.7, lastModified: '2026-09-23' },
+  { path: '/chi-siamo', changeFrequency: 'monthly', priority: 0.7, lastModified: '2026-09-29' },
   { path: '/blog', changeFrequency: 'weekly', priority: 0.7 },
   { path: '/glossario', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/contatti', changeFrequency: 'monthly', priority: 0.8 },

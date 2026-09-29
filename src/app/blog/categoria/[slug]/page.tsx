@@ -4,6 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import BlogGrid from "@/components/BlogGrid";
+import { RicordaEdizione } from "@/components/DownloadLinks";
+import { edizioneDaCategoria } from "@/lib/ms-store";
 import {
   posts,
   categories,
@@ -112,8 +114,11 @@ export default async function CategoriaPage({
     ],
   };
 
+  const edizione = edizioneDaCategoria(category.name);
+
   return (
     <div className="pt-32 pb-24 bg-background min-h-screen">
+      {edizione ? <RicordaEdizione edizione={edizione} /> : null}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

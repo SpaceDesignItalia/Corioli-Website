@@ -4,6 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import FaqList from "@/components/FaqList";
+import { RicordaEdizione } from "@/components/DownloadLinks";
+import { edizioneDaCategoria } from "@/lib/ms-store";
 import { SITE_URL, pageOpenGraph } from "@/lib/seo";
 import { posts, postsBySlug, categorySlug } from "../posts";
 
@@ -207,8 +209,11 @@ export default async function BlogPostPage({
     ],
   };
 
+  const edizione = edizioneDaCategoria(post.category);
+
   return (
     <article className="pt-32 pb-24 bg-white min-h-screen">
+      {edizione ? <RicordaEdizione edizione={edizione} /> : null}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -410,7 +415,7 @@ export default async function BlogPostPage({
               </h2>
               <ol className="flex flex-col gap-2 pl-5 m-0 list-decimal text-sm text-gray-600 leading-relaxed">
                 {post.sources.map((source) => (
-                  <li key={source.title} className="m-0 pl-1">
+                  <li key={source.title} className="m-0 pl-1 [overflow-wrap:anywhere]">
                     {source.url ? (
                       <a
                         href={source.url}

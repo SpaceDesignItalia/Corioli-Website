@@ -49,7 +49,8 @@ Moduli per specializzazione:
   con percentili di Hadlock, stima del peso fetale con Hadlock I-IV, curve di
   crescita e flussimetria dell'arteria ombelicale (PI e IR con percentile per
   epoca gestazionale). Pagina: ${BASE}/ginecologia
-- Cardiologia — rilascio pubblico a ottobre 2026. Ogni visita comprende
+- Cardiologia — disponibile sul Microsoft Store come Corioli Cardiologia,
+  applicazione distinta da quella di ginecologia. Ogni visita comprende
   variabili cliniche, anamnesi, motivo della visita, esami ematochimici,
   terapia in atto, pressione arteriosa, elettrocardiogramma (con QTc secondo
   Bazett), esame obiettivo, accertamenti e conclusioni; ecocardiogramma

@@ -20,7 +20,7 @@ import {
 
 // Revisione di questa pagina: tenerla allineata al lastModified di
 // /chi-siamo in src/app/sitemap.ts, come per STATIC_PAGES_UPDATED.
-const PAGE_UPDATED = "2026-09-23";
+const PAGE_UPDATED = "2026-09-29";
 
 export const metadata: Metadata = {
   title: "Chi siamo",
@@ -121,10 +121,10 @@ const editions = [
   },
   {
     name: "Cardiologia",
-    status: "Da ottobre 2026",
+    status: "Disponibile",
     text: "Elettrocardiogramma, ecocardiogramma e TC coronarica, con indici calcolati di supporto.",
     href: "/cardiologia",
-    highlight: false,
+    highlight: true,
   },
   {
     name: "Pediatria",

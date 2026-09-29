@@ -69,6 +69,260 @@ export type BlogPost = {
 // Ordine: dal più recente al meno recente.
 export const posts: BlogPost[] = [
   {
+    slug: "corioli-cardiologia-disponibile",
+    title: "Corioli Cardiologia è disponibile: cosa contiene e come provarla",
+    description:
+      "Il gestionale per l'ambulatorio cardiologico si scarica dal Microsoft Store: com'è fatta la visita, quali moduli si accendono, cosa resta volutamente spento e come iniziare i 30 giorni di prova.",
+    excerpt:
+      "Corioli Cardiologia è sul Microsoft Store, con 30 giorni di prova gratuita. La visita, i moduli strumentali da accendere, gli indici con la formula in chiaro e quello che abbiamo scelto di lasciare spento.",
+    date: "29 Settembre 2026",
+    isoDate: "2026-09-29",
+    category: "Cardiologia",
+    lead: "Corioli Cardiologia si scarica dal Microsoft Store. È un'applicazione a sé, con il suo archivio, costruita insieme a un team di cardiologi per refertare in ambulatorio: una visita che parte essenziale e si allunga solo quando serve, misure in campi strutturati invece che in testo libero, indici calcolati che dichiarano sempre la formula da cui vengono. Qui trovi che cosa contiene, che cosa abbiamo scelto di lasciare spento e come iniziare la prova.",
+    keyPoints: [
+      "Corioli Cardiologia è un'applicazione desktop per Windows 10 e Windows 11 e si installa dal Microsoft Store; su Mac, con macOS 10.13 o superiore, la installiamo insieme al medico in una breve call.",
+      "La prova gratuita dura 30 giorni, senza carta di credito; poi il prezzo è lo stesso di Corioli per la ginecologia, 30 euro al mese tutto incluso.",
+      "Alla prima apertura la visita è quella essenziale; ecocardiogramma, TC coronarica, test ergometrico, Holter ECG e pressorio, Doppler dei tronchi sovraaortici, scompenso e fibrillazione atriale si accendono uno per uno dalle impostazioni.",
+      "QTc, eGFR, LDL, HOMA-IR, CHA2DS2-VASc e HAS-BLED compaiono con la formula accanto e non vengono mai scritti da soli nel referto.",
+      "I dati restano sul computer dello studio, in un archivio separato da quello di Corioli per la ginecologia: le due applicazioni convivono sullo stesso computer.",
+    ],
+    sections: [
+      {
+        title: "Un'applicazione a sé, con il suo archivio",
+        body: "Corioli Cardiologia nasce dalla stessa base di Corioli, il gestionale che usano i ginecologi, ma non è un modulo aggiunto: è un'applicazione distinta, con la sua scheda sul Microsoft Store e il suo archivio. Dentro non ci sono le visite ostetriche e i calcolatori fetali, ci sono i moduli strumentali e gli indici della cardiologia.\n\nLa separazione è voluta. Un ambulatorio cardiologico non ha bisogno di vedere una cartella ostetrica, e uno studio che le usa tutte e due può installarle sullo stesso computer: gli archivi restano distinti e le due applicazioni non interferiscono. Il prezzo è lo stesso, 30 euro al mese tutto incluso, senza moduli a pagamento.\n\nI requisiti clinici li detta un team di cardiologi: l'ordine delle sezioni, che cosa entra nel referto e che cosa resta nella maschera, quali soglie usare e quali calcoli mostrare. Il software si adegua al modo in cui si referta, non il contrario.",
+      },
+      {
+        title: "La visita: essenziale all'apertura, completa quando serve",
+        body: "Il grosso delle visite cardiologiche si referta in poche righe, e una maschera che apre subito tutti i moduli è una maschera che non si usa. Per questo, alla prima apertura, la visita contiene l'essenziale: anamnesi, motivo della visita, terapia in atto, esame obiettivo, pressione arteriosa, elettrocardiogramma, esami di laboratorio, rischio cardiovascolare, accertamenti e conclusioni.\n\nTutto il resto esiste e si accende uno per uno dalle impostazioni, nella scheda dei moduli della visita: ecocardiogramma, TC coronarica, test ergometrico, Holter ECG, Holter pressorio, ecocolorDoppler dei tronchi sovraaortici, scompenso e fibrillazione atriale. Un modulo spento sparisce dalla maschera ma non dai dati: una visita in archivio che lo aveva compilato continua a mostrarlo.\n\nFra un controllo e l'altro la terapia in atto e i fattori di rischio di solito non cambiano: alla visita nuova arrivano copiati dall'ultima, e si corregge solo quello che è cambiato. Nella colonna laterale restano a vista parametri vitali, peso con BMI, fattori di rischio ed esami di laboratorio, raggruppati per ragionamento clinico: burden aterogeno, profilo infiammatorio, metabolismo glucidico, funzione renale.",
+      },
+      {
+        title: "Il referto che esce dallo studio",
+        body: "Oltre al referto di visita, l'applicazione produce ricetta, certificato e richiesta di esame, tutti in PDF con l'intestazione dello studio. Nel referto di visita l'anamnesi viene prima del motivo, gli esami ematochimici prima della terapia in atto, poi pressione ed elettrocardiogramma, l'esame obiettivo e gli altri esami strumentali, uno per fascia.\n\nOgni esame strumentale è reso come una tabella, perché con una dozzina di misure per modulo la riga continua separata da punti diventava illeggibile. Il grassetto segnala solo i valori fuori dai limiti di riferimento, senza giudizi scritti accanto: a leggere il foglio è un collega. Le pagine sono numerate e riportano in testa paziente e medico; le immagini allegate, come i tracciati ECG o Holter, sono numerate anche loro.\n\nNei campi di testo si può mettere in grassetto una parola o una frase con Ctrl+B o con il tasto destro, per far risaltare ciò che conta senza dover impaginare un documento.",
+      },
+      {
+        title: "Indici calcolati, e quello che resta spento",
+        body: "QTc secondo Bazett, eGFR con CKD-EPI 2021 e stadio KDIGO, LDL secondo Friedewald, colesterolo non-HDL, HOMA-IR, fascia del calcium score, CHA2DS2-VASc e HAS-BLED compaiono in riquadri separati, ciascuno con la formula di provenienza e i limiti che applica. Nessuno viene scritto in automatico nel referto: sono suggerimenti, e l'interpretazione resta del medico. Quando manca un dato necessario, per esempio il sesso del paziente per l'eGFR, il calcolo si ferma e dice che cosa manca invece di rispondere su un valore inventato.\n\nAlcune cose sono implementate ma volutamente spente. Lo SCORE2, lo SCORE2-OP e i percentili MESA del calcium score restano disattivati finché coefficienti e tabelle di riferimento non saranno verificati sulla fonte primaria: l'applicazione mostra il motivo invece di un numero potenzialmente sbagliato. Il prontuario resta spento finché il team di cardiologi non ne valida le schede, e i moduli di scompenso e fibrillazione atriale, che si possono accendere, sono segnalati come ancora in revisione.\n\nCorioli Cardiologia non è un dispositivo medico certificato: gli indici non pongono diagnosi e non propongono soglie terapeutiche.",
+      },
+      {
+        title: "Come si installa e come si prova",
+        body: "Su Windows 10 e Windows 11 l'installazione passa dal Microsoft Store: il pacchetto è verificato dallo store e gli aggiornamenti arrivano in automatico. Nella pagina download del sito scegli la cardiologia, e il pulsante apre la scheda giusta. Su Mac l'applicazione c'è, ma non passa dal Mac App Store: la installiamo insieme in una breve call con un nostro operatore.\n\nAl primo avvio imposti i dati dello studio e l'intestazione dei referti, poi accendi i moduli che usi davvero. I dati stanno sul computer dello studio: non esiste un archivio pazienti sui nostri server, e verso l'esterno passano solo la telemetria della licenza e la chat di assistenza. L'applicazione fa da sola copie di sicurezza sullo stesso disco; una copia da conservare altrove, per esempio su un disco esterno, resta una responsabilità dello studio.\n\nLa prova dura 30 giorni, senza carta di credito e senza vincoli. Alla fine decidi se attivare il piano: se non lo fai, non ti viene addebitato nulla.",
+      },
+    ],
+    faq: [
+      {
+        question: "Dove si scarica Corioli Cardiologia?",
+        answer:
+          "Dal Microsoft Store, per Windows 10 e Windows 11. Nella pagina download del sito di Corioli si sceglie la specialità e il pulsante apre la scheda dell'applicazione. Su Mac, con macOS 10.13 o superiore, l'installazione si fa insieme a un operatore in una breve call.",
+      },
+      {
+        question: "Corioli Cardiologia e Corioli per la ginecologia sono la stessa applicazione?",
+        answer:
+          "No. Sono due applicazioni distinte, ciascuna con la sua scheda sul Microsoft Store e il suo archivio. Possono convivere sullo stesso computer senza interferire, e costano uguale: 30 euro al mese, tutto incluso.",
+      },
+      {
+        question: "Serve internet per usare Corioli Cardiologia?",
+        answer:
+          "Serve per scaricarla, per gli aggiornamenti, per la licenza e per la chat di assistenza. Il lavoro clinico no: visite, calcoli e referti funzionano sul computer dello studio anche quando la connessione non c'è, perché i dati sono salvati lì.",
+      },
+      {
+        question: "Cosa succede alla fine dei 30 giorni di prova?",
+        answer:
+          "Decidi se attivare il piano da 30 euro al mese. La prova non richiede la carta di credito, quindi se non lo attivi non ti viene addebitato nulla.",
+      },
+    ],
+  },
+  {
+    slug: "calcium-score-cad-rads-tc-coronarica",
+    title: "Calcium score e CAD-RADS 2.0: come si leggono nel referto della TC coronarica",
+    description:
+      "Come si calcola il punteggio di Agatston, le fasce di calcificazione, cosa non dice un calcium score zero, le categorie CAD-RADS 2.0 con burden di placca e modificatori, e cosa riportare nel referto.",
+    excerpt:
+      "Due numeri della stessa indagine che rispondono a domande diverse: quanto calcio c'è nelle coronarie e quanto è ristretto il lume. Agatston, fasce, CAD-RADS 2.0, burden di placca e modificatori, con gli errori di lettura più comuni.",
+    date: "29 Settembre 2026",
+    isoDate: "2026-09-29",
+    category: "Cardiologia",
+    lead: "Nel referto di una TC coronarica compaiono spesso due numeri che sembrano dire la stessa cosa e non la dicono. Il calcium score misura quanto calcio c'è nelle pareti delle coronarie e viene da una scansione senza mezzo di contrasto; la categoria CAD-RADS descrive quanto è ristretto il lume nel punto peggiore e viene dall'angio-TC. Qui trovi come si calcolano, come si leggono le fasce, che cosa ha aggiunto CAD-RADS 2.0 e che cosa conviene riportare nel referto cardiologico.",
+    keyPoints: [
+      "Il punteggio di Agatston si calcola su una TC senza contrasto: ogni lesione calcifica sopra i 130 HU ha un'area che viene moltiplicata per un fattore da 1 a 4, scelto in base al picco di densità, e i prodotti di tutte le lesioni si sommano.",
+      "Nel referto il valore si descrive di solito per fasce: 0, 1-99, 100-299 e 300 o più; alcuni centri pongono a 400 la soglia della calcificazione severa, quindi va scritto quale soglia si è applicata.",
+      "Un calcium score di 0 indica in prevenzione un rischio di eventi basso, ma non esclude una placca non calcifica né, in un paziente con sintomi, una stenosi.",
+      "CAD-RADS 2.0 classifica la stenosi massima da 0, nessuna placca, a 5, occlusione totale; 4A indica una stenosi del 70-99% in uno o due vasi, 4B un tronco comune al 50% o più o una malattia trivasale al 70% o più.",
+      "Dalla versione 2.0 la categoria è seguita dal burden di placca, da P1 a P4, e da sei possibili modificatori: N, HRP, I, S, G ed E.",
+    ],
+    sections: [
+      {
+        title: "Due esami, due domande",
+        body: "Il calcium score e l'angio-TC coronarica si fanno spesso nella stessa seduta, ma sono due acquisizioni diverse. La prima è una scansione sincronizzata con l'elettrocardiogramma, senza mezzo di contrasto e a bassa dose di radiazioni: mostra solo il calcio, che nelle coronarie è un marcatore di aterosclerosi. La seconda si esegue dopo l'iniezione del contrasto e mostra il lume, le placche calcifiche e quelle non calcifiche, e quindi le stenosi.\n\nDa qui la regola che attraversa tutto il resto: il calcium score misura il carico di aterosclerosi calcifica, non il grado di stenosi. Un punteggio alto dice che nelle coronarie c'è molto calcio, non che una coronaria è chiusa; un punteggio basso non garantisce che il lume sia libero. La stenosi la descrive la categoria CAD-RADS, che si ottiene solo dall'angio-TC.\n\nLe due informazioni servono a decisioni diverse. Il calcium score è soprattutto uno strumento di stratificazione del rischio in prevenzione; l'angio-TC serve a valutare un paziente con sintomi o con il sospetto di una malattia coronarica ostruttiva.",
+      },
+      {
+        title: "Come si calcola il punteggio di Agatston",
+        body: "Il metodo è quello descritto da Agatston nel 1990. Sulle immagini si individuano le lesioni calcifiche delle coronarie, cioè le aree con una densità di almeno 130 unità Hounsfield e una superficie di almeno 1 mm². Per ogni lesione si misura l'area e si guarda il picco di densità, che stabilisce un fattore di peso: 1 fra 130 e 199 HU, 2 fra 200 e 299, 3 fra 300 e 399, 4 da 400 HU in su. Il punteggio della lesione è l'area moltiplicata per il fattore, e il calcium score è la somma di tutte le lesioni in tutte le sezioni.\n\nUn esempio: una lesione di 6 mm² con un picco di 250 HU vale 6 × 2 = 12; una di 10 mm² con un picco di 450 HU vale 10 × 4 = 40. Se nelle coronarie ci sono solo queste due, il calcium score è 52.\n\nIl risultato si esprime in unità Agatston e va letto rispetto alla persona: lo stesso valore di 150 non ha lo stesso peso a 45 e a 75 anni. Per questo accanto al numero assoluto si riporta talvolta il percentile per età, sesso ed etnia, ricavato da grandi coorti come lo studio MESA.",
+      },
+      {
+        title: "Le fasce di lettura e cosa ne fanno le linee guida",
+        body: "Nel referto il calcium score si descrive di solito per fasce: 0, nessuna calcificazione; da 1 a 99, calcificazione lieve; da 100 a 299, moderata; da 300 in su, severa. I centri non concordano sull'ultima soglia, che alcuni pongono a 400. Non è un dettaglio: un valore di 350 finisce in due categorie diverse a seconda del centro, e il referto dovrebbe dire quale soglia ha applicato. Il valore si usa come è stato misurato, senza arrotondamenti: un 99 e un 101 cadono in due fasce diverse.\n\nLe linee guida europee non propongono il calcium score come test di screening per tutti. L'aggiornamento 2025 delle linee guida ESC/EAS sulle dislipidemie indica però che, quando è stato misurato, un calcium score aumentato va considerato come modificatore del rischio nelle persone a rischio moderato o vicine a una soglia di trattamento, per riclassificarle.\n\nLe linee guida americane ACC/AHA del 2026 sulle dislipidemie lo usano in modo più esplicito per chi è a rischio intermedio. Con un calcium score di 0, e in assenza di condizioni ad alto rischio come l'ipercolesterolemia familiare o grave, il diabete dopo i 40 anni, il fumo o una forte familiarità per malattia coronarica precoce, considerano ragionevole rimandare la terapia ipolipemizzante e ripetere l'esame dopo 3-7 anni; con un valore superiore a 0 raccomandano di iniziarla, in particolare da 100 unità in su o sopra il 75° percentile. Sono indicazioni di prevenzione, da leggere nel quadro clinico complessivo.",
+      },
+      {
+        title: "Il limite del calcium score zero",
+        body: "Un calcium score di 0 è un'informazione rassicurante in prevenzione, ed è per questo che le linee guida americane lo usano per rimandare la terapia in alcuni pazienti. Ma zero calcio non significa zero placca. Le placche non calcifiche, più frequenti nei pazienti giovani, non si vedono nella scansione senza contrasto e possono anche restringere il lume.\n\nNella pratica il rischio è usare un calcium score di 0 per chiudere il discorso in un paziente che ha sintomi. In quel caso la domanda non è quanto calcio c'è, ma se c'è una stenosi, e a quella rispondono l'angio-TC o un test funzionale.\n\nAnche il confronto nel tempo va fatto con attenzione. La progressione si legge sui valori realmente misurati, esame per esame, senza riempire gli intervalli. E il passaggio da 0 a 40 non è un aumento del 100% né di qualsiasi altra percentuale, perché il punto di partenza è zero: è una variazione che si descrive in unità assolute.",
+      },
+      {
+        title: "CAD-RADS 2.0: le categorie di stenosi",
+        body: "CAD-RADS è il sistema di refertazione standardizzato dell'angio-TC coronarica, promosso da SCCT, ACC, ACR e NASCI. La versione 2.0, del 2022, ha mantenuto l'impianto originale: una categoria per paziente, assegnata in base alla stenosi più grave ed espressa come riduzione percentuale del diametro del lume.\n\nLe categorie sono queste. CAD-RADS 0: nessuna placca e nessuna stenosi. CAD-RADS 1: stenosi minima, dall'1 al 24%, oppure placca senza stenosi. CAD-RADS 2: stenosi lieve, dal 25 al 49%. CAD-RADS 3: stenosi moderata, dal 50 al 69%. CAD-RADS 4A: stenosi severa, dal 70 al 99%, in uno o due vasi. CAD-RADS 4B: stenosi del tronco comune del 50% o più, oppure malattia trivasale con stenosi del 70% o più. CAD-RADS 5: occlusione totale. CAD-RADS N indica un esame non diagnostico.\n\nPoiché lo 0 significa assenza di placca, un paziente con un calcium score superiore a 0 non può avere una CAD-RADS 0: se c'è calcio, c'è almeno una placca. È un controllo di coerenza semplice, utile quando i due valori arrivano da referti diversi.",
+      },
+      {
+        title: "Burden di placca e modificatori",
+        body: "La novità principale della versione 2.0 è il burden di placca, che descrive quanta aterosclerosi c'è nel complesso, a prescindere dalla stenosi peggiore. Va da P1, lieve, a P4, esteso, e si ricava in tre modi: dal calcium score (P1 da 1 a 100, P2 da 101 a 300, P3 da 301 a 999, P4 oltre 1000), dal numero di segmenti coronarici con placca, il segment involvement score (P1 fino a 2, P2 da 3 a 4, P3 da 5 a 7, P4 da 8 in su), oppure con una stima visiva. Due pazienti con la stessa stenosi massima del 40% possono essere uno P1 e l'altro P4, e dal punto di vista del rischio non sono la stessa persona. Le soglie del burden non coincidono con le fasce di lettura del calcium score viste sopra: sono due classificazioni diverse, e nel referto conviene non mescolarle.\n\nAlla categoria e al burden si aggiungono, quando servono, sei modificatori. N segnala segmenti non valutabili. HRP indica una placca ad alto rischio, cioè con almeno due fra rimodellamento positivo, bassa attenuazione, calcificazioni puntiformi e segno dell'anello (napkin-ring), e ha sostituito il vecchio modificatore V. I riporta l'esito di una valutazione dell'ischemia con FFR-TC o perfusione TC: I+ se presente, I- se assente, I± se dubbia. S indica uno stent, G un bypass, E un reperto non aterosclerotico, come un'anomalia coronarica o una dissezione.\n\nLa sigla si scrive nell'ordine categoria, burden e modificatori, separati da una barra: per esempio CAD-RADS 3/P2/HRP, oppure CAD-RADS 4A/P3/I+. Letta così, una riga sola dice quanto è stretto il punto peggiore, quanta placca c'è in tutto e se c'è qualcosa che cambia la gestione.",
+      },
+      {
+        title: "Cosa riportare nel referto cardiologico",
+        body: "Nel referto della visita conviene riportare tre informazioni della TC, sempre con la data e il centro dell'esame: il calcium score con la fascia e la soglia usata, la categoria CAD-RADS con burden e modificatori, e la stenosi massima con il segmento in cui si trova, secondo il modello a 18 segmenti della SCCT. Se è stata eseguita una FFR-TC, il suo esito completa il quadro.\n\nIn Corioli Cardiologia la TC coronarica è un modulo che si accende quando serve. Contiene il calcium score con la fascia di Agatston, con la soglia della calcificazione severa impostabile a 300 o a 400, la categoria CAD-RADS con i modificatori, il burden di placca, i segmenti SCCT interessati, la stenosi massima, l'FFR-TC e la sintesi del referto radiologico. Nel referto stampato escono tre numeri: Agatston, CAD-RADS e burden di placca.\n\nLa fascia del calcium score porta sempre con sé un'avvertenza che non si può togliere: il punteggio non equivale a una stenosi ostruttiva e va integrato con la clinica. La variazione fra due esami si calcola solo sui valori misurati, senza interpolazioni. Il percentile MESA non viene mostrato finché le tabelle di riferimento non saranno inserite e verificate, perché un percentile approssimato sposterebbe un paziente di fascia di rischio.",
+      },
+    ],
+    faq: [
+      {
+        question: "Un calcium score di 0 esclude la malattia coronarica?",
+        answer:
+          "No. Indica l'assenza di calcificazioni coronariche e, in prevenzione, un rischio di eventi basso, ma non esclude le placche non calcifiche, che nella scansione senza contrasto non si vedono. In un paziente con sintomi la presenza di una stenosi si valuta con l'angio-TC o con un test funzionale.",
+      },
+      {
+        question: "Che differenza c'è fra calcium score e CAD-RADS?",
+        answer:
+          "Il calcium score misura quanto calcio c'è nelle pareti delle coronarie, su una TC senza contrasto, ed è uno strumento di stratificazione del rischio. La categoria CAD-RADS descrive la stenosi più grave vista all'angio-TC con contrasto. Il primo non dice quanto è ristretto il lume, la seconda sì.",
+      },
+      {
+        question: "Quali sono le fasce del calcium score?",
+        answer:
+          "Le più usate in refertazione sono 0 (nessuna calcificazione), 1-99 (lieve), 100-299 (moderata) e 300 o più (severa). Alcuni centri pongono la soglia della calcificazione severa a 400: per questo il referto dovrebbe indicare quale soglia è stata applicata.",
+      },
+      {
+        question: "Cosa significa CAD-RADS 4B?",
+        answer:
+          "Indica una stenosi del tronco comune del 50% o più, oppure una malattia trivasale con stenosi del 70% o più. Nel sistema CAD-RADS 2.0 è la categoria che precede l'occlusione totale, CAD-RADS 5.",
+      },
+      {
+        question: "Cosa vuol dire P2 in un referto CAD-RADS?",
+        answer:
+          "È il burden di placca, introdotto con CAD-RADS 2.0: P2 indica una quantità moderata di placca nel complesso delle coronarie. Si ricava dal calcium score (da 101 a 300), dal numero di segmenti con placca (3 o 4) oppure da una stima visiva.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Agatston AS, Janowitz WR, Hildner FJ, Zusmer NR, Viamonte M Jr, Detrano R. Quantification of coronary artery calcium using ultrafast computed tomography. J Am Coll Cardiol. 1990;15(4):827-832.",
+        url: "https://doi.org/10.1016/0735-1097(90)90282-T",
+      },
+      {
+        title:
+          "Cury RC, Leipsic J, Abbara S, et al. CAD-RADS 2.0 – 2022 Coronary Artery Disease-Reporting and Data System: an expert consensus document of the SCCT, ACC, ACR and NASCI. J Cardiovasc Comput Tomogr. 2022;16(6):536-557.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/36115815/",
+      },
+      {
+        title:
+          "Mach F, Koskinas KC, et al. 2025 Focused Update of the 2019 ESC/EAS Guidelines for the management of dyslipidaemias. Eur Heart J. 2025;46(42):4359.",
+        url: "https://academic.oup.com/eurheartj/article/46/42/4359/8234482",
+      },
+      {
+        title:
+          "2026 ACC/AHA/AACVPR/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the Management of Dyslipidemia. J Am Coll Cardiol. 2026.",
+        url: "https://www.jacc.org/doi/10.1016/j.jacc.2025.11.016",
+      },
+    ],
+  },
+  {
+    slug: "egfr-ckd-epi-cockcroft-gault-doac",
+    title: "eGFR con CKD-EPI 2021 o clearance di Cockcroft-Gault: quale usare in cardiologia",
+    description:
+      "La formula CKD-EPI 2021 senza coefficiente etnico, gli stadi KDIGO e perché per la dose degli anticoagulanti orali diretti serve ancora la clearance di Cockcroft-Gault. Con esempi numerici.",
+    excerpt:
+      "Stessa creatinina, due numeri diversi: l'eGFR stadia la malattia renale, la clearance di Cockcroft-Gault decide la dose dei DOAC. Formule, esempi e i pazienti in cui i due valori si allontanano di più.",
+    date: "29 Settembre 2026",
+    isoDate: "2026-09-29",
+    category: "Cardiologia",
+    lead: "In ambulatorio cardiologico la funzione renale serve a due cose diverse: capire se c'è una malattia renale cronica e in che stadio, e decidere la dose di un farmaco. Per la prima si usa l'eGFR calcolato con CKD-EPI; per la seconda, almeno per gli anticoagulanti orali diretti, le schede tecniche chiedono ancora la clearance della creatinina secondo Cockcroft-Gault. I due numeri partono dalla stessa creatinina e nell'anziano di basso peso possono essere lontani quasi 30 mL/min. Qui trovi le formule, gli esempi e cosa scrivere nel referto.",
+    keyPoints: [
+      "CKD-EPI 2021 stima il filtrato glomerulare dalla creatinina, dall'età e dal sesso, senza coefficiente etnico; il risultato è in mL/min/1,73 m², cioè riferito a una superficie corporea standard.",
+      "Gli stadi KDIGO dell'eGFR sono G1 (90 o più), G2 (60-89), G3a (45-59), G3b (30-44), G4 (15-29) e G5 (sotto 15); per parlare di malattia renale cronica l'alterazione deve durare più di tre mesi.",
+      "Cockcroft-Gault stima la clearance della creatinina in mL/min: (140 − età) × peso / (72 × creatinina), moltiplicato per 0,85 nelle donne. È la clearance su cui le schede tecniche e la guida pratica EHRA fissano le soglie di dose degli anticoagulanti orali diretti.",
+      "Nell'anziano di basso peso i due valori divergono: una donna di 82 anni e 52 kg con creatinina 1,1 mg/dL ha un eGFR di 50 mL/min/1,73 m² e una clearance di 32 mL/min.",
+      "Accanto al risultato vanno sempre la creatinina, la formula e l'unità di misura: «funzione renale 50» non dice quale delle due stime si ha davanti.",
+    ],
+    sections: [
+      {
+        title: "Due numeri per due domande",
+        body: "La creatinina da sola dice poco, perché dipende dalla massa muscolare: lo stesso valore di 1,1 mg/dL è normale in un uomo robusto di quarant'anni e segnala una funzione ridotta in una donna minuta di ottanta. Per questo la si trasforma in una stima della funzione renale, e in ambulatorio le stime più usate sono due.\n\nL'eGFR calcolato con l'equazione CKD-EPI stima il filtrato glomerulare ed è riferito a una superficie corporea standard di 1,73 m². È il numero con cui si diagnostica e si stadia la malattia renale cronica, ed è quello che i laboratori stampano accanto alla creatinina.\n\nLa clearance della creatinina secondo Cockcroft-Gault usa anche il peso e dà un valore in mL/min, non normalizzato. È una formula del 1976, meno accurata come stima del filtrato, ma è quella su cui sono state costruite le soglie di dose di molti farmaci, e in particolare degli anticoagulanti orali diretti.",
+      },
+      {
+        title: "La formula CKD-EPI 2021",
+        body: "Nel 2021 il gruppo CKD-EPI ha pubblicato una nuova equazione basata sulla creatinina che non usa più il coefficiente etnico della versione del 2009. Con la creatinina in mg/dL è: eGFR = 142 × min(Scr/κ, 1)^α × max(Scr/κ, 1)^−1,200 × 0,9938^età, moltiplicato per 1,012 nelle donne. κ vale 0,7 nelle donne e 0,9 negli uomini; α vale −0,241 nelle donne e −0,302 negli uomini. Il risultato è in mL/min/1,73 m².\n\nNon è un conto da fare a mente, ma un esempio aiuta a capire quanto pesano età e sesso. Con una creatinina di 1,0 mg/dL a 70 anni l'eGFR è 61 in una donna e 81 in un uomo: stessa creatinina, venti punti di differenza, perché a parità di funzione renale la donna ha in media meno massa muscolare e quindi una creatinina più bassa.\n\nL'equazione presuppone una creatinina dosata con metodi standardizzati e una massa muscolare nella media. Quando la massa muscolare è molto bassa o molto alta la stima perde accuratezza, e le linee guida KDIGO 2024 suggeriscono in questi casi di affiancare il dosaggio della cistatina C.",
+      },
+      {
+        title: "Gli stadi KDIGO",
+        body: "Le linee guida KDIGO classificano la funzione renale in sei categorie di filtrato: G1 da 90 in su, G2 da 60 a 89, G3a da 45 a 59, G3b da 30 a 44, G4 da 15 a 29 e G5 sotto 15, tutte in mL/min/1,73 m². Accanto al filtrato c'è l'albuminuria, espressa come rapporto albumina/creatinina sulle urine: A1 sotto 30 mg/g, A2 da 30 a 300, A3 oltre 300.\n\nLa malattia renale cronica si definisce come un'alterazione della struttura o della funzione renale presente da più di tre mesi. Un eGFR sotto 60 che dura da più di tre mesi basta a porre la diagnosi; sopra 60 servono altri segni di danno renale, come l'albuminuria. Un singolo valore basso, magari durante una disidratazione o dopo l'aumento di un diuretico, non è una diagnosi.\n\nLo stadio completo combina le due informazioni, per esempio G3a A2, perché il rischio di progressione e quello di eventi cardiovascolari crescono con entrambe. Nei referti cardiologici l'albuminuria è spesso il dato che manca.",
+      },
+      {
+        title: "Cockcroft-Gault e gli anticoagulanti diretti",
+        body: "La formula di Cockcroft e Gault stima la clearance della creatinina in mL/min: (140 − età) × peso in kg / (72 × creatinina in mg/dL), moltiplicato per 0,85 nelle donne. A differenza del CKD-EPI usa il peso, e il risultato non è riferito alla superficie corporea.\n\nGli studi registrativi degli anticoagulanti orali diretti hanno selezionato i pazienti e ridotto le dosi in base a questa clearance, e le schede tecniche fissano le loro soglie sullo stesso valore. Per questo la guida pratica della European Heart Rhythm Association (EHRA) indica di usare Cockcroft-Gault per decidere la dose. Le soglie cambiano da farmaco a farmaco, ma riduzioni e controindicazioni si concentrano intorno a 50, 30 e 15 mL/min: proprio dove una stima sbagliata sposta la dose.\n\nLa stessa guida dice anche ogni quanto ricontrollare la funzione renale: almeno una volta l'anno e, quando la clearance è di 60 mL/min o meno, con un intervallo in mesi pari alla clearance divisa per 10. Con una clearance di 40 mL/min il controllo va ripetuto almeno ogni quattro mesi.",
+      },
+      {
+        title: "Dove i due numeri divergono",
+        body: "Nella maggior parte dei pazienti eGFR e clearance sono abbastanza vicini da non cambiare nulla. Divergono dove la decisione conta di più: nell'anziano di basso peso.\n\nUna donna di 82 anni, 52 kg, creatinina 1,1 mg/dL. Il CKD-EPI 2021 le attribuisce un eGFR di 50 mL/min/1,73 m², stadio G3a; la clearance di Cockcroft-Gault è 32 mL/min. Circa diciotto punti di differenza, uno sopra e uno sotto la soglia dei 50. Se la stessa donna pesasse 80 kg la clearance salirebbe a 50 mL/min e i due valori quasi coinciderebbero.\n\nIl caso più insidioso è la creatinina che sembra normale. Una donna di 84 anni e 48 kg con creatinina 0,9 mg/dL ha un eGFR di 63, che pare rassicurante, e una clearance di 35 mL/min: 28 punti di distanza. Guardare solo l'eGFR stampato dal laboratorio porterebbe a lasciare la dose piena a chi forse andrebbe ridotta.\n\nC'è poi la questione della superficie corporea. L'eGFR è riferito a 1,73 m²: per una donna di 52 kg e 155 cm, con una superficie di circa 1,49 m², un eGFR di 50 corrisponde a un filtrato assoluto di circa 43 mL/min. Per questo le linee guida KDIGO 2024 indicano che, nelle persone con un peso molto lontano dalla media e per i farmaci con un margine terapeutico stretto, si può usare l'eGFR non normalizzato, moltiplicandolo per la superficie corporea reale divisa per 1,73. Il verso opposto esiste: in una persona in forte sovrappeso, Cockcroft-Gault calcolato con il peso reale tende a sovrastimare la clearance.",
+      },
+      {
+        title: "Cosa scrivere nel referto",
+        body: "Accanto a un valore di funzione renale conviene riportare sempre la creatinina, la formula e l'unità di misura. «eGFR 50 mL/min/1,73 m² (CKD-EPI 2021)» e «clearance 32 mL/min (Cockcroft-Gault, peso 52 kg)» sono due informazioni diverse, e un collega che legge soltanto «funzione renale 50» non sa quale delle due ha davanti. Se il paziente assume un anticoagulante diretto, il valore che giustifica la dose è la clearance, ed è quello che conviene far comparire.\n\nIn Corioli Cardiologia l'eGFR con CKD-EPI 2021 e lo stadio KDIGO si calcolano nel pannello della funzione renale, dalla creatinina, dall'età e dal sesso del paziente. La clearance di Cockcroft-Gault sta nel modulo della fibrillazione atriale, accanto a CHA2DS2-VASc e HAS-BLED, e usa il peso corporeo. Entrambi i valori riportano la formula da cui vengono e nessuno dei due viene scritto da solo nel referto. Se in anagrafica il sesso non è indicato, i calcoli si fermano e lo dicono, invece di rispondere su un sesso scelto a caso.",
+      },
+    ],
+    faq: [
+      {
+        question: "Qual è la differenza fra eGFR e clearance della creatinina?",
+        answer:
+          "L'eGFR, calcolato con CKD-EPI, stima il filtrato glomerulare riferito a una superficie corporea di 1,73 m² ed è il valore con cui si stadia la malattia renale cronica. La clearance di Cockcroft-Gault usa anche il peso e dà un valore assoluto in mL/min: è quella su cui le schede tecniche degli anticoagulanti orali diretti fissano le soglie di dose.",
+      },
+      {
+        question: "Per la dose dei DOAC si usa l'eGFR o Cockcroft-Gault?",
+        answer:
+          "La clearance di Cockcroft-Gault, come indica la guida pratica EHRA: è la stima usata negli studi registrativi e nelle schede tecniche. Nell'anziano di basso peso l'eGFR può risultare molto più alto della clearance, e usarlo al suo posto rischia di lasciare la dose piena a chi andrebbe ridotta.",
+      },
+      {
+        question: "Perché CKD-EPI 2021 non ha il coefficiente etnico?",
+        answer:
+          "La versione del 2009 moltiplicava il risultato per un coefficiente nei pazienti di etnia nera. L'equazione del 2021 è stata ricalcolata senza quel coefficiente, con la sola creatinina, l'età e il sesso, perché la stima non dipendesse da una categoria etnica.",
+      },
+      {
+        question: "Un eGFR sotto 60 significa malattia renale cronica?",
+        answer:
+          "Solo se persiste per più di tre mesi. Un valore isolato può dipendere da una disidratazione, da un farmaco o da una malattia acuta; secondo KDIGO la malattia renale cronica richiede un'alterazione della funzione o della struttura renale presente da oltre tre mesi.",
+      },
+      {
+        question: "Quali sono gli stadi KDIGO dell'eGFR?",
+        answer:
+          "G1 da 90 mL/min/1,73 m² in su, G2 da 60 a 89, G3a da 45 a 59, G3b da 30 a 44, G4 da 15 a 29 e G5 sotto 15. Lo stadio completo si accompagna all'albuminuria: A1 sotto 30 mg/g, A2 da 30 a 300, A3 oltre 300.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Inker LA, Eneanya ND, Coresh J, et al. New creatinine- and cystatin C-based equations to estimate GFR without race. N Engl J Med. 2021;385(19):1737-1749.",
+        url: "https://www.nejm.org/doi/full/10.1056/NEJMoa2102953",
+      },
+      {
+        title:
+          "Kidney Disease: Improving Global Outcomes (KDIGO) CKD Work Group. KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease. Kidney Int. 2024;105(4S):S117-S314.",
+        url: "https://www.kidney-international.org/article/S0085-2538(23)00766-4/fulltext",
+      },
+      {
+        title:
+          "Cockcroft DW, Gault MH. Prediction of creatinine clearance from serum creatinine. Nephron. 1976;16(1):31-41.",
+      },
+      {
+        title:
+          "Steffel J, Collins R, Antz M, et al. 2021 European Heart Rhythm Association Practical Guide on the use of non-vitamin K antagonist oral anticoagulants in patients with atrial fibrillation. Europace. 2021;23(10):1612-1676.",
+        url: "https://academic.oup.com/europace/article/23/10/1612/6247378",
+      },
+    ],
+  },
+  {
     slug: "cha2ds2-vasc-cha2ds2-va-has-bled-calcolo",
     title: "CHA2DS2-VASc, CHA2DS2-VA e HAS-BLED: come si calcolano",
     description:
@@ -108,7 +362,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Come lo gestisce un gestionale cardiologico",
-        body: "Quasi tutti i dati che servono a questi punteggi sono già nella visita: età e sesso nell'anagrafica, ipertensione, diabete, scompenso e malattia vascolare fra i fattori di rischio, la creatinina fra gli esami di laboratorio. Un calcolatore separato obbliga a ricopiarli; un gestionale che li rilegge da dove stanno elimina l'errore alla radice.\n\nIn Corioli Cardiologia, in arrivo a ottobre 2026, il modulo della fibrillazione atriale funziona così: età e sesso arrivano dall'anagrafica e non sono caselle da spuntare, gli altri fattori dal pannello dei fattori di rischio della visita, e i due punteggi compaiono in un riquadro con la fonte accanto. Il punteggio calcolato è il CHA2DS2-VASc; quando un punto deriva solo dal sesso femminile l'applicazione lo segnala, e togliendolo si ottiene il CHA2DS2-VA. L'HAS-BLED distingue le voci su cui si può intervenire, e il software non propone né sconsiglia l'anticoagulazione: la decisione resta del medico.\n\nNel referto finisce solo il totale, accanto a peso, creatinina, età ed eGFR. E il modulo si stampa solo se il medico ha dichiarato la fibrillazione atriale: i punteggi si calcolano da età, sesso e fattori di rischio, quindi senza quell'interruttore comparirebbero su ogni referto.",
+        body: "Quasi tutti i dati che servono a questi punteggi sono già nella visita: età e sesso nell'anagrafica, ipertensione, diabete, scompenso e malattia vascolare fra i fattori di rischio, la creatinina fra gli esami di laboratorio. Un calcolatore separato obbliga a ricopiarli; un gestionale che li rilegge da dove stanno elimina l'errore alla radice.\n\nIn Corioli Cardiologia il modulo della fibrillazione atriale funziona così: età e sesso arrivano dall'anagrafica e non sono caselle da spuntare, gli altri fattori dal pannello dei fattori di rischio della visita, e i due punteggi compaiono in un riquadro con la fonte accanto. Il punteggio calcolato è il CHA2DS2-VASc; quando un punto deriva solo dal sesso femminile l'applicazione lo segnala, e togliendolo si ottiene il CHA2DS2-VA. L'HAS-BLED distingue le voci su cui si può intervenire, e il software non propone né sconsiglia l'anticoagulazione: la decisione resta del medico.\n\nNel referto finisce solo il totale, accanto a peso, creatinina, età ed eGFR. E il modulo si stampa solo se il medico ha dichiarato la fibrillazione atriale: i punteggi si calcolano da età, sesso e fattori di rischio, quindi senza quell'interruttore comparirebbero su ogni referto.",
       },
     ],
     faq: [
@@ -195,7 +449,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Cosa scrivere nel referto",
-        body: "Un QTc scritto da solo non è confrontabile con quello del controllo successivo, soprattutto se nel frattempo è cambiata la frequenza. Nel referto conviene riportare il QT misurato, la frequenza cardiaca, la formula usata e il QTc risultante: quattro numeri, una riga.\n\nIn Corioli Cardiologia, in arrivo a ottobre 2026, il modulo ECG ha campi separati per PR, QRS, QT e asse; il QTc secondo Bazett si calcola mentre si compila, con la formula indicata accanto al risultato e un avviso quando la frequenza è fuori dalla finestra 50-100 bpm. Nel referto l'elettrocardiogramma esce come tabella, e il QTc è in grassetto solo se è fuori dai limiti: nessun giudizio scritto accanto, perché a leggere il foglio è un medico.",
+        body: "Un QTc scritto da solo non è confrontabile con quello del controllo successivo, soprattutto se nel frattempo è cambiata la frequenza. Nel referto conviene riportare il QT misurato, la frequenza cardiaca, la formula usata e il QTc risultante: quattro numeri, una riga.\n\nIn Corioli Cardiologia il modulo ECG ha campi separati per PR, QRS, QT e asse; il QTc secondo Bazett si calcola mentre si compila, con la formula indicata accanto al risultato e un avviso quando la frequenza è fuori dalla finestra 50-100 bpm. Nel referto l'elettrocardiogramma esce come tabella, e il QTc è in grassetto solo se è fuori dai limiti: nessun giudizio scritto accanto, perché a leggere il foglio è un medico.",
       },
     ],
     faq: [
@@ -497,7 +751,7 @@ export const posts: BlogPost[] = [
       {
         question: "Corioli ha un modulo per la cardiologia?",
         answer:
-          "Sì. Corioli Cardiologia viene rilasciata al pubblico a ottobre 2026: elettrocardiogramma, pressione arteriosa ed esami di laboratorio in ogni visita, e moduli da attivare quando servono per ecocardiogramma, TC coronarica, test ergometrico, Holter ECG e pressorio, Doppler dei tronchi sovraaortici, scompenso e fibrillazione atriale. Gli indici calcolati hanno sempre la formula in chiaro, i pazienti si possono raggruppare per progetto di ricerca e i referti PDF riportano gli esami strumentali in tabella. I requisiti clinici sono dettati da un cardiologo. I dati restano in locale sul computer dello studio e l'archivio è separato da quello dell'edizione per la ginecologia.",
+          "Sì. Corioli Cardiologia si scarica dal Microsoft Store: elettrocardiogramma, pressione arteriosa ed esami di laboratorio in ogni visita, e moduli da attivare quando servono per ecocardiogramma, TC coronarica, test ergometrico, Holter ECG e pressorio, Doppler dei tronchi sovraaortici, scompenso e fibrillazione atriale. Gli indici calcolati hanno sempre la formula in chiaro, i pazienti si possono raggruppare per progetto di ricerca e i referti PDF riportano gli esami strumentali in tabella. I requisiti clinici sono dettati da un team di cardiologi. I dati restano in locale sul computer dello studio e l'archivio è separato da quello dell'edizione per la ginecologia.",
       },
     ],
   },
@@ -1343,7 +1597,7 @@ export const categoryMeta: Record<
   Cardiologia: {
     title: "Cardiologia: refertazione e software per l'ambulatorio",
     description:
-      "Refertazione di ECG ed ecocardiogramma, indici calcolati, calcium score e scelta del gestionale: guide per chi lavora in un ambulatorio cardiologico.",
+      "Refertazione di ECG, ecocardiogramma e TC coronarica, indici calcolati, funzione renale e scelta del gestionale: guide per chi lavora in un ambulatorio cardiologico.",
     intro:
       "Come si tiene insieme un referto cardiologico rapido e dei dati che restino confrontabili nel tempo, senza affidarsi a calcolatori sparsi e a documenti di testo.",
   },

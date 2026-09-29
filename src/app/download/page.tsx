@@ -1,14 +1,25 @@
 "use client";
 
-import { Apple, CheckCircle2 } from "lucide-react";
+import { Apple, ArrowRight, Baby, CheckCircle2, HeartPulse, type LucideIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import posthog from "posthog-js";
 import { useState, useEffect } from "react";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
 import FaqList from "@/components/FaqList";
+import { MacRequestLink, StoreLink, leggiEdizioneRicordata } from "@/components/DownloadLinks";
+import type { Edizione } from "@/lib/ms-store";
 
-const MS_STORE_URL = "https://apps.microsoft.com/store/detail/9P24WMFJW58N";
+// Ginecologia e cardiologia sono due app distinte sullo Store: il selettore
+// sopra i pulsanti decide quale scheda apre "Scarica per Windows". Le altre
+// pagine preselezionano la specialita con /download#cardiologia.
+const edizioni: { id: Edizione; etichetta: string; icona: LucideIcon }[] = [
+  { id: "ginecologia", etichetta: "Ginecologia e ostetricia", icona: Baby },
+  { id: "cardiologia", etichetta: "Cardiologia", icona: HeartPulse },
+];
+
+function isEdizione(value: string): value is Edizione {
+  return edizioni.some((edizione) => edizione.id === value);
+}
 
 const requisiti = [
   {
@@ -36,7 +47,7 @@ const passaggi = [
   {
     titolo: "Scarica dal Microsoft Store",
     testo:
-      "L'installazione passa dallo store ufficiale Microsoft, quindi il pacchetto è firmato e verificato e gli aggiornamenti arrivano in automatico. Non devi disattivare avvisi di sicurezza né scaricare eseguibili da fonti esterne.",
+      "Il pulsante della tua specialità apre la scheda ufficiale sul Microsoft Store, quindi il pacchetto è firmato e verificato e gli aggiornamenti arrivano in automatico. Non devi disattivare avvisi di sicurezza né scaricare eseguibili da fonti esterne.",
   },
   {
     titolo: "Apri Corioli e configura lo studio",
@@ -51,6 +62,11 @@ const passaggi = [
 ];
 
 const downloadFaqs = [
+  {
+    question: "Ginecologia e cardiologia sono la stessa applicazione?",
+    answer:
+      "No, sono due applicazioni distinte, ognuna con la sua scheda sul Microsoft Store: Corioli per ginecologia e ostetricia, Corioli Cardiologia per l'ambulatorio cardiologico. Hanno archivi separati e possono convivere sullo stesso computer senza interferire. Prezzo e prova sono gli stessi: 30€ al mese tutto incluso, con 30 giorni di prova gratuita.",
+  },
   {
     question: "Corioli è disponibile per Mac?",
     answer:
@@ -91,6 +107,29 @@ const downloadStructuredData = {
 
 export default function DownloadPage() {
   const [latestVersion, setLatestVersion] = useState<string | null>(null);
+  const [edizione, setEdizione] = useState<Edizione>("ginecologia");
+
+  // La specialita arriva dall'hash (/download#cardiologia), che vince perche
+  // e una scelta esplicita di un link; altrimenti dall'ultima pagina di
+  // specialita vista in questa sessione (header, footer e gli altri "Prova
+  // gratis" portano tutti a /download senza hash). Cambiandola si aggiorna
+  // l'hash, cosi il link copiato apre la stessa scelta.
+  useEffect(() => {
+    const leggiHash = () => {
+      const hash = window.location.hash.slice(1);
+      if (isEdizione(hash)) setEdizione(hash);
+    };
+    const ricordata = leggiEdizioneRicordata();
+    if (ricordata) setEdizione(ricordata);
+    leggiHash();
+    window.addEventListener("hashchange", leggiHash);
+    return () => window.removeEventListener("hashchange", leggiHash);
+  }, []);
+
+  const selezionaEdizione = (id: Edizione) => {
+    setEdizione(id);
+    window.history.replaceState(null, "", `#${id}`);
+  };
 
   useEffect(() => {
     fetch("/api/download/windows")
@@ -101,71 +140,89 @@ export default function DownloadPage() {
       .catch(() => {});
   }, []);
 
-  const handleMsStoreClick = () => {
-    posthog.capture("program_downloaded", { os: "windows", source: "ms_store" });
-  };
-
-  // Su Mac non c'e un download diretto: l'evento traccia la richiesta di
-  // installazione assistita, non un'installazione avvenuta.
-  const handleMacRequestClick = () => {
-    posthog.capture("mac_install_requested", { os: "macos", source: "download_page" });
-  };
-
   return (
     <div className="pt-40 md:pt-48 pb-24 bg-gradient-to-b from-brand-50/40 to-background min-h-screen flex flex-col items-center">
       <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 flex flex-col items-center text-center">
-        
+
         <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 tracking-tight leading-tight px-2">
           Inizia la tua prova con <span className="text-brand-600">Corioli</span>
         </h1>
-        
-        <p className="text-lg sm:text-xl text-gray-600 mb-12 leading-relaxed max-w-2xl px-4">
-          Su Windows scarichi e installi in autonomia dal Microsoft Store. Su Mac ti seguiamo noi: una breve call e sei operativo, con gli stessi 30 giorni di prova.
+
+        <p className="text-lg sm:text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl px-4">
+          Scegli la tua specialità e scarica l&apos;app: 30 giorni di prova gratuita, senza carta di credito.
         </p>
 
-        {/* ── Download buttons ── */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 mb-16 w-full max-w-2xl justify-center z-20 px-4">
-          {/* Microsoft Store */}
-          <a
-            href={MS_STORE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={handleMsStoreClick}
-            className="flex-1 bg-brand-800 text-white px-6 py-4 rounded-xl font-bold hover:bg-brand-950 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-3 group text-lg"
-          >
-            <Image src="/ms-store-badge.svg" alt="Microsoft" width={24} height={24} className="group-hover:scale-110 transition-transform" />
-            Scarica per Windows
-          </a>
-
-          {/* Mac – installazione assistita. Non e un download diretto: su Mac
-              seguiamo il primo avvio in call invece di lasciare un file. */}
-          <div className="flex-1 relative">
-            <Link
-              href="/contatti"
-              onClick={handleMacRequestClick}
-              className="w-full h-full bg-white text-brand-800 border-2 border-brand-100 px-6 py-4 rounded-xl font-bold transition-all shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-brand-300 flex items-center justify-center gap-3 group text-lg"
-            >
-              <Apple size={24} className="group-hover:scale-110 transition-transform" />
-              Richiedi per Mac
-            </Link>
-            <div className="absolute -top-3 -right-2 sm:-right-4 bg-brand-700 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg shadow-md border border-brand-600">
-              Installazione assistita
+        {/* ── Pannello di download ──
+            Prima si sceglie la specialita (opzioni leggere, da spuntare), poi
+            c'e un solo pulsante, con la stessa scritta per entrambe: cambia
+            solo la scheda Store che apre. Il Mac non e un download, quindi
+            resta un link sotto e non un secondo pulsante dello stesso peso. */}
+        <div className="w-full max-w-[44rem] bg-white border border-gray-100 shadow-card rounded-3xl p-4 sm:p-6 mb-16 z-20">
+          <fieldset>
+            <legend className="sr-only">La tua specialità</legend>
+            {/* Affiancate solo quando "Ginecologia e ostetricia" sta su una riga */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+              {edizioni.map(({ id, etichetta, icona: Icona }) => {
+                const attiva = id === edizione;
+                return (
+                  <label
+                    key={id}
+                    className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl border-2 cursor-pointer text-left text-base sm:text-lg font-semibold transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-brand-300 ${
+                      attiva
+                        ? "border-brand-500 bg-brand-50/70 text-brand-800"
+                        : "border-gray-200 text-gray-600 hover:border-brand-200 hover:text-brand-700"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="edizione"
+                      value={id}
+                      checked={attiva}
+                      onChange={() => selezionaEdizione(id)}
+                      className="sr-only"
+                    />
+                    <span
+                      aria-hidden="true"
+                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${
+                        attiva ? "border-brand-600" : "border-gray-300"
+                      }`}
+                    >
+                      {attiva ? <span className="w-2.5 h-2.5 rounded-full bg-brand-600" /> : null}
+                    </span>
+                    <Icona size={22} className="shrink-0" aria-hidden="true" />
+                    {etichetta}
+                  </label>
+                );
+              })}
             </div>
+          </fieldset>
+
+          {/* Microsoft Store: apre la scheda della specialita scelta */}
+          <StoreLink
+            edizione={edizione}
+            location="download_page"
+            className="mt-5 sm:mt-6 w-full bg-brand-800 text-white px-5 sm:px-6 py-4 sm:py-5 rounded-2xl font-bold hover:bg-brand-950 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-3 group text-lg sm:text-xl"
+          >
+            <Image src="/ms-store-badge.svg" alt="" width={26} height={26} className="shrink-0 group-hover:scale-110 transition-transform" />
+            Scarica Corioli
+          </StoreLink>
+          <p className="mt-3 text-[15px] text-gray-500">
+            Microsoft Store · Windows 10 e 11
+          </p>
+
+          <div className="mt-5 pt-5 border-t border-gray-100">
+            <MacRequestLink
+              edizione={edizione}
+              location="download_page"
+              className="inline-flex items-center gap-2.5 py-1 text-base font-semibold text-brand-700 hover:text-brand-900 transition-colors group"
+            >
+              <Apple size={20} className="shrink-0" />
+              Hai un Mac? Lo installiamo insieme in una breve call
+              <ArrowRight size={18} className="shrink-0 group-hover:translate-x-0.5 transition-transform" />
+            </MacRequestLink>
           </div>
         </div>
 
-        {/* Nota per i due sistemi: il segnale di fiducia dello store vale solo
-            per Windows, quindi la riga Mac dice cosa succede davvero. */}
-        <div className="flex flex-col items-center gap-2.5 mb-16 text-sm text-gray-400 font-medium">
-          <div className="flex items-center justify-center gap-2.5">
-            <Image src="/ms-store-badge.svg" alt="" width={16} height={16} className="opacity-60" />
-            <span>Windows: disponibile su <a href={MS_STORE_URL} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-brand-600 transition-colors">Microsoft Store</a> · Installazione sicura e verificata</span>
-          </div>
-          <div className="flex items-start justify-center gap-2.5 text-center px-4">
-            <Apple size={15} className="opacity-60 shrink-0 mt-[3px]" />
-            <span>Mac: la configuriamo insieme in una breve call, così parti già impostato · <Link href="/contatti" className="text-gray-500 hover:text-brand-600 transition-colors">prenota l&apos;installazione</Link></span>
-          </div>
-        </div>
         {/* INTERACTIVE GALLERY */}
         <div className="w-full mt-6 sm:mt-10 relative">
           <ScreenshotGallery />
@@ -188,8 +245,12 @@ export default function DownloadPage() {
           </ul>
         </div>
         
+        {/* La versione arriva dalle release GitHub della sola app di
+            ginecologia: con due app sullo Store, senza etichetta sembrerebbe
+            valere per entrambe. */}
         <p className="text-sm text-gray-500 mt-8 font-medium">
-          Versione {latestVersion ?? "…"} • <Link href="/contatti" className="text-brand-600 hover:underline">Serve aiuto?</Link>
+          {latestVersion ? <>Corioli per ginecologia, versione {latestVersion} • </> : null}
+          <Link href="/contatti" className="text-brand-600 hover:underline">Serve aiuto?</Link>
         </p>
 
         {/* ── Requisiti di sistema ── */}
@@ -251,21 +312,21 @@ export default function DownloadPage() {
                   E su Mac?
                 </h3>
                 <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-4">
-                  La versione per macOS c&apos;è, ma non passa dal Mac App Store
-                  come quella per Windows passa dal Microsoft Store. Per questo
+                  La versione per macOS c&apos;è, per entrambe le specialità, ma
+                  non passa dal Mac App Store come quella per Windows passa dal
+                  Microsoft Store. Per questo
                   non la lasciamo come file da scaricare e arrangiarsi:
                   fissiamo una breve call con un nostro operatore e installiamo
                   l&apos;applicazione insieme. Alla fine della chiamata sei
                   operativo, con gli stessi 30 giorni di prova. Serve macOS 10.13
                   o superiore.
                 </p>
-                <Link
-                  href="/contatti"
-                  onClick={handleMacRequestClick}
+                <MacRequestLink
+                  location="download_page"
                   className="inline-flex items-center gap-2 bg-brand-700 text-white px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-brand-800 transition-colors"
                 >
                   Prenota l&apos;installazione su Mac
-                </Link>
+                </MacRequestLink>
               </div>
             </div>
           </div>

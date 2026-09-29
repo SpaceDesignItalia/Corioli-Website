@@ -16,6 +16,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import clsx from "clsx";
+import { MS_STORE_URL } from "@/lib/ms-store";
 
 // Le FAQ della home: mostrate in pagina e dichiarate come FAQPage nei dati
 // strutturati. Le due cose devono restare allineate, perche Google accetta il
@@ -29,7 +30,7 @@ const homeFaqs = [
   {
     question: "Per quali medici è pensato Corioli?",
     answer:
-      "Corioli nasce per i medici specialisti che lavorano in libera professione. La verticalizzazione attiva oggi è quella per ginecologia e ostetricia, con cartella ostetrica elettronica e calcolatori fetali. L'edizione per la cardiologia — con moduli per elettrocardiogramma, ecocardiogramma e TC coronarica — viene rilasciata a ottobre 2026, mentre il modulo di pediatria è ancora in sviluppo. È adatto a chi cerca un software clinico e non un gestionale amministrativo adattato alla sanità.",
+      "Corioli nasce per i medici specialisti che lavorano in libera professione. Le edizioni disponibili oggi sono due: ginecologia e ostetricia, con cartella ostetrica elettronica e calcolatori fetali, e cardiologia, con moduli per elettrocardiogramma, ecocardiogramma e TC coronarica. Il modulo di pediatria è ancora in sviluppo. È adatto a chi cerca un software clinico e non un gestionale amministrativo adattato alla sanità.",
   },
   {
     question: "Dove vengono salvati i dati dei pazienti?",
@@ -370,7 +371,7 @@ export default function Home() {
             </div>
             <p className="text-sm text-gray-500 font-medium">
               Nessuna carta di credito richiesta &bull; Prova gratuita di 30
-              giorni &bull; Disponibile su <a href="https://apps.microsoft.com/store/detail/9P24WMFJW58N" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-brand-600 transition-colors">Microsoft Store</a>
+              giorni &bull; Disponibile su <a href={MS_STORE_URL.ginecologia} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-brand-600 transition-colors">Microsoft Store</a>
             </p>
           </div>
 
@@ -998,7 +999,7 @@ export default function Home() {
                 >
                   gestionale per cardiologi
                 </Link>
-                , in arrivo a ottobre 2026.
+                .
               </p>
             </div>
             <div className="bg-white rounded-2xl p-7 border border-brand-100 shadow-soft">
@@ -1086,7 +1087,7 @@ export default function Home() {
                    <rect x="1" y="13" width="10" height="10" fill="#00A4EF"/>
                    <rect x="13" y="13" width="10" height="10" fill="#FFB900"/>
                  </svg>
-                 <span>Disponibile su <a href="https://apps.microsoft.com/store/detail/9P24WMFJW58N" target="_blank" rel="noopener noreferrer" className="text-brand-200 hover:text-white transition-colors underline underline-offset-2 decoration-brand-400/50">Microsoft Store</a></span>
+                 <span>Disponibile su <a href={MS_STORE_URL.ginecologia} target="_blank" rel="noopener noreferrer" className="text-brand-200 hover:text-white transition-colors underline underline-offset-2 decoration-brand-400/50">Microsoft Store</a></span>
                </div>
             </div>
           </div>

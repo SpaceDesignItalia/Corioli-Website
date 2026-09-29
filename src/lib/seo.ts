@@ -11,7 +11,7 @@ export const SITE_URL = "https://corioli.it";
 // dateModified nei dati strutturati: per i motori di risposta la freschezza
 // dichiarata e uno dei segnali con cui scelgono quale fonte citare.
 // Tenere allineata a STATIC_PAGES_UPDATED in src/app/sitemap.ts.
-export const STATIC_PAGES_UPDATED = "2026-09-22";
+export const STATIC_PAGES_UPDATED = "2026-09-29";
 
 // Base per l'openGraph di ogni pagina. Next non fonde openGraph fra layout e
 // pagina: una pagina che definisce il proprio openGraph perde tutto quello del

@@ -3,6 +3,7 @@ import { pageOpenGraph } from "@/lib/seo";
 import Link from "next/link";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
 import FaqList from "@/components/FaqList";
+import { RicordaEdizione } from "@/components/DownloadLinks";
 import {
   ArrowRight,
   Check,
@@ -197,6 +198,7 @@ function ComparisonCell({ value }: { value: boolean | string }) {
 export default function GinecologiaPage() {
   return (
     <>
+      <RicordaEdizione edizione="ginecologia" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

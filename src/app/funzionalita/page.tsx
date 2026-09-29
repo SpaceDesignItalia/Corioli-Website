@@ -6,7 +6,6 @@ import {
   Baby,
   Bold,
   Building2,
-  CalendarClock,
   ClipboardCheck,
   ClipboardList,
   DatabaseBackup,
@@ -354,9 +353,9 @@ const faqs = [
       "Una visita cardiologica con elettrocardiogramma, pressione arteriosa, esame obiettivo ed esami di laboratorio, più moduli da accendere quando servono: ecocardiogramma, TC coronarica, test ergometrico, Holter ECG e pressorio, Doppler dei tronchi sovraaortici, scompenso e fibrillazione atriale. Calcola QTc, eGFR, LDL, HOMA-IR, CHA2DS2-VASc e HAS-BLED, sempre con la formula in chiaro e senza scriverli da solo nel referto.",
   },
   {
-    question: "Quando esce la cardiologia, e quanto costa?",
+    question: "Dove si scarica la cardiologia, e quanto costa?",
     answer:
-      "Esce a ottobre 2026 e costa come Corioli: 30€ al mese, tutto incluso, con 30 giorni di prova gratuita. Ginecologia e cardiologia sono due applicazioni con archivi separati, che possono convivere sullo stesso computer senza interferire.",
+      "Dal Microsoft Store, come applicazione a sé: Corioli Cardiologia. Costa come Corioli: 30€ al mese, tutto incluso, con 30 giorni di prova gratuita. Ginecologia e cardiologia sono due applicazioni con archivi separati, che possono convivere sullo stesso computer senza interferire.",
   },
   {
     question: "Cosa succede se il computer si rompe?",
@@ -403,7 +402,7 @@ const funzionalitaStructuredData = {
       itemListElement: [
         ...[visita, ginecologia].map(featureListItem),
         {
-          name: "Cardiologia (in arrivo a ottobre 2026)",
+          name: "Cardiologia (Corioli Cardiologia)",
           description: cardioModules
             .map((module) => `${module.title}: ${module.text}`)
             .join(" "),
@@ -535,15 +534,15 @@ export default function FunzionalitaPage() {
       <section id="cardiologia" className="scroll-mt-28 py-20 md:py-28 bg-white border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="max-w-3xl mb-12 md:mb-16">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold uppercase tracking-wide mb-6">
-              <CalendarClock size={14} /> Corioli Cardiologia · in arrivo a ottobre 2026
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-xs font-bold uppercase tracking-wide mb-6">
+              <HeartPulse size={14} /> Corioli Cardiologia · disponibile
             </span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-6">
               Cardiologia: la visita come la referta un cardiologo
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
               Un&apos;edizione a sé, con il suo archivio, sviluppata insieme a un
-              cardiologo che ne detta i requisiti clinici: l&apos;ordine delle
+              team di cardiologi che ne dettano i requisiti clinici: l&apos;ordine delle
               sezioni, cosa entra nel referto e cosa resta nella maschera. Dagli
               esami strumentali al laboratorio, ogni dato ha il suo campo.
             </p>
@@ -596,10 +595,10 @@ export default function FunzionalitaPage() {
               Tutti i dettagli sulla cardiologia <ArrowRight size={18} />
             </Link>
             <Link
-              href="/contatti"
+              href="/download#cardiologia"
               className="inline-flex items-center justify-center gap-2 border border-brand-200 text-brand-700 px-6 py-3.5 rounded-xl font-bold hover:bg-brand-50 transition-colors"
             >
-              Avvisami al lancio
+              Scarica e prova gratis
             </Link>
           </div>
         </div>

@@ -402,7 +402,12 @@ export const glossaryTerms: GlossaryTerm[] = [
     group: "cardiologia",
     definition:
       "Quantificazione della calcificazione delle arterie coronarie ottenuta con TC senza mezzo di contrasto, espressa in unità Agatston. Il valore viene abitualmente riportato per fasce, che descrivono l'entità del carico di calcio coronarico e vengono interpretate insieme all'età, al sesso e al quadro clinico complessivo.",
-    link: { href: "/cardiologia", label: "Il blocco TC coronarica" },
+    detail:
+      "Le fasce più usate in refertazione sono 0, 1-99, 100-299 e 300 o più; alcuni centri pongono a 400 la soglia della calcificazione severa. Un valore di 0 non esclude una placca non calcifica.",
+    link: {
+      href: "/blog/calcium-score-cad-rads-tc-coronarica",
+      label: "Calcium score e CAD-RADS 2.0: come si leggono",
+    },
   },
   {
     slug: "cad-rads",
@@ -410,6 +415,12 @@ export const glossaryTerms: GlossaryTerm[] = [
     group: "cardiologia",
     definition:
       "Sistema di refertazione standardizzato della TC coronarica: classifica il grado massimo di stenosi rilevato con una scala codificata, accompagnata da modificatori che segnalano condizioni particolari come stent, bypass, placche ad alto rischio o esame non diagnostico. Serve a rendere i referti confrontabili fra centri diversi, invece di affidare la sintesi agli aggettivi.",
+    detail:
+      "La versione 2.0 del 2022 va da CAD-RADS 0, nessuna placca, a 5, occlusione totale, e aggiunge il burden di placca da P1 a P4: la sigla completa si scrive per esempio CAD-RADS 3/P2/HRP.",
+    link: {
+      href: "/blog/calcium-score-cad-rads-tc-coronarica",
+      label: "Le categorie CAD-RADS 2.0, con burden e modificatori",
+    },
   },
   {
     slug: "egfr-ckd-epi",
@@ -418,6 +429,26 @@ export const glossaryTerms: GlossaryTerm[] = [
     group: "cardiologia",
     definition:
       "Stima del filtrato glomerulare calcolata dalla creatinina sierica insieme a età e sesso. L'equazione CKD-EPI del 2021 è la versione che non impiega il coefficiente etnico. Il valore stimato colloca il paziente in uno degli stadi KDIGO della funzione renale, informazione che in cardiologia entra nella scelta e nel dosaggio di diversi farmaci.",
+    detail:
+      "Il risultato è in mL/min/1,73 m². Gli stadi KDIGO sono G1 (90 o più), G2 (60-89), G3a (45-59), G3b (30-44), G4 (15-29) e G5 (sotto 15).",
+    link: {
+      href: "/blog/egfr-ckd-epi-cockcroft-gault-doac",
+      label: "eGFR o Cockcroft-Gault: quale usare in cardiologia",
+    },
+  },
+  {
+    slug: "clearance-cockcroft-gault",
+    term: "Clearance della creatinina secondo Cockcroft-Gault",
+    aliases: ["Cockcroft-Gault", "clearance della creatinina"],
+    group: "cardiologia",
+    definition:
+      "Stima della clearance della creatinina in mL/min calcolata da età, peso e creatinina sierica: (140 − età) × peso in kg / (72 × creatinina in mg/dL), moltiplicato per 0,85 nelle donne. A differenza dell'eGFR non è riferita alla superficie corporea. È il valore su cui le schede tecniche degli anticoagulanti orali diretti fissano le soglie di riduzione della dose.",
+    detail:
+      "Nell'anziano di basso peso può essere molto più bassa dell'eGFR: una donna di 82 anni e 52 kg con creatinina 1,1 mg/dL ha un eGFR di 50 e una clearance di 32 mL/min.",
+    link: {
+      href: "/blog/egfr-ckd-epi-cockcroft-gault-doac",
+      label: "Cockcroft-Gault e la dose dei DOAC",
+    },
   },
   {
     slug: "ldl-friedewald",
