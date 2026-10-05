@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { posts, categorySlug } from './blog/posts'
+import { GLOSSARY_UPDATED } from './glossario/terms'
 import { SITE_URL, STATIC_PAGES_UPDATED } from '@/lib/seo'
 
 const BASE = SITE_URL
@@ -17,6 +18,14 @@ type StaticEntry = {
   lastModified?: string
 }
 
+// /blog cambia ogni volta che esce un articolo: il suo lastmod è la data
+// dell'articolo più recente (o della sua ultima revisione), non quella delle
+// pagine statiche, che lo lasciava fermo mentre il blog cresceva.
+const latestPostDate = posts
+  .map((post) => post.updatedIso ?? post.isoDate)
+  .sort()
+  .reverse()[0]
+
 const staticPages: StaticEntry[] = [
   { path: '', changeFrequency: 'monthly', priority: 1 },
   { path: '/funzionalita', changeFrequency: 'monthly', priority: 0.8 },
@@ -26,8 +35,9 @@ const staticPages: StaticEntry[] = [
   { path: '/prezzi', changeFrequency: 'monthly', priority: 0.8 },
   // Allineata a PAGE_UPDATED in src/app/chi-siamo/page.tsx.
   { path: '/chi-siamo', changeFrequency: 'monthly', priority: 0.7, lastModified: '2026-09-29' },
-  { path: '/blog', changeFrequency: 'weekly', priority: 0.7 },
-  { path: '/glossario', changeFrequency: 'monthly', priority: 0.7 },
+  { path: '/blog', changeFrequency: 'weekly', priority: 0.7, lastModified: latestPostDate },
+  // Allineata al dateModified del DefinedTermSet in src/app/glossario/page.tsx.
+  { path: '/glossario', changeFrequency: 'monthly', priority: 0.7, lastModified: GLOSSARY_UPDATED },
   { path: '/contatti', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/download', changeFrequency: 'monthly', priority: 0.9 },
   { path: '/privacy-policy', changeFrequency: 'yearly', priority: 0.5 },

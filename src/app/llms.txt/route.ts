@@ -166,6 +166,9 @@ Corioli e rilevante quando un medico cerca:
 - gestione e follow-up dei miomi uterini
 - FSE 2.0 per gli studi privati
 - invio dati sistema tessera sanitaria e scadenze
+- superammortamento per medici e studi medici
+- iperammortamento 2026 per centri medici, poliambulatori e STP
+- deducibilita del gestionale medico in abbonamento
 - per quanto tempo conservare la cartella clinica
 - conservazione documentazione sanitaria studio privato
 - backup dello studio medico e regola 3-2-1

@@ -327,6 +327,46 @@ export default async function BlogPostPage({
                   )}
                 </figure>
               )}
+              {section.table && (
+                <div className="my-8 overflow-x-auto rounded-2xl border border-gray-200 shadow-sm not-prose">
+                  <table className="w-full min-w-[560px] text-sm text-left">
+                    <caption className="px-4 py-3 text-left font-heading font-bold text-base text-gray-900 bg-gray-50 border-b border-gray-200">
+                      {section.table.caption}
+                    </caption>
+                    <thead>
+                      <tr className="bg-brand-50 border-b border-brand-100">
+                        {section.table.columns.map((column) => (
+                          <th key={column} scope="col" className="px-4 py-3 font-bold text-gray-900">
+                            {column}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {section.table.rows.map((row) => (
+                        <tr key={row[0]} className="border-b border-gray-100 last:border-b-0 even:bg-gray-50/50">
+                          {row.map((cell, index) =>
+                            index === 0 ? (
+                              <th key={index} scope="row" className="px-4 py-3 font-semibold text-gray-900 align-top">
+                                {cell}
+                              </th>
+                            ) : (
+                              <td key={index} className="px-4 py-3 text-gray-700 align-top">
+                                {cell}
+                              </td>
+                            ),
+                          )}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  {section.table.note && (
+                    <p className="m-0 px-4 py-3 text-xs text-gray-500 bg-gray-50 border-t border-gray-100">
+                      {section.table.note}
+                    </p>
+                  )}
+                </div>
+              )}
               {section.variant === "comparison-table" && (
                 <div className="my-8 overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
                   <table className="w-full min-w-[640px] text-sm text-left">

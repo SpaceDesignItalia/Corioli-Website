@@ -8,12 +8,23 @@ export type BlogImage = {
   caption?: string;
 };
 
+// Tabella opzionale di una sezione. Per i confronti è il formato che motori di
+// ricerca e assistenti estraggono meglio: una riga per caso, celle brevi e
+// autosufficienti, nessuna cella vuota. Finisce anche in llms-full.txt.
+export type BlogTable = {
+  caption: string;
+  columns: string[];
+  rows: string[][];
+  note?: string;
+};
+
 export type BlogSection = {
   title: string;
   body: string;
   variant?: "text" | "comparison-table";
   // Immagine opzionale mostrata sotto al testo della sezione.
   image?: BlogImage;
+  table?: BlogTable;
 };
 
 export type FaqItem = {
@@ -68,6 +79,129 @@ export type BlogPost = {
 // (/blog), la sitemap e le immagini OpenGraph derivano tutte da qui.
 // Ordine: dal più recente al meno recente.
 export const posts: BlogPost[] = [
+  {
+    slug: "superammortamento-2026-medici-centri-medici",
+    title: "Superammortamento 2026: vale per medici e centri medici?",
+    description:
+      "Nel 2026 il superammortamento torna come iperammortamento, ma solo per chi ha reddito d'impresa: cosa vale per lo studio individuale, le STP e i poliambulatori.",
+    excerpt:
+      "Il superammortamento del 2016 valeva anche per lo studio del libero professionista, l'iperammortamento del 2026 no. Chi può usarlo fra STP, poliambulatori e centri diagnostici, su quali beni, quanto vale e cosa resta al medico con la partita IVA.",
+    date: "5 Ottobre 2026",
+    isoDate: "2026-10-05",
+    category: "Normativa",
+    lead: "No, se lavori da solo con la partita IVA; sì, se il centro medico è una società. Nel 2026 il superammortamento è tornato con il nome di iperammortamento e con una maggiorazione fino al 180%, ma la legge di bilancio 2026 lo riserva a chi produce reddito d'impresa: poliambulatori, centri diagnostici e società tra professionisti possono usarlo, il medico libero professionista e lo studio associato no. È la differenza principale rispetto al superammortamento del 2016, che valeva anche per lo studio individuale e che molti ricordano ancora. Qui trovi chi ne ha diritto, su quali beni, quanto vale e che cosa resta al libero professionista.",
+    keyPoints: [
+      "Il medico che lavora con la propria partita IVA non può usare l'iperammortamento 2026, e nemmeno lo studio associato o chi è in regime forfettario: l'agevolazione spetta solo ai titolari di reddito d'impresa, come poliambulatori, centri medici in forma di società e società tra professionisti.",
+      "L'iperammortamento ha preso il posto del superammortamento (legge 30 dicembre 2025, n. 199, articolo 1, commi 427-436): maggiora del 180% il costo dei beni strumentali nuovi 4.0 per la quota di investimento fino a 2,5 milioni di euro, ai fini delle quote di ammortamento e dei canoni di leasing, per investimenti dal 1° gennaio 2026 al 30 settembre 2028.",
+      "I beni devono rientrare negli allegati IV e V della legge ed essere interconnessi: un'apparecchiatura medica non vi rientra per il solo fatto di essere nuova e digitale, e lo deve attestare una perizia tecnica asseverata, qualunque sia l'importo.",
+      "Si accede con una procedura di comunicazioni al GSE; dal decreto-legge 38/2026 i beni non devono più essere prodotti nell'Unione europea, salvo i moduli fotovoltaici.",
+      "Per una società soggetta a IRES al 24% la maggiorazione vale un risparmio pari al 43,2% del costo del bene, distribuito negli anni di ammortamento; un gestionale in abbonamento resta un costo dell'anno e non si maggiora.",
+    ],
+    sections: [
+      {
+        title: "Dal superammortamento all'iperammortamento: cosa è cambiato",
+        body: "Il superammortamento è nato con la legge di stabilità 2016: per i beni strumentali nuovi il costo veniva maggiorato del 40%, ai soli fini del calcolo delle quote di ammortamento, e la norma nominava espressamente, accanto alle imprese, gli esercenti arti e professioni. Un ecografo da 40.000 euro si ammortizzava fiscalmente come se ne costasse 56.000. La misura è stata prorogata con percentuali via via più basse fino al 2019.\n\nDal 2020 la deduzione maggiorata è stata sostituita da un credito d'imposta per gli investimenti in beni strumentali. Per i beni ordinari i professionisti vi hanno avuto accesso fino al 2022; quello per i beni 4.0, interconnessi ai sistemi aziendali, è rimasto riservato alle imprese.\n\nLa legge di bilancio 2026, legge 30 dicembre 2025, n. 199, ha riportato la maggiorazione del costo con il nome di iperammortamento e con percentuali molto più alte: 180% sulla quota di investimento fino a 2,5 milioni di euro, 100% fra 2,5 e 10 milioni, 50% fra 10 e 20 milioni. La platea però è quella del vecchio credito 4.0, non quella del superammortamento: solo i titolari di reddito d'impresa. È il motivo per cui molte indicazioni che circolano fra colleghi, rimaste ferme al 2016, oggi non valgono più per lo studio individuale.",
+      },
+      {
+        title: "Chi può usare l'iperammortamento in sanità",
+        body: "L'iperammortamento spetta ai titolari di reddito d'impresa che investono in beni destinati a strutture produttive in Italia, a prescindere da settore, dimensione e forma giuridica. Nel mondo sanitario significa poliambulatori, centri diagnostici, case di cura e centri medici organizzati come società di capitali, srl o spa, o come società di persone commerciali, snc o sas. Rientrano anche le società tra professionisti: con la risoluzione 35/E del 2018, scritta per le società tra avvocati, l'Agenzia delle Entrate ha chiarito che l'esercizio della professione in forma societaria produce reddito d'impresa, e la stessa lettura si applica in generale alle STP.\n\nNe resta fuori il medico che lavora con la propria partita IVA, perché il suo è reddito di lavoro autonomo, e per la stessa ragione lo studio associato, che è un'associazione professionale e non una società commerciale. Sono escluse anche le società semplici e chi applica il regime forfettario. Fra i requisiti, l'impresa deve rispettare le norme sulla sicurezza nei luoghi di lavoro ed essere in regola con i contributi; non vi accede chi è in liquidazione o in una procedura concorsuale.\n\nL'esclusione dei professionisti è stata contestata da Confprofessioni, dall'Associazione Nazionale Commercialisti e, fra i sanitari, dall'Associazione Italiana Odontoiatri. Il decreto fiscale di marzo 2026 ha modificato l'agevolazione ma non ha allargato la platea: chi lavora in forma individuale, oggi, non può usarla. Conta la forma dell'attività, non la specialità né il fatturato.",
+        table: {
+          caption: "Iperammortamento 2026 secondo la forma dell'attività sanitaria",
+          columns: ["Forma dell'attività", "Tipo di reddito", "Iperammortamento 2026"],
+          rows: [
+            ["Medico con partita IVA individuale, regime ordinario", "Lavoro autonomo", "No: il bene si ammortizza con le regole ordinarie"],
+            ["Medico in regime forfettario", "Lavoro autonomo, determinato a forfait", "No: i costi non incidono sul reddito"],
+            ["Studio associato", "Lavoro autonomo", "No"],
+            ["Società tra professionisti (STP)", "Reddito d'impresa", "Sì, per i beni degli allegati IV e V"],
+            ["Centro medico o poliambulatorio in srl, spa, snc o sas", "Reddito d'impresa", "Sì, per i beni degli allegati IV e V"],
+          ],
+          note: "Regole in vigore a ottobre 2026: legge 30 dicembre 2025, n. 199, articolo 1, commi 427-436. La verifica sul singolo caso spetta al commercialista.",
+        },
+      },
+      {
+        title: "Quali beni rientrano nell'iperammortamento",
+        body: "Non tutti i beni strumentali nuovi danno diritto all'iperammortamento. Devono rientrare negli allegati IV e V della legge di bilancio, che riprendono, aggiornati, gli allegati A e B del vecchio piano Industria 4.0. Nell'allegato IV ci sono beni materiali il cui funzionamento è controllato da sistemi computerizzati e che vanno interconnessi al sistema informativo dell'impresa, insieme a sistemi per la qualità e a dispositivi per la sicurezza e l'ergonomia del posto di lavoro; nell'allegato V software, piattaforme e applicazioni con funzioni specifiche. Sono agevolabili anche gli impianti per l'autoproduzione di energia da fonti rinnovabili destinata all'autoconsumo, con requisiti propri per i moduli fotovoltaici. Restano fuori i beni usati e tutto ciò che non compare negli allegati, a cominciare da immobili e automobili.\n\nPer un centro medico il punto delicato sono le apparecchiature. Gli allegati sono stati scritti pensando alla manifattura, e un ecografo, un apparecchio radiologico o un riunito odontoiatrico non vi rientrano per il solo fatto di essere nuovi e digitali: devono corrispondere a una voce precisa ed essere effettivamente interconnessi. È una valutazione tecnica, caso per caso, che la perizia deve sostenere. Conviene farla prima di firmare l'ordine, chiedendo al fornitore come il bene si collega al sistema informativo della struttura e a un perito se la voce regge.\n\nUna novità riguarda la provenienza. Nel testo originario i beni dovevano essere prodotti nell'Unione europea o nello Spazio economico europeo; il decreto-legge 27 marzo 2026, n. 38, convertito dalla legge 22 maggio 2026, n. 88, ha tolto questo vincolo con effetto dal 1° gennaio 2026. Il requisito resta solo per i moduli fotovoltaici.",
+      },
+      {
+        title: "Quanto si risparmia con l'iperammortamento: due esempi",
+        body: "La maggiorazione dell'iperammortamento non è uno sconto sul prezzo: aumenta il costo su cui si calcolano le quote di ammortamento, o i canoni se il bene è in leasing, ai fini delle imposte sui redditi. Il risparmio arriva quindi negli stessi anni in cui il bene si ammortizza, e solo se c'è reddito imponibile su cui dedurre.\n\nUn poliambulatorio in forma di srl acquista nel 2026 un'apparecchiatura da 100.000 euro che la perizia riconosce come bene dell'allegato IV. Senza agevolazione dedurrebbe in quote di ammortamento 100.000 euro, cioè 24.000 euro di IRES al 24%. Con la maggiorazione del 180% le quote si calcolano su 280.000 euro: i 180.000 euro in più valgono 43.200 euro di IRES in meno, il 43,2% del costo del bene. Il conto riguarda la sola IRES.\n\nSu importi piccoli le proporzioni cambiano. Per un bene da 15.000 euro la maggiorazione vale circa 6.500 euro di imposta, distribuiti su più anni, e dal beneficio vanno tolti il costo della perizia e il tempo della procedura. Gli scaglioni al 100% e al 50%, oltre i 2,5 e i 10 milioni di euro, riguardano investimenti che uno studio medico difficilmente raggiunge.\n\nIl beneficio si usa a partire dal periodo d'imposta in cui si trasmette al GSE la comunicazione di completamento, a condizione che il bene sia già entrato in funzione. Gli investimenti agevolabili sono quelli effettuati dal 1° gennaio 2026 al 30 settembre 2028.",
+      },
+      {
+        title: "Come si accede: comunicazioni al GSE e perizia asseverata",
+        body: "All'iperammortamento si accede attraverso la piattaforma del GSE, nell'area clienti del portale, con SPID. Le regole sono nel decreto attuativo firmato dal ministero delle Imprese e del made in Italy e dal ministero dell'Economia il 7 maggio 2026, i modelli in un decreto direttoriale del 10 giugno 2026; la piattaforma riceve le comunicazioni dal 12 giugno 2026.\n\nLe comunicazioni sono cinque. Tre riguardano l'accesso: una preventiva, con i dati dell'impresa e dei beni; una di conferma, entro 60 giorni dall'esito positivo, con il pagamento di un acconto di almeno il 20%; una di completamento, entro il 15 novembre 2028, quando il bene è interconnesso. Le altre due sono di monitoraggio e tornano ogni anno finché dura il beneficio, entro il 20 gennaio e il 30 giugno.\n\nAlla comunicazione di completamento va allegata una perizia tecnica asseverata, firmata da un ingegnere o da un perito industriale iscritti all'albo, oppure da un ente di certificazione accreditato. A differenza del vecchio piano 4.0 non c'è una soglia di importo sotto la quale basti un'autodichiarazione. L'agevolazione si può cumulare con altre misure, purché il totale non superi il costo sostenuto, ma non con i crediti d'imposta Transizione 4.0 o 5.0 sugli stessi beni.",
+      },
+      {
+        title: "Cosa resta al medico libero professionista",
+        body: "Escluso dall'iperammortamento, il medico libero professionista in regime ordinario acquista i beni strumentali con le regole di sempre. Il costo si deduce in quote di ammortamento, con i coefficienti ministeriali, negli anni di vita fiscale del bene; i beni con costo unitario fino a 516,46 euro si deducono per intero nell'anno di acquisto; i beni usati anche per fini personali, come un computer che si porta a casa, si deducono al 50%.\n\nC'è poi un dettaglio che nei preventivi si dimentica. Le prestazioni sanitarie di diagnosi e cura alla persona sono esenti da IVA, e chi fa solo operazioni esenti non può detrarre l'IVA sugli acquisti: diventa parte del costo. Un ecografo da 30.000 euro più IVA al 22% costa allo studio 36.600 euro, ed è su quella cifra che si calcola l'ammortamento. Chi accanto all'attività clinica fa anche prestazioni imponibili, per esempio alcune perizie medico-legali, detrae in parte, secondo il proprio pro-rata.\n\nIn regime forfettario la questione non si pone: il reddito si calcola applicando ai compensi il coefficiente di redditività, che per le attività sanitarie è il 78%, e i costi reali non contano. Un acquisto riduce la liquidità, non le imposte.\n\nPassare a una forma societaria per accedere all'iperammortamento è possibile, ma è una decisione che tocca previdenza, contabilità, IRAP e responsabilità, e che raramente si giustifica con un'agevolazione sola. Se lo studio sta già crescendo verso più medici e più apparecchiature, è un tema da portare al commercialista con i numeri dei prossimi anni.",
+      },
+      {
+        title: "Il gestionale dello studio si può superammortizzare?",
+        body: "Un software usato in abbonamento non è un bene che si compra ma un servizio che si paga: il canone è un costo dell'anno, e non c'è niente da ammortizzare né da maggiorare. Vale per il professionista, che lo deduce nell'anno in cui lo paga, come per la società, che lo imputa per competenza. La maggiorazione si applica alle quote di ammortamento e ai canoni di leasing: un software dell'allegato V può rientrarvi se viene acquistato e ammortizzato, non se si paga un abbonamento.\n\nCorioli, per esempio, costa 30 euro al mese, tutto incluso, e si installa sul computer dello studio: per chi è in regime ordinario è una spesa inerente all'attività come le altre, deducibile nell'anno. Il computer su cui gira, invece, è un bene strumentale: se costa più di 516,46 euro si ammortizza in più anni, e se si usa anche fuori dallo studio si deduce al 50%.\n\nQuesto articolo descrive le regole in vigore a ottobre 2026 e non sostituisce una consulenza: forma dell'attività, regime fiscale e natura del bene cambiano la risposta da uno studio all'altro, e la verifica sul singolo caso spetta al commercialista.",
+      },
+    ],
+    faq: [
+      {
+        question: "Che differenza c'è tra superammortamento e iperammortamento?",
+        answer:
+          "Il superammortamento, introdotto nel 2016, maggiorava del 40% il costo dei beni strumentali nuovi, con alcune esclusioni, e valeva anche per i professionisti. L'iperammortamento della legge di bilancio 2026 maggiora il costo fino al 180%, ma solo per beni 4.0 interconnessi compresi negli allegati IV e V e solo per chi ha reddito d'impresa, con comunicazioni al GSE e perizia tecnica asseverata.",
+      },
+      {
+        question: "I medici liberi professionisti possono usare l'iperammortamento 2026?",
+        answer:
+          "No. L'iperammortamento della legge di bilancio 2026 spetta solo ai titolari di reddito d'impresa. Il medico che lavora con la propria partita IVA produce reddito di lavoro autonomo e ne è escluso, come lo studio associato e chi è in regime forfettario. Il superammortamento del 2016, invece, valeva anche per i professionisti: è da lì che nasce la confusione. Conviene ricontrollare a ogni nuova legge di bilancio, perché le associazioni di categoria chiedono l'estensione.",
+      },
+      {
+        question: "Un centro medico in forma di srl o una STP può accedere all'iperammortamento?",
+        answer:
+          "Sì, perché produce reddito d'impresa. Servono beni nuovi compresi negli allegati IV e V della legge 199/2025, interconnessi ai sistemi della struttura, le comunicazioni al GSE e una perizia tecnica asseverata. Gli investimenti agevolabili sono quelli effettuati dal 1° gennaio 2026 al 30 settembre 2028.",
+      },
+      {
+        question: "Un ecografo nuovo rientra nell'iperammortamento?",
+        answer:
+          "Non automaticamente. Deve corrispondere a una voce dell'allegato IV ed essere interconnesso al sistema informativo della struttura, e la perizia deve attestarlo. Vale solo se chi lo acquista ha reddito d'impresa: per il medico con partita IVA individuale l'ecografo si ammortizza con le regole ordinarie, e l'IVA, se l'attività è esente, entra nel costo.",
+      },
+      {
+        question: "Quanto si risparmia con l'iperammortamento al 180%?",
+        answer:
+          "Per una società soggetta a IRES al 24%, la maggiorazione del 180% vale un risparmio d'imposta pari al 43,2% del costo del bene, oltre alla normale deduzione dell'ammortamento. Su un bene da 100.000 euro sono 43.200 euro di IRES in meno, distribuiti negli anni di ammortamento, a condizione che ci sia reddito su cui dedurre.",
+      },
+      {
+        question: "Il canone del gestionale medico si può superammortizzare?",
+        answer:
+          "No. Un software in abbonamento è un servizio, non un bene da ammortizzare: il canone è un costo dell'anno. Il professionista in regime ordinario lo deduce nell'anno in cui lo paga, la società per competenza; in regime forfettario i costi non contano.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Legge 30 dicembre 2025, n. 199. Bilancio di previsione dello Stato per l'anno finanziario 2026 e bilancio pluriennale per il triennio 2026-2028, articolo 1, commi 427-436.",
+        url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2025-12-30;199",
+      },
+      {
+        title:
+          "Decreto-legge 27 marzo 2026, n. 38. Disposizioni urgenti in materia fiscale ed economica, articolo 7, convertito con modificazioni dalla legge 22 maggio 2026, n. 88.",
+        url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2026-03-27;38",
+      },
+      {
+        title:
+          "Decreto interministeriale del ministro delle Imprese e del made in Italy e del ministro dell'Economia e delle finanze del 7 maggio 2026, attuativo dell'iperammortamento, e decreto direttoriale del 10 giugno 2026 sui modelli di comunicazione al GSE.",
+      },
+      {
+        title:
+          "Legge 28 dicembre 2015, n. 208. Legge di stabilità 2016, articolo 1, comma 91 (superammortamento).",
+        url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2015-12-28;208",
+      },
+      {
+        title:
+          "Agenzia delle Entrate. Risoluzione n. 35/E del 7 maggio 2018, natura del reddito prodotto dalle società tra avvocati.",
+      },
+      {
+        title:
+          "Decreto del Presidente della Repubblica 26 ottobre 1972, n. 633, articolo 10, primo comma, numero 18, e articolo 19 (esenzione IVA delle prestazioni sanitarie e indetraibilità dell'imposta sugli acquisti).",
+        url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:presidente.repubblica:decreto:1972-10-26;633",
+      },
+    ],
+  },
   {
     slug: "corioli-cardiologia-disponibile",
     title: "Corioli Cardiologia è disponibile: cosa contiene e come provarla",
@@ -1576,9 +1710,9 @@ export const categoryMeta: Record<
   Normativa: {
     title: "Normativa sanitaria per lo studio privato",
     description:
-      "FSE 2.0, GDPR, Sistema Tessera Sanitaria, consenso informato e conservazione della documentazione clinica: gli obblighi che riguardano il medico specialista in libera professione.",
+      "FSE 2.0, GDPR, Sistema Tessera Sanitaria, conservazione della documentazione clinica e agevolazioni come l'iperammortamento: le regole che riguardano il medico specialista e il centro medico privato.",
     intro:
-      "Gli adempimenti che toccano davvero lo studio privato, spiegati senza gergo: cosa prescrive la norma, cosa cambia nella pratica quotidiana e da dove conviene iniziare.",
+      "Gli adempimenti e le agevolazioni che toccano davvero lo studio privato, spiegati senza gergo: cosa prescrive la norma, a chi si applica, cosa cambia nella pratica quotidiana e da dove conviene iniziare.",
   },
   Ostetricia: {
     title: "Ostetricia: calcoli e refertazione in ambulatorio",

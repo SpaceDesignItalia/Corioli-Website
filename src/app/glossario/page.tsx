@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { SITE_URL, STATIC_PAGES_UPDATED, breadcrumbList, jsonLdProps, pageOpenGraph } from "@/lib/seo";
-import { glossaryGroups, glossaryTerms } from "./terms";
+import { SITE_URL, breadcrumbList, jsonLdProps, pageOpenGraph } from "@/lib/seo";
+import { GLOSSARY_UPDATED, glossaryGroups, glossaryTerms } from "./terms";
 
 export const metadata: Metadata = {
   title: "Glossario del gestionale medico",
@@ -36,7 +36,7 @@ const glossaryStructuredData = {
         "Definizioni dei termini clinici, normativi e software ricorrenti nello studio medico specialistico privato.",
       url: `${SITE_URL}/glossario`,
       inLanguage: "it-IT",
-      dateModified: STATIC_PAGES_UPDATED,
+      dateModified: GLOSSARY_UPDATED,
       publisher: { "@id": `${SITE_URL}/#organization` },
       hasDefinedTerm: glossaryTerms.map((term) => ({
         "@type": "DefinedTerm",

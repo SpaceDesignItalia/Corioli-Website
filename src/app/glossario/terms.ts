@@ -49,7 +49,7 @@ export const glossaryGroups: GlossaryGroup[] = [
     id: "normativa",
     title: "Privacy, GDPR e adempimenti",
     description:
-      "Chi risponde dei dati sanitari, per quanto si conservano e quali obblighi digitali riguardano lo studio privato.",
+      "Chi risponde dei dati sanitari, per quanto si conservano, quali obblighi digitali riguardano lo studio privato e quali agevolazioni fiscali gli spettano.",
   },
   {
     id: "ostetricia",
@@ -64,6 +64,12 @@ export const glossaryGroups: GlossaryGroup[] = [
       "Misure, punteggi e classificazioni che compaiono nel referto dell'ambulatorio cardiologico.",
   },
 ];
+
+// Data dell'ultima modifica sostanziale delle voci. Alimenta sia il lastmod di
+// /glossario nella sitemap sia il dateModified del DefinedTermSet: aggiornala
+// quando aggiungi o correggi una voce, altrimenti la pagina dichiara una
+// freschezza che non ha.
+export const GLOSSARY_UPDATED = "2026-10-05";
 
 export const glossaryTerms: GlossaryTerm[] = [
   // --- Gestionale e cartella clinica ---
@@ -258,6 +264,20 @@ export const glossaryTerms: GlossaryTerm[] = [
     link: {
       href: "/blog/sistema-tessera-sanitaria-invio-dati-annuale",
       label: "L'invio al Sistema TS è annuale",
+    },
+  },
+  {
+    slug: "iperammortamento",
+    term: "Iperammortamento",
+    aliases: ["Superammortamento", "Iper ammortamento 2026"],
+    group: "normativa",
+    definition:
+      "L'agevolazione della legge di bilancio 2026 che maggiora il costo dei beni strumentali nuovi 4.0, ai soli fini delle quote di ammortamento e dei canoni di leasing: del 180% per la quota di investimento fino a 2,5 milioni di euro, del 100% fino a 10 milioni e del 50% fino a 20 milioni. Vale per gli investimenti dal 1° gennaio 2026 al 30 settembre 2028 ed è riservata ai titolari di reddito d'impresa.",
+    detail:
+      "Il superammortamento del 2016 valeva anche per i professionisti, l'iperammortamento no. Un centro medico in forma societaria, comprese le società tra professionisti, può accedervi con le comunicazioni al GSE e una perizia tecnica asseverata; il medico con partita IVA individuale ne resta escluso. Un gestionale in abbonamento è un costo dell'anno e non si maggiora.",
+    link: {
+      href: "/blog/superammortamento-2026-medici-centri-medici",
+      label: "Superammortamento 2026 per medici e centri medici",
     },
   },
 

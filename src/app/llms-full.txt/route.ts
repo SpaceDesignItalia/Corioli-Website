@@ -106,6 +106,19 @@ function formattaArticolo(post: (typeof posts)[number]): string {
     parti.push("");
     parti.push(sezione.body);
     parti.push("");
+    if (sezione.table) {
+      const { caption, columns, rows, note } = sezione.table;
+      parti.push(`${caption}:`);
+      parti.push("");
+      parti.push(`| ${columns.join(" | ")} |`);
+      parti.push(`| ${columns.map(() => "---").join(" | ")} |`);
+      for (const riga of rows) parti.push(`| ${riga.join(" | ")} |`);
+      parti.push("");
+      if (note) {
+        parti.push(note);
+        parti.push("");
+      }
+    }
   }
 
   if (post.faq?.length) {
