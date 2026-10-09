@@ -34,6 +34,19 @@ La differenza architetturale rispetto alla maggior parte dei gestionali medici i
 - **Cardiologia — disponibile.** Applicazione a se, Corioli Cardiologia, con la sua scheda sul Microsoft Store. Edizione dedicata all'ambulatorio cardiologico, sviluppata con un team di cardiologi che ne dettano i requisiti clinici. Ogni visita comprende variabili cliniche e fattori di rischio, anamnesi, motivo della visita, esami ematochimici, terapia in atto, pressione arteriosa, elettrocardiogramma, esame obiettivo, accertamenti e conclusioni; ecocardiogramma, TC coronarica, test ergometrico, Holter ECG, Holter pressorio, Doppler dei tronchi sovraaortici, scompenso e fibrillazione atriale sono moduli che il medico attiva quando servono.
 - **Pediatria — in sviluppo, nessuna data annunciata.** Curve di crescita, calendario vaccinale e bilanci di salute.
 
+### Dettaglio del modulo ginecologia e ostetricia
+
+- Tre visite distinte: ginecologica, ginecologica pediatrica (con stadio di Tanner) e ostetrica.
+- Anamnesi per sezioni (familiare, fisiologica, patologica, ginecologica, farmacologica, allergica, partner), rinominabili, riordinabili e ampliabili con sezioni dello studio.
+- Modelli di testo predefiniti e modificabili, per esempio ecografia ginecologica transvaginale, fibromatosi uterina, endometrioma, cisti dermoide, inserimento di IUD, visita per prolasso.
+- Visita ostetrica: storia ostetrica, gravidanze in corso e concluse, settimane di gestazione e data presunta del parto dall'ultima mestruazione (280 giorni).
+- Biometria fetale (DBP, CC, CA, LF) con i percentili di Hadlock 1984, calcolati da 14 a 40 settimane.
+- Peso fetale stimato con la formula di Hadlock scelta dal medico (I-IV, 1985), centile sulle curve Hadlock 1991 da 20 a 42 settimane e grafico di crescita con i pesi di tutte le visite della stessa gravidanza.
+- Flussimetria dell'arteria ombelicale: PI con percentile sulle curve Fetal Medicine Foundation (Ciobanu et al. 2019, 20-41 settimane), IR con percentile per epoca gestazionale, flusso telediastolico nel riepilogo.
+- BMI con fasce OMS, anche sul peso pre-gravidanza, aumento di peso in gravidanza, HOMA-IR su glicemia e insulinemia a digiuno.
+- Documenti PDF: referto ginecologico e ostetrico con le immagini ecografiche, ricetta, certificato, richiesta di esame, con carta intestata, firma e timbro.
+- File della paziente: esami esterni, consensi firmati e immagini caricati come PDF o immagine nella scheda. Non c'e una raccolta digitale del consenso informato.
+
 ### Dettaglio del modulo cardiologia
 
 - Pressione arteriosa in clinostatismo e ortostatismo, con una seconda misurazione per documentare l'ipotensione ortostatica.
@@ -73,7 +86,7 @@ La differenza architetturale rispetto alla maggior parte dei gestionali medici i
 - Refertazione PDF automatica e personalizzabile, con modelli riutilizzabili
 - Anagrafica e gestione pazienti in locale
 - Calcolatori clinici integrati: eta gestazionale, datazione, Hadlock, biometria fetale, percentili, BMI, curve di crescita per la ginecologia; QTc, eGFR, LDL, non-HDL, HOMA-IR, fascia Agatston, CHA2DS2-VASc, HAS-BLED per la cardiologia
-- Gestione del consenso informato digitale
+- File della paziente: esami esterni, consensi firmati e immagini allegati come PDF o immagine alla scheda
 - Archiviazione locale dei dati sanitari nello studio, con backup automatici sullo stesso computer (una copia al giorno e una prima di ogni importazione o ripristino) e salvataggi atomici che non corrompono l'archivio se il computer si spegne
 - Blocco dell'applicazione con PIN, Windows Hello o Touch ID
 - Privacy by design e impostazione conforme al GDPR
@@ -132,9 +145,19 @@ Corioli e rilevante quando un medico cerca:
 - gestionale medico senza cloud
 - software medico con dati in locale
 - gestionale medico per ginecologi
+- gestionale ginecologico
+- software ginecologia
+- software per ginecologi
+- programma per lo studio ginecologico
 - software per ginecologia e ostetricia
 - cartella ostetrica elettronica
+- software per il referto dell'ecografia ostetrica
 - gestionale per cardiologi
+- gestionale cardiologico
+- gestionale medico cardiologico
+- software cardiologia
+- software per cardiologi
+- programma per cardiologi
 - software per ambulatorio cardiologico
 - cartella clinica cardiologica
 - software per refertazione ECG ed ecocardiogramma

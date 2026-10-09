@@ -23,13 +23,17 @@ import {
 export const metadata: Metadata = {
   title: {
     absolute:
-      "Gestionale per Cardiologi | Software Cardiologia e Refertazione ECG — Corioli",
+      "Gestionale per Cardiologi | Software Cardiologia e Cartella Cardiologica — Corioli",
   },
   description:
     "Gestionale per cardiologi: cartella cardiologica, referto ECG ed ecocardiogramma, TC coronarica e indici calcolati. Scaricalo dal Microsoft Store.",
   keywords: [
     "gestionale per cardiologi",
+    "gestionale cardiologico",
+    "gestionale medico cardiologico",
     "software cardiologia",
+    "software per cardiologi",
+    "programma per cardiologi",
     "software gestionale cardiologo",
     "cartella clinica cardiologica",
     "refertazione ECG",
@@ -49,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     ...pageOpenGraph,
     title:
-      "Gestionale per Cardiologi | Software Cardiologia e Refertazione ECG — Corioli",
+      "Gestionale per Cardiologi | Software Cardiologia e Cartella Cardiologica — Corioli",
     description:
       "Cartella clinica cardiologica, referto ECG ed ecocardiogramma, TC coronarica e indici calcolati in un unico software desktop. Disponibile sul Microsoft Store, con 30 giorni di prova.",
     url: "https://corioli.it/cardiologia",
@@ -94,11 +98,11 @@ const softwareStructuredData = {
     "Gruppi di ricerca per arruolare e ritrovare i pazienti di un progetto",
     "Dati salvati in locale nello studio, senza archivio pazienti sul server",
   ],
-  publisher: {
-    "@type": "Organization",
-    name: "Corioli",
-    url: "https://corioli.it",
-  },
+  // La scheda Store e la stessa applicazione vista da un altro sito: dirlo
+  // aiuta motori e assistenti a non trattarle come due prodotti omonimi.
+  sameAs: [MS_STORE_URL.cardiologia],
+  publisher: { "@id": "https://corioli.it/#organization" },
+  isPartOf: { "@id": "https://corioli.it/#software" },
 };
 
 const breadcrumbStructuredData = {
@@ -521,7 +525,7 @@ export default function CardiologiaPage() {
             Gestionale per Cardiologi
           </h1>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-10 text-balance">
-            Corioli Cardiologia è il software per l'ambulatorio cardiologico:
+            Corioli Cardiologia è il gestionale cardiologico per l'ambulatorio:
             cartella clinica, moduli per elettrocardiogramma, ecocardiogramma e
             TC coronarica, indici calcolati con la formula in chiaro e referti
             PDF pronti da consegnare. I dati delle persone che segui restano nel

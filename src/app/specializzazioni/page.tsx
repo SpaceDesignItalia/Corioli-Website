@@ -77,10 +77,10 @@ export default function SpecializzazioniPage() {
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-20 text-center">
         <h1 className="font-heading text-4xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
-          L'eccellenza richiede <span className="text-brand-600">specializzazione.</span>
+          Un gestionale medico <span className="text-brand-600">per la tua specialità.</span>
         </h1>
         <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed text-balance">
-          A differenza dei gestionali generici, sviluppiamo moduli verticali dedicati ad ogni singola branca della medicina, in collaborazione con i migliori specialisti.
+          A differenza dei gestionali generici, Corioli ha un'edizione per ogni branca che copre: il software di ginecologia e ostetricia e quello di cardiologia sono disponibili, la pediatria è in sviluppo. Ciascuna nasce insieme a un team di specialisti di quella branca.
         </p>
       </div>
 

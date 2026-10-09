@@ -27,11 +27,14 @@ const latestPostDate = posts
   .reverse()[0]
 
 const staticPages: StaticEntry[] = [
-  { path: '', changeFrequency: 'monthly', priority: 1 },
+  // Home, specializzazioni e le due pagine di specialità sono state riviste il
+  // 9/10/2026 (/ginecologia riscritta sulle funzioni verificate nell'app); le
+  // altre pagine statiche restano a STATIC_PAGES_UPDATED.
+  { path: '', changeFrequency: 'monthly', priority: 1, lastModified: '2026-10-09' },
   { path: '/funzionalita', changeFrequency: 'monthly', priority: 0.8 },
-  { path: '/specializzazioni', changeFrequency: 'monthly', priority: 0.8 },
-  { path: '/ginecologia', changeFrequency: 'monthly', priority: 0.9 },
-  { path: '/cardiologia', changeFrequency: 'monthly', priority: 0.9 },
+  { path: '/specializzazioni', changeFrequency: 'monthly', priority: 0.8, lastModified: '2026-10-09' },
+  { path: '/ginecologia', changeFrequency: 'monthly', priority: 0.9, lastModified: '2026-10-09' },
+  { path: '/cardiologia', changeFrequency: 'monthly', priority: 0.9, lastModified: '2026-10-09' },
   { path: '/prezzi', changeFrequency: 'monthly', priority: 0.8 },
   // Allineata a PAGE_UPDATED in src/app/chi-siamo/page.tsx.
   { path: '/chi-siamo', changeFrequency: 'monthly', priority: 0.7, lastModified: '2026-09-29' },

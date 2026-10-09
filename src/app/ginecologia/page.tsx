@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
-import { pageOpenGraph } from "@/lib/seo";
+import { SITE_URL, breadcrumbList, jsonLdProps, pageOpenGraph } from "@/lib/seo";
+import { MS_STORE_URL } from "@/lib/ms-store";
 import Link from "next/link";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
 import FaqList from "@/components/FaqList";
 import { RicordaEdizione } from "@/components/DownloadLinks";
 import {
   ArrowRight,
+  Baby,
   Check,
   Clock,
   FileText,
   AlertTriangle,
   Calculator,
-  Shield,
   Download,
+  FolderInput,
+  Lock,
+  Paperclip,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -21,7 +25,21 @@ export const metadata: Metadata = {
       "Gestionale per Ginecologi | Software Ginecologia e Ostetricia — Corioli",
   },
   description:
-    "Software gestionale per ginecologi e ostetrici. Cartella clinica elettronica, calcolatori fetali e referti PDF. Prova gratuita 30 giorni.",
+    "Gestionale per ginecologi e ostetrici: cartella ostetrica, biometria e peso fetale con Hadlock, flussimetria ombelicale e referti PDF. Prova gratuita 30 giorni.",
+  keywords: [
+    "gestionale per ginecologi",
+    "software ginecologia",
+    "gestionale ginecologico",
+    "software per ginecologi",
+    "software ginecologia e ostetricia",
+    "gestionale studio ginecologico",
+    "cartella ostetrica elettronica",
+    "cartella clinica ginecologica",
+    "software referto ecografia ostetrica",
+    "biometria fetale Hadlock software",
+    "stima peso fetale Hadlock",
+    "flussimetria arteria ombelicale percentili",
+  ],
   alternates: {
     canonical: "/ginecologia",
   },
@@ -29,64 +47,91 @@ export const metadata: Metadata = {
     ...pageOpenGraph,
     title: "Gestionale per Ginecologi | Software Ginecologia e Ostetricia — Corioli",
     description:
-      "Software gestionale per ginecologi e ostetrici. Cartella clinica elettronica, calcolatori fetali e referti PDF. Prova gratuita 30 giorni.",
-    url: "https://corioli.it/ginecologia",
+      "Cartella ostetrica elettronica, biometria e peso fetale con i percentili di Hadlock, flussimetria ombelicale e referti PDF in un unico software desktop. Prova gratuita di 30 giorni.",
+    url: `${SITE_URL}/ginecologia`,
   },
 };
 
+// Le funzionalita dichiarate qui vengono dal codice dell'app (repo Corioli,
+// src/utils e src/Pages/Dashboard), non dal resto del sito: e la stessa regola
+// di /cardiologia. In particolare non esiste una raccolta digitale del
+// consenso informato: i consensi firmati si allegano alla scheda come file.
 const softwareStructuredData = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   // @id esplicito: il layout dichiara gia un SoftwareApplication per il
   // prodotto (#software). Senza un id distinto i due nodi risultano due entita
   // sovrapposte per lo stesso software.
-  "@id": "https://corioli.it/ginecologia#software-ginecologia",
+  "@id": `${SITE_URL}/ginecologia#software-ginecologia`,
   name: "Corioli — Gestionale per Ginecologi",
-  url: "https://corioli.it/ginecologia",
+  url: `${SITE_URL}/ginecologia`,
   applicationCategory: "MedicalBusinessSoftware",
+  applicationSubCategory: "Cartella clinica elettronica per ginecologia e ostetricia",
   operatingSystem: "Windows 10, Windows 11, macOS 10.13+",
   inLanguage: "it-IT",
+  downloadUrl: MS_STORE_URL.ginecologia,
+  // La scheda Store e la stessa applicazione vista da un altro sito: dirlo
+  // aiuta motori e assistenti a non trattarle come due prodotti omonimi.
+  sameAs: [MS_STORE_URL.ginecologia],
   offers: {
     "@type": "Offer",
     price: "30",
     priceCurrency: "EUR",
-    url: "https://corioli.it/prezzi",
+    url: `${SITE_URL}/prezzi`,
     availability: "https://schema.org/InStock",
     description: "Prova gratuita di 30 giorni, senza carta di credito",
   },
   description:
-    "Software gestionale per ginecologi e ostetrici con cartella ostetrica elettronica, calcolatori fetali Hadlock, referti PDF e consenso informato digitale.",
+    "Gestionale per ginecologi e ostetrici con visite ginecologica, ginecologica pediatrica e ostetrica, cartella ostetrica elettronica, biometria fetale e peso fetale stimato con i percentili di Hadlock, flussimetria dell'arteria ombelicale e referti PDF. Applicazione desktop con i dati delle pazienti salvati in locale nello studio.",
   featureList: [
-    "Cartella ostetrica elettronica",
-    "Calcolatori fetali Hadlock, biometria e percentili",
-    "Referti PDF personalizzabili",
-    "Consenso informato digitale",
-    "Conformità GDPR",
+    "Visite ginecologica, ginecologica pediatrica e ostetrica con anamnesi per sezioni configurabile",
+    "Cartella ostetrica elettronica con storia ostetrica e gravidanze in corso e concluse",
+    "Settimane di gestazione e data presunta del parto dall'ultima mestruazione",
+    "Biometria fetale (DBP, CC, CA, LF) con i percentili di Hadlock",
+    "Peso fetale stimato con Hadlock I–IV, centile e grafico di crescita",
+    "Flussimetria dell'arteria ombelicale: PI e IR con il percentile per epoca gestazionale",
+    "BMI con fasce OMS e HOMA-IR",
+    "Referti PDF ginecologici e ostetrici con immagini ecografiche, ricette, certificati e richieste di esame",
+    "Modelli di testo per ecografia ginecologica, visita ed esame obiettivo",
+    "Dati salvati in locale nello studio, senza archivio pazienti sul server",
   ],
-  publisher: {
-    "@type": "Organization",
-    name: "Corioli",
-    url: "https://corioli.it",
-  },
+  publisher: { "@id": `${SITE_URL}/#organization` },
+  isPartOf: { "@id": `${SITE_URL}/#software` },
 };
 
-// Domande frequenti mostrate in pagina e replicate come FAQPage nei dati
-// strutturati: le stesse risposte devono restare allineate nei due punti.
+// Le FAQ sono mostrate in pagina e replicate come FAQPage: Google accetta il
+// markup solo se le stesse domande e risposte sono visibili all'utente, quindi
+// le due copie devono restare allineate.
 const faqs = [
   {
     question: "Quanto costa un gestionale per ginecologi?",
     answer:
-      "In Italia i gestionali medici vanno da circa 10€ al mese per soluzioni generaliste fino a 99€-499€ al mese per piattaforme pensate per poliambulatori. Corioli costa 30€ al mese, tutto incluso: cartella clinica elettronica illimitata, anagrafica pazienti, refertazione PDF e calcolatori fetali avanzati, senza moduli a pagamento né costi di attivazione.",
+      "In Italia i gestionali medici vanno da circa 10€ al mese per soluzioni generaliste fino a 99€-499€ al mese per piattaforme pensate per poliambulatori. Corioli costa 30€ al mese, tutto incluso: cartella clinica elettronica illimitata, anagrafica pazienti, refertazione PDF e calcolatori fetali, senza moduli a pagamento né costi di attivazione.",
+  },
+  {
+    question: "Come si scarica il gestionale per ginecologi di Corioli?",
+    answer:
+      "Dal Microsoft Store: Corioli è un'applicazione per Windows 10 e Windows 11 che si installa in autonomia e si aggiorna da sola, con 30 giorni di prova gratuita senza carta di credito. Su Mac (macOS 10.13 o superiore) la installiamo insieme a te in una breve call. È un'applicazione distinta da Corioli Cardiologia, con il proprio archivio.",
+  },
+  {
+    question: "Quali calcoli fetali sono inclusi?",
+    answer:
+      "Settimane di gestazione e data presunta del parto dall'ultima mestruazione; biometria fetale (DBP, CC, CA, LF) con i percentili di Hadlock; peso fetale stimato con la formula di Hadlock che preferisci, dalla I alla IV, con il centile e il grafico di crescita; flussimetria dell'arteria ombelicale con PI e IR e il loro percentile per epoca gestazionale, sulle curve della Fetal Medicine Foundation per il PI. Sono dentro la visita: il risultato finisce nel referto senza passare da app esterne o calcolatrici sullo smartphone.",
+  },
+  {
+    question: "Corioli gestisce anche la ginecologia pediatrica?",
+    answer:
+      "Sì. Le visite sono tre: ginecologica, ginecologica pediatrica e ostetrica, ognuna con la propria anamnesi. Nella visita ginecologica pediatrica c'è anche lo stadio di Tanner. Le sezioni dell'anamnesi — familiare, fisiologica, patologica, ginecologica, farmacologica, allergica, partner — si rinominano, si riordinano e si completano con sezioni tue.",
   },
   {
     question: "I dati delle pazienti dove vengono salvati?",
     answer:
-      "Restano sul computer dello studio. Corioli è un'applicazione desktop per Windows con archiviazione locale: le cartelle cliniche non vengono trasmesse a server esterni e il fornitore non vi accede in alcun modo. Il medico resta l'unico titolare del trattamento e, per l'uso standard del software, non serve stipulare un DPA con noi perché non esiste un responsabile esterno del trattamento.",
+      "Restano sul computer dello studio. Corioli è un'applicazione desktop con archiviazione locale: le cartelle cliniche non vengono trasmesse a server esterni e il fornitore non vi accede in alcun modo. Il medico resta l'unico titolare del trattamento e, per l'uso standard del software, non serve stipulare un DPA con noi perché non esiste un responsabile esterno del trattamento.",
   },
   {
-    question: "Quali calcolatori fetali sono inclusi?",
+    question: "Corioli è un dispositivo medico?",
     answer:
-      "Età gestazionale e datazione della gravidanza (ultima mestruazione e datazione ecografica), biometria fetale con BPD, HC, AC e FL, stima del peso fetale con la formula di Hadlock, percentili e curve di crescita. Sono nativi nella visita: il risultato finisce direttamente nel referto, senza passare da app esterne o calcolatrici sullo smartphone.",
+      "No. Corioli non è un dispositivo medico certificato: percentili, stime del peso fetale e indici sono strumenti di supporto alla refertazione, riportano la curva o la formula da cui nascono, non pongono diagnosi e vanno letti nel contesto clinico complessivo.",
   },
   {
     question: "Posso provare Corioli prima di acquistarlo?",
@@ -96,18 +141,19 @@ const faqs = [
   {
     question: "Corioli gestisce anche agenda e fatturazione?",
     answer:
-      "Non ancora: agenda e fatturazione elettronica sono in sviluppo. Oggi Corioli copre la parte clinica della visita — cartella, anamnesi, calcolatori, referti e consensi — mentre per la gestione amministrativa serve ancora uno strumento separato. È un limite da considerare se cerchi una soluzione unica per clinica e contabilità.",
+      "Non ancora: agenda e fatturazione elettronica sono in sviluppo. Oggi Corioli copre la parte clinica della visita — cartella, anamnesi, calcolatori, referti e documenti della paziente — mentre per la gestione amministrativa serve ancora uno strumento separato. È un limite da considerare se cerchi una soluzione unica per clinica e contabilità.",
   },
   {
     question: "Posso migrare i dati da Word, Excel o da un altro gestionale?",
     answer:
-      "Sì. La migrazione dei dati storici è un servizio su preventivo, calcolato in base al formato e alla dimensione dell'archivio, e copre Word, Excel e i formati esportabili dai gestionali più diffusi. È un passaggio consigliato prima di iniziare, così lo storico delle pazienti resta consultabile dentro la cartella clinica invece di rimanere in cartelle separate sul disco.",
+      "Sì. Pazienti e appuntamenti si importano da CSV, compreso l'elenco pazienti esportato da Doctolib, con il controllo del codice fiscale e dei doppioni. Per gli archivi in Word, Excel o in altri formati la migrazione dei dati storici è un servizio su preventivo, calcolato in base al formato e alla dimensione dell'archivio, così lo storico delle pazienti resta consultabile dentro la cartella clinica invece di rimanere in cartelle separate sul disco.",
   },
 ];
 
 const faqStructuredData = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  "@id": `${SITE_URL}/ginecologia#faq`,
   mainEntity: faqs.map((item) => ({
     "@type": "Question",
     name: item.question,
@@ -118,61 +164,181 @@ const faqStructuredData = {
   })),
 };
 
+const breadcrumbStructuredData = {
+  "@context": "https://schema.org",
+  ...breadcrumbList([
+    { name: "Specializzazioni", path: "/specializzazioni" },
+    { name: "Gestionale per ginecologi", path: "/ginecologia" },
+  ]),
+};
+
+// Riquadro "in breve": risposte secche alle domande che un ginecologo — o un
+// assistente conversazionale che riassume la pagina — si pone per primo.
+// Stesso schema di /cardiologia.
+const inBreve = [
+  {
+    label: "Che cos'è",
+    value:
+      "Un gestionale desktop per lo studio di ginecologia e ostetricia: cartella clinica, calcoli fetali e referti PDF.",
+  },
+  {
+    label: "Per chi",
+    value:
+      "Ginecologi e ostetrici in libera professione, studi e ambulatori ginecologici.",
+  },
+  {
+    label: "Dove si scarica",
+    value: "Dal Microsoft Store, con prova gratuita di 30 giorni.",
+  },
+  {
+    label: "Dove stanno i dati",
+    value:
+      "In locale sul computer dello studio. Nessun archivio pazienti sui nostri server.",
+  },
+  {
+    label: "Prezzo",
+    value: "30€ al mese, tutto incluso: nessun modulo a pagamento.",
+  },
+  {
+    label: "Sistemi supportati",
+    value:
+      "Windows 10 e Windows 11. Su Mac (macOS 10.13 o superiore) con installazione assistita da un nostro operatore.",
+  },
+];
+
 const painPoints = [
   {
     icon: Clock,
     title: "Ore perse tra Word, Excel e app esterne",
     description:
-      "Senza un gestionale per ginecologi dedicato, ogni visita ostetrica richiede copia-incolla tra documenti, calcolatrici fetali su smartphone e referti creati da zero. Il tempo clinico si trasforma in lavoro amministrativo ripetitivo.",
+      "Senza un gestionale ginecologico, ogni visita ostetrica richiede copia-incolla tra documenti, calcolatrici fetali sullo smartphone e referti scritti da zero. Il tempo clinico si trasforma in lavoro amministrativo ripetitivo.",
   },
   {
     icon: AlertTriangle,
     title: "Dati clinici dispersi e non confrontabili",
     description:
-      "Biometrie, percentili e curve di crescita finiscono in file separati, impossibili da interrogare nel tempo. Recuperare lo storico di una gravidanza o confrontare visite consecutive diventa un'operazione manuale soggetta a errori.",
+      "Biometrie, percentili e pesi stimati finiscono in file separati, impossibili da interrogare nel tempo. Recuperare lo storico di una gravidanza o confrontare due controlli diventa un'operazione manuale soggetta a errori.",
   },
   {
     icon: FileText,
     title: "Referti non strutturati e archivi fragili",
     description:
-      "I software generici non offrono template ostetrici né calcolatori integrati. Il medico produce referti inconsistenti, archivia consensi cartacei e non ha garanzie su backup, crittografia e conformità GDPR per i dati sanitari.",
+      "Un software generico non conosce la differenza fra un DBP e una nota libera: niente modelli ostetrici, niente percentili, niente curve. I referti cambiano forma da una paziente all'altra e i consensi firmati restano in un raccoglitore.",
+  },
+];
+
+// Le tre visite dell'app (tipi di visita in AddVisit.tsx) e le sezioni
+// dell'anamnesi predefinite (utils/anamnesiStrutturata.ts).
+const visite = [
+  {
+    numero: "01",
+    title: "Visita ginecologica",
+    description:
+      "Anamnesi per sezioni — familiare, fisiologica, patologica, ginecologica, farmacologica, allergica, partner — da rinominare, riordinare e completare con sezioni tue. Esame obiettivo, ecografia e conclusioni con i modelli di testo dello studio.",
+  },
+  {
+    numero: "02",
+    title: "Visita ginecologica pediatrica",
+    description:
+      "Una visita a parte per le pazienti più giovani, con la sua anamnesi e lo stadio di Tanner nella scheda.",
+  },
+  {
+    numero: "03",
+    title: "Visita ostetrica",
+    description:
+      "Storia ostetrica, gravidanze in corso e concluse, settimane di gestazione e data presunta del parto, biometria, peso fetale stimato e flussimetria ombelicale nella stessa maschera.",
   },
 ];
 
 const features = [
   {
-    icon: FileText,
+    icon: Baby,
     title: "Cartella ostetrica elettronica",
     description:
-      "Anamnesi strutturata per gravidanza e ginecologia, diario clinico con timeline delle visite e storico completo consultabile in pochi clic. La cartella ostetrica elettronica è il cuore del software ginecologia Corioli.",
+      "Storia ostetrica, gravidanze in corso e concluse e ogni controllo in ordine cronologico. Il peso fetale stimato di ogni visita finisce nel grafico di crescita: l'andamento di una gravidanza si legge in un colpo d'occhio, senza riaprire i vecchi referti.",
   },
   {
     icon: Calculator,
-    title: "Calcolatori fetali integrati",
+    title: "Calcoli fetali dentro la visita",
     description:
-      "Età gestazionale, biometria fetale (BPD, HC, AC, FL), stima del peso fetale con algoritmo Hadlock, percentili e curve di crescita tutti nativi nella visita, senza app di terze parti.",
+      "Le misure diventano subito percentili, con una barra che mostra dove cade il valore: DBP, CC, CA e LF con Hadlock, peso fetale con la formula Hadlock che preferisci (I–IV), PI e IR dell'arteria ombelicale per epoca gestazionale. Niente calcolatrici sul telefono.",
   },
   {
     icon: FileText,
     title: "Referti PDF pronti",
     description:
-      "Genera referti ostetrici e ginecologici completi in PDF con un clic. I risultati dei calcolatori si inseriscono automaticamente nel documento, pronto per la stampa o l'invio alla paziente.",
+      "Referto ginecologico e ostetrico, ricetta, certificato e richiesta di esame, con le immagini ecografiche della visita, la carta intestata dello studio, firma e timbro. I risultati dei calcoli entrano nel documento senza essere ricopiati.",
   },
   {
-    icon: Shield,
-    title: "Consenso informato digitale",
+    icon: Paperclip,
+    title: "Documenti e consensi della paziente",
     description:
-      "Raccogli e archivia i consensi informati in modo tracciabile e conforme al GDPR. Niente più moduli cartacei dispersi: tutto collegato alla scheda paziente nel gestionale.",
+      "Esami esterni, consensi firmati e immagini si caricano come PDF o immagine nella scheda della paziente, accanto alle visite. Ogni correzione a una visita resta nella cronologia delle modifiche, con data, campo e valore precedente.",
+  },
+  {
+    icon: Lock,
+    title: "Archivio locale e protetto",
+    description:
+      "I dati restano sul computer dello studio, con backup automatici sullo stesso disco, scrittura atomica del database e blocco dell'applicazione con PIN, Windows Hello o Touch ID.",
+  },
+  {
+    icon: FolderInput,
+    title: "Dal vecchio archivio a Corioli",
+    description:
+      "Import da CSV di pazienti e appuntamenti, compreso l'elenco pazienti di Doctolib, con il controllo del codice fiscale e dei doppioni. Gli archivi in Word o Excel li migriamo noi, su preventivo.",
+  },
+];
+
+// Curve e formule realmente usate dall'app (utils/biometryCentiles.ts,
+// fetalWeightUtils.ts, fetalGrowthCentiles.ts, flussimetriaUtils.ts,
+// metabolicIndices.ts). I limiti sono quelli applicati dal codice: fuori range
+// il percentile non viene calcolato.
+const calcoli = [
+  {
+    nome: "Settimane di gestazione e data presunta del parto",
+    fonte: "Dall'ultima mestruazione, 280 giorni",
+    nota: "Calcolate alla data della visita",
+  },
+  {
+    nome: "Biometria fetale (DBP, CC, CA, LF)",
+    fonte: "Percentili di Hadlock (1984)",
+    nota: "Da 14 a 40 settimane",
+  },
+  {
+    nome: "Peso fetale stimato",
+    fonte: "Hadlock I–IV (1985), a scelta del medico",
+    nota: "Centile sulle curve Hadlock 1991, da 20 a 42 settimane",
+  },
+  {
+    nome: "PI dell'arteria ombelicale",
+    fonte: "Curve Fetal Medicine Foundation (Ciobanu et al., 2019)",
+    nota: "Percentile da 20 a 41 settimane",
+  },
+  {
+    nome: "IR dell'arteria ombelicale",
+    fonte: "Percentile per epoca gestazionale",
+    nota: "Nel riepilogo insieme al PI e al flusso telediastolico",
+  },
+  {
+    nome: "BMI",
+    fonte: "Fasce OMS",
+    nota: "Anche sul peso pre-gravidanza, con l'aumento di peso in gravidanza",
+  },
+  {
+    nome: "HOMA-IR",
+    fonte: "(glicemia × insulinemia) / 405",
+    nota: "Su glicemia e insulinemia a digiuno",
   },
 ];
 
 const genericComparison = [
   { feature: "Cartella ostetrica elettronica strutturata", corioli: true, generic: false },
-  { feature: "Calcolatori fetali Hadlock integrati", corioli: true, generic: false },
-  { feature: "Percentili e biometria nella visita", corioli: true, generic: false },
-  { feature: "Referti PDF con dati clinici auto-compilati", corioli: true, generic: "Parziale" },
-  { feature: "Consenso informato digitale nativo", corioli: true, generic: false },
-  { feature: "Progettato per ginecologia e ostetricia", corioli: true, generic: false },
+  { feature: "Biometria con i percentili di Hadlock nella visita", corioli: true, generic: false },
+  { feature: "Peso fetale stimato Hadlock I–IV con grafico di crescita", corioli: true, generic: false },
+  { feature: "Flussimetria ombelicale con percentili", corioli: true, generic: false },
+  { feature: "Referti PDF con i dati della visita", corioli: true, generic: "Parziale" },
+  { feature: "Modelli di testo per ecografia e visita", corioli: true, generic: "Parziale" },
+  { feature: "Dati salvati in locale nello studio", corioli: true, generic: "Raro" },
   { feature: "Agenda e fatturazione", corioli: "In sviluppo", generic: true },
   { feature: "Prova gratuita 30 giorni", corioli: true, generic: "Variabile" },
 ];
@@ -199,30 +365,22 @@ export default function GinecologiaPage() {
   return (
     <>
       <RicordaEdizione edizione="ginecologia" />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(softwareStructuredData).replace(/</g, "\\u003c"),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqStructuredData).replace(/</g, "\\u003c"),
-        }}
-      />
+      <script {...jsonLdProps(softwareStructuredData)} />
+      <script {...jsonLdProps(breadcrumbStructuredData)} />
+      <script {...jsonLdProps(faqStructuredData)} />
 
       <div className="pt-40 md:pt-48 pb-24 bg-background">
         {/* Hero */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 mb-24 md:mb-32 text-center">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 mb-20 md:mb-28 text-center">
           <h1 className="font-heading text-4xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight text-balance">
             Gestionale per Ginecologi e Ostetrici
           </h1>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-10 text-balance">
-            Corioli è il gestionale per ginecologi pensato per la visita
-            specialistica: cartella ostetrica elettronica, calcolatori fetali e
-            referti PDF in un unico software per ginecologia, sicuro e
-            conforme al GDPR, con i dati salvati nel tuo studio.
+            Corioli è il software per lo studio di ginecologia e ostetricia:
+            visite ginecologiche e ostetriche con l'anamnesi che imposti tu,
+            biometria e peso fetale con i percentili di Hadlock, flussimetria
+            ombelicale e referti PDF pronti da consegnare. I dati delle
+            pazienti restano nel tuo studio.
           </p>
           <Link
             href="/download"
@@ -232,12 +390,34 @@ export default function GinecologiaPage() {
           </Link>
         </section>
 
+        {/* In breve: risposte secche, utili a chi arriva da una ricerca o da un
+            assistente conversazionale e vuole capire in dieci secondi. */}
+        <section className="max-w-4xl mx-auto px-6 md:px-12 mb-24 md:mb-32">
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-card p-8 md:p-10">
+            <h2 className="font-heading text-xl font-bold text-gray-900 mb-6">
+              Corioli per la ginecologia in breve
+            </h2>
+            <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-5">
+              {inBreve.map((item) => (
+                <div key={item.label} className="border-t border-gray-100 pt-4">
+                  <dt className="text-xs font-bold uppercase tracking-wider text-brand-600 mb-1.5">
+                    {item.label}
+                  </dt>
+                  <dd className="text-sm text-gray-600 leading-relaxed">
+                    {item.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+
         {/* Pain points */}
         <section className="py-20 md:py-28 bg-white border-y border-gray-100">
           <div className="max-w-7xl mx-auto px-6 md:px-12">
             <div className="text-center mb-16">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                I problemi di chi lavora senza un gestionale dedicato
+                Cosa non funziona senza un gestionale ginecologico
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 Un software generico o Word ed Excel non coprono le esigenze
@@ -265,16 +445,70 @@ export default function GinecologiaPage() {
           </div>
         </section>
 
+        {/* Le visite */}
+        <section id="visite" className="py-20 md:py-28 scroll-mt-32">
+          <div className="max-w-5xl mx-auto px-6 md:px-12">
+            <div className="text-center mb-16">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Tre visite, ciascuna con la sua anamnesi
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Ginecologia, ginecologia pediatrica e ostetricia non si
+                refertano allo stesso modo: in Corioli sono tre visite distinte,
+                con i campi che servono a ciascuna.
+              </p>
+            </div>
+            <ol className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {visite.map((visita) => (
+                <li
+                  key={visita.numero}
+                  className="bg-white rounded-2xl border border-gray-100 shadow-soft p-6 flex flex-col gap-4"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="font-heading font-bold text-brand-200 text-2xl leading-none"
+                  >
+                    {visita.numero}
+                  </span>
+                  <div>
+                    <h3 className="font-heading font-bold text-lg text-gray-900 mb-2">
+                      {visita.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed text-sm">
+                      {visita.description}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+
+            <div className="mt-12 bg-gray-50 rounded-2xl border border-gray-100 p-6 md:p-8">
+              <h3 className="font-heading text-xl font-bold text-gray-900 mb-3">
+                Modelli di testo pronti, tutti modificabili
+              </h3>
+              <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+                Corioli parte con i modelli per le formulazioni ricorrenti —
+                ecografia ginecologica transvaginale, fibromatosi uterina,
+                endometrioma, cisti dermoide, inserimento di IUD, visita per
+                prolasso — e li inserisci con un clic dal pulsante «Modello».
+                Ognuno si modifica o si sostituisce dalle impostazioni, e puoi
+                aggiungere i tuoi per anamnesi, esame obiettivo, conclusioni e
+                terapie.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Features */}
-        <section className="py-20 md:py-28">
+        <section className="py-20 md:py-28 bg-white border-y border-gray-100">
           <div className="max-w-7xl mx-auto px-6 md:px-12">
             <div className="text-center mb-16">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Funzionalità specifiche per ginecologia e ostetricia
+                Funzionalità del software di ginecologia e ostetricia
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
-                Ogni strumento del software ginecologia Corioli è integrato
-                nel flusso della visita, non aggiunto come modulo esterno.
+                Ogni strumento è dentro il flusso della visita, non aggiunto
+                come modulo esterno.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -300,6 +534,60 @@ export default function GinecologiaPage() {
           </div>
         </section>
 
+        {/* Calcoli e curve */}
+        <section className="py-20 md:py-28">
+          <div className="max-w-4xl mx-auto px-6 md:px-12">
+            <div className="text-center mb-12">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Calcoli e curve, con la fonte dichiarata
+              </h2>
+              <p className="text-gray-600">
+                Le curve di riferimento sono quelle pubblicate. Fuori
+                dall'intervallo di settimane in cui una curva è valida, il
+                percentile non viene calcolato.
+              </p>
+            </div>
+            <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
+              <table className="w-full min-w-[560px] text-sm">
+                <thead>
+                  <tr className="bg-brand-50 border-b border-brand-100">
+                    <th className="px-6 py-4 text-left font-bold text-gray-900">
+                      Calcolo
+                    </th>
+                    <th className="px-6 py-4 text-left font-bold text-gray-900">
+                      Formula o curva
+                    </th>
+                    <th className="px-6 py-4 text-left font-bold text-gray-900">
+                      Limite applicato
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {calcoli.map((riga) => (
+                    <tr
+                      key={riga.nome}
+                      className="border-b border-gray-100 even:bg-gray-50/50"
+                    >
+                      <td className="px-6 py-4 text-gray-900 font-semibold">
+                        {riga.nome}
+                      </td>
+                      <td className="px-6 py-4 text-gray-600">{riga.fonte}</td>
+                      <td className="px-6 py-4 text-gray-500 text-xs">
+                        {riga.nota}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-sm text-gray-500 leading-relaxed mt-8 max-w-2xl mx-auto text-center">
+              Corioli non è un dispositivo medico certificato: percentili e
+              stime sono strumenti di supporto alla refertazione e
+              l'interpretazione resta del medico.
+            </p>
+          </div>
+        </section>
+
         {/* Screenshot gallery */}
         <section className="py-20 md:py-28 bg-white border-y border-gray-100">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12">
@@ -308,7 +596,7 @@ export default function GinecologiaPage() {
         </section>
 
         {/* Comparison */}
-        <section className="py-20 md:py-28 bg-white border-y border-gray-100">
+        <section className="py-20 md:py-28">
           <div className="max-w-4xl mx-auto px-6 md:px-12">
             <div className="text-center mb-12">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -358,7 +646,7 @@ export default function GinecologiaPage() {
         </section>
 
         {/* Free trial */}
-        <section className="py-20 md:py-28">
+        <section className="py-20 md:py-28 bg-white border-y border-gray-100">
           <div className="max-w-4xl mx-auto px-6 md:px-12">
             <div className="bg-brand-900 rounded-3xl p-10 md:p-14 text-center relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-brand-600 rounded-full blur-[80px] opacity-40 transform translate-x-1/2 -translate-y-1/2" />
@@ -389,7 +677,7 @@ export default function GinecologiaPage() {
         </section>
 
         {/* FAQ */}
-        <section className="py-20 md:py-28 bg-white border-y border-gray-100">
+        <section className="py-20 md:py-28">
           <div className="max-w-6xl mx-auto px-6 md:px-12">
             <div className="text-center mb-12">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -411,10 +699,10 @@ export default function GinecologiaPage() {
             className="flex flex-wrap justify-center gap-6 text-sm font-medium text-gray-500"
           >
             <Link
-              href="/funzionalita"
+              href="/specializzazioni"
               className="inline-block py-1 hover:text-brand-600 transition-colors"
             >
-              Funzionalità
+              Tutte le specializzazioni
             </Link>
             <Link
               href="/cardiologia"
@@ -423,28 +711,34 @@ export default function GinecologiaPage() {
               Gestionale per cardiologi
             </Link>
             <Link
+              href="/funzionalita"
+              className="inline-block py-1 hover:text-brand-600 transition-colors"
+            >
+              Funzionalità
+            </Link>
+            <Link
               href="/prezzi"
               className="inline-block py-1 hover:text-brand-600 transition-colors"
             >
               Prezzi
             </Link>
             <Link
-              href="/download"
-              className="inline-block py-1 hover:text-brand-600 transition-colors"
-            >
-              Download
-            </Link>
-            <Link
               href="/blog/gestionale-per-ginecologi-cosa-cercare"
               className="inline-block py-1 hover:text-brand-600 transition-colors"
             >
-              Guida alla scelta del gestionale
+              Come scegliere un gestionale per ginecologi
             </Link>
             <Link
               href="/blog/stima-peso-fetale-hadlock-guida-pratica"
               className="inline-block py-1 hover:text-brand-600 transition-colors"
             >
               Stima del peso fetale con Hadlock
+            </Link>
+            <Link
+              href="/blog/flussimetria-arteria-ombelicale-pi-percentili"
+              className="inline-block py-1 hover:text-brand-600 transition-colors"
+            >
+              Flussimetria dell'arteria ombelicale
             </Link>
             <Link
               href="/blog/calcolo-eta-gestazionale-settimane-gravidanza"

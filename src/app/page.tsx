@@ -327,9 +327,10 @@ export default function Home() {
               <span className="text-brand-600">il tuo tempo</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed font-sans max-w-[90%]">
-              Corioli è il software gestionale medico per dottori e studi
-              specialistici. Non adattato, non generico: una cartella clinica
-              elettronica pensata per come lavori davvero.
+              Corioli è il software gestionale medico per studi
+              specialistici, con un'edizione per la ginecologia e l'ostetricia
+              e una per la cardiologia. Non adattato, non generico: una
+              cartella clinica elettronica pensata per come lavori davvero.
             </p>
 
             <ul className="flex flex-col gap-4 mb-8">
