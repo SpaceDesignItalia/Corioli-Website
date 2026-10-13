@@ -3,6 +3,7 @@ import Image from "next/image";
 import { pageOpenGraph } from "@/lib/seo";
 import { MS_STORE_URL } from "@/lib/ms-store";
 import Link from "next/link";
+import ScreenshotGallery, { type Screenshot } from "@/components/ScreenshotGallery";
 import FaqList from "@/components/FaqList";
 import { MacRequestLink, RicordaEdizione, StoreLink } from "@/components/DownloadLinks";
 import {
@@ -101,6 +102,12 @@ const softwareStructuredData = {
   // La scheda Store e la stessa applicazione vista da un altro sito: dirlo
   // aiuta motori e assistenti a non trattarle come due prodotti omonimi.
   sameAs: [MS_STORE_URL.cardiologia],
+  // Le stesse schermate della galleria in pagina.
+  screenshot: [
+    "https://corioli.it/screenshots/cardiologia/2026-10/dashboard.png",
+    "https://corioli.it/screenshots/cardiologia/2026-10/visita.png",
+    "https://corioli.it/screenshots/cardiologia/2026-10/referto.png",
+  ],
   publisher: { "@id": "https://corioli.it/#organization" },
   isPartOf: { "@id": "https://corioli.it/#software" },
 };
@@ -304,9 +311,7 @@ const sezioniVisita = [
 ];
 
 // I moduli che partono spenti e si accendono dalle impostazioni
-// (utils/moduliVisita.ts di CorioliGenerale). Scompenso e fibrillazione
-// atriale l'app li segnala come ancora in revisione con il referente clinico:
-// la pagina lo dice allo stesso modo.
+// (utils/moduliVisita.ts di CorioliGenerale).
 const moduliOpzionali = [
   {
     title: "Ecocardiogramma",
@@ -339,13 +344,11 @@ const moduliOpzionali = [
     title: "Scompenso cardiaco",
     description:
       "Fenotipo per frazione di eiezione, classe NYHA e NT-proBNP. Porta con sé l'ecocardiogramma, da cui legge la FE.",
-    inRevisione: true,
   },
   {
     title: "Fibrillazione atriale",
     description:
       "CHA2DS2-VASc, HAS-BLED e clearance della creatinina secondo Cockcroft-Gault.",
-    inRevisione: true,
   },
 ];
 
@@ -372,7 +375,7 @@ const features = [
     icon: HeartPulse,
     title: "Scompenso e fibrillazione atriale",
     description:
-      "Fenotipi dello scompenso aggiornati a ESC 2026 — dove HFmrEF non esiste più e il confine passa a una frazione di eiezione del 50% — con classe NYHA e NT-proBNP. Per la fibrillazione atriale CHA2DS2-VASc e HAS-BLED, che leggono ipertensione e diabete dal pannello dei fattori di rischio invece di richiederli di nuovo, e la clearance di Cockcroft-Gault per la dose degli anticoagulanti diretti. Sono due moduli da accendere, che l'app segnala come ancora in revisione con il team di cardiologi.",
+      "Fenotipi dello scompenso aggiornati a ESC 2026 — dove HFmrEF non esiste più e il confine passa a una frazione di eiezione del 50% — con classe NYHA e NT-proBNP. Per la fibrillazione atriale CHA2DS2-VASc e HAS-BLED, che leggono ipertensione e diabete dal pannello dei fattori di rischio invece di richiederli di nuovo, e la clearance di Cockcroft-Gault per la dose degli anticoagulanti diretti. Sono due moduli da accendere quando servono.",
   },
   {
     icon: Users,
@@ -440,6 +443,59 @@ const indici = [
     nome: "Progressione calcium score",
     formula: "Variazione assoluta e percentuale fra esami consecutivi",
     nota: "Nessuna interpolazione fra un esame e l'altro",
+  },
+];
+
+// Schermate catturate dall'app vera (build del 13/10/2026) su un archivio di
+// prova con tutti gli otto moduli accesi; script e istruzioni stanno in
+// Corioli-Cardiologia-Store/strumenti/sito. Visita, dashboard e referto sono pagine
+// intere che si scorrono dentro la finestra; laboratorio e moduli (la finestra
+// "Moduli della visita" delle impostazioni, con due moduli spenti) sono
+// ritagliati a 3:2 esatto. Sei schede al massimo, con le etichette corte: con
+// sette l'ultima andava a capo da sola gia a 1280px. "Pazienti a rischio" e'
+// stata tolta su richiesta di Pablo: quella colonna si vede gia nella dashboard.
+// L'ordine e' il suo: dashboard, visita, laboratorio, moduli, referto.
+const SCREENSHOT_RATIO = 3 / 2;
+const screenshots: Screenshot[] = [
+  {
+    id: "dashboard",
+    label: "Dashboard",
+    image: "/screenshots/cardiologia/2026-10/dashboard.png",
+    alt: "Dashboard di Corioli Cardiologia con pazienti e visite recenti, gli esami di ogni visita, i pazienti a rischio rispetto all'obiettivo di LDL e i gruppi di ricerca",
+    width: 2049,
+    height: 1769,
+  },
+  {
+    id: "visita",
+    label: "Visita",
+    image: "/screenshots/cardiologia/2026-10/visita.png",
+    alt: "Visita cardiologica completa in un'unica pagina: variabili cliniche, laboratorio, anamnesi, ECG con QTc, ecocardiogramma con massa ventricolare, TC coronarica, test ergometrico, Holter ECG e pressorio, doppler dei tronchi sovraaortici, scompenso e fibrillazione atriale con CHA2DS2-VASc e HAS-BLED",
+    width: 1708,
+    height: 7299,
+  },
+  {
+    id: "laboratorio",
+    label: "Laboratorio",
+    image: "/screenshots/cardiologia/2026-10/laboratorio.png",
+    alt: "Esami ematochimici raggruppati per burden aterogeno, profilo infiammatorio, metabolismo glucidico e funzione renale, con il valore precedente accanto e LDL Friedewald, non-HDL, HOMA-IR ed eGFR calcolati",
+    width: 2037,
+    height: 1358,
+  },
+  {
+    id: "moduli",
+    label: "Moduli",
+    image: "/screenshots/cardiologia/2026-10/impostazioni-moduli.png",
+    alt: "Impostazioni di Corioli Cardiologia, finestra Moduli della visita: interruttori per accendere ecocardiogramma, TC coronarica, test ergometrico, Holter ECG e pressorio, doppler dei tronchi sovraaortici, scompenso cardiaco e fibrillazione atriale",
+    width: 2031,
+    height: 1354,
+  },
+  {
+    id: "referto",
+    label: "Referto PDF",
+    image: "/screenshots/cardiologia/2026-10/referto.png",
+    alt: "Referto PDF di cinque pagine della visita cardiologica, con gli esami strumentali in tabella, l'inquadramento clinico, la firma del medico e il tracciato ECG allegato",
+    width: 1352,
+    height: 9042,
   },
 ];
 
@@ -562,9 +618,34 @@ export default function CardiologiaPage() {
           </p>
         </section>
 
+        {/* Galleria subito dopo l'hero: prima di leggere che cosa contiene, il
+            medico vede l'app. */}
+        <section
+          id="interfaccia"
+          className="py-20 md:py-28 bg-white border-y border-gray-100 scroll-mt-24"
+        >
+          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12">
+            <ScreenshotGallery
+              screenshots={screenshots}
+              frameRatio={SCREENSHOT_RATIO}
+              intro={
+                <>
+                  Corioli Cardiologia com&apos;è davvero, su un archivio di
+                  prova con tutti i moduli accesi. Nella visita e nel referto
+                  PDF{" "}
+                  <strong className="text-brand-700">
+                    scorri all&apos;interno della finestra
+                  </strong>{" "}
+                  per vederli interi.
+                </>
+              }
+            />
+          </div>
+        </section>
+
         {/* In breve: risposte secche, utili a chi arriva da una ricerca o da un
             assistente conversazionale e vuole capire in dieci secondi. */}
-        <section className="max-w-4xl mx-auto px-6 md:px-12 mb-24 md:mb-32">
+        <section className="max-w-4xl mx-auto px-6 md:px-12 pt-20 md:pt-28 mb-24 md:mb-32">
           <div className="bg-white rounded-3xl border border-gray-100 shadow-card p-8 md:p-10">
             <h2 className="font-heading text-xl font-bold text-gray-900 mb-6">
               Corioli Cardiologia in breve
@@ -670,14 +751,7 @@ export default function CardiologiaPage() {
                     key={modulo.title}
                     className="bg-gray-50 rounded-2xl border border-gray-100 p-5"
                   >
-                    <div className="flex flex-wrap items-center gap-2 mb-1.5">
-                      <h4 className="font-bold text-gray-900">{modulo.title}</h4>
-                      {modulo.inRevisione ? (
-                        <span className="text-xs font-semibold text-amber-800 bg-amber-50 border border-amber-200 rounded-full px-2.5 py-0.5">
-                          In revisione
-                        </span>
-                      ) : null}
-                    </div>
+                    <h4 className="font-bold text-gray-900 mb-1.5">{modulo.title}</h4>
                     <p className="text-sm text-gray-600 leading-relaxed">
                       {modulo.description}
                     </p>

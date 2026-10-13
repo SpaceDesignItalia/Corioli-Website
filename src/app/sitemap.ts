@@ -28,13 +28,15 @@ const latestPostDate = posts
 
 const staticPages: StaticEntry[] = [
   // Home, specializzazioni e le due pagine di specialità sono state riviste il
-  // 9/10/2026 (/ginecologia riscritta sulle funzioni verificate nell'app); le
-  // altre pagine statiche restano a STATIC_PAGES_UPDATED.
+  // 9/10/2026 (/ginecologia riscritta sulle funzioni verificate nell'app); il
+  // 13/10 le due specialità hanno la galleria delle schermate in testa e
+  // /download le schede che portano lì. Le altre pagine statiche restano a
+  // STATIC_PAGES_UPDATED.
   { path: '', changeFrequency: 'monthly', priority: 1, lastModified: '2026-10-09' },
   { path: '/funzionalita', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/specializzazioni', changeFrequency: 'monthly', priority: 0.8, lastModified: '2026-10-09' },
-  { path: '/ginecologia', changeFrequency: 'monthly', priority: 0.9, lastModified: '2026-10-09' },
-  { path: '/cardiologia', changeFrequency: 'monthly', priority: 0.9, lastModified: '2026-10-09' },
+  { path: '/ginecologia', changeFrequency: 'monthly', priority: 0.9, lastModified: '2026-10-13' },
+  { path: '/cardiologia', changeFrequency: 'monthly', priority: 0.9, lastModified: '2026-10-13' },
   { path: '/prezzi', changeFrequency: 'monthly', priority: 0.8 },
   // Allineata a PAGE_UPDATED in src/app/chi-siamo/page.tsx.
   { path: '/chi-siamo', changeFrequency: 'monthly', priority: 0.7, lastModified: '2026-09-29' },
@@ -42,7 +44,7 @@ const staticPages: StaticEntry[] = [
   // Allineata al dateModified del DefinedTermSet in src/app/glossario/page.tsx.
   { path: '/glossario', changeFrequency: 'monthly', priority: 0.7, lastModified: GLOSSARY_UPDATED },
   { path: '/contatti', changeFrequency: 'monthly', priority: 0.8 },
-  { path: '/download', changeFrequency: 'monthly', priority: 0.9 },
+  { path: '/download', changeFrequency: 'monthly', priority: 0.9, lastModified: '2026-10-13' },
   { path: '/privacy-policy', changeFrequency: 'yearly', priority: 0.5 },
   { path: '/gdpr', changeFrequency: 'yearly', priority: 0.5 },
 ]

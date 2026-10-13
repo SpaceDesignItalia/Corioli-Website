@@ -390,9 +390,20 @@ export default function GinecologiaPage() {
           </Link>
         </section>
 
+        {/* Galleria subito dopo l'hero, come in /cardiologia: prima di leggere
+            che cosa contiene, il medico vede l'app. */}
+        <section
+          id="interfaccia"
+          className="py-20 md:py-28 bg-white border-y border-gray-100 scroll-mt-24"
+        >
+          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12">
+            <ScreenshotGallery />
+          </div>
+        </section>
+
         {/* In breve: risposte secche, utili a chi arriva da una ricerca o da un
             assistente conversazionale e vuole capire in dieci secondi. */}
-        <section className="max-w-4xl mx-auto px-6 md:px-12 mb-24 md:mb-32">
+        <section className="max-w-4xl mx-auto px-6 md:px-12 pt-20 md:pt-28 mb-24 md:mb-32">
           <div className="bg-white rounded-3xl border border-gray-100 shadow-card p-8 md:p-10">
             <h2 className="font-heading text-xl font-bold text-gray-900 mb-6">
               Corioli per la ginecologia in breve
@@ -588,15 +599,8 @@ export default function GinecologiaPage() {
           </div>
         </section>
 
-        {/* Screenshot gallery */}
-        <section className="py-20 md:py-28 bg-white border-y border-gray-100">
-          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12">
-            <ScreenshotGallery />
-          </div>
-        </section>
-
         {/* Comparison */}
-        <section className="py-20 md:py-28">
+        <section className="py-20 md:py-28 bg-white border-y border-gray-100">
           <div className="max-w-4xl mx-auto px-6 md:px-12">
             <div className="text-center mb-12">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -646,7 +650,7 @@ export default function GinecologiaPage() {
         </section>
 
         {/* Free trial */}
-        <section className="py-20 md:py-28 bg-white border-y border-gray-100">
+        <section className="py-20 md:py-28">
           <div className="max-w-4xl mx-auto px-6 md:px-12">
             <div className="bg-brand-900 rounded-3xl p-10 md:p-14 text-center relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-brand-600 rounded-full blur-[80px] opacity-40 transform translate-x-1/2 -translate-y-1/2" />
@@ -677,7 +681,7 @@ export default function GinecologiaPage() {
         </section>
 
         {/* FAQ */}
-        <section className="py-20 md:py-28">
+        <section className="py-20 md:py-28 bg-white border-y border-gray-100">
           <div className="max-w-6xl mx-auto px-6 md:px-12">
             <div className="text-center mb-12">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">

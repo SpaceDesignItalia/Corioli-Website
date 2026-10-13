@@ -1,13 +1,23 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback, type ReactNode } from "react";
 import NextImage from "next/image";
-import { Image as ImageIcon, Maximize2, X, Minus } from "lucide-react";
+import { ArrowDown, Image as ImageIcon, Maximize2, X, Minus } from "lucide-react";
 
 // label = testo della tab (breve). alt = descrizione per screen reader e
 // Google Immagini, quindi piu esplicita. width/height sono le dimensioni reali
 // del PNG: servono a next/image per riservare lo spazio ed evitare layout shift.
-const screenshots = [
+export type Screenshot = {
+  id: string;
+  label: string;
+  image: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
+// Le schermate di Corioli per la ginecologia, quelle di /ginecologia.
+const screenshotsGinecologia: Screenshot[] = [
   {
     id: "dashboard",
     label: "Dashboard",
@@ -50,9 +60,56 @@ const screenshots = [
   },
 ];
 
-export default function ScreenshotGallery() {
+type ScreenshotGalleryProps = {
+  screenshots?: Screenshot[];
+  // Testo sotto il titolo; l'indicazione sul tutto schermo segue da sola.
+  intro?: ReactNode;
+  // Rapporto larghezza/altezza delle schermate. Se c'e, la finestra prende a
+  // ogni larghezza l'altezza giusta per contenerle intere: niente banda vuota
+  // sotto, e solo quelle piu alte (un referto PDF) si scorrono. Senza, la
+  // finestra ha le altezze fisse pensate per le schermate della ginecologia.
+  frameRatio?: number;
+};
+
+export default function ScreenshotGallery({
+  screenshots = screenshotsGinecologia,
+  intro = (
+    <>
+      Scopri quanto è intuitivo Corioli. Seleziona una vista e{" "}
+      <strong className="text-brand-700">
+        scorri all&apos;interno della finestra
+      </strong>{" "}
+      per esplorare l&apos;intera schermata.
+    </>
+  ),
+  frameRatio,
+}: ScreenshotGalleryProps) {
   const [activeTab, setActiveTab] = useState(screenshots[0].id);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const active = screenshots.find((s) => s.id === activeTab) ?? screenshots[0];
+
+  // La schermata attiva e' piu alta della finestra. Va detto in modo che si
+  // veda: chi apre la visita intera vede solo l'inizio e, senza un invito a
+  // scorrere, la crede tagliata. Si misura invece di dedurlo dalle
+  // proporzioni, perche' la finestra della ginecologia ha altezze fisse.
+  const schermi = useRef<Record<string, HTMLDivElement | null>>({});
+  const [sborda, setSborda] = useState(false);
+  // Schermate gia' scorse: l'invito sparisce e non torna.
+  const [scorse, setScorse] = useState<Record<string, boolean>>({});
+  const misura = useCallback(() => {
+    const el = schermi.current[activeTab];
+    setSborda(Boolean(el && el.scrollHeight - el.clientHeight > 24));
+  }, [activeTab]);
+  useEffect(() => {
+    misura();
+    // Il passaggio al tutto schermo dura 700ms: si rimisura a fine corsa.
+    const t = window.setTimeout(misura, 750);
+    window.addEventListener("resize", misura);
+    return () => {
+      window.clearTimeout(t);
+      window.removeEventListener("resize", misura);
+    };
+  }, [misura, isFullscreen]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -76,17 +133,15 @@ export default function ScreenshotGallery() {
   }, [isFullscreen]);
 
   return (
-    <div className="w-full relative">
+    // --barra e l'altezza della barra della finestra: la usa la barra stessa e
+    // il calcolo dell'altezza della finestra quando c'e frameRatio.
+    <div className="w-full relative [--barra:42px] sm:[--barra:54px]">
       <div className="text-center mb-8 sm:mb-10 px-4">
         <h2 className="font-heading text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
           Esplora l&apos;Interfaccia
         </h2>
         <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-          Scopri quanto è intuitivo Corioli. Seleziona una vista e{" "}
-          <strong className="text-brand-700">
-            scorri all&apos;interno della finestra
-          </strong>{" "}
-          per esplorare l&apos;intera schermata.{" "}
+          {intro}{" "}
           <span className="hidden sm:inline">
             Puoi anche cliccare sulla schermata per vederla a tutto schermo.
           </span>
@@ -112,8 +167,21 @@ export default function ScreenshotGallery() {
         ))}
       </div>
 
-      <div className="relative mx-auto w-full max-w-[1200px] group mt-4 aspect-video sm:aspect-auto sm:h-[600px] md:h-[750px] lg:h-[850px] px-2 sm:px-0">
-        {!isFullscreen && (
+      <div
+        className={`relative mx-auto w-full max-w-[1200px] group mt-4 ${
+          frameRatio
+            ? "box-content"
+            : "aspect-video sm:aspect-auto sm:h-[600px] md:h-[750px] lg:h-[850px] px-2 sm:px-0"
+        }`}
+        // Con box-content il rapporto vale per l'area della schermata e la
+        // barra si aggiunge sopra come padding (+1px per il bordo inferiore).
+        style={
+          frameRatio
+            ? { aspectRatio: frameRatio, paddingTop: "calc(var(--barra) + 1px)" }
+            : undefined
+        }
+      >
+        {!isFullscreen && sborda && (
           // Da 2xl e non da xl: a 1280px la galleria (max 1200px) lascia meno
           // dei 64px che servono all'indicatore e la pagina scorreva di lato.
           <div className="absolute -right-16 top-1/2 -translate-y-1/2 hidden 2xl:flex flex-col items-center gap-2 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -163,7 +231,7 @@ export default function ScreenshotGallery() {
             }`}
           >
             <div
-              className={`bg-white/95 backdrop-blur-md border border-gray-200 border-b-0 px-3 sm:px-4 py-2 sm:py-3 flex items-center gap-2 shadow-sm shrink-0 z-20 transition-all ${
+              className={`h-[var(--barra)] bg-white/95 backdrop-blur-md border border-gray-200 border-b-0 px-3 sm:px-4 py-2 sm:py-3 flex items-center gap-2 shadow-sm shrink-0 z-20 transition-all ${
                 isFullscreen ? "rounded-none sm:rounded-t-2xl" : "rounded-t-2xl"
               }`}
             >
@@ -216,9 +284,7 @@ export default function ScreenshotGallery() {
               <div className="flex-1 flex justify-center overflow-hidden px-2">
                 <div className="bg-gray-100/80 text-gray-500 text-[10px] sm:text-xs font-semibold px-3 sm:px-6 py-1 sm:py-1.5 rounded-md border border-gray-200 flex items-center gap-1.5 sm:gap-2 transition-colors hover:bg-gray-200 cursor-default truncate max-w-full">
                   <ImageIcon size={12} className="shrink-0 sm:w-3.5 sm:h-3.5" />
-                  <span className="truncate">
-                    {screenshots.find((s) => s.id === activeTab)?.label}
-                  </span>
+                  <span className="truncate">{active.label}</span>
                 </div>
               </div>
               <div className="w-12 sm:w-16 shrink-0" />
@@ -232,6 +298,14 @@ export default function ScreenshotGallery() {
               {screenshots.map((screen) => (
                 <div
                   key={screen.id}
+                  ref={(el) => {
+                    schermi.current[screen.id] = el;
+                  }}
+                  onScroll={(e) => {
+                    if (e.currentTarget.scrollTop > 40 && !scorse[screen.id]) {
+                      setScorse((prima) => ({ ...prima, [screen.id]: true }));
+                    }
+                  }}
                   className={`absolute inset-0 overflow-auto [&::-webkit-scrollbar]:w-1.5 sm:[&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar]:h-1.5 sm:[&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-gray-300/80 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-gray-400 transition-opacity duration-500 ${
                     activeTab === screen.id
                       ? "opacity-100 z-10"
@@ -244,6 +318,7 @@ export default function ScreenshotGallery() {
                     width={screen.width}
                     height={screen.height}
                     onClick={() => !isFullscreen && setIsFullscreen(true)}
+                    onLoad={misura}
                     className={`h-auto object-top transition-all duration-500 ${
                       isFullscreen
                         ? "w-full cursor-default"
@@ -257,6 +332,18 @@ export default function ScreenshotGallery() {
                   />
                 </div>
               ))}
+
+              {sborda && !scorse[activeTab] && (
+                <div
+                  aria-hidden="true"
+                  className="absolute bottom-4 sm:bottom-6 inset-x-0 z-30 flex justify-center px-4 pointer-events-none"
+                >
+                  <span className="inline-flex items-center gap-2 rounded-full bg-gray-900/80 px-4 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-sm">
+                    <ArrowDown size={16} className="shrink-0" />
+                    Scorri per vedere tutta la pagina
+                  </span>
+                </div>
+              )}
 
               <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/5 to-transparent pointer-events-none z-20" />
             </div>
