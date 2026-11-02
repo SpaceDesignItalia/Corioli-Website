@@ -13,7 +13,6 @@ import {
   ArrowRight,
   Calculator,
   Check,
-  CheckCircle2,
   Clock,
   FileText,
   HeartPulse,
@@ -58,6 +57,24 @@ export const metadata: Metadata = {
     description:
       "Cartella clinica cardiologica, referto ECG ed ecocardiogramma, TC coronarica e indici calcolati in un unico software desktop. Disponibile sul Microsoft Store, con 30 giorni di prova.",
     url: "https://corioli.it/cardiologia",
+    // Esplicita: l'immagine di pageOpenGraph (quella generica del sito)
+    // vinceva su opengraph-image.tsx di questa cartella.
+    images: [
+      {
+        url: "/cardiologia/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Corioli Cardiologia — Il gestionale per cardiologi",
+      },
+    ],
+  },
+  // Senza, la card di Twitter/X ereditava titolo e descrizione della home.
+  // L'immagine viene da opengraph-image.tsx e twitter-image.tsx accanto.
+  twitter: {
+    card: "summary_large_image",
+    title: "Gestionale per cardiologi | Corioli Cardiologia",
+    description:
+      "ECG, ecocardiogramma e TC coronarica in campi strutturati, indici con la formula in chiaro e referti PDF. Prova gratuita di 30 giorni.",
   },
 };
 
@@ -154,7 +171,7 @@ const faqs = [
   {
     question: "Quali misure gestisce il modulo ecocardiogramma?",
     answer:
-      "Le misure standard di un transtoracico refertato in ambulatorio: DTD e DTS, setto interventricolare, parete posteriore, frazione di eiezione, atrio sinistro, radice aortica, aorta ascendente, TAPSE, PAPs, rapporto E/A ed E/e', più il referto testuale. Ogni modulo strumentale ha i propri modelli di refertazione riutilizzabili, così le frasi ricorrenti non vanno riscritte a ogni visita.",
+      "Le misure standard di un transtoracico refertato in ambulatorio: DTD e DTS, setto interventricolare, parete posteriore, frazione di eiezione, atrio sinistro, gradienti transvalvolari aortici e mitralici (medio e massimo), area valvolare aortica, radice aortica, aorta ascendente, TAPSE, PAPs e rapporto E/A, più il referto testuale. Ogni modulo strumentale ha i propri modelli di refertazione riutilizzabili, così le frasi ricorrenti non vanno riscritte a ogni visita.",
   },
   {
     question: "Corioli calcola i punteggi di rischio cardiovascolare?",
@@ -282,7 +299,7 @@ const sezioniVisita = [
     numero: "06",
     title: "Pressione arteriosa ed elettrocardiogramma",
     description:
-      "Pressione in clinostatismo e ortostatismo; ECG con ritmo, PR, QRS, QT, asse elettrico, QTc calcolato secondo Bazett e referto testuale.",
+      "Pressione in clinostatismo e ortostatismo; ECG con PR, QRS, QT, asse elettrico, QTc calcolato secondo Bazett e referto testuale, dove il ritmo lo scrivi tu.",
   },
   {
     numero: "07",
@@ -316,7 +333,7 @@ const moduliOpzionali = [
   {
     title: "Ecocardiogramma",
     description:
-      "DTD e DTS, setto interventricolare, parete posteriore, frazione di eiezione, atrio sinistro, radice aortica, aorta ascendente, TAPSE, PAPs, E/A ed E/e', con referto.",
+      "DTD e DTS, setto interventricolare, parete posteriore, frazione di eiezione, atrio sinistro, gradienti aortici e mitralici, area valvolare aortica, radice aortica, aorta ascendente, TAPSE, PAPs, E/A, con referto.",
   },
   {
     title: "TC coronarica",
@@ -357,7 +374,7 @@ const features = [
     icon: Activity,
     title: "Moduli strumentali strutturati",
     description:
-      "Elettrocardiogramma, ecocardiogramma e TC coronarica non sono campi di testo libero: sono misure con la loro unità e il loro referto. Nel PDF finiscono raggruppati sotto un unico titolo, Esami strumentali, resi come tabella a griglia leggibile.",
+      "Elettrocardiogramma, ecocardiogramma e TC coronarica non sono campi di testo libero: sono misure con la loro unità e il loro referto. Nel PDF ogni esame ha la sua fascia, con le misure in tabella e il grassetto solo sui valori fuori dai limiti.",
   },
   {
     icon: Calculator,
@@ -571,63 +588,25 @@ export default function CardiologiaPage() {
         }}
       />
 
-      <div className="pt-40 md:pt-48 pb-24 bg-background">
-        {/* Hero */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 mb-20 md:mb-28 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-xs font-bold mb-8 w-fit mx-auto uppercase tracking-wider">
-            <CheckCircle2 size={14} /> Disponibile sul Microsoft Store
-          </div>
-          <h1 className="font-heading text-4xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight text-balance">
-            Gestionale per Cardiologi
-          </h1>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-10 text-balance">
-            Corioli Cardiologia è il gestionale cardiologico per l'ambulatorio:
-            cartella clinica, moduli per elettrocardiogramma, ecocardiogramma e
-            TC coronarica, indici calcolati con la formula in chiaro e referti
-            PDF pronti da consegnare. I dati delle persone che segui restano nel
-            tuo studio.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <StoreLink
-              edizione="cardiologia"
-              location="cardiologia_hero"
-              className="inline-flex items-center gap-3 bg-brand-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-700 transition-colors shadow-soft hover:shadow-md text-base"
-            >
-              <Image src="/ms-store-badge.svg" alt="Microsoft" width={20} height={20} />
-              Scarica per Windows
-            </StoreLink>
-            <Link
-              href="#funzionalita"
-              className="inline-flex items-center gap-2 text-brand-700 px-6 py-4 rounded-xl font-semibold hover:text-brand-800 transition-colors"
-            >
-              Guarda cosa contiene <ArrowRight size={18} />
-            </Link>
-          </div>
-          <p className="text-sm text-gray-500 mt-6 flex flex-col sm:flex-row sm:justify-center gap-1 sm:gap-2">
-            <span>30 giorni di prova gratuita, senza carta di credito</span>
-            <span aria-hidden="true" className="hidden sm:inline">·</span>
-            <span>
-              Su Mac{" "}
-              <Link
-                href="/download#cardiologia"
-                className="text-brand-600 hover:text-brand-700 underline underline-offset-2 decoration-brand-300"
-              >
-                con installazione assistita
-              </Link>
-            </span>
-          </p>
-        </section>
-
-        {/* Galleria subito dopo l'hero: prima di leggere che cosa contiene, il
-            medico vede l'app. */}
-        <section
-          id="interfaccia"
-          className="py-20 md:py-28 bg-white border-y border-gray-100 scroll-mt-24"
-        >
+      <div className="pt-32 md:pt-44 pb-24 bg-background">
+        {/* L'interfaccia per prima (richiesta di Pablo, 21/10/2026): questa
+            pagina è il link delle campagne, e chi arriva, quasi sempre da
+            telefono, deve vedere subito l'app. Sopra la galleria solo l'H1 e
+            una riga; sotto, il download. La descrizione sta in "In breve". */}
+        <section id="interfaccia" className="pb-12 md:pb-16 scroll-mt-24">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12">
+            <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-6 px-2">
+              <p className="text-brand-700 font-bold text-xs sm:text-sm tracking-[0.18em] uppercase mb-3">
+                Esplora l&apos;interfaccia
+              </p>
+              <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 tracking-tight text-balance">
+                Gestionale per Cardiologi
+              </h1>
+            </div>
             <ScreenshotGallery
               screenshots={screenshots}
               frameRatio={SCREENSHOT_RATIO}
+              title={null}
               intro={
                 <>
                   Corioli Cardiologia com&apos;è davvero, su un archivio di
@@ -640,13 +619,53 @@ export default function CardiologiaPage() {
                 </>
               }
             />
+
+            <div className="mt-10 sm:mt-12 flex flex-col items-center text-center px-2">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
+                <StoreLink
+                  edizione="cardiologia"
+                  location="cardiologia_hero"
+                  className="inline-flex items-center justify-center gap-3 bg-brand-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-700 transition-colors shadow-soft hover:shadow-md text-base"
+                >
+                  <Image src="/ms-store-badge.svg" alt="Microsoft" width={20} height={20} />
+                  Scarica per Windows
+                </StoreLink>
+                <Link
+                  href="#funzionalita"
+                  className="inline-flex items-center justify-center gap-2 text-brand-700 px-6 py-3 sm:py-4 rounded-xl font-semibold hover:text-brand-800 transition-colors"
+                >
+                  Guarda cosa contiene <ArrowRight size={18} />
+                </Link>
+              </div>
+              <p className="text-sm text-gray-500 mt-4 flex flex-col sm:flex-row sm:justify-center gap-1 sm:gap-2">
+                <span>Microsoft Store · 30 giorni di prova gratuita, senza carta di credito</span>
+                <span aria-hidden="true" className="hidden sm:inline">·</span>
+                <span>
+                  Su Mac{" "}
+                  <Link
+                    href="/download#cardiologia"
+                    className="text-brand-600 hover:text-brand-700 underline underline-offset-2 decoration-brand-300"
+                  >
+                    con installazione assistita
+                  </Link>
+                </span>
+              </p>
+            </div>
           </div>
         </section>
 
         {/* In breve: risposte secche, utili a chi arriva da una ricerca o da un
-            assistente conversazionale e vuole capire in dieci secondi. */}
-        <section className="max-w-4xl mx-auto px-6 md:px-12 pt-20 md:pt-28 mb-24 md:mb-32">
-          <div className="bg-white rounded-3xl border border-gray-100 shadow-card p-8 md:p-10">
+            assistente conversazionale e vuole capire in dieci secondi. Il
+            paragrafo sopra era il testo dell'hero. */}
+        <section className="max-w-4xl mx-auto px-6 md:px-12 pt-8 md:pt-12 mb-24 md:mb-32">
+          <p className="text-lg md:text-xl text-gray-600 leading-relaxed text-center text-balance mb-10 md:mb-12">
+            Corioli Cardiologia è il gestionale cardiologico per l&apos;ambulatorio:
+            cartella clinica, moduli per elettrocardiogramma, ecocardiogramma e
+            TC coronarica, indici calcolati con la formula in chiaro e referti
+            PDF pronti da consegnare. I dati delle persone che segui restano nel
+            tuo studio.
+          </p>
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-card p-6 sm:p-8 md:p-10">
             <h2 className="font-heading text-xl font-bold text-gray-900 mb-6">
               Corioli Cardiologia in breve
             </h2>
@@ -681,7 +700,7 @@ export default function CardiologiaPage() {
               {painPoints.map((point) => (
                 <div
                   key={point.title}
-                  className="p-8 rounded-2xl border border-gray-100 bg-gray-50/50 hover:shadow-md transition-shadow"
+                  className="p-6 sm:p-8 rounded-2xl border border-gray-100 bg-gray-50/50 hover:shadow-md transition-shadow"
                 >
                   <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-red-500 mb-6">
                     <point.icon size={24} />
@@ -715,11 +734,13 @@ export default function CardiologiaPage() {
               {sezioniVisita.map((sezione) => (
                 <li
                   key={sezione.numero}
-                  className="bg-white rounded-2xl border border-gray-100 shadow-soft p-6 flex gap-5"
+                  className="bg-white rounded-2xl border border-gray-100 shadow-soft p-6 flex gap-4 sm:gap-5"
                 >
+                  {/* Larghezza fissa: "01" e "08" sono larghi in modo diverso
+                      e i titoli partivano ognuno da un punto suo. */}
                   <span
                     aria-hidden="true"
-                    className="font-heading font-bold text-brand-200 text-2xl leading-none shrink-0 pt-0.5"
+                    className="font-heading font-bold text-brand-200 text-2xl leading-none shrink-0 pt-0.5 w-9"
                   >
                     {sezione.numero}
                   </span>
@@ -784,9 +805,11 @@ export default function CardiologiaPage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {features.map((feature) => (
+                // Da telefono l'icona sta sopra il titolo: accanto lasciava al
+                // testo una colonna di 200px.
                 <div
                   key={feature.title}
-                  className="flex gap-6 p-8 bg-white rounded-2xl border border-gray-100 shadow-card"
+                  className="flex flex-col sm:flex-row gap-4 sm:gap-6 p-6 sm:p-8 bg-white rounded-2xl border border-gray-100 shadow-card"
                 >
                   <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 shrink-0">
                     <feature.icon size={24} />
@@ -817,7 +840,25 @@ export default function CardiologiaPage() {
                 da cui nasce. Nessuno viene scritto in automatico nel referto.
               </p>
             </div>
-            <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
+            {/* Da telefono una scheda per indice: la tabella a tre colonne
+                usciva dallo schermo e la colonna dei limiti non si vedeva. */}
+            <ul className="sm:hidden flex flex-col gap-3 list-none p-0 m-0">
+              {indici.map((riga) => (
+                <li
+                  key={riga.nome}
+                  className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5"
+                >
+                  <p className="font-bold text-gray-900 mb-1">{riga.nome}</p>
+                  <p className="text-[15px] text-gray-700 leading-relaxed">{riga.formula}</p>
+                  {/* Il trattino è un segnaposto della tabella: da solo, in
+                      una scheda, sembrava un errore. */}
+                  {riga.nota !== "—" && (
+                    <p className="text-sm text-gray-500 leading-relaxed mt-2">{riga.nota}</p>
+                  )}
+                </li>
+              ))}
+            </ul>
+            <div className="hidden sm:block overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
               <table className="w-full min-w-[560px] text-sm">
                 <thead>
                   <tr className="bg-brand-50 border-b border-brand-100">
@@ -887,18 +928,22 @@ export default function CardiologiaPage() {
                 software amministrativo adattato alla clinica.
               </p>
             </div>
+            {/* Senza larghezza minima da telefono: con min-w-[480px] la colonna
+                "Software generico" restava fuori dallo schermo e il confronto
+                mostrava solo Corioli. */}
             <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
-              <table className="w-full min-w-[480px] text-sm">
+              <table className="w-full sm:min-w-[480px] text-sm">
                 <thead>
                   <tr className="bg-brand-50 border-b border-brand-100">
-                    <th className="px-6 py-4 text-left font-bold text-gray-900">
+                    <th className="px-4 sm:px-6 py-4 text-left font-bold text-gray-900">
                       Funzionalità
                     </th>
-                    <th className="px-6 py-4 text-center font-bold text-brand-700">
+                    <th className="px-2 sm:px-6 py-4 text-center font-bold text-brand-700">
                       Corioli
                     </th>
-                    <th className="px-6 py-4 text-center font-bold text-gray-500">
-                      Software generico
+                    <th className="px-2 sm:px-6 py-4 text-center font-bold text-gray-500">
+                      <span className="sm:hidden">Generico</span>
+                      <span className="hidden sm:inline">Software generico</span>
                     </th>
                   </tr>
                 </thead>
@@ -908,13 +953,13 @@ export default function CardiologiaPage() {
                       key={row.feature}
                       className="border-b border-gray-100 even:bg-gray-50/50"
                     >
-                      <td className="px-6 py-4 text-gray-700 font-medium">
+                      <td className="px-4 sm:px-6 py-4 text-gray-700 font-medium">
                         {row.feature}
                       </td>
-                      <td className="px-6 py-4 text-center">
+                      <td className="px-2 sm:px-6 py-4 text-center">
                         <ComparisonCell value={row.corioli} />
                       </td>
-                      <td className="px-6 py-4 text-center">
+                      <td className="px-2 sm:px-6 py-4 text-center">
                         <ComparisonCell value={row.generic} />
                       </td>
                     </tr>
@@ -928,7 +973,7 @@ export default function CardiologiaPage() {
         {/* Download */}
         <section className="py-20 md:py-28">
           <div className="max-w-4xl mx-auto px-6 md:px-12">
-            <div className="bg-brand-900 rounded-3xl p-10 md:p-14 text-center relative overflow-hidden">
+            <div className="bg-brand-900 rounded-3xl px-6 py-10 sm:p-10 md:p-14 text-center relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-brand-600 rounded-full blur-[80px] opacity-40 transform translate-x-1/2 -translate-y-1/2" />
               <div className="relative z-10">
                 <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
@@ -945,11 +990,12 @@ export default function CardiologiaPage() {
                 <p className="text-brand-200 text-sm mb-10">
                   30€/mese, tutto incluso · disdici quando vuoi
                 </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                {/* Da telefono i due pulsanti hanno la stessa larghezza. */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
                   <StoreLink
                     edizione="cardiologia"
                     location="cardiologia_cta"
-                    className="inline-flex items-center gap-3 bg-white text-brand-900 px-8 py-4 rounded-xl font-bold hover:bg-brand-50 transition-colors shadow-md text-base"
+                    className="inline-flex items-center justify-center gap-3 bg-white text-brand-900 px-8 py-4 rounded-xl font-bold hover:bg-brand-50 transition-colors shadow-md text-base"
                   >
                     <Image src="/ms-store-badge.svg" alt="Microsoft" width={20} height={20} />
                     Scarica per Windows
@@ -957,7 +1003,7 @@ export default function CardiologiaPage() {
                   <MacRequestLink
                     edizione="cardiologia"
                     location="cardiologia_cta"
-                    className="inline-flex items-center gap-2 border border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition-colors text-base"
+                    className="inline-flex items-center justify-center gap-2 border border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition-colors text-base"
                   >
                     <Apple size={20} /> Richiedi per Mac
                   </MacRequestLink>

@@ -122,8 +122,9 @@ function ContattiContent({ isMigrationQuote }: { isMigrationQuote: boolean }) {
                 <Mail size={20} />
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-1">Email</h3>
-                <p className="text-gray-600 text-sm">info@corioli.it</p>
+                <h2 className="font-bold text-base text-gray-900 mb-1">Email</h2>
+                {/* Link veri: da telefono un tocco apre la mail o la chiamata. */}
+                <a href="mailto:info@corioli.it" className="inline-block py-1 text-gray-600 text-sm hover:text-brand-600 underline underline-offset-2 decoration-gray-300 hover:decoration-brand-300">info@corioli.it</a>
                 <p className="text-xs text-gray-500 mt-1">Rispondiamo entro 24h</p>
               </div>
             </div>
@@ -133,8 +134,8 @@ function ContattiContent({ isMigrationQuote }: { isMigrationQuote: boolean }) {
                 <Phone size={20} />
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-1">Telefono</h3>
-                <p className="text-gray-600 text-sm">+39 393 800 1284</p>
+                <h2 className="font-bold text-base text-gray-900 mb-1">Telefono</h2>
+                <a href="tel:+393938001284" className="inline-block py-1 text-gray-600 text-sm hover:text-brand-600 underline underline-offset-2 decoration-gray-300 hover:decoration-brand-300">+39 393 800 1284</a>
                 <p className="text-xs text-gray-500 mt-1">Lun - Ven, 09:00 - 18:00</p>
               </div>
             </div>
@@ -144,7 +145,7 @@ function ContattiContent({ isMigrationQuote }: { isMigrationQuote: boolean }) {
                 <MapPin size={20} />
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-1">Sede Legale</h3>
+                <h2 className="font-bold text-base text-gray-900 mb-1">Sede Legale</h2>
                 <p className="text-gray-600 text-sm">Sesto Fiorentino, Firenze (FI)<br/>Italia</p>
               </div>
             </div>          </div>

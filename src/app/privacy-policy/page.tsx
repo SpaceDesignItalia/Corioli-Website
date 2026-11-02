@@ -31,7 +31,7 @@ export default function PrivacyPolicyPage() {
           </p>
 
           <div className="p-6 bg-brand-50 border border-brand-100 rounded-2xl mb-8">
-            <h3 className="font-heading text-lg font-bold text-brand-900 mb-2">Cos'è Corioli?</h3>
+            <h2 className="font-heading text-lg font-bold text-brand-900 mb-2">Cos'è Corioli?</h2>
             <p className="text-sm text-brand-800 mb-4">
               Corioli è il software di gestione delle cartelle cliniche pensato per i medici specialisti privati italiani — ginecologi, ostetrici e cardiologi.
             </p>

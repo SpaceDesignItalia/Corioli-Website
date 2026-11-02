@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback, type ReactNode } from "react";
+import { useState, useEffect, useRef, useCallback, type CSSProperties, type ReactNode } from "react";
 import NextImage from "next/image";
 import { ArrowDown, Image as ImageIcon, Maximize2, X, Minus } from "lucide-react";
 
@@ -62,6 +62,10 @@ const screenshotsGinecologia: Screenshot[] = [
 
 type ScreenshotGalleryProps = {
   screenshots?: Screenshot[];
+  // Titolo della galleria. null: nessun titolo, perche lo mette la pagina
+  // (in /ginecologia e /cardiologia la galleria e la prima cosa e sopra ha
+  // l'H1 della pagina).
+  title?: ReactNode | null;
   // Testo sotto il titolo; l'indicazione sul tutto schermo segue da sola.
   intro?: ReactNode;
   // Rapporto larghezza/altezza delle schermate. Se c'e, la finestra prende a
@@ -73,6 +77,7 @@ type ScreenshotGalleryProps = {
 
 export default function ScreenshotGallery({
   screenshots = screenshotsGinecologia,
+  title = "Esplora l'Interfaccia",
   intro = (
     <>
       Scopri quanto è intuitivo Corioli. Seleziona una vista e{" "}
@@ -87,6 +92,18 @@ export default function ScreenshotGallery({
   const [activeTab, setActiveTab] = useState(screenshots[0].id);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const active = screenshots.find((s) => s.id === activeTab) ?? screenshots[0];
+
+  // Schermate da montare. Le immagini delle schede non aperte stanno dentro
+  // la finestra con opacita 0, quindi il lazy loading del browser le
+  // scaricava tutte subito: in /cardiologia visita e referto pesano quasi
+  // 600 KB su 4G, per immagini che chi arriva da telefono spesso non apre.
+  // Ora si scaricano al primo tocco o passaggio del mouse sulla scheda, che
+  // anticipa di qualche centinaio di millisecondi il clic.
+  const [montate, setMontate] = useState<Record<string, boolean>>({
+    [screenshots[0].id]: true,
+  });
+  const monta = (id: string) =>
+    setMontate((prima) => (prima[id] ? prima : { ...prima, [id]: true }));
 
   // La schermata attiva e' piu alta della finestra. Va detto in modo che si
   // veda: chi apre la visita intera vede solo l'inizio e, senza un invito a
@@ -132,14 +149,31 @@ export default function ScreenshotGallery({
     };
   }, [isFullscreen]);
 
+  // Il tutto schermo occupa una voce della cronologia: su Android il gesto
+  // "indietro" chiude la schermata ingrandita invece di lasciare la pagina,
+  // che è quello che chi arriva da una campagna si aspetta.
+  useEffect(() => {
+    if (!isFullscreen) return;
+    window.history.pushState({ ...window.history.state, galleria: true }, "");
+    const chiudi = () => setIsFullscreen(false);
+    window.addEventListener("popstate", chiudi);
+    return () => {
+      window.removeEventListener("popstate", chiudi);
+      // Chiuso con il pulsante o con Esc: si toglie la voce aggiunta.
+      if (window.history.state?.galleria) window.history.back();
+    };
+  }, [isFullscreen]);
+
   return (
     // --barra e l'altezza della barra della finestra: la usa la barra stessa e
     // il calcolo dell'altezza della finestra quando c'e frameRatio.
     <div className="w-full relative [--barra:42px] sm:[--barra:54px]">
-      <div className="text-center mb-8 sm:mb-10 px-4">
-        <h2 className="font-heading text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-          Esplora l&apos;Interfaccia
-        </h2>
+      <div className="text-center mb-6 sm:mb-10 px-2 sm:px-4">
+        {title !== null && (
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+            {title}
+          </h2>
+        )}
         <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
           {intro}{" "}
           <span className="hidden sm:inline">
@@ -155,7 +189,15 @@ export default function ScreenshotGallery({
         {screenshots.map((screen) => (
           <button
             key={screen.id}
-            onClick={() => setActiveTab(screen.id)}
+            type="button"
+            aria-pressed={activeTab === screen.id}
+            onClick={() => {
+              monta(screen.id);
+              setActiveTab(screen.id);
+            }}
+            onPointerEnter={() => monta(screen.id)}
+            onTouchStart={() => monta(screen.id)}
+            onFocus={() => monta(screen.id)}
             className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 ${
               activeTab === screen.id
                 ? "bg-brand-600 text-white shadow-md scale-105 ring-2 ring-brand-600 ring-offset-2 ring-offset-background"
@@ -167,18 +209,25 @@ export default function ScreenshotGallery({
         ))}
       </div>
 
+      {/* Da telefono la finestra prende le proporzioni della schermata attiva,
+          fino al 65% dell'altezza dello schermo: con il 3:2 o il 16:9 del
+          desktop restava una striscia alta 200px, con la dashboard
+          illeggibile e l'invito a scorrere sopra a coprirla. Le schermate
+          piu alte (visita, referto) si scorrono dentro la finestra.
+          Con box-content il rapporto e l'altezza massima valgono per l'area
+          della schermata, e la barra si aggiunge sopra come padding (+1px per
+          il bordo inferiore). */}
       <div
-        className={`relative mx-auto w-full max-w-[1200px] group mt-4 ${
+        className={`relative mx-auto w-full max-w-[1200px] group mt-4 max-sm:box-content max-sm:pt-[calc(var(--barra)+1px)] max-sm:[aspect-ratio:var(--rapporto-schermata)] max-sm:max-h-[65svh] ${
           frameRatio
-            ? "box-content"
-            : "aspect-video sm:aspect-auto sm:h-[600px] md:h-[750px] lg:h-[850px] px-2 sm:px-0"
+            ? "sm:box-content sm:pt-[calc(var(--barra)+1px)] sm:[aspect-ratio:var(--rapporto-cornice)]"
+            : "sm:h-[600px] md:h-[750px] lg:h-[850px]"
         }`}
-        // Con box-content il rapporto vale per l'area della schermata e la
-        // barra si aggiunge sopra come padding (+1px per il bordo inferiore).
         style={
-          frameRatio
-            ? { aspectRatio: frameRatio, paddingTop: "calc(var(--barra) + 1px)" }
-            : undefined
+          {
+            "--rapporto-schermata": active.width / active.height,
+            "--rapporto-cornice": frameRatio,
+          } as CSSProperties
         }
       >
         {!isFullscreen && sborda && (
@@ -282,12 +331,25 @@ export default function ScreenshotGallery({
               </div>
 
               <div className="flex-1 flex justify-center overflow-hidden px-2">
-                <div className="bg-gray-100/80 text-gray-500 text-[10px] sm:text-xs font-semibold px-3 sm:px-6 py-1 sm:py-1.5 rounded-md border border-gray-200 flex items-center gap-1.5 sm:gap-2 transition-colors hover:bg-gray-200 cursor-default truncate max-w-full">
+                <div className="bg-gray-100/80 text-gray-500 text-[11px] sm:text-xs font-semibold px-3 sm:px-6 py-1 sm:py-1.5 rounded-md border border-gray-200 flex items-center gap-1.5 sm:gap-2 transition-colors hover:bg-gray-200 cursor-default truncate max-w-full">
                   <ImageIcon size={12} className="shrink-0 sm:w-3.5 sm:h-3.5" />
                   <span className="truncate">{active.label}</span>
                 </div>
               </div>
-              <div className="w-12 sm:w-16 shrink-0" />
+              {isFullscreen ? (
+                // Da telefono i pallini sono larghi 12px: per uscire serve un
+                // pulsante che si veda e si tocchi.
+                <button
+                  type="button"
+                  onClick={() => setIsFullscreen(false)}
+                  className="shrink-0 inline-flex items-center gap-1.5 h-8 px-3 rounded-full bg-gray-900 text-white text-sm font-semibold hover:bg-gray-700 transition-colors"
+                >
+                  <X size={16} strokeWidth={2.5} aria-hidden="true" />
+                  Chiudi
+                </button>
+              ) : (
+                <div className="w-12 sm:w-16 shrink-0" />
+              )}
             </div>
 
             <div
@@ -306,7 +368,11 @@ export default function ScreenshotGallery({
                       setScorse((prima) => ({ ...prima, [screen.id]: true }));
                     }
                   }}
+                  // Le schede mai aperte restano display:none: l'immagine
+                  // lazy non parte, ma resta nell'HTML con il suo alt.
                   className={`absolute inset-0 overflow-auto [&::-webkit-scrollbar]:w-1.5 sm:[&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar]:h-1.5 sm:[&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-gray-300/80 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-gray-400 transition-opacity duration-500 ${
+                    montate[screen.id] ? "" : "hidden"
+                  } ${
                     activeTab === screen.id
                       ? "opacity-100 z-10"
                       : "opacity-0 z-0 pointer-events-none"
@@ -325,7 +391,8 @@ export default function ScreenshotGallery({
                         : "w-full cursor-zoom-in"
                     }`}
                     // Solo lo screenshot della tab attiva e prioritario: gli
-                    // altri restano lazy finche l'utente non cambia tab.
+                    // altri restano lazy e nascosti finche la loro scheda
+                    // non viene toccata (vedi `montate`).
                     priority={activeTab === screen.id}
                     loading={activeTab === screen.id ? "eager" : "lazy"}
                     sizes="(max-width: 768px) 100vw, (max-width: 1400px) 90vw, 1280px"

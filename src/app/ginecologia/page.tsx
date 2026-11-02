@@ -49,6 +49,24 @@ export const metadata: Metadata = {
     description:
       "Cartella ostetrica elettronica, biometria e peso fetale con i percentili di Hadlock, flussimetria ombelicale e referti PDF in un unico software desktop. Prova gratuita di 30 giorni.",
     url: `${SITE_URL}/ginecologia`,
+    // Esplicita: l'immagine di pageOpenGraph (quella generica del sito)
+    // vinceva su opengraph-image.tsx di questa cartella.
+    images: [
+      {
+        url: "/ginecologia/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Corioli — Il gestionale per ginecologi e ostetrici",
+      },
+    ],
+  },
+  // Senza, la card di Twitter/X ereditava titolo e descrizione della home.
+  // L'immagine viene da opengraph-image.tsx e twitter-image.tsx accanto.
+  twitter: {
+    card: "summary_large_image",
+    title: "Gestionale per ginecologi e ostetrici | Corioli",
+    description:
+      "Biometria e peso fetale con Hadlock, flussimetria ombelicale, cartella ostetrica e referti PDF. Prova gratuita di 30 giorni.",
   },
 };
 
@@ -369,42 +387,60 @@ export default function GinecologiaPage() {
       <script {...jsonLdProps(breadcrumbStructuredData)} />
       <script {...jsonLdProps(faqStructuredData)} />
 
-      <div className="pt-40 md:pt-48 pb-24 bg-background">
-        {/* Hero */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 mb-20 md:mb-28 text-center">
-          <h1 className="font-heading text-4xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight text-balance">
-            Gestionale per Ginecologi e Ostetrici
-          </h1>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-10 text-balance">
-            Corioli è il software per lo studio di ginecologia e ostetricia:
-            visite ginecologiche e ostetriche con l'anamnesi che imposti tu,
-            biometria e peso fetale con i percentili di Hadlock, flussimetria
-            ombelicale e referti PDF pronti da consegnare. I dati delle
-            pazienti restano nel tuo studio.
-          </p>
-          <Link
-            href="/download"
-            className="inline-flex items-center gap-2 bg-brand-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-700 transition-colors shadow-soft hover:shadow-md text-base"
-          >
-            Inizia la prova gratuita <ArrowRight size={20} />
-          </Link>
-        </section>
-
-        {/* Galleria subito dopo l'hero, come in /cardiologia: prima di leggere
-            che cosa contiene, il medico vede l'app. */}
-        <section
-          id="interfaccia"
-          className="py-20 md:py-28 bg-white border-y border-gray-100 scroll-mt-24"
-        >
+      <div className="pt-32 md:pt-44 pb-24 bg-background">
+        {/* L'interfaccia per prima, come in /cardiologia (richiesta di Pablo,
+            21/10/2026): questa pagina è il link delle campagne, e chi arriva,
+            quasi sempre da telefono, deve vedere subito l'app. Sopra la
+            galleria solo l'H1; sotto, la prova. La descrizione sta in "In
+            breve". */}
+        <section id="interfaccia" className="pb-12 md:pb-16 scroll-mt-24">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12">
-            <ScreenshotGallery />
+            <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-6 px-2">
+              <p className="text-brand-700 font-bold text-xs sm:text-sm tracking-[0.18em] uppercase mb-3">
+                Esplora l&apos;interfaccia
+              </p>
+              <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 tracking-tight text-balance">
+                Gestionale per Ginecologi e Ostetrici
+              </h1>
+            </div>
+            <ScreenshotGallery title={null} />
+
+            <div className="mt-10 sm:mt-12 flex flex-col items-center text-center px-2">
+              <Link
+                href="/download"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-700 transition-colors shadow-soft hover:shadow-md text-base"
+              >
+                Inizia la prova gratuita <ArrowRight size={20} />
+              </Link>
+              <p className="text-sm text-gray-500 mt-4 flex flex-col sm:flex-row sm:justify-center gap-1 sm:gap-2">
+                <span>Microsoft Store · 30 giorni di prova gratuita, senza carta di credito</span>
+                <span aria-hidden="true" className="hidden sm:inline">·</span>
+                <span>
+                  Su Mac{" "}
+                  <Link
+                    href="/download#ginecologia"
+                    className="text-brand-600 hover:text-brand-700 underline underline-offset-2 decoration-brand-300"
+                  >
+                    con installazione assistita
+                  </Link>
+                </span>
+              </p>
+            </div>
           </div>
         </section>
 
         {/* In breve: risposte secche, utili a chi arriva da una ricerca o da un
-            assistente conversazionale e vuole capire in dieci secondi. */}
-        <section className="max-w-4xl mx-auto px-6 md:px-12 pt-20 md:pt-28 mb-24 md:mb-32">
-          <div className="bg-white rounded-3xl border border-gray-100 shadow-card p-8 md:p-10">
+            assistente conversazionale e vuole capire in dieci secondi. Il
+            paragrafo sopra era il testo dell'hero. */}
+        <section className="max-w-4xl mx-auto px-6 md:px-12 pt-8 md:pt-12 mb-24 md:mb-32">
+          <p className="text-lg md:text-xl text-gray-600 leading-relaxed text-center text-balance mb-10 md:mb-12">
+            Corioli è il software per lo studio di ginecologia e ostetricia:
+            visite ginecologiche e ostetriche con l&apos;anamnesi che imposti tu,
+            biometria e peso fetale con i percentili di Hadlock, flussimetria
+            ombelicale e referti PDF pronti da consegnare. I dati delle
+            pazienti restano nel tuo studio.
+          </p>
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-card p-6 sm:p-8 md:p-10">
             <h2 className="font-heading text-xl font-bold text-gray-900 mb-6">
               Corioli per la ginecologia in breve
             </h2>
@@ -439,7 +475,7 @@ export default function GinecologiaPage() {
               {painPoints.map((point) => (
                 <div
                   key={point.title}
-                  className="p-8 rounded-2xl border border-gray-100 bg-gray-50/50 hover:shadow-md transition-shadow"
+                  className="p-6 sm:p-8 rounded-2xl border border-gray-100 bg-gray-50/50 hover:shadow-md transition-shadow"
                 >
                   <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-red-500 mb-6">
                     <point.icon size={24} />
@@ -524,9 +560,11 @@ export default function GinecologiaPage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {features.map((feature) => (
+                // Da telefono l'icona sta sopra il titolo: accanto lasciava al
+                // testo una colonna di 200px.
                 <div
                   key={feature.title}
-                  className="flex gap-6 p-8 bg-white rounded-2xl border border-gray-100 shadow-card"
+                  className="flex flex-col sm:flex-row gap-4 sm:gap-6 p-6 sm:p-8 bg-white rounded-2xl border border-gray-100 shadow-card"
                 >
                   <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 shrink-0">
                     <feature.icon size={24} />
@@ -558,7 +596,21 @@ export default function GinecologiaPage() {
                 percentile non viene calcolato.
               </p>
             </div>
-            <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
+            {/* Da telefono una scheda per calcolo: la tabella a tre colonne
+                usciva dallo schermo e la colonna dei limiti non si vedeva. */}
+            <ul className="sm:hidden flex flex-col gap-3 list-none p-0 m-0">
+              {calcoli.map((riga) => (
+                <li
+                  key={riga.nome}
+                  className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5"
+                >
+                  <p className="font-bold text-gray-900 mb-1">{riga.nome}</p>
+                  <p className="text-[15px] text-gray-700 leading-relaxed">{riga.fonte}</p>
+                  <p className="text-sm text-gray-500 leading-relaxed mt-2">{riga.nota}</p>
+                </li>
+              ))}
+            </ul>
+            <div className="hidden sm:block overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
               <table className="w-full min-w-[560px] text-sm">
                 <thead>
                   <tr className="bg-brand-50 border-b border-brand-100">
@@ -611,18 +663,22 @@ export default function GinecologiaPage() {
                 rispetto a un software amministrativo adattato alla clinica.
               </p>
             </div>
+            {/* Senza larghezza minima da telefono: con min-w-[480px] la colonna
+                "Software generico" restava fuori dallo schermo e il confronto
+                mostrava solo Corioli. */}
             <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
-              <table className="w-full min-w-[480px] text-sm">
+              <table className="w-full sm:min-w-[480px] text-sm">
                 <thead>
                   <tr className="bg-brand-50 border-b border-brand-100">
-                    <th className="px-6 py-4 text-left font-bold text-gray-900">
+                    <th className="px-4 sm:px-6 py-4 text-left font-bold text-gray-900">
                       Funzionalità
                     </th>
-                    <th className="px-6 py-4 text-center font-bold text-brand-700">
+                    <th className="px-2 sm:px-6 py-4 text-center font-bold text-brand-700">
                       Corioli
                     </th>
-                    <th className="px-6 py-4 text-center font-bold text-gray-500">
-                      Software generico
+                    <th className="px-2 sm:px-6 py-4 text-center font-bold text-gray-500">
+                      <span className="sm:hidden">Generico</span>
+                      <span className="hidden sm:inline">Software generico</span>
                     </th>
                   </tr>
                 </thead>
@@ -632,13 +688,13 @@ export default function GinecologiaPage() {
                       key={row.feature}
                       className="border-b border-gray-100 even:bg-gray-50/50"
                     >
-                      <td className="px-6 py-4 text-gray-700 font-medium">
+                      <td className="px-4 sm:px-6 py-4 text-gray-700 font-medium">
                         {row.feature}
                       </td>
-                      <td className="px-6 py-4 text-center">
+                      <td className="px-2 sm:px-6 py-4 text-center">
                         <ComparisonCell value={row.corioli} />
                       </td>
-                      <td className="px-6 py-4 text-center">
+                      <td className="px-2 sm:px-6 py-4 text-center">
                         <ComparisonCell value={row.generic} />
                       </td>
                     </tr>
@@ -652,7 +708,7 @@ export default function GinecologiaPage() {
         {/* Free trial */}
         <section className="py-20 md:py-28">
           <div className="max-w-4xl mx-auto px-6 md:px-12">
-            <div className="bg-brand-900 rounded-3xl p-10 md:p-14 text-center relative overflow-hidden">
+            <div className="bg-brand-900 rounded-3xl px-6 py-10 sm:p-10 md:p-14 text-center relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-brand-600 rounded-full blur-[80px] opacity-40 transform translate-x-1/2 -translate-y-1/2" />
               <div className="relative z-10">
                 <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6">

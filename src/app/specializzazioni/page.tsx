@@ -98,12 +98,12 @@ export default function SpecializzazioniPage() {
               </Link>
             </h2>
             <p className="text-gray-600 mb-8 leading-relaxed">
-              Il nostro modulo di punta, sviluppato e validato clinicamente da specialisti delle migliori strutture italiane. Progettato per ottimizzare le visite ostetriche e ginecologiche.
+              La prima edizione di Corioli, sviluppata insieme a un team di ginecologi che ne dettano i requisiti clinici. Tre visite distinte, ginecologica, ginecologica pediatrica e ostetrica, con i calcoli fetali dentro la visita.
             </p>
             <ul className="flex flex-col gap-3 text-sm font-medium text-gray-700 mb-8">
-              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> Cartella ostetrica elettronica e ginecologia pediatrica</li>
-              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> Calcolo automatico della datazione</li>
-              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> Integrazione di curve e percentili fetali</li>
+              <li className="flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500 shrink-0 mt-[7px]"></div> Cartella ostetrica elettronica e ginecologia pediatrica</li>
+              <li className="flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500 shrink-0 mt-[7px]"></div> Calcolo automatico della datazione</li>
+              <li className="flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500 shrink-0 mt-[7px]"></div> Integrazione di curve e percentili fetali</li>
             </ul>
             <div className="flex flex-wrap items-center gap-3">
               <Link href="/ginecologia" className="inline-flex items-center gap-2 bg-brand-50 text-brand-700 px-6 py-3 rounded-xl font-semibold hover:bg-brand-100 transition-colors w-fit">
@@ -119,16 +119,16 @@ export default function SpecializzazioniPage() {
              <div className="w-full max-w-sm bg-white rounded-xl shadow-md border border-gray-200 p-6">
                 <div className="flex justify-between items-center mb-4 pb-3 border-b border-gray-100">
                    <div className="text-xs font-bold text-gray-500 uppercase tracking-wide">Biometria Fetale</div>
-                   <div className="text-[10px] bg-brand-100 text-brand-700 px-2 py-0.5 rounded-full font-bold">W 22+4</div>
+                   <div className="text-[11px] bg-brand-100 text-brand-700 px-2 py-0.5 rounded-full font-bold">W 22+4</div>
                 </div>
                 <div className="flex flex-col gap-3">
                    <div className="flex justify-between items-center">
                      <span className="text-sm font-medium text-gray-700">Diametro Biparietale (BPD)</span>
-                     <div className="bg-gray-50 border border-gray-200 rounded px-2 py-1 text-xs text-gray-900 font-medium">54.2 mm</div>
+                     <div className="bg-gray-50 border border-gray-200 rounded px-2 py-1 text-xs text-gray-900 font-medium whitespace-nowrap shrink-0">54.2 mm</div>
                    </div>
                    <div className="flex justify-between items-center">
                      <span className="text-sm font-medium text-gray-700">Circonferenza Cranica (HC)</span>
-                     <div className="bg-gray-50 border border-gray-200 rounded px-2 py-1 text-xs text-gray-900 font-medium">198 mm</div>
+                     <div className="bg-gray-50 border border-gray-200 rounded px-2 py-1 text-xs text-gray-900 font-medium whitespace-nowrap shrink-0">198 mm</div>
                    </div>
                    <div className="mt-2 pt-3 border-t border-gray-100 flex justify-between items-center bg-brand-50/50 -mx-6 -mb-6 px-6 py-4 rounded-b-xl">
                      <span className="text-xs text-gray-500 font-medium">Peso Stimato (Hadlock)</span>
@@ -154,9 +154,9 @@ export default function SpecializzazioniPage() {
               Un'edizione dedicata all'ambulatorio cardiologico, sviluppata insieme a un team di cardiologi che ne dettano i requisiti clinici. La visita parte essenziale e gli esami strumentali si accendono quando servono: sono misure vere, non campi di testo libero.
             </p>
             <ul className="flex flex-col gap-3 text-sm font-medium text-gray-700 mb-8">
-              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> Elettrocardiogramma, ecocardiogramma e TC coronarica</li>
-              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> QTc, eGFR, LDL, CHA2DS2-VASc e HAS-BLED calcolati in visita</li>
-              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> Referto PDF con gli esami strumentali in tabella</li>
+              <li className="flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500 shrink-0 mt-[7px]"></div> Elettrocardiogramma, ecocardiogramma e TC coronarica</li>
+              <li className="flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500 shrink-0 mt-[7px]"></div> QTc, eGFR, LDL, CHA2DS2-VASc e HAS-BLED calcolati in visita</li>
+              <li className="flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500 shrink-0 mt-[7px]"></div> Referto PDF con gli esami strumentali in tabella</li>
             </ul>
             <div className="flex flex-wrap items-center gap-3">
               <Link href="/cardiologia" className="inline-flex items-center gap-2 bg-brand-50 text-brand-700 px-6 py-3 rounded-xl font-semibold hover:bg-brand-100 transition-colors w-fit">
@@ -172,7 +172,7 @@ export default function SpecializzazioniPage() {
              <div className="w-full max-w-sm bg-white rounded-xl shadow-md border border-gray-200 p-6">
                 <div className="flex justify-between items-center mb-4 pb-3 border-b border-gray-100">
                    <div className="text-xs font-bold text-gray-500 uppercase tracking-wide">Esami strumentali</div>
-                   <div className="text-[10px] bg-brand-100 text-brand-700 px-2 py-0.5 rounded-full font-bold">ECG + ECO</div>
+                   <div className="text-[11px] bg-brand-100 text-brand-700 px-2 py-0.5 rounded-full font-bold">ECG + ECO</div>
                 </div>
                 <div className="h-12 mb-4 -mx-1">
                   <svg viewBox="0 0 200 40" className="w-full h-full" preserveAspectRatio="none" aria-hidden="true">
@@ -188,11 +188,11 @@ export default function SpecializzazioniPage() {
                 <div className="flex flex-col gap-3">
                    <div className="flex justify-between items-center">
                      <span className="text-sm font-medium text-gray-700">Frazione di eiezione (FE)</span>
-                     <div className="bg-gray-50 border border-gray-200 rounded px-2 py-1 text-xs text-gray-900 font-medium">58 %</div>
+                     <div className="bg-gray-50 border border-gray-200 rounded px-2 py-1 text-xs text-gray-900 font-medium whitespace-nowrap shrink-0">58 %</div>
                    </div>
                    <div className="flex justify-between items-center">
                      <span className="text-sm font-medium text-gray-700">Intervallo QT</span>
-                     <div className="bg-gray-50 border border-gray-200 rounded px-2 py-1 text-xs text-gray-900 font-medium">396 ms</div>
+                     <div className="bg-gray-50 border border-gray-200 rounded px-2 py-1 text-xs text-gray-900 font-medium whitespace-nowrap shrink-0">396 ms</div>
                    </div>
                    <div className="mt-2 pt-3 border-t border-gray-100 flex justify-between items-center bg-brand-50/50 -mx-6 -mb-6 px-6 py-4 rounded-b-xl">
                      <span className="text-xs text-gray-500 font-medium">QTc (Bazett)</span>

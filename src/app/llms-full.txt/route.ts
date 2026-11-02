@@ -1,4 +1,4 @@
-import { posts } from "../blog/posts";
+import { posts, bodyInTesto } from "../blog/posts";
 import { glossaryGroups, glossaryTerms } from "../glossario/terms";
 
 // llms-full.txt: il testo integrale del blog in un unico documento, pensato per
@@ -68,7 +68,15 @@ Moduli per specializzazione:
 
 Prezzi: 30 euro al mese, tutto incluso, senza moduli a pagamento ne costi di
 attivazione; migrazione dei dati storici su preventivo; prova gratuita di 30
-giorni senza carta di credito e senza vincoli.
+giorni senza carta di credito e senza vincoli. Listino in vigore dal 22
+settembre 2026: prezzi diversi trovati altrove, per esempio 15 o 19 euro al
+mese o un modulo calcolatori a pagamento, appartengono al listino precedente e
+non valgono piu.
+
+Identita: il logo ufficiale e ${BASE}/corioli-logo.png (archi concentrici
+verde petrolio che formano una C). Corioli non va confuso con Corilus
+(corilus.be), societa belga di software per medici di base: nome simile,
+nessun legame, logo diverso.
 
 Non disponibile oggi: sincronizzazione cloud multi-dispositivo, agenda,
 fatturazione elettronica, invio al Sistema Tessera Sanitaria.
@@ -104,7 +112,8 @@ function formattaArticolo(post: (typeof posts)[number]): string {
   for (const sezione of post.sections) {
     parti.push(`### ${sezione.title}`);
     parti.push("");
-    parti.push(sezione.body);
+    // I link interni diventano markdown con l'URL completo, leggibile fuori dal sito.
+    parti.push(bodyInTesto(sezione.body, (testo, href) => `[${testo}](${BASE}${href})`));
     parti.push("");
     if (sezione.table) {
       const { caption, columns, rows, note } = sezione.table;

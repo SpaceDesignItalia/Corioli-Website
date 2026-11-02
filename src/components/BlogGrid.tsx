@@ -37,7 +37,7 @@ export default function BlogGrid({ articoli }: { articoli: Articolo[] }) {
               <span className="text-xs font-bold uppercase text-brand-600 bg-brand-50 px-2.5 py-1 rounded-md">
                 {articolo.categoria}
               </span>
-              <span className="text-xs text-gray-400 font-medium">
+              <span className="text-xs text-gray-500 font-medium">
                 {articolo.data}
               </span>
             </div>

@@ -41,7 +41,7 @@ const gdprFaqs = [
   {
     question: "Un software può essere «conforme al GDPR»?",
     answer:
-      "In senso stretto no: la conformità riguarda il trattamento, non il programma. Quello che un software può fare è renderla più semplice da raggiungere e da dimostrare — limitando i dati che escono dallo studio, riducendo i soggetti coinvolti e documentando consensi e accessi. Corioli è progettato con questo criterio, ma gli adempimenti restano in capo al titolare.",
+      "In senso stretto no: la conformità riguarda il trattamento, non il programma. Quello che un software può fare è renderla più semplice da raggiungere e da dimostrare — limitando i dati che escono dallo studio, riducendo i soggetti coinvolti e tenendo traccia delle correzioni alle visite. Corioli è progettato con questo criterio, ma gli adempimenti restano in capo al titolare.",
   },
   {
     question: "I dati clinici escono dall'Unione Europea?",
@@ -134,9 +134,19 @@ export default function GDPRPage() {
         <div className="bg-brand-900 text-white rounded-3xl p-10 md:p-12 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-brand-600 rounded-full blur-[80px] opacity-50 transform translate-x-1/2 -translate-y-1/2"></div>
           <div className="relative z-10">
-             <h2 className="font-heading text-2xl font-bold mb-4">Modulo Consenso Integrato</h2>
+             {/* Qui c'era un "Modulo Consenso Integrato" con raccolta digitale
+                 e storicizzazione inalterabile del consenso: nell'app non
+                 esiste. Restano solo le funzioni verificate nel codice. */}
+             <h2 className="font-heading text-2xl font-bold mb-4">Cosa ti aiuta a dimostrare quello che fai</h2>
+             <p className="text-brand-100 leading-relaxed mb-4 max-w-3xl">
+               Ogni correzione a una visita resta registrata con data, campo modificato e valore precedente, e la cronologia non si cancella. I consensi firmati si allegano alla scheda del paziente come PDF o immagine, accanto a visite e referti. L&apos;app si blocca con PIN, Windows Hello o Touch ID.
+             </p>
              <p className="text-brand-100 leading-relaxed mb-0 max-w-3xl">
-               Il nostro software include un modulo nativo per la raccolta digitale e la storicizzazione inalterabile del consenso informato privacy dei pazienti, eliminando la necessità di infiniti archivi cartacei e facilitando l'esibizione immediata in caso di controlli dell'autorità.
+               Corioli non raccoglie il consenso in forma digitale e non lo firma: la sottoscrizione resta su carta o con lo strumento di firma che lo studio usa già. Registro dei trattamenti, informativa e il resto degli adempimenti del titolare sono spiegati nella{" "}
+               <Link href="/blog/gdpr-medico-libero-professionista-adempimenti" className="text-white underline underline-offset-2 decoration-brand-300 hover:decoration-white">
+                 guida al GDPR per il medico libero professionista
+               </Link>
+               .
              </p>
           </div>
         </div>

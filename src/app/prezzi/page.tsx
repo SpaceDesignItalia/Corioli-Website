@@ -209,7 +209,9 @@ export default function PricingPage() {
 
       {/* Final CTA */}
       <section className="max-w-5xl mx-auto px-6 md:px-12 mt-24">
-        <div className="bg-brand-900 rounded-3xl p-10 md:p-14 text-center shadow-2xl relative overflow-hidden">
+        {/* px-6 da telefono: con p-10 "Prenota una demo di 15 minuti" andava
+            su due righe e il pulsante era più alto dell'altro. */}
+        <div className="bg-brand-900 rounded-3xl px-6 py-10 sm:p-10 md:p-14 text-center shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-brand-600 rounded-full blur-[80px] opacity-50 transform translate-x-1/2 -translate-y-1/2"></div>
           <div className="relative z-10">
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
@@ -223,14 +225,14 @@ export default function PricingPage() {
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link
                 href="/download"
-                className="bg-white text-brand-900 px-8 py-4 rounded-xl font-bold hover:bg-brand-50 transition-colors shadow-lg"
+                className="bg-white text-brand-900 px-6 sm:px-8 py-4 rounded-xl font-bold hover:bg-brand-50 transition-colors shadow-lg"
                 onClick={() => posthog.capture("pricing_final_cta_clicked", { cta: "download" })}
               >
                 Inizia la prova gratuita
               </Link>
               <Link
                 href="/contatti"
-                className="border border-brand-400 text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-800 transition-colors"
+                className="border border-brand-400 text-white px-6 sm:px-8 py-4 rounded-xl font-bold hover:bg-brand-800 transition-colors"
                 onClick={() => posthog.capture("pricing_final_cta_clicked", { cta: "demo" })}
               >
                 Prenota una demo di 15 minuti

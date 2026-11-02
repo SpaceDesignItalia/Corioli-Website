@@ -69,7 +69,7 @@ export const glossaryGroups: GlossaryGroup[] = [
 // /glossario nella sitemap sia il dateModified del DefinedTermSet: aggiornala
 // quando aggiungi o correggi una voce, altrimenti la pagina dichiara una
 // freschezza che non ha.
-export const GLOSSARY_UPDATED = "2026-10-05";
+export const GLOSSARY_UPDATED = "2026-11-02";
 
 export const glossaryTerms: GlossaryTerm[] = [
   // --- Gestionale e cartella clinica ---
@@ -172,8 +172,8 @@ export const glossaryTerms: GlossaryTerm[] = [
     detail:
       "In Corioli la migrazione dei dati storici è un servizio su preventivo, calcolato in base al formato e alla dimensione dell'archivio.",
     link: {
-      href: "/blog/come-sostituire-word-excel-studio-medico",
-      label: "Come sostituire Word ed Excel nello studio",
+      href: "/blog/cambiare-gestionale-medico-migrazione-dati",
+      label: "Cambiare gestionale senza perdere i dati",
     },
   },
   {
@@ -204,6 +204,34 @@ export const glossaryTerms: GlossaryTerm[] = [
     group: "normativa",
     definition:
       "Chi determina finalità e mezzi del trattamento dei dati personali e ne risponde. Nello studio privato è il medico o la struttura: decide quali dati raccogliere, per quanto conservarli e con quali strumenti trattarli. La responsabilità resta sua anche quando il lavoro materiale è svolto da altri, e non si trasferisce scegliendo un fornitore invece di un altro.",
+  },
+  {
+    slug: "registro-dei-trattamenti",
+    term: "Registro delle attività di trattamento",
+    aliases: ["registro dei trattamenti"],
+    group: "normativa",
+    definition:
+      "Documento previsto dall'articolo 30 del GDPR in cui il titolare elenca i propri trattamenti di dati personali, con finalità, categorie di interessati e di dati, destinatari, tempi di conservazione e misure di sicurezza. L'esenzione per chi ha meno di 250 dipendenti non vale quando si trattano dati sanitari: per questo, come ha chiarito il Garante nel 2019, il registro è obbligatorio anche per il singolo medico libero professionista.",
+    detail:
+      "Non va inviato al Garante: va tenuto aggiornato ed esibito in caso di controllo. Per uno studio specialistico le righe sono poche, tipicamente visite e cartella clinica, fatturazione e Sistema Tessera Sanitaria, appuntamenti ed eventuali comunicazioni facoltative.",
+    link: {
+      href: "/blog/gdpr-medico-libero-professionista-adempimenti",
+      label: "GDPR per il medico libero professionista",
+    },
+  },
+  {
+    slug: "informativa-privacy",
+    term: "Informativa privacy",
+    aliases: ["informativa sul trattamento dei dati", "articolo 13 GDPR"],
+    group: "normativa",
+    definition:
+      "Documento con cui il titolare spiega al paziente come tratta i suoi dati: titolare e contatti, finalità e base giuridica, destinatari, periodo di conservazione, diritti e reclamo al Garante, come richiede l'articolo 13 del GDPR. Va data quando si raccolgono i dati, nello studio di solito alla prima visita.",
+    detail:
+      "Per i trattamenti necessari alla cura il consenso non serve, ha chiarito il Garante nel provvedimento n. 55 del 7 marzo 2019; l'informativa sì.",
+    link: {
+      href: "/blog/informativa-privacy-studio-medico-modello",
+      label: "Informativa privacy dello studio medico: contenuti e modello",
+    },
   },
   {
     slug: "responsabile-del-trattamento",
@@ -310,8 +338,13 @@ export const glossaryTerms: GlossaryTerm[] = [
     aliases: ["BPD", "HC", "AC", "FL"],
     group: "ostetricia",
     definition:
-      "Insieme delle misure ecografiche del feto usate per valutarne dimensioni e crescita: diametro biparietale (BPD), circonferenza cranica (HC), circonferenza addominale (AC) e lunghezza del femore (FL). Alimentano la stima del peso fetale e il confronto con le curve di riferimento. La circonferenza addominale è il parametro che pesa di più sulla stima ed è il più sensibile alle condizioni di misura.",
-    link: { href: "/ginecologia", label: "I calcolatori ostetrici di Corioli" },
+      "Insieme delle misure ecografiche del feto usate per valutarne dimensioni e crescita: diametro biparietale (BPD), circonferenza cranica (HC), circonferenza addominale (AC) e lunghezza del femore (FL), che le linee guida ISUOG 2019 indicano di misurare dalle 14 settimane. Alimentano la stima del peso fetale e il confronto con le curve di riferimento. La circonferenza addominale è il parametro che pesa di più sulla stima ed è il più sensibile alle condizioni di misura.",
+    detail:
+      "Il feto è piccolo per l'epoca quando il peso stimato o la circonferenza addominale sono sotto il 10° percentile, grande quando sono sopra il 90°. HC e AC si misurano con l'ellisse, con i calibri sul margine esterno dei tessuti molli.",
+    link: {
+      href: "/blog/biometria-fetale-bpd-hc-ac-fl",
+      label: "Biometria fetale: come si misurano BPD, HC, AC e FL",
+    },
   },
   {
     slug: "formula-di-hadlock",
@@ -319,7 +352,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     aliases: ["stima del peso fetale", "EFW"],
     group: "ostetricia",
     definition:
-      "Standard di fatto per la stima ecografica del peso fetale: equazioni logaritmiche che combinano i parametri biometrici — nelle varianti più diffuse HC, AC e FL, oppure tutti e quattro con il BPD — restituendo un peso in grammi. Il peso fetale non si misura, si stima: l'errore tipico è intorno al ±10% rispetto al peso alla nascita, e si amplia agli estremi e a fine gravidanza.",
+      "Standard di fatto per la stima ecografica del peso fetale: quattro equazioni logaritmiche, pubblicate nel 1985, che combinano da due a quattro parametri biometrici in centimetri (AC e FL in tutte, più BPD, HC o entrambi) restituendo un peso in grammi. Il peso fetale non si misura, si stima: nello studio della Fetal Medicine Foundation su 5.163 gravidanze, la variante con HC, AC e FL, la più accurata, era entro il 10% del peso alla nascita nell'80% dei casi.",
     detail:
       "Il numero acquista significato solo insieme al percentile per epoca, che a sua volta dipende da una datazione corretta.",
     link: {
@@ -336,6 +369,20 @@ export const glossaryTerms: GlossaryTerm[] = [
     link: {
       href: "/blog/percentili-crescita-pediatrici-oms-guida",
       label: "Come si leggono i percentili OMS",
+    },
+  },
+  {
+    slug: "stadi-di-tanner",
+    term: "Stadi di Tanner",
+    aliases: ["scala di Tanner", "stadi puberali"],
+    group: "ostetricia",
+    definition:
+      "Scala in cinque stadi che descrive lo sviluppo puberale, pubblicata da Marshall e Tanner nel 1969. Nelle ragazze si valutano separatamente il seno, da B1 a B5, e i peli pubici, da PH1 a PH5: lo stadio 1 è prepuberale, il 5 adulto. L'inizio della pubertà è lo stadio B2, la comparsa di tessuto ghiandolare sotto l'areola, che va cercato con la palpazione.",
+    detail:
+      "Lo sviluppo del seno prima degli 8 anni si considera precoce, l'assenza di sviluppo del seno a 13 anni ritardata. Nella visita ginecologica pediatrica di Corioli lo stadio di Tanner ha un campo suo, accanto al menarca, e compare nel referto.",
+    link: {
+      href: "/blog/stadi-di-tanner-ragazze-visita-ginecologica",
+      label: "Stadi di Tanner nelle ragazze: come si valutano in visita",
     },
   },
   {
@@ -373,6 +420,33 @@ export const glossaryTerms: GlossaryTerm[] = [
     link: {
       href: "/blog/qtc-bazett-calcolo-limiti",
       label: "QTc con Bazett: come si calcola e quando non fidarsi",
+    },
+  },
+  {
+    slug: "ipotensione-ortostatica",
+    term: "Ipotensione ortostatica",
+    group: "cardiologia",
+    definition:
+      "Calo sostenuto della pressione sistolica di almeno 20 mmHg o della diastolica di almeno 10 mmHg entro 3 minuti dal passaggio in piedi, o dall'inclinazione su lettino basculante di almeno 60 gradi, secondo il consensus statement del 2011. Nel paziente con ipertensione supina un calo sistolico di 30 mmHg può essere un criterio più adatto. Le linee guida europee indicano di misurare la pressione in piedi a 1 e a 3 minuti.",
+    detail:
+      "Una frequenza che sale poco mentre la pressione scende, con un rapporto inferiore a 0,5 battiti al minuto per mmHg, orienta verso una forma neurogena. In Corioli Cardiologia ogni misurazione della pressione porta la posizione, clinostatismo o ortostatismo, e il referto le stampa una sotto l'altra.",
+    link: {
+      href: "/blog/ipotensione-ortostatica-come-misurarla-criteri",
+      label: "Ipotensione ortostatica: come si misura e quando si fa diagnosi",
+    },
+  },
+  {
+    slug: "monitoraggio-pressorio-24-ore",
+    term: "Monitoraggio pressorio delle 24 ore",
+    aliases: ["Holter pressorio", "ABPM", "MAPA"],
+    group: "cardiologia",
+    definition:
+      "Registrazione automatica della pressione per 24 ore, ogni 15-30 minuti di giorno e ogni 30-60 di notte. Secondo le linee guida ESC 2024 c'è ipertensione con una media di almeno 130/80 mmHg nelle 24 ore, 135/85 di giorno o 120/70 di notte; la registrazione è valida con almeno il 70% di misure utilizzabili.",
+    detail:
+      "Il paziente è dipper se la pressione notturna scende di oltre il 10% rispetto alla media diurna (ESC/ESH 2018). In Corioli Cardiologia l'Holter pressorio è un modulo della visita, con le medie delle 24 ore, diurna e notturna e il calo notturno calcolato dalle medie sistoliche.",
+    link: {
+      href: "/blog/holter-pressorio-valori-normali-calo-notturno",
+      label: "Holter pressorio delle 24 ore: valori normali e calo notturno",
     },
   },
   {

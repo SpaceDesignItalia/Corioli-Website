@@ -63,7 +63,6 @@ export const metadata: Metadata = {
     "software medico dati in locale",
     "cartella ostetrica elettronica",
     "software refertazione medica",
-    "consenso informato digitale",
     "conservazione cartella clinica",
     "backup studio medico",
     "alternativa a Word per referti medici",
@@ -108,9 +107,26 @@ const structuredData = {
       "@type": "Organization",
       "@id": `${siteUrl}/#organization`,
       name: "Corioli",
+      alternateName: ["Corioli gestionale medico", "corioli.it"],
+      // Corilus (corilus.be) e una software house sanitaria belga con un nome
+      // quasi uguale: a novembre 2026 ChatGPT mostrava il suo logo accanto a
+      // Corioli. disambiguatingDescription esiste proprio per dire ai motori
+      // quale delle due entita omonime e questa.
+      disambiguatingDescription:
+        "Software house italiana di Sesto Fiorentino che sviluppa i gestionali medici Corioli (ginecologia e ostetricia) e Corioli Cardiologia. Non e collegata a Corilus, societa belga di software sanitario.",
       url: siteUrl,
-      logo: `${siteUrl}/logo_short.png`,
-      image: `${siteUrl}/logo_short.png`,
+      // Un nome di file con il marchio aiuta i motori di immagini ad associare
+      // il logo a "Corioli" (logo_short.png resta per i riferimenti esistenti).
+      logo: {
+        "@type": "ImageObject",
+        "@id": `${siteUrl}/#logo`,
+        url: `${siteUrl}/corioli-logo.png`,
+        contentUrl: `${siteUrl}/corioli-logo.png`,
+        width: 512,
+        height: 512,
+        caption: "Logo di Corioli",
+      },
+      image: { "@id": `${siteUrl}/#logo` },
       vatID: "IT07420400488",
       slogan: "Tu visiti. Corioli referta.",
       email: "info@corioli.it",
@@ -169,6 +185,7 @@ const structuredData = {
       "@id": `${siteUrl}/#software`,
       name: "Corioli",
       url: siteUrl,
+      image: { "@id": `${siteUrl}/#logo` },
       applicationCategory: "MedicalBusinessSoftware",
       applicationSubCategory: "Cartella clinica elettronica",
       operatingSystem: "Windows 10, Windows 11, macOS 10.13+",
@@ -180,6 +197,7 @@ const structuredData = {
         `${siteUrl}/screenshots/dashboard.png`,
         `${siteUrl}/screenshots/ostetrica.png`,
         `${siteUrl}/screenshots/paziente.png`,
+        `${siteUrl}/screenshots/cardiologia/2026-10/dashboard.png`,
       ],
       // A chi si rivolge: senza questo, un assistente che deve decidere se
       // Corioli e pertinente a "software per il mio ambulatorio" lo deduce solo

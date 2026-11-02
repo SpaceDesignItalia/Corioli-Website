@@ -50,7 +50,7 @@ const homeFaqs = [
   {
     question: "Corioli include agenda e fatturazione?",
     answer:
-      "Non ancora: agenda e fatturazione elettronica sono in sviluppo. Oggi Corioli copre la parte clinica della visita — cartella, anamnesi, calcolatori, referti e consensi — mentre per la gestione amministrativa e per gli adempimenti fiscali serve ancora uno strumento separato.",
+      "Non ancora: agenda e fatturazione elettronica sono in sviluppo. Oggi Corioli copre la parte clinica della visita — cartella, anamnesi, calcolatori, referti e documenti del paziente — mentre per la gestione amministrativa e per gli adempimenti fiscali serve ancora uno strumento separato.",
   },
 ];
 
@@ -318,7 +318,7 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content */}
           <div className="max-w-xl">
-            <div className="text-brand-700 font-bold text-[10px] md:text-xs tracking-[0.2em] uppercase mb-6 font-sans">
+            <div className="text-brand-700 font-bold text-[11px] md:text-xs tracking-[0.2em] uppercase mb-6 font-sans">
               SOFTWARE GESTIONALE MEDICO
             </div>
             <h1 className="font-heading text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl text-gray-950 leading-[1.1] sm:leading-[1.0] mb-6 tracking-tight">
@@ -542,8 +542,8 @@ export default function Home() {
             </h3>
             <p className="text-gray-600 leading-relaxed">
               I dati restano nel tuo studio: archiviazione locale, nessuna
-              trasmissione a server esterni e gestione del consenso integrata
-              nel workflow.
+              trasmissione a server esterni e nessun accesso del fornitore
+              alle cartelle cliniche.
             </p>
           </div>
         </div>
@@ -669,7 +669,7 @@ export default function Home() {
                     <div className="bg-white rounded-xl p-4 sm:p-5 shadow-card flex flex-col justify-between sm:row-span-2 relative overflow-hidden">
                       <div className="relative z-10 flex justify-between items-start gap-2">
                         <div className="min-w-0">
-                          <div className="text-gray-400 text-[10px] font-bold uppercase tracking-wider mb-1">
+                          <div className="text-gray-400 text-[11px] font-bold uppercase tracking-wider mb-1">
                             Peso fetale (Hadlock)
                           </div>
                           <div className="text-xl sm:text-2xl font-bold text-gray-900 transition-all duration-300">
@@ -783,7 +783,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div
-                        className={`relative z-10 inline-flex px-2 py-0.5 rounded-full ${bmiStatus.bg} ${bmiStatus.color} text-[10px] font-bold w-fit border ${bmiStatus.border} transition-colors duration-300`}
+                        className={`relative z-10 inline-flex px-2 py-0.5 rounded-full ${bmiStatus.bg} ${bmiStatus.color} text-[11px] font-bold w-fit border ${bmiStatus.border} transition-colors duration-300`}
                       >
                         {bmiStatus.label}
                       </div>
@@ -833,7 +833,7 @@ export default function Home() {
                     <div className="bg-white rounded-xl p-4 sm:p-5 shadow-card flex flex-col justify-between sm:row-span-2 relative overflow-hidden">
                       <div className="relative z-10 flex justify-between items-start gap-2">
                         <div className="min-w-0">
-                          <div className="text-gray-400 text-[10px] font-bold uppercase tracking-wider mb-1">
+                          <div className="text-gray-400 text-[11px] font-bold uppercase tracking-wider mb-1">
                             Elettrocardiogramma
                           </div>
                           <div className="text-xl sm:text-2xl font-bold text-gray-900 transition-all duration-300">
@@ -901,7 +901,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div
-                        className={`relative z-10 inline-flex px-2 py-0.5 rounded-full ${egfrStatus.bg} ${egfrStatus.color} text-[10px] font-bold w-fit border ${egfrStatus.border} transition-colors duration-300`}
+                        className={`relative z-10 inline-flex px-2 py-0.5 rounded-full ${egfrStatus.bg} ${egfrStatus.color} text-[11px] font-bold w-fit border ${egfrStatus.border} transition-colors duration-300`}
                       >
                         {egfrStatus.label}
                       </div>
@@ -931,7 +931,7 @@ export default function Home() {
 
           <div className="[grid-area:link]">
             <Link
-              href="/contatti"
+              href="/funzionalita"
               className="text-brand-700 font-bold inline-flex items-center gap-2 hover:gap-3 transition-all"
             >
               Scopri tutti i calcolatori <ArrowRight size={18} />

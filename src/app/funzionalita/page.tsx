@@ -32,11 +32,15 @@ import FaqList from "@/components/FaqList";
 import ScreenshotFrame from "@/components/ScreenshotFrame";
 import {
   SITE_URL,
-  STATIC_PAGES_UPDATED,
   breadcrumbList,
   jsonLdProps,
   pageOpenGraph,
 } from "@/lib/seo";
+
+// Revisione di questa pagina: tenerla allineata al lastModified di
+// /funzionalita in src/app/sitemap.ts. Il 21/10/2026 è stata tolta la
+// datazione riallineata sul CRL, che nell'app usa ancora una formula sbagliata.
+const PAGE_UPDATED = "2026-10-21";
 
 export const metadata: Metadata = {
   title: "Funzionalità gestionale medico",
@@ -133,7 +137,7 @@ const ginecologia: Feature = {
   intro:
     "Niente calcolatrici sul telefono né app a parte: le misure che inserisci diventano subito percentili, con una barra che mostra dove cade il valore.",
   bullets: [
-    "Settimane di gestazione e data presunta del parto dall'ultima mestruazione, riallineate sul CRL se non concordano",
+    "Settimane di gestazione e data presunta del parto dall'ultima mestruazione",
     "Biometria fetale (DBP, CC, CA, FL) con i percentili di Hadlock",
     "Peso fetale stimato con la formula Hadlock che preferisci (I–IV), centile e grafico di crescita",
     "Flussimetria dell'arteria ombelicale: PI e IR con il percentile per epoca gestazionale",
@@ -389,7 +393,7 @@ const funzionalitaStructuredData = {
       url: `${SITE_URL}/funzionalita`,
       name: "Funzionalità del gestionale medico Corioli",
       inLanguage: "it-IT",
-      dateModified: STATIC_PAGES_UPDATED,
+      dateModified: PAGE_UPDATED,
       isPartOf: { "@id": `${SITE_URL}/#website` },
       about: { "@id": `${SITE_URL}/#software` },
       primaryImageOfPage: `${SITE_URL}/screenshots/funzionalita-calcolatori.png`,

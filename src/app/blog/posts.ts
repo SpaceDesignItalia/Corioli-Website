@@ -20,6 +20,10 @@ export type BlogTable = {
 
 export type BlogSection = {
   title: string;
+  // Paragrafi separati da una riga vuota. Ammette link interni nella forma
+  // [testo](/percorso): portano chi legge alle pagine di specialità, ai prezzi
+  // o al modulo contatti dal punto dell'articolo in cui serve. Solo percorsi
+  // del sito; le fonti esterne stanno in `sources`.
   body: string;
   variant?: "text" | "comparison-table";
   // Immagine opzionale mostrata sotto al testo della sezione.
@@ -80,6 +84,718 @@ export type BlogPost = {
 // Ordine: dal più recente al meno recente.
 export const posts: BlogPost[] = [
   {
+    slug: "holter-pressorio-valori-normali-calo-notturno",
+    title: "Holter pressorio delle 24 ore: valori normali e calo notturno",
+    description:
+      "Soglie ESC 2024 per il monitoraggio delle 24 ore: 130/80 nelle 24 ore, 135/85 di giorno, 120/70 di notte. Calo notturno, validità e referto.",
+    excerpt:
+      "Le tre fasce delle linee guida ESC 2024 per media delle 24 ore, diurna e notturna, quando una registrazione è valida, come si calcola e si legge il calo notturno e cosa riportare nel referto.",
+    date: "2 Novembre 2026",
+    isoDate: "2026-11-02",
+    category: "Cardiologia",
+    lead: "Al monitoraggio pressorio delle 24 ore si parla di ipertensione quando la media delle 24 ore è almeno 130/80 mmHg, quella diurna almeno 135/85 o quella notturna almeno 120/70, secondo le linee guida ESC 2024: soglie diverse dai 140/90 della misura in ambulatorio. Le stesse linee guida aggiungono una fascia intermedia, la pressione elevata. Qui trovi le tre fasce, quando una registrazione è valida, come si calcola e si legge il calo notturno e cosa riportare nel referto.",
+    keyPoints: [
+      "Secondo le linee guida ESC 2024, al monitoraggio delle 24 ore c'è ipertensione con una media delle 24 ore di almeno 130/80 mmHg, una media diurna di almeno 135/85 o una media notturna di almeno 120/70.",
+      "La pressione è elevata, ma non ancora ipertensione, da 115/65 a meno di 130/80 nelle 24 ore, da 120/70 a meno di 135/85 di giorno e da 110/60 a meno di 120/70 di notte.",
+      "Una registrazione è valida con almeno il 70% di misure utilizzabili, di solito 27 o più nelle 24 ore, con una misura ogni 15-30 minuti di giorno e ogni 30-60 minuti di notte.",
+      "Il paziente è dipper se la pressione notturna scende di oltre il 10% rispetto alla media diurna: un calo minore, o una pressione notturna più alta di quella diurna, si associa a un rischio cardiovascolare maggiore.",
+      "Il profilo dipper o non-dipper cambia spesso da una registrazione all'altra: un singolo esame non-dipper va letto con prudenza.",
+    ],
+    sections: [
+      {
+        title: "Le soglie delle linee guida ESC 2024",
+        body: "Le linee guida ESC 2024 sulla pressione elevata e l'ipertensione dividono i valori in tre fasce: non elevata, elevata e ipertensione. Per il monitoraggio delle 24 ore le soglie valgono separatamente per la media delle 24 ore, per quella diurna e per quella notturna, e basta che la sistolica o la diastolica superi il limite perché il valore cada nella fascia superiore.\n\nLa fascia della pressione elevata è la novità del 2024. Non è una diagnosi di ipertensione, ma un'area di rischio in cui le linee guida chiedono di valutare il rischio cardiovascolare complessivo prima di decidere se trattare. Le soglie diurne del monitoraggio coincidono con quelle della misura a domicilio: 135/85 per l'ipertensione, 120/70 per la pressione elevata.",
+        table: {
+          caption: "Fasce di pressione al monitoraggio delle 24 ore secondo le linee guida ESC 2024 (mmHg)",
+          columns: ["Fascia", "Media 24 ore", "Media diurna", "Media notturna"],
+          rows: [
+            ["Non elevata", "Sotto 115/65", "Sotto 120/70", "Sotto 110/60"],
+            ["Elevata", "Da 115/65 a meno di 130/80", "Da 120/70 a meno di 135/85", "Da 110/60 a meno di 120/70"],
+            ["Ipertensione", "130/80 o più", "135/85 o più", "120/70 o più"],
+          ],
+          note: "Linee guida ESC 2024, tabella 5. Le soglie si applicano alle medie; basta che la sistolica o la diastolica superi il limite.",
+        },
+      },
+      {
+        title: "Quando la registrazione è valida",
+        body: "Una media vale quanto le misure da cui è calcolata. Le linee guida ESC 2024 considerano valida una registrazione con almeno il 70% di letture utilizzabili, che nelle 24 ore significa di solito 27 misure o più. L'apparecchio va programmato per misurare ogni 15-30 minuti di giorno, indicativamente dalle 7 alle 23, e ogni 30-60 minuti di notte.\n\nLa notte è la parte più fragile della registrazione. Le linee guida indicano idealmente sette letture notturne; quando non si riesce, otto letture in veglia e quattro durante il sonno possono bastare. Prima di calcolare le medie i valori grezzi vanno controllati, per togliere le letture palesemente errate.\n\nConta anche come si definiscono giorno e notte. I periodi fissi dell'apparecchio non coincidono sempre con il sonno reale del paziente: il diario con l'ora in cui è andato a letto e quella in cui si è alzato permette di calcolare le medie sui periodi veri.",
+      },
+      {
+        title: "Il calo notturno: dipper e non-dipper",
+        body: "Di notte la pressione normalmente scende. Il calo si esprime in percentuale della media diurna: (media diurna meno media notturna) diviso media diurna, per 100. Con una sistolica diurna di 140 mmHg e una notturna di 130, il calo è 10 su 140, cioè il 7,1%.\n\nLe linee guida ESC/ESH 2018 definiscono dipper il paziente la cui pressione notturna scende di oltre il 10% rispetto alla media diurna. È una soglia arbitraria, ma un calo inferiore al 10%, o un rapporto notte/giorno superiore a 0,9, si associa a un rischio cardiovascolare maggiore, e il rischio cresce ancora quando il calo manca del tutto o la pressione notturna supera quella diurna. Anche un calo molto marcato è stato associato a un rischio più alto, ma è poco frequente e poco riproducibile, quindi difficile da interpretare.\n\nLe stesse linee guida elencano le cause note di un calo assente: disturbi del sonno, apnee ostruttive, obesità, consumo elevato di sale nei soggetti sale-sensibili, ipotensione ortostatica, disfunzione autonomica, malattia renale cronica, neuropatia diabetica ed età avanzata. Avvertono anche che lo stato di dipper cambia spesso da un giorno all'altro: un singolo profilo non-dipper non basta a etichettare il paziente.",
+      },
+      {
+        title: "Camice bianco e ipertensione mascherata",
+        body: "Il monitoraggio delle 24 ore serve anche a riconoscere due situazioni che la sola misura in ambulatorio confonde. Nell'ipertensione da camice bianco la pressione è alta in studio e normale fuori. Nell'ipertensione mascherata succede il contrario: normale in studio, alta nella vita quotidiana.\n\nSecondo le linee guida ESC 2024 l'ipertensione mascherata è più frequente negli uomini, nei fumatori, in chi consuma molto alcol e nelle persone con diabete o obesità. Le stesse linee guida osservano che monitoraggio delle 24 ore e misura a domicilio danno una diagnosi diversa in circa il 15% dei casi, e in circa metà di questi la differenza supera i 5 mmHg.",
+      },
+      {
+        title: "Cosa scrivere nel referto",
+        body: "Un referto confrontabile con il controllo successivo riporta la data e la durata della registrazione, la percentuale di misure valide, le medie delle 24 ore, diurna e notturna con sistolica e diastolica, i periodi usati per giorno e notte, il calo notturno in percentuale e la fascia secondo le linee guida, con l'anno delle linee guida usate. Accanto ai numeri vanno la terapia in corso, con gli orari di assunzione, e gli eventi annotati nel diario.\n\nIn [Corioli Cardiologia](/cardiologia) l'Holter pressorio è un modulo della visita che si accende quando serve. Ha i campi per la data di inizio, le medie delle 24 ore, diurna e notturna, il calo notturno riportato dall'apparecchio, la percentuale di misure oltre la soglia e il referto testuale. Accanto al calo riportato, l'app propone quello calcolato dalle medie sistoliche diurna e notturna; nel referto PDF compare il valore dell'apparecchio, oppure, se manca, quello calcolato.",
+      },
+    ],
+    faq: [
+      {
+        question: "Quali sono i valori normali dell'Holter pressorio?",
+        answer:
+          "Secondo le linee guida ESC 2024 la pressione non è elevata sotto 115/65 mmHg nelle 24 ore, sotto 120/70 di giorno e sotto 110/60 di notte. Si parla di ipertensione da 130/80 nelle 24 ore, 135/85 di giorno o 120/70 di notte; fra le due fasce c'è la pressione elevata.",
+      },
+      {
+        question: "Quante misure servono perché l'Holter pressorio sia valido?",
+        answer:
+          "Almeno il 70% di letture utilizzabili, di solito 27 o più nelle 24 ore, secondo le linee guida ESC 2024. Di notte servono idealmente sette letture; se non si riesce, otto in veglia e quattro durante il sonno possono bastare.",
+      },
+      {
+        question: "Come si calcola il calo notturno della pressione?",
+        answer:
+          "Si sottrae la media notturna dalla media diurna, si divide per la media diurna e si moltiplica per 100. Con 140 di giorno e 130 di notte il calo è del 7,1%: sotto il 10%, quindi un profilo non-dipper secondo la definizione delle linee guida ESC/ESH 2018.",
+      },
+      {
+        question: "Cosa vuol dire non-dipper?",
+        answer:
+          "Che di notte la pressione scende meno del 10% rispetto al giorno. Si associa a un rischio cardiovascolare maggiore, ma lo stato di dipper cambia spesso fra una registrazione e l'altra: un singolo esame non-dipper va letto con prudenza e, se serve, ripetuto.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "McEvoy JW, McCarthy CP, Bruno RM, et al. 2024 ESC Guidelines for the management of elevated blood pressure and hypertension. Eur Heart J. 2024;45(38):3912-4018.",
+        url: "https://doi.org/10.1093/eurheartj/ehae178",
+      },
+      {
+        title:
+          "Williams B, Mancia G, Spiering W, et al. 2018 ESC/ESH Guidelines for the management of arterial hypertension. Eur Heart J. 2018;39(33):3021-3104.",
+        url: "https://doi.org/10.1093/eurheartj/ehy339",
+      },
+    ],
+  },
+  {
+    slug: "biometria-fetale-bpd-hc-ac-fl",
+    title: "Biometria fetale: come si misurano BPD, HC, AC e FL",
+    description:
+      "BPD, HC, AC e FL dalle 14 settimane: piani di scansione e criteri di qualità ISUOG, percentili per epoca, errori comuni e cosa riportare nel referto.",
+    excerpt:
+      "Le quattro misure della biometria fetale, i piani di scansione con i criteri di qualità delle linee guida ISUOG 2019, come si passa dalla misura al percentile e gli errori che lo falsano.",
+    date: "2 Novembre 2026",
+    isoDate: "2026-11-02",
+    category: "Ostetricia",
+    lead: "La biometria fetale del secondo e terzo trimestre si basa su quattro misure, diametro biparietale (BPD), circonferenza cranica (HC), circonferenza addominale (AC) e lunghezza della diafisi del femore (FL), che le linee guida ISUOG indicano di misurare dalle 14 settimane in poi. Ognuna ha un piano di scansione preciso, e il percentile ha senso solo se la misura è presa con lo stesso metodo degli studi che hanno costruito le curve. Qui trovi i piani e i criteri di qualità, come si passa dalla misura al percentile, gli errori più comuni e cosa riportare nel referto.",
+    keyPoints: [
+      "Dalle 14 settimane si misurano BPD, HC, AC e FL; prima si usa la lunghezza cranio-caudale (CRL), secondo le linee guida ISUOG 2019.",
+      "HC e AC si misurano con l'ellisse, con i calibri sul margine esterno dei tessuti molli: è la raccomandazione ISUOG, che considera equivalente il metodo dei due diametri misurati dall'esterno all'esterno.",
+      "Le misure vanno prese con lo stesso metodo degli studi che hanno prodotto le curve di riferimento usate in studio, altrimenti il percentile non è confrontabile.",
+      "Un feto è piccolo per l'epoca, SGA, quando il peso stimato o la circonferenza addominale sono sotto il 10° percentile, e grande per l'epoca, LGA, quando sono sopra il 90°.",
+      "Fra due ecografie di crescita ISUOG indica di norma almeno 3 settimane, per non scambiare l'errore di misura per un rallentamento della crescita.",
+    ],
+    sections: [
+      {
+        title: "Le quattro misure e quando si usano",
+        body: "Prima delle 14 settimane le dimensioni del feto e l'età gestazionale si valutano con la lunghezza cranio-caudale. Dalle 14 settimane in poi le linee guida ISUOG 2019 indicano quattro misure: il diametro biparietale e la circonferenza cranica per la testa, la circonferenza addominale per l'addome e la lunghezza della diafisi del femore. In italiano si trovano anche come DBP, CC, CA e LF.\n\nLe quattro misure servono a due cose. Ciascuna, confrontata con le curve di riferimento, dice se quella parte del corpo è nella norma per l'epoca. Insieme alimentano le formule che stimano il peso fetale, come quelle di [Hadlock](/blog/stima-peso-fetale-hadlock-guida-pratica). La circonferenza addominale entra in quasi tutte le formule, ed è anche una misura che ISUOG segnala come difficile da prendere bene per ragioni tecniche.",
+      },
+      {
+        title: "I piani di scansione e i criteri di qualità",
+        body: "ISUOG propone un punteggio di qualità per ogni immagine biometrica: ogni criterio soddisfatto vale un punto. È utile anche fuori dagli audit, come lista di controllo prima di congelare l'immagine.\n\nPer la circonferenza cranica e quella addominale la raccomandazione è usare l'ellisse, con i calibri sul margine esterno dei tessuti molli. Il metodo dei due diametri perpendicolari è considerato altrettanto riproducibile, purché anche lì i calibri siano dall'esterno all'esterno. Quello che conta, per ISUOG, è che all'interno dello stesso centro o della stessa rete si usi un solo metodo, lo stesso degli studi che hanno costruito le curve di riferimento adottate.",
+        table: {
+          caption: "Criteri di qualità delle immagini biometriche secondo le linee guida ISUOG 2019",
+          columns: ["Misura", "Cosa deve vedersi", "Cosa non deve vedersi"],
+          rows: [
+            ["BPD e HC", "Piano simmetrico con i talami e il cavo del setto pellucido; testa oltre metà dell'immagine; calibri ed ellisse ben posizionati", "Il cervelletto"],
+            ["AC", "Piano simmetrico con la bolla gastrica e il seno portale; addome oltre metà dell'immagine; calibri ed ellisse ben posizionati", "I reni"],
+            ["FL", "Entrambe le estremità dell'osso ben visibili; angolo inferiore a 45 gradi rispetto all'orizzontale; femore oltre metà dell'immagine; calibri ben posizionati", "Un'estremità dell'osso non riconoscibile"],
+          ],
+          note: "Dalla tabella 1 delle linee guida ISUOG 2019, che riprende il punteggio di Salomon et al.: ogni criterio soddisfatto vale un punto.",
+        },
+      },
+      {
+        title: "Dalla misura al percentile",
+        body: "Un millimetro in più o in meno non dice niente finché non lo si confronta con quello atteso per l'epoca. Il percentile dipende quindi da due cose: dall'età gestazionale, che deve essere stabilita correttamente, e dalle curve di riferimento scelte.\n\nISUOG distingue due tipi di curve. Quelle descrittive, come le curve di Hadlock, descrivono come erano distribuite le misure in una popolazione in un certo periodo. Gli standard prescrittivi, come quelli del progetto INTERGROWTH-21st, descrivono la crescita in condizioni ottimali, in gravidanze sane selezionate in anticipo. Lo stesso feto può cadere a percentili diversi sull'una e sull'altra: per questo nel referto va scritto quale curva si è usata.\n\nLe soglie più usate sono il 10° e il 90° percentile. Secondo ISUOG un feto è adeguato per l'epoca quando le misure o il peso stimato stanno fra il 10° e il 90°, piccolo per l'epoca quando il peso stimato o la circonferenza addominale sono sotto il 10°, grande quando sono sopra il 90°. Alcuni protocolli usano soglie diverse, come il 5° o il 3° percentile.",
+      },
+      {
+        title: "Gli errori che si ripetono",
+        body: "La maggior parte degli errori di biometria è già scritta nella tabella dei criteri di qualità. Una testa misurata su un piano obliquo, quello in cui compare il cervelletto, dà un BPD e una HC diversi da quelli del piano corretto. Un addome misurato troppo in basso, dove si vedono i reni, o su una sezione non circolare sbaglia la AC, che è la misura che pesa di più nella stima del peso. Un femore troppo inclinato o con un'estremità non visibile rischia di essere misurato male.\n\nAltri errori stanno fuori dall'immagine. Misurare con un metodo diverso da quello delle curve, per esempio i calibri in una posizione diversa da quella prevista, sposta il percentile anche se la misura è precisa. Ripetere l'ecografia di crescita dopo una o due settimane rischia di leggere come rallentamento quello che è solo errore di misura: ISUOG indica di norma almeno 3 settimane, salvo indicazioni cliniche. E il peso stimato non va riportato sulle curve del peso alla nascita, che includono molti neonati prematuri con restrizione di crescita, ma su curve dedicate al peso fetale.",
+      },
+      {
+        title: "Cosa scrivere nel referto",
+        body: "Per ogni misura il referto riporta il valore in millimetri e il percentile, con la curva di riferimento usata. Prima delle misure va l'età gestazionale, con il metodo con cui è stata stabilita. Se si calcola il peso stimato, va indicata la formula, per esempio Hadlock con HC, AC e FL, e la curva su cui si legge il suo percentile. Con questi elementi un collega può confrontare il referto con quello dell'ecografia successiva anche se l'ha fatta un altro operatore con un altro ecografo.\n\nIn [Corioli](/ginecologia), nella visita ostetrica, si inseriscono DBP, CC, CA e LF in millimetri. L'app calcola il percentile di ciascuna misura sulle curve di Hadlock 1984, valide da 14 a 40 settimane, sull'età gestazionale calcolata dall'ultima mestruazione alla data della visita, e il peso stimato con la formula di Hadlock scelta nelle impostazioni, con il suo centile sulle curve del 1991. Il referto PDF riporta gli stessi valori, senza ricopiarli a mano.",
+      },
+    ],
+    faq: [
+      {
+        question: "Da quale settimana si misurano BPD, HC, AC e FL?",
+        answer:
+          "Dalle 14 settimane, secondo le linee guida ISUOG 2019. Prima di allora le dimensioni del feto e l'età gestazionale si valutano con la lunghezza cranio-caudale (CRL).",
+      },
+      {
+        question: "Come si misura correttamente la circonferenza cranica?",
+        answer:
+          "Su un piano assiale simmetrico che mostri i talami e il cavo del setto pellucido, senza il cervelletto, con la testa che occupa più di metà dell'immagine. ISUOG raccomanda l'ellisse con i calibri sul margine esterno dei tessuti molli.",
+      },
+      {
+        question: "Quale misura conta di più per riconoscere un feto piccolo per l'epoca?",
+        answer:
+          "Secondo ISUOG un feto è piccolo per l'epoca quando il peso stimato o la circonferenza addominale sono sotto il 10° percentile. La circonferenza addominale è anche la misura che pesa di più nelle formule del peso fetale, ed è difficile da prendere bene.",
+      },
+      {
+        question: "Ogni quanto si ripete l'ecografia di crescita?",
+        answer:
+          "ISUOG indica di norma un intervallo di almeno 3 settimane, per ridurre i falsi positivi dovuti all'errore di misura. Intervalli più brevi restano possibili quando c'è un'indicazione clinica, anche senza ricalcolare il peso stimato.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Salomon LJ, Alfirevic Z, Da Silva Costa F, et al. ISUOG Practice Guidelines: ultrasound assessment of fetal biometry and growth. Ultrasound Obstet Gynecol. 2019;53(6):715-723.",
+        url: "https://doi.org/10.1002/uog.20272",
+      },
+      {
+        title:
+          "Hadlock FP, Deter RL, Harrist RB, Park SK. Estimating fetal age: computer-assisted analysis of multiple fetal growth parameters. Radiology. 1984;152(2):497-501.",
+        url: "https://doi.org/10.1148/radiology.152.2.6739822",
+      },
+      {
+        title:
+          "Hadlock FP, Harrist RB, Martinez-Poyer J. In utero analysis of fetal growth: a sonographic weight standard. Radiology. 1991;181(1):129-133.",
+        url: "https://doi.org/10.1148/radiology.181.1.1887021",
+      },
+      {
+        title:
+          "Papageorghiou AT, Ohuma EO, Altman DG, et al. International standards for fetal growth based on serial ultrasound measurements: the Fetal Growth Longitudinal Study of the INTERGROWTH-21st Project. Lancet. 2014;384(9946):869-879.",
+        url: "https://doi.org/10.1016/S0140-6736(14)61490-2",
+      },
+    ],
+  },
+  {
+    slug: "informativa-privacy-studio-medico-modello",
+    title: "Informativa privacy dello studio medico: contenuti e modello",
+    description:
+      "Cosa deve contenere l'informativa privacy di uno studio medico secondo l'articolo 13 del GDPR, quando serve il consenso e un modello da adattare.",
+    excerpt:
+      "Gli elementi dell'articolo 13 del GDPR uno per uno, i trattamenti per cui il consenso serve ancora, come e quando consegnare l'informativa e un modello da adattare al proprio studio.",
+    date: "2 Novembre 2026",
+    isoDate: "2026-11-02",
+    category: "Normativa",
+    lead: "L'informativa privacy dello studio medico deve dire al paziente chi tratta i suoi dati, per quali finalità e su quale base giuridica, a chi li comunica, per quanto tempo li conserva, quali diritti ha e come proporre reclamo al Garante: sono gli elementi dell'articolo 13 del GDPR. Per la cura il consenso non serve, ma l'informativa sì, e va data quando si raccolgono i dati, cioè di solito alla prima visita. Qui trovi gli elementi uno per uno, i trattamenti per cui il consenso serve ancora e un modello da adattare al tuo studio.",
+    keyPoints: [
+      "L'articolo 13 del GDPR elenca cosa scrivere: titolare e contatti, eventuale DPO, finalità e base giuridica, destinatari, trasferimenti fuori dall'Unione europea, periodo di conservazione, diritti, revoca del consenso, reclamo al Garante, obbligo di fornire i dati e decisioni automatizzate.",
+      "Per i trattamenti necessari alla cura il medico non deve chiedere il consenso del paziente: lo ha chiarito il Garante nel provvedimento n. 55 del 7 marzo 2019, sulla base dell'articolo 9 del GDPR.",
+      "Il consenso resta necessario per i trattamenti solo indirettamente legati alla cura, come la consegna del referto online, le app mediche diverse dalla telemedicina o le finalità promozionali.",
+      "Il medico libero professionista non deve nominare un DPO, perché non tratta dati su larga scala, ma deve tenere il registro delle attività di trattamento.",
+      "Nell'informativa va scritto anche il periodo di conservazione, o il criterio per stabilirlo: per lo studio privato il riferimento più usato è di dieci anni dall'ultima prestazione.",
+    ],
+    sections: [
+      {
+        title: "Il consenso per la cura non serve, l'informativa sì",
+        body: "Con il GDPR è cambiato il punto di partenza. I dati sanitari trattati per la diagnosi e la cura, da un professionista tenuto al segreto professionale, si basano sull'articolo 9 del regolamento, paragrafo 2, lettera h, e paragrafo 3. Nel provvedimento n. 55 del 7 marzo 2019 il Garante ha chiarito che in questi casi il medico non deve più chiedere il consenso del paziente, sia che lavori in libera professione sia in una struttura, purché il trattamento sia davvero necessario alla prestazione richiesta.\n\nL'informativa invece resta obbligatoria. L'articolo 13 del GDPR chiede di fornirla nel momento in cui i dati vengono raccolti, che nello studio coincide con la prima visita. Per i pazienti già in carico il Garante ha precisato che l'informativa data prima del GDPR va aggiornata solo per gli elementi nuovi, come il periodo di conservazione.",
+      },
+      {
+        title: "Cosa deve contenere: gli elementi dell'articolo 13",
+        body: "L'articolo 13 divide gli elementi in due gruppi, ma nella pratica vanno tutti nello stesso documento. Alcuni nello studio medico sono quasi sempre gli stessi; altri vanno scritti solo se ricorrono, come il DPO o il trasferimento dei dati fuori dall'Unione europea.\n\nDue punti meritano attenzione. Fra i destinatari vanno anche i fornitori che trattano i dati per conto dello studio, come un gestionale in cloud o un servizio di prenotazione online: sono responsabili del trattamento e serve un contratto con loro. E i diritti del paziente vanno elencati tutti, sapendo che la cancellazione incontra il limite degli obblighi di conservazione della documentazione clinica.",
+        table: {
+          caption: "Gli elementi dell'informativa (articolo 13 del GDPR) e come si declinano nello studio medico",
+          columns: ["Elemento", "Cosa scrivere nello studio"],
+          rows: [
+            ["Titolare e contatti", "Nome del medico o della società, indirizzo dello studio, email e telefono"],
+            ["Responsabile della protezione dei dati (DPO)", "Solo se nominato: il libero professionista di norma non è tenuto"],
+            ["Finalità e base giuridica", "Diagnosi e cura: articolo 9, paragrafo 2, lettera h; adempimenti fiscali: obbligo di legge, articolo 6, paragrafo 1, lettera c"],
+            ["Legittimo interesse", "Solo se un trattamento si basa sul legittimo interesse; nello studio è raro"],
+            ["Destinatari", "Commercialista, Sistema Tessera Sanitaria, colleghi e laboratori a cui invii il paziente, fornitori che trattano i dati per conto dello studio"],
+            ["Trasferimenti fuori dall'Unione europea", "Solo se avvengono, per esempio con servizi che conservano i dati su server extra UE"],
+            ["Periodo di conservazione", "Il termine scelto o il criterio, per esempio dieci anni dall'ultima prestazione"],
+            ["Diritti del paziente", "Accesso, rettifica, cancellazione, limitazione, opposizione e portabilità, e a chi scrivere per esercitarli"],
+            ["Revoca del consenso", "Solo per i trattamenti basati sul consenso: si può revocare in qualsiasi momento"],
+            ["Reclamo", "Il diritto di proporre reclamo al Garante per la protezione dei dati personali"],
+            ["Obbligo di fornire i dati", "Quali dati sono necessari alla prestazione e cosa succede se il paziente non li fornisce"],
+            ["Decisioni automatizzate", "Se non ce ne sono, come di norma nello studio, si scrive che non ce ne sono"],
+          ],
+          note: "Elementi dell'articolo 13, paragrafi 1 e 2, del Regolamento (UE) 2016/679.",
+        },
+      },
+      {
+        title: "Quando il consenso serve ancora",
+        body: "La regola del Garante vale per i trattamenti necessari alla cura. Quelli collegati alla cura solo in modo indiretto hanno bisogno di un'altra base giuridica, di solito il consenso esplicito. Nel provvedimento del 2019 il Garante ne indica alcuni: le app mediche usate per finalità diverse dalla telemedicina o accessibili a persone che non sono professionisti sanitari, le finalità promozionali o commerciali, e la consegna del referto online, per cui il consenso è richiesto dalle regole di settore sulla refertazione.\n\nIn pratica conviene separare i due piani. L'informativa descrive tutti i trattamenti; il consenso, quando serve, si raccoglie a parte, per ciascuna finalità, e il paziente deve poterlo negare senza che cambi la cura che riceve.",
+      },
+      {
+        title: "Come e quando consegnarla",
+        body: "Il GDPR non impone una forma, ma chiede che l'informativa sia chiara e semplice, e il titolare deve poter dimostrare di averla data. Nello studio la soluzione più pratica è un foglio consegnato alla prima visita, con una firma per presa visione conservata nella scheda del paziente, e la stessa informativa affissa in sala d'attesa e pubblicata sul sito, se c'è.\n\nL'informativa va rivista quando cambia qualcosa di sostanziale, per esempio un nuovo fornitore che tratta i dati per conto dello studio o un nuovo servizio, come le prenotazioni online. Il resto degli adempimenti, dal registro dei trattamenti alle violazioni dei dati, è nella guida al [GDPR per il medico libero professionista](/blog/gdpr-medico-libero-professionista-adempimenti).",
+      },
+      {
+        title: "Un modello da adattare",
+        body: "Il testo che segue è un punto di partenza per uno studio specialistico in cui lavora un solo medico. Le parti fra parentesi quadre vanno sostituite, e le voci che non riguardano lo studio vanno tolte: un'informativa che descrive trattamenti che non fai è inesatta quanto una che ne dimentica.\n\nTitolare del trattamento. Il titolare è il dott. o la dott.ssa [nome e cognome], [specialità], con studio in [indirizzo], email [indirizzo email], telefono [numero].\n\nFinalità e base giuridica. I dati personali e sanitari sono trattati per la diagnosi, la cura e le prestazioni richieste, sulla base dell'articolo 9, paragrafo 2, lettera h, e paragrafo 3, del Regolamento (UE) 2016/679: per queste finalità non è richiesto il consenso. I dati necessari agli adempimenti fiscali e contabili sono trattati per obbligo di legge, articolo 6, paragrafo 1, lettera c.\n\nDestinatari. I dati possono essere comunicati al commercialista dello studio, al Sistema Tessera Sanitaria per la dichiarazione dei redditi precompilata, salvo opposizione del paziente, ad altri professionisti sanitari e laboratori coinvolti nella cura, e a [eventuali fornitori che trattano i dati per conto dello studio], nominati responsabili del trattamento. I dati non sono diffusi né trasferiti fuori dall'Unione europea.\n\nConservazione. La documentazione clinica è conservata per [dieci] anni dall'ultima prestazione, salvo contenziosi in corso o diversi obblighi di legge; i documenti fiscali per il tempo previsto dalla normativa fiscale.\n\nDiritti. Il paziente può chiedere in ogni momento l'accesso ai propri dati, la rettifica, la cancellazione nei limiti degli obblighi di conservazione, la limitazione del trattamento, l'opposizione e la portabilità, scrivendo a [indirizzo email]. Ha inoltre il diritto di proporre reclamo al Garante per la protezione dei dati personali.\n\nConferimento dei dati. I dati anagrafici e sanitari sono necessari per eseguire la prestazione: senza di essi la visita non può essere svolta in modo appropriato. Non sono presenti processi decisionali automatizzati.",
+      },
+      {
+        title: "Se usi un gestionale",
+        body: "Il gestionale entra nell'informativa solo se il fornitore tratta i dati dei pazienti per conto dello studio. Un gestionale in cloud conserva l'archivio sui server del fornitore, che diventa responsabile del trattamento: va indicato fra i destinatari, serve un contratto ai sensi dell'articolo 28 e, se i server sono fuori dall'Unione europea, va descritto anche il trasferimento. La differenza fra i due modelli è spiegata in [gestionale medico locale o in cloud](/blog/gestionale-medico-locale-o-cloud).\n\nCon un gestionale che salva i dati sul computer dello studio, come [Corioli](/gdpr), il fornitore del software non riceve i dati clinici e non va indicato fra i destinatari. Resta da scrivere il periodo di conservazione, che è una scelta del medico: i criteri per stabilirlo sono nella guida su [quanto conservare la cartella clinica nello studio privato](/blog/conservazione-cartella-clinica-studio-privato).",
+      },
+    ],
+    faq: [
+      {
+        question: "Il medico deve far firmare il consenso privacy al paziente?",
+        answer:
+          "Per la diagnosi e la cura no: il Garante, nel provvedimento n. 55 del 7 marzo 2019, ha chiarito che il medico non deve chiedere il consenso per i trattamenti necessari alla prestazione. Deve però consegnare l'informativa. Il consenso serve per i trattamenti solo indirettamente legati alla cura, come il referto online o le finalità promozionali.",
+      },
+      {
+        question: "Quando va consegnata l'informativa privacy?",
+        answer:
+          "Nel momento in cui si raccolgono i dati, come prevede l'articolo 13 del GDPR: nello studio, di solito alla prima visita. Conviene conservare una firma per presa visione, perché il titolare deve poter dimostrare di averla data.",
+      },
+      {
+        question: "Il medico libero professionista deve nominare un DPO?",
+        answer:
+          "No. Secondo il Garante il professionista sanitario che lavora da solo non tratta dati su larga scala e non è tenuto a nominarlo. Deve però tenere il registro delle attività di trattamento, da mostrare in caso di controllo.",
+      },
+      {
+        question: "Cosa scrivere nell'informativa sul periodo di conservazione?",
+        answer:
+          "Il periodo o il criterio per stabilirlo. Per la cartella dello studio privato nessuna norma fissa un termine: il riferimento più usato è di dieci anni dall'ultima prestazione, il termine di prescrizione ordinaria, salvo contenziosi in corso.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Regolamento (UE) 2016/679 del Parlamento europeo e del Consiglio, del 27 aprile 2016 (GDPR), articoli 6, 9, 13 e 28.",
+        url: "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+      },
+      {
+        title:
+          "Garante per la protezione dei dati personali. Chiarimenti sull'applicazione della disciplina per il trattamento dei dati relativi alla salute in ambito sanitario, provvedimento n. 55 del 7 marzo 2019.",
+        url: "https://www.garanteprivacy.it/home/docweb/-/docweb-display/docweb/9091942",
+      },
+    ],
+  },
+  {
+    slug: "cambiare-gestionale-medico-migrazione-dati",
+    title: "Cambiare gestionale medico senza perdere i dati: come si fa la migrazione",
+    description:
+      "Cosa chiedere al vecchio fornitore, quali dati passano bene e quali no, come verificare l'import e cosa dice il GDPR: la migrazione in 6 passaggi.",
+    excerpt:
+      "Il cambio di gestionale si decide sull'archivio, non sul software nuovo. Cosa chiedere al vecchio fornitore, in che formato, cosa prevede l'articolo 28 del GDPR, come si verifica l'import e come si gestisce il periodo di passaggio.",
+    date: "2 Novembre 2026",
+    isoDate: "2026-11-02",
+    category: "Gestione Studio",
+    lead: "Per cambiare gestionale medico senza perdere i dati serve un'esportazione completa del vecchio archivio in un formato aperto, verificata prima di disdire il contratto e importata nel nuovo software su una copia di prova. Se il vecchio gestionale tiene i dati sui server del fornitore, il GDPR è dalla tua parte: il contratto deve prevedere che alla fine del servizio il fornitore te li restituisca o li cancelli, a tua scelta. Qui trovi cosa chiedere, in che formato, quali dati passano bene e quali no, come si controlla l'import e come si organizza il periodo di passaggio.",
+    keyPoints: [
+      "Prima di disdire il vecchio gestionale serve un'esportazione completa in un formato aperto, come CSV, Excel, XML o una copia del database con la descrizione dei campi, e la verifica che contenga tutti i pazienti e tutte le visite.",
+      "Se il fornitore conserva i dati sui suoi server è responsabile del trattamento: l'articolo 28 del GDPR impone che il contratto preveda, a scelta del medico titolare, la restituzione o la cancellazione di tutti i dati personali alla fine del servizio.",
+      "La portabilità dell'articolo 20 del GDPR è un diritto del paziente sui dati che lo riguardano, non uno strumento del medico verso il fornitore: per riavere l'archivio dello studio contano il contratto e l'articolo 28.",
+      "Anagrafiche e appuntamenti di solito passano bene; testi liberi, campi clinici strutturati, immagini e allegati sono le parti che più spesso si perdono o arrivano in una forma diversa.",
+      "Conviene importare prima su una copia di prova, confrontare i conteggi e un campione di schede scelte apposta, e tenere il vecchio archivio consultabile finché il nuovo non è verificato.",
+    ],
+    sections: [
+      {
+        title: "Prima di tutto: cosa c'è nel vecchio archivio",
+        body: "Il cambio di gestionale si decide sull'archivio, non sul software nuovo. Prima di parlare con qualsiasi fornitore conviene fare l'inventario di quello che c'è da portare: le anagrafiche dei pazienti, gli appuntamenti, le visite con il diario clinico, i campi strutturati come misure, biometrie e diagnosi, i referti e gli altri documenti prodotti dallo studio, gli allegati caricati nel tempo, cioè esami esterni, immagini e consensi firmati, e infine i modelli di testo e la carta intestata.\n\nPer ognuna di queste voci servono due numeri, presi dal vecchio software: quanti pazienti ci sono in archivio e quante visite. Sembrano dettagli, ma sono il metro con cui si verificherà l'import. Un'esportazione che arriva con 3.200 pazienti quando il gestionale ne mostrava 3.450 ha un problema, e conviene scoprirlo prima di aver disdetto il contratto, non dopo.\n\nL'inventario serve anche a decidere cosa non portare. Le prove fatte all'installazione, i pazienti di test e i doppioni accumulati negli anni sono un buon momento per essere lasciati indietro.",
+      },
+      {
+        title: "Cosa chiedere al vecchio fornitore",
+        body: "La richiesta va fatta per iscritto e deve essere precisa: un'esportazione completa, in un formato aperto, con la descrizione dei campi. Un file di backup che si apre solo con il vecchio programma non è un'esportazione: ti lascia i dati, ma non il modo di leggerli.\n\nPer le anagrafiche e gli appuntamenti il formato più pratico è il CSV o l'Excel, una riga per paziente o per appuntamento, con un identificativo che colleghi ogni appuntamento al suo paziente. Per le visite il formato dipende da come il vecchio gestionale le archivia: un CSV con il testo completo, un XML o una copia del database, sempre accompagnati dal tracciato dei campi, cioè l'elenco di cosa contiene ogni colonna. I referti già prodotti conviene averli in PDF, uno per documento, con un nome o un indice che dica a quale paziente appartengono. Lo stesso vale per gli allegati.\n\nChiedi anche i tempi e gli eventuali costi dell'esportazione, e se il fornitore la fa una sola volta o la ripete alla data del passaggio: tra il primo export di prova e il giorno in cui smetti di usare il vecchio software, l'archivio continua a crescere.",
+        table: {
+          caption: "Cosa chiedere per ogni tipo di dato e cosa controllare all'arrivo",
+          columns: ["Dato", "Formato da chiedere", "Cosa controllare"],
+          rows: [
+            ["Anagrafiche dei pazienti", "CSV o Excel, una riga per paziente", "Numero di pazienti, codice fiscale, date di nascita nel formato giusto, lettere accentate"],
+            ["Appuntamenti", "CSV con l'identificativo del paziente", "Che ogni appuntamento sia collegato al paziente giusto, come sono marcati quelli annullati"],
+            ["Visite e diario clinico", "CSV, XML o copia del database, con il tracciato dei campi", "Date, testo completo delle note, campi strutturati come misure e diagnosi"],
+            ["Referti e documenti prodotti", "PDF, uno per documento, con un indice paziente-file", "Che si aprano e che ognuno sia attribuibile al suo paziente"],
+            ["Allegati: esami esterni, immagini, consensi firmati", "File originali con un indice paziente-file", "Numero di file e spazio occupato, uguali a quelli del vecchio archivio"],
+            ["Modelli di testo e carta intestata", "Testo o documento modificabile", "Spesso non si esportano: vanno ricreati nel nuovo software"],
+          ],
+          note: "Il tracciato dei campi è la descrizione di cosa contiene ogni colonna dell'esportazione. Senza, chi importa deve indovinarlo.",
+        },
+      },
+      {
+        title: "Cosa dice il GDPR quando cambi fornitore",
+        body: "Se il vecchio gestionale è in cloud, il fornitore tratta i dati dei tuoi pazienti per tuo conto ed è quindi responsabile del trattamento. L'articolo 28 del GDPR stabilisce che il contratto con il responsabile preveda, fra le altre cose, che alla fine della prestazione dei servizi il responsabile cancelli o restituisca tutti i dati personali, su scelta del titolare, e cancelli le copie esistenti, salvo che la legge ne imponga la conservazione. È la clausola da cercare nel contratto o nell'accordo sul trattamento dei dati prima di dare la disdetta.\n\nSpesso si cita la portabilità dell'articolo 20, ma non è lo strumento giusto. La portabilità è un diritto dell'interessato, cioè del paziente, sui dati che lo riguardano e che ha fornito: non è pensata per il medico che vuole riavere l'archivio dello studio dal fornitore. Per quello contano il contratto e l'articolo 28.\n\nSe invece il vecchio gestionale è installato nello studio e i dati sono sul tuo computer, il problema è solo tecnico: l'archivio è già nelle tue mani e bisogna capire come esportarlo in un formato leggibile.\n\nDue adempimenti da non dimenticare. Il registro delle attività di trattamento elenca anche le categorie di destinatari dei dati, quindi va aggiornato quando cambia chi tratta i dati per tuo conto. E durante il trasferimento l'archivio va protetto come qualsiasi altro dato sanitario: un export completo dei pazienti non viaggia come allegato di una email in chiaro, ma su un supporto cifrato o con un trasferimento protetto.",
+      },
+      {
+        title: "La prova d'import e la verifica",
+        body: "Il primo import non si fa sull'archivio con cui lavorerai. Si fa su una copia o su un'installazione di prova, con l'export completo, e si controlla prima di decidere la data del passaggio.\n\nLa verifica parte dai numeri dell'inventario: pazienti e visite importati devono corrispondere a quelli del vecchio gestionale, e ogni differenza deve avere una spiegazione, per esempio pazienti di test lasciati fuori o doppioni riuniti. Poi si aprono una decina di schede scelte apposta, non a caso: il paziente più vecchio dell'archivio, quello con più visite, uno con nome e cognome con apostrofi o accenti, due omonimi, una paziente con gravidanze o un paziente con molti esami allegati.\n\nGli errori che si ripetono sono sempre gli stessi. Date con giorno e mese invertiti, che trasformano il 3 aprile nel 4 marzo. Lettere accentate diventate simboli per un problema di codifica del file. Pazienti doppi perché lo stesso nome era scritto in due modi. Note tagliate a una lunghezza massima. Appuntamenti annullati importati come visite fatte.",
+      },
+      {
+        title: "Il periodo di passaggio",
+        body: "Il giorno del passaggio va scelto prima: da quella data le visite nuove si registrano solo nel nuovo gestionale. Lavorare in parallelo sui due sistemi, inserendo la stessa visita due volte, sembra prudente ma produce archivi che divergono in pochi giorni.\n\nIl vecchio archivio non sparisce il giorno dopo. Deve restare consultabile, anche solo in lettura o attraverso i PDF esportati, per tutto il tempo in cui potrebbe servire un dato non migrato e per rispettare gli [obblighi di conservazione della documentazione clinica](/blog/conservazione-cartella-clinica-studio-privato), che non si interrompono con il cambio di software.\n\nSolo dopo la verifica si chiude il contratto con il vecchio fornitore e gli si chiede, per iscritto, la conferma della restituzione o della cancellazione dei dati. L'export originale va conservato in [almeno due posti diversi](/blog/backup-studio-medico-regola-3-2-1): è l'unica copia completa dell'archivio com'era prima della migrazione, e l'articolo 32 del GDPR chiede di poter ripristinare tempestivamente l'accesso ai dati in caso di incidente.",
+      },
+      {
+        title: "Come si importa l'archivio in Corioli",
+        body: "Corioli, sia nell'app di ginecologia e ostetricia sia in Corioli Cardiologia, importa le anagrafiche dei pazienti e gli appuntamenti da due file CSV con un tracciato preciso, separati da punto e virgola. Gli appuntamenti diventano visite con la prestazione e l'agenda di provenienza, quelli annullati vengono saltati, e osservazioni, patologie pregresse, farmaci e allergie della scheda paziente arrivano come una prima visita di anamnesi. C'è anche un import dedicato delle anagrafiche esportate da Doctolib.\n\nL'import controlla i doppioni: un paziente già presente, riconosciuto dal codice fiscale oppure da nome, cognome e data di nascita, non viene creato una seconda volta, ma completato con i dati che gli mancano, senza riscrivere i campi già compilati. L'unica eccezione è l'import da Doctolib, che corregge il codice fiscale quando gli altri dati confermano che si tratta della stessa persona. Le visite già importate non vengono duplicate, quindi un secondo import con l'export aggiornato al giorno del passaggio aggiunge solo quello che è cambiato. Prima di un import conviene comunque fare un backup manuale dalle impostazioni.\n\nPer gli archivi che non arrivano in questo tracciato, da Word, da Excel organizzati a modo proprio o da altri gestionali, la migrazione dei dati storici è un servizio su preventivo, calcolato in base al formato e alla dimensione dell'archivio: si [chiede dal modulo contatti](/contatti?richiesta=migrazione) indicando da quale software o da quali file si parte. Il software costa [30€ al mese tutto incluso](/prezzi) e si può provare per 30 giorni senza carta di credito, anche con l'archivio importato.",
+      },
+    ],
+    faq: [
+      {
+        question: "Il vecchio fornitore del gestionale è obbligato a restituirmi i dati?",
+        answer:
+          "Se il gestionale tiene i dati sui server del fornitore, sì: il fornitore è responsabile del trattamento e l'articolo 28 del GDPR impone che il contratto preveda, a scelta del medico titolare, la restituzione o la cancellazione di tutti i dati personali alla fine del servizio. Se il gestionale è installato nello studio, i dati sono già sul tuo computer e si tratta solo di esportarli.",
+      },
+      {
+        question: "In che formato conviene chiedere l'esportazione?",
+        answer:
+          "In un formato aperto: CSV o Excel per anagrafiche e appuntamenti, CSV, XML o copia del database per le visite, PDF per referti e documenti, sempre con la descrizione dei campi. Un backup che si apre solo con il vecchio programma non basta.",
+      },
+      {
+        question: "Posso usare la portabilità dell'articolo 20 del GDPR per riavere l'archivio?",
+        answer:
+          "No. La portabilità è un diritto del paziente sui dati che lo riguardano e che ha fornito. Per riavere l'archivio dello studio dal fornitore contano il contratto e l'articolo 28 del GDPR, che regola la restituzione dei dati alla fine del servizio.",
+      },
+      {
+        question: "Quali dati si perdono più spesso in una migrazione?",
+        answer:
+          "Anagrafiche e appuntamenti di solito passano bene. I problemi si concentrano su testi liberi tagliati, campi clinici strutturati che il nuovo software organizza in un altro modo, immagini e allegati non collegati al paziente, e modelli di testo che spesso vanno ricreati a mano.",
+      },
+      {
+        question: "Quanto costa migrare i dati in Corioli?",
+        answer:
+          "Corioli importa da sé anagrafiche e appuntamenti da CSV con il suo tracciato e le anagrafiche esportate da Doctolib. Per gli altri archivi la migrazione è un servizio su preventivo, calcolato su formato e dimensione, che si chiede dal modulo contatti. Il software costa 30€ al mese tutto incluso, con 30 giorni di prova gratuita.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Regolamento (UE) 2016/679 del Parlamento europeo e del Consiglio, del 27 aprile 2016 (GDPR), articoli 20, 28, 30 e 32.",
+        url: "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+      },
+      {
+        title:
+          "Comitato europeo per la protezione dei dati (EDPB). Linee guida 07/2020 sui concetti di titolare del trattamento e di responsabile del trattamento ai sensi del GDPR, versione definitiva del 7 luglio 2021.",
+        url: "https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_it",
+      },
+    ],
+  },
+  {
+    slug: "ipotensione-ortostatica-come-misurarla-criteri",
+    title: "Ipotensione ortostatica: come si misura e quando si fa diagnosi",
+    description:
+      "Calo di 20/10 mmHg entro 3 minuti: come misurare la pressione in clino e ortostatismo, cosa chiedono le linee guida europee e cosa scrivere nel referto.",
+    excerpt:
+      "La definizione è una sola, ma il modo in cui si misura cambia il risultato. Criteri, protocollo a 1 e 3 minuti, ipertensione supina, forma neurogena e cosa riportare nel referto perché il dato resti confrontabile.",
+    date: "21 Ottobre 2026",
+    isoDate: "2026-10-21",
+    category: "Cardiologia",
+    lead: "Si parla di ipotensione ortostatica quando, passando dalla posizione supina a quella eretta, la pressione sistolica scende di almeno 20 mmHg o la diastolica di almeno 10 mmHg entro 3 minuti. La definizione è semplice; la misura lo è meno, perché il momento in cui si legge lo sfigmomanometro, la posizione di partenza e la pressione di base cambiano il risultato. Qui trovi i criteri, il protocollo indicato dalle linee guida europee sull'ipertensione, i casi particolari e cosa scrivere nel referto.",
+    keyPoints: [
+      "L'ipotensione ortostatica classica è un calo sostenuto della pressione sistolica di almeno 20 mmHg o della diastolica di almeno 10 mmHg entro 3 minuti dal passaggio in piedi, o dall'inclinazione su lettino basculante di almeno 60 gradi, secondo il consensus statement del 2011.",
+      "Le linee guida europee sull'ipertensione indicano di misurare la pressione dopo alcuni minuti di riposo da sdraiati o seduti e poi in piedi, a 1 e a 3 minuti; l'ESC 2024 chiede di cercarla alla prima diagnosi di pressione elevata o di ipertensione e quando compaiono sintomi.",
+      "Nel paziente con ipertensione supina un calo sistolico di 30 mmHg può essere un criterio più adatto, perché a pressioni di partenza alte 20 mmHg sono una quota piccola.",
+      "La misura entro il primo minuto conta: nello studio ARIC, su 11.429 adulti di mezza età, l'ipotensione rilevata a circa 30 secondi dall'alzata era la più associata a capogiri, cadute, sincope e mortalità.",
+      "Un rapporto fra aumento della frequenza e calo della sistolica inferiore a 0,5 battiti per mmHg orienta verso una forma neurogena: nel referto vanno quindi anche le frequenze, non solo le pressioni.",
+    ],
+    sections: [
+      {
+        title: "La definizione e le sue varianti",
+        body: "Il riferimento è il consensus statement pubblicato nel 2011 da un gruppo di esperti di neurologia autonomica: l'ipotensione ortostatica è un calo sostenuto della pressione sistolica di almeno 20 mmHg o della diastolica di almeno 10 mmHg entro 3 minuti dall'assunzione della posizione eretta, o dall'inclinazione su lettino basculante di almeno 60 gradi. Basta uno dei due criteri. È la forma classica, quella che si cerca in ambulatorio.\n\nLo stesso documento propone un aggiustamento per chi ha l'ipertensione supina: in questi pazienti un calo sistolico di 30 mmHg può essere un criterio più appropriato. Il motivo è aritmetico. Venti millimetri sono molti su una sistolica di 120 e pochi su una di 190, e con la soglia standard il paziente iperteso risulterebbe positivo anche per variazioni che non hanno un significato emodinamico.\n\nAccanto alla forma classica ci sono due varianti. L'ipotensione ortostatica iniziale è un calo transitorio nei primi secondi dopo l'alzata, che si recupera da solo e che lo sfigmomanometro tradizionale fatica a cogliere. Quella ritardata soddisfa gli stessi criteri ma compare dopo i 3 minuti, e spesso si vede solo al tilt test.\n\nDa tutte queste va distinta la sindrome da tachicardia posturale, la POTS, dove la pressione tiene e a salire è la frequenza: almeno 30 battiti in più entro 10 minuti in piedi, almeno 40 fra i 12 e i 19 anni, senza ipotensione ortostatica.",
+        table: {
+          caption: "Le forme di ipotensione ortostatica e la POTS",
+          columns: ["Forma", "Criterio", "Quando si vede"],
+          rows: [
+            ["Classica", "Calo sostenuto di almeno 20 mmHg di sistolica o 10 mmHg di diastolica", "Entro 3 minuti in piedi o al tilt di almeno 60 gradi"],
+            ["Con ipertensione supina", "Calo sistolico di almeno 30 mmHg, criterio più adatto della soglia standard", "Entro 3 minuti in piedi"],
+            ["Ritardata", "Stessi valori della forma classica", "Dopo i 3 minuti, spesso solo al tilt test"],
+            ["Iniziale", "Calo transitorio che si recupera spontaneamente", "Nei primi secondi dopo l'alzata"],
+            ["POTS, da distinguere", "Aumento della frequenza di almeno 30 bpm, 40 fra 12 e 19 anni, senza ipotensione ortostatica", "Entro 10 minuti in piedi o al tilt"],
+          ],
+          note: "Definizioni del consensus statement del 2011 (Freeman et al., Clinical Autonomic Research). La forma iniziale e quella ritardata richiedono di solito una registrazione continua della pressione o il tilt test.",
+        },
+      },
+      {
+        title: "Come si misura in ambulatorio",
+        body: "La misura parte da una pressione di base attendibile. Le linee guida ESC 2024 sull'ipertensione indicano di far riposare il paziente da sdraiato o da seduto per 5 minuti prima della misura di riferimento, e di misurare di nuovo dopo l'alzata, a 1 e a 3 minuti. Le linee guida ESH del 2023 indicano le stesse due misure in piedi, a 1 e a 3 minuti.\n\nPartire da sdraiati rende il passaggio di posizione più marcato e quindi il test più sensibile; partire da seduti è più pratico ed è accettato come primo screening. Quello che non va fatto è mescolare: se la misura di base è da seduti e quella in piedi viene confrontata con una supina di un'altra visita, il calo calcolato non vuol dire niente.\n\nIn piedi il paziente sta fermo, senza appoggiarsi e senza contrarre i muscoli delle gambe, con il braccio sostenuto all'altezza del cuore: un braccio che pende lungo il fianco sovrastima la pressione. A ogni misura si annotano anche la frequenza e gli eventuali sintomi, capogiro, offuscamento della vista, sensazione di svenimento, perché un calo accompagnato dai sintomi del paziente pesa più di un numero isolato.\n\nSe il sospetto è forte e il test in ambulatorio è negativo, vale la pena ripeterlo in un'altra occasione, al mattino o dopo il pasto, quando il calo è più frequente, oppure rinviare al tilt test.",
+      },
+      {
+        title: "Perché il primo minuto conta",
+        body: "La finestra di 3 minuti nasce dalle definizioni degli anni Novanta, ma nella pratica molti calibrano la misura proprio sul terzo minuto e saltano la prima. I dati dello studio ARIC suggeriscono che è un errore.\n\nNell'analisi pubblicata nel 2017 su JAMA Internal Medicine, 11.429 adulti fra i 44 e i 66 anni avevano misurato la pressione da sdraiati e poi in piedi fino a cinque volte, a intervalli di circa 25 secondi. L'ipotensione rilevata alla prima misura, a una media di 28 secondi dall'alzata, era l'unica associata a una storia di capogiri in piedi, e nei circa 23 anni di follow-up era associata a un rischio più alto di cadute, fratture, sincope e morte. Le misure dopo il primo minuto non erano associate ai capogiri e lo erano in modo incostante agli altri esiti.\n\nGli autori concludono che l'ipotensione ortostatica andrebbe cercata entro il primo minuto. Le linee guida europee hanno scelto di tenere entrambe le misure, a 1 e a 3 minuti, che è la sintesi più ragionevole: la prima coglie il calo precoce, quello più legato ai sintomi, la seconda il calo lento e sostenuto che la definizione classica richiede.",
+      },
+      {
+        title: "Chi controllare",
+        body: "Le linee guida ESH del 2023 indicano la misura ortostatica come screening nelle persone sopra i 65 anni, nei pazienti con ipertensione in trattamento, diabete o malattie neurodegenerative, e in chiunque riferisca sintomi in piedi. Le linee guida ESC 2024 raccomandano di cercare l'ipotensione ortostatica alla prima diagnosi di pressione elevata o di ipertensione, e di nuovo quando compaiono sintomi che la fanno sospettare; secondo lo stesso documento riguarda circa un adulto iperteso su dieci.\n\nIn ambulatorio cardiologico la domanda si pone soprattutto prima di iniziare o di aumentare una terapia antipertensiva, dopo l'introduzione di farmaci che abbassano la pressione o il volume, come diuretici, alfa-bloccanti e nitrati, e nel paziente anziano che riferisce cadute. Un calo ortostatico cambia la scelta dei farmaci e il valore a cui conviene fermarsi con la terapia.",
+      },
+      {
+        title: "Neurogena o no: il ruolo della frequenza",
+        body: "Quando la pressione scende, la risposta normale è un aumento della frequenza. Nelle forme non neurogene, da disidratazione, anemia o farmaci, la tachicardia compensatoria c'è; nelle forme neurogene, dove il sistema nervoso autonomo non riesce ad attivarsi, è scarsa o assente.\n\nLo studio del consorzio autonomico statunitense pubblicato nel 2018 su Annals of Neurology ha tradotto questa osservazione in un numero. Su 402 pazienti con ipotensione ortostatica e ritmo sinusale, un rapporto fra l'aumento della frequenza e il calo della pressione sistolica inferiore a 0,5 battiti al minuto per mmHg identificava la forma neurogena. Con un calo sistolico di 30 mmHg, per esempio, una frequenza che sale di meno di 15 battiti è un segnale da approfondire.\n\nIl rapporto perde significato quando la frequenza non è libera di salire, per esempio con un pacemaker o con farmaci che la rallentano. Anche per questo, nel referto la frequenza in piedi va scritta accanto alla pressione in piedi.",
+      },
+      {
+        title: "Cosa scrivere nel referto",
+        body: "Un \"ipotensione ortostatica assente\" senza numeri non dice al collega che legge come è stata cercata. Nel referto conviene riportare la posizione di partenza e la pressione di base, le pressioni in piedi con il minuto a cui sono state misurate, la frequenza a ogni misura, gli eventuali sintomi e la terapia in corso. Con questi elementi il risultato è confrontabile con quello del controllo successivo, anche se lo esegue un altro medico.\n\nIn [Corioli Cardiologia](/cardiologia) la pressione arteriosa ha una fascia sua nel referto, prima dell'elettrocardiogramma, e ogni misurazione porta la posizione in cui è stata presa: clinostatismo o ortostatismo. Alla prima misurazione se ne aggiunge una seconda, di solito in ortostatismo, e il referto le stampa in tabella una sotto l'altra. Il calo non lo calcola il software e non c'è un campo per il minuto della misura: quello, insieme alla frequenza in piedi e ai sintomi, va scritto nel testo della visita.",
+      },
+    ],
+    faq: [
+      {
+        question: "Quali valori definiscono l'ipotensione ortostatica?",
+        answer:
+          "Un calo sostenuto della pressione sistolica di almeno 20 mmHg o della diastolica di almeno 10 mmHg entro 3 minuti dal passaggio in piedi, o dall'inclinazione su lettino basculante di almeno 60 gradi. Nel paziente con ipertensione supina il consensus statement del 2011 suggerisce come criterio più adatto un calo sistolico di 30 mmHg.",
+      },
+      {
+        question: "Quanto deve riposare il paziente prima della misura?",
+        answer:
+          "Le linee guida ESC 2024 sull'ipertensione indicano 5 minuti da sdraiati o da seduti prima della misura di riferimento. Poi il paziente si alza e la pressione si misura di nuovo a 1 e a 3 minuti, annotando ogni volta anche la frequenza.",
+      },
+      {
+        question: "Basta misurare la pressione a 3 minuti?",
+        answer:
+          "No. Nello studio ARIC, su più di 11.000 adulti, l'ipotensione rilevata entro il primo minuto in piedi era la più associata a capogiri, cadute, sincope e mortalità. Le linee guida europee indicano due misure, a 1 e a 3 minuti: la prima coglie il calo precoce, la seconda quello sostenuto.",
+      },
+      {
+        question: "Che differenza c'è fra ipotensione ortostatica e POTS?",
+        answer:
+          "Nell'ipotensione ortostatica in piedi scende la pressione. Nella sindrome da tachicardia posturale la pressione tiene e sale la frequenza: almeno 30 battiti in più entro 10 minuti, almeno 40 fra i 12 e i 19 anni, senza ipotensione ortostatica.",
+      },
+      {
+        question: "Come si capisce se l'ipotensione ortostatica è neurogena?",
+        answer:
+          "Dalla risposta della frequenza. Un rapporto fra aumento della frequenza e calo della pressione sistolica inferiore a 0,5 battiti al minuto per mmHg orienta verso una forma neurogena, secondo uno studio su 402 pazienti pubblicato nel 2018 su Annals of Neurology. Il rapporto non è interpretabile con un pacemaker o con farmaci che rallentano la frequenza.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Freeman R, Wieling W, Axelrod FB, et al. Consensus statement on the definition of orthostatic hypotension, neurally mediated syncope and the postural tachycardia syndrome. Clin Auton Res. 2011;21(2):69-72.",
+        url: "https://doi.org/10.1007/s10286-011-0119-5",
+      },
+      {
+        title:
+          "McEvoy JW, McCarthy CP, Bruno RM, et al. 2024 ESC Guidelines for the management of elevated blood pressure and hypertension. Eur Heart J. 2024;45(38):3912-4018.",
+        url: "https://doi.org/10.1093/eurheartj/ehae178",
+      },
+      {
+        title:
+          "Mancia G, Kreutz R, Brunström M, et al. 2023 ESH Guidelines for the management of arterial hypertension. J Hypertens. 2023;41(12):1874-2071.",
+        url: "https://doi.org/10.1097/HJH.0000000000003480",
+      },
+      {
+        title:
+          "Juraschek SP, Daya N, Rawlings AM, et al. Association of History of Dizziness and Long-term Adverse Outcomes With Early vs Later Orthostatic Hypotension Assessment Times in Middle-aged Adults. JAMA Intern Med. 2017;177(9):1316-1323.",
+        url: "https://doi.org/10.1001/jamainternmed.2017.2937",
+      },
+      {
+        title:
+          "Norcliffe-Kaufmann L, Kaufmann H, Palma JA, et al. Orthostatic heart rate changes in patients with autonomic failure caused by neurodegenerative synucleinopathies. Ann Neurol. 2018;83(3):522-531.",
+        url: "https://doi.org/10.1002/ana.25170",
+      },
+    ],
+  },
+  {
+    slug: "stadi-di-tanner-ragazze-visita-ginecologica",
+    title: "Stadi di Tanner nelle ragazze: come si valutano in visita",
+    description:
+      "Seno e peli pubici in cinque stadi secondo Marshall e Tanner: come si valutano, età di riferimento, pubertà precoce o ritardata e cosa scrivere nel referto.",
+    excerpt:
+      "La scala con cui da più di cinquant'anni si descrive la pubertà femminile: i cinque stadi del seno e dei peli pubici, come si riconosce il tessuto ghiandolare, le età di riferimento e i segnali che chiedono un approfondimento.",
+    date: "21 Ottobre 2026",
+    isoDate: "2026-10-21",
+    category: "Ginecologia",
+    lead: "Gli stadi di Tanner descrivono lo sviluppo puberale in cinque fasi, separatamente per il seno e per i peli pubici: lo stadio 1 è prepuberale, il 5 è adulto. Nella visita ginecologica pediatrica sono il modo più rapido per dire a che punto è la pubertà di una ragazza e se il suo ritmo è nella norma. Qui trovi i cinque stadi, come si valuta il seno senza farsi ingannare dal tessuto adiposo, le età di riferimento e i limiti oltre i quali la pubertà si considera precoce o ritardata.",
+    keyPoints: [
+      "La scala di Marshall e Tanner, pubblicata nel 1969, divide in cinque stadi lo sviluppo del seno, da B1 a B5, e quello dei peli pubici, da PH1 a PH5: i due caratteri si valutano e si annotano separatamente.",
+      "L'inizio della pubertà femminile è lo stadio B2, la comparsa di tessuto ghiandolare sotto l'areola: va cercato con la palpazione, perché a vista il tessuto adiposo può simulare un seno in sviluppo.",
+      "L'età di comparsa del B2 si è abbassata: nel Copenhagen Puberty Study l'età media è passata da 10,88 anni nelle ragazze studiate nel 1991-1993 a 9,86 anni in quelle studiate nel 2006-2008, mentre il menarca è sceso meno, da 13,42 a 13,13 anni.",
+      "Si parla di pubertà precoce quando lo sviluppo del seno compare prima degli 8 anni e di pubertà ritardata quando a 13 anni non c'è alcuno sviluppo del seno.",
+      "Il menarca arriva in media circa due anni e mezzo dopo l'inizio dello sviluppo del seno.",
+    ],
+    sections: [
+      {
+        title: "Una scala, due caratteri",
+        body: "La scala nasce dal lavoro di William Marshall e James Tanner, che nel 1969 descrissero sugli Archives of Disease in Childhood le variazioni della pubertà in un gruppo di ragazze inglesi seguite nel tempo. Da allora è il linguaggio comune con cui pediatri, ginecologi ed endocrinologi descrivono lo sviluppo puberale, tanto che nei referti si scrive semplicemente \"Tanner 3\".\n\nLa semplificazione nasconde però un dettaglio importante: gli stadi sono due serie distinte, una per il seno e una per i peli pubici, e non procedono sempre insieme. Lo sviluppo del seno dipende dagli estrogeni prodotti dall'ovaio, quello dei peli pubici soprattutto dagli androgeni delle ghiandole surrenali. Una ragazza può essere B3 e PH2, o il contrario, e la combinazione dice qualcosa: quando i peli compaiono prima del seno il segnale viene dal surrene, non dall'ovaio.\n\nPer questo una valutazione completa riporta sempre entrambi, nella forma B3 PH2, invece di un numero solo.",
+        table: {
+          caption: "Stadi di Tanner nelle ragazze: seno e peli pubici",
+          columns: ["Stadio", "Seno (B)", "Peli pubici (PH)"],
+          rows: [
+            ["1", "Prepuberale: è sollevata solo la papilla", "Assenti: solo la peluria fine, come sull'addome"],
+            ["2", "Bottone mammario: piccolo rilievo di seno e papilla, areola che si allarga", "Pochi peli lunghi, appena pigmentati, lisci o lievemente arricciati, soprattutto lungo le grandi labbra"],
+            ["3", "Seno e areola più ampi e sollevati, senza separazione fra i loro contorni", "Peli più scuri, più spessi e più arricciati, che si estendono sul pube"],
+            ["4", "Areola e papilla formano un secondo rilievo sopra il profilo del seno", "Peli di tipo adulto, ma su un'area più piccola e senza estensione alle cosce"],
+            ["5", "Seno adulto: l'areola torna nel profilo del seno e sporge solo la papilla", "Tipo e quantità adulti, a triangolo, con estensione alla faccia interna delle cosce"],
+          ],
+          note: "Descrizioni dalla classificazione di Marshall e Tanner (Archives of Disease in Childhood, 1969). Seno e peli pubici si valutano e si annotano separatamente.",
+        },
+      },
+      {
+        title: "Come si valuta il seno: guardare non basta",
+        body: "Lo stadio B2 è il segno che la pubertà è cominciata, e proprio lì sta l'errore più frequente. A vista, un accumulo di tessuto adiposo nella regione mammaria, comune nelle bambine in sovrappeso, può sembrare un seno in sviluppo. La differenza la fa la palpazione: il tessuto ghiandolare si sente come un piccolo disco più consistente sotto l'areola, il tessuto adiposo è morbido e senza un nucleo.\n\nEsaminare la ragazza da supina aiuta, perché in quella posizione il tessuto adiposo si appiattisce e il bottone ghiandolare risalta. Il Copenhagen Puberty Study, i cui dati sono fra i riferimenti europei più recenti, ha valutato tutte le ragazze con la palpazione proprio per evitare questo errore.\n\nI peli pubici si valutano invece con l'ispezione. Conviene annotare anche se lo sviluppo del seno è simmetrico: un'asimmetria nelle prime fasi è frequente e di solito si riduce con il tempo, ma va scritta per poterla confrontare alla visita successiva.",
+      },
+      {
+        title: "Le età di riferimento, e perché si sono abbassate",
+        body: "Le età di comparsa degli stadi non sono fisse, e negli ultimi decenni si sono spostate in avanti. Il dato europeo più citato viene da Copenaghen, dove lo stesso gruppo di ricerca ha valutato con lo stesso metodo due coorti di ragazze a quindici anni di distanza: l'età media stimata al B2 era 10,88 anni nelle 1.100 ragazze studiate nel 1991-1993 e 9,86 anni nelle 995 studiate nel 2006-2008. La differenza restava significativa anche correggendo per l'indice di massa corporea.\n\nIl menarca si è spostato molto meno, da 13,42 a 13,13 anni, e questo significa che la pubertà nel suo insieme si è allungata: comincia prima, ma finisce più o meno alla stessa età.\n\nIn media il menarca arriva circa due anni e mezzo dopo l'inizio dello sviluppo del seno. È un riferimento utile in visita: davanti a una ragazza B2 da sei mesi il menarca è ancora lontano, davanti a una B4 è vicino.",
+      },
+      {
+        title: "Quando la pubertà è precoce o ritardata",
+        body: "Nelle bambine si parla di pubertà precoce quando lo sviluppo del seno compare prima degli 8 anni. È la soglia indicata dalle principali rassegne cliniche e quella che, nella pratica, giustifica l'invio all'endocrinologo pediatra per capire se la causa è centrale, cioè un'attivazione anticipata dell'asse ipotalamo-ipofisi-ovaio, o periferica.\n\nAl capo opposto, la pubertà si considera ritardata quando a 13 anni non c'è alcuno sviluppo del seno. Anche qui l'età è solo il primo filtro: spesso si tratta di un ritardo costituzionale, con una storia familiare simile, ma prima di concluderlo vanno escluse le cause organiche.\n\nOltre all'età di inizio conta il ritmo. Il passaggio da uno stadio all'altro richiede di solito mesi, e una progressione molto rapida, o un arresto prolungato in uno stadio intermedio, sono segnali da approfondire anche quando l'età di partenza era nella norma. Per vederli servono più visite con lo stadio annotato ogni volta, insieme all'altezza.",
+      },
+      {
+        title: "Cosa scrivere nel referto",
+        body: "Uno stadio di Tanner ha valore soprattutto nel confronto con la visita precedente. Nel referto conviene annotare lo stadio del seno e quello dei peli pubici separatamente, il metodo con cui il seno è stato valutato, l'eventuale asimmetria, l'età del menarca se c'è già stato, e altezza e peso con i loro percentili. Un \"sviluppo puberale nella norma\" senza stadio non permette di dire, sei mesi dopo, se qualcosa è cambiato.\n\nNella visita ginecologica pediatrica di [Corioli](/ginecologia) lo stadio di Tanner ha un campo suo, da I a V, accanto al menarca e alla vaccinazione HPV, e compare nel referto PDF. Il campo è uno solo: quando seno e peli pubici sono in stadi diversi conviene indicare lo stadio del seno, che segna l'inizio della pubertà, e annotare quello dei peli pubici nel testo della visita.",
+      },
+    ],
+    faq: [
+      {
+        question: "Cosa sono gli stadi di Tanner?",
+        answer:
+          "Sono una scala in cinque stadi che descrive lo sviluppo puberale, pubblicata da Marshall e Tanner nel 1969. Nelle ragazze si valutano separatamente il seno, da B1 a B5, e i peli pubici, da PH1 a PH5: lo stadio 1 è prepuberale, il 5 corrisponde allo sviluppo adulto.",
+      },
+      {
+        question: "A che età compare lo stadio B2?",
+        answer:
+          "Varia da ragazza a ragazza e si è abbassata nel tempo. Nel Copenhagen Puberty Study l'età media stimata era 9,86 anni nelle ragazze valutate nel 2006-2008, contro 10,88 anni in quelle valutate nel 1991-1993. Uno sviluppo del seno prima degli 8 anni si considera precoce.",
+      },
+      {
+        question: "Quando la pubertà si considera precoce o ritardata nelle bambine?",
+        answer:
+          "È precoce quando lo sviluppo del seno compare prima degli 8 anni, ritardata quando a 13 anni non c'è alcuno sviluppo del seno. In entrambi i casi conta anche il ritmo con cui si passa da uno stadio all'altro, che si vede solo confrontando visite successive.",
+      },
+      {
+        question: "Quanto tempo passa fra l'inizio dello sviluppo del seno e il menarca?",
+        answer:
+          "In media circa due anni e mezzo. Nel Copenhagen Puberty Study l'età media al menarca era 13,13 anni nelle ragazze valutate nel 2006-2008.",
+      },
+      {
+        question: "Seno e peli pubici possono essere in stadi diversi?",
+        answer:
+          "Sì, ed è frequente. Il seno risponde agli estrogeni ovarici, i peli pubici soprattutto agli androgeni surrenalici, quindi i due caratteri possono procedere con tempi diversi. Per questo vanno annotati separatamente, per esempio B3 PH2.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Marshall WA, Tanner JM. Variations in pattern of pubertal changes in girls. Arch Dis Child. 1969;44(235):291-303.",
+        url: "https://doi.org/10.1136/adc.44.235.291",
+      },
+      {
+        title:
+          "Aksglaede L, Sørensen K, Petersen JH, Skakkebæk NE, Juul A. Recent decline in age at breast development: the Copenhagen Puberty Study. Pediatrics. 2009;123(5):e932-e939.",
+        url: "https://doi.org/10.1542/peds.2008-2491",
+      },
+      {
+        title:
+          "Carel JC, Léger J. Precocious puberty. N Engl J Med. 2008;358(22):2366-2377.",
+        url: "https://doi.org/10.1056/NEJMcp0800459",
+      },
+      {
+        title:
+          "Klein DA, Emerick JE, Sylvester JE, Vogt KS. Disorders of puberty: an approach to diagnosis and management. Am Fam Physician. 2017;96(9):590-599.",
+        url: "https://www.aafp.org/afp/2017/1101/p590",
+      },
+    ],
+  },
+  {
+    slug: "gdpr-medico-libero-professionista-adempimenti",
+    title: "GDPR per il medico libero professionista: cosa serve davvero",
+    description:
+      "Consenso, informativa, registro dei trattamenti, DPO e valutazione d'impatto: gli obblighi privacy del medico che lavora da solo, secondo GDPR e Garante.",
+    excerpt:
+      "Il medico non deve chiedere il consenso per curare, non deve nominare un DPO e di regola non deve fare la valutazione d'impatto, ma deve dare l'informativa e tenere il registro dei trattamenti. Cosa serve, cosa no e da quale norma viene.",
+    date: "21 Ottobre 2026",
+    isoDate: "2026-10-21",
+    category: "Normativa",
+    lead: "Il medico che lavora da solo con la partita IVA è titolare del trattamento dei dati dei suoi pazienti, e alcuni obblighi del GDPR lo riguardano in pieno mentre altri no. Non deve chiedere il consenso per i trattamenti necessari alla cura, non deve nominare un responsabile della protezione dei dati e di regola non deve fare una valutazione d'impatto. Deve invece dare l'informativa, tenere il registro delle attività di trattamento, proteggere i dati e notificare le violazioni. Qui trovi ogni adempimento con la norma da cui viene.",
+    keyPoints: [
+      "Per i trattamenti necessari alla cura il medico non deve chiedere il consenso del paziente: la base giuridica è l'articolo 9, paragrafo 2, lettera h, del GDPR, insieme al segreto professionale, come ha chiarito il Garante nel provvedimento n. 55 del 7 marzo 2019.",
+      "Il consenso serve invece per i trattamenti che non sono necessari alla cura, come le comunicazioni promozionali.",
+      "Il registro delle attività di trattamento è obbligatorio anche per il singolo libero professionista, perché l'esenzione per chi ha meno di 250 dipendenti non vale quando si trattano dati sanitari; non va inviato al Garante, ma esibito in caso di controllo.",
+      "Il medico che esercita da solo non deve nominare un DPO e, secondo il considerando 91 del GDPR, non è obbligato alla valutazione d'impatto: i dati dei pazienti di un singolo medico non sono un trattamento su larga scala.",
+      "Una violazione dei dati va notificata al Garante entro 72 ore da quando se ne è venuti a conoscenza, salvo che sia improbabile che presenti un rischio per le persone.",
+    ],
+    sections: [
+      {
+        title: "Il punto di partenza: sei tu il titolare",
+        body: "Il GDPR chiama titolare del trattamento chi decide perché e come si trattano i dati personali. Nello studio del libero professionista il titolare è il medico: decide quali dati raccogliere, con quali strumenti, per quanto conservarli e a chi comunicarli, e ne risponde anche quando una parte del lavoro la fanno altri.\n\nI dati sanitari sono dati particolari, nell'articolo 9 del regolamento, e il loro trattamento è vietato salvo le eccezioni che lo stesso articolo elenca. Per il medico l'eccezione che conta è quella della lettera h del paragrafo 2: il trattamento è lecito quando serve a finalità di medicina preventiva, diagnosi, assistenza o terapia ed è svolto da un professionista soggetto al segreto professionale.\n\nDa qui discendono quasi tutti gli adempimenti dello studio. La tabella li riassume, con la norma da cui vengono.",
+        table: {
+          caption: "Gli adempimenti GDPR per il medico libero professionista",
+          columns: ["Adempimento", "Serve al medico che lavora da solo?", "Riferimento"],
+          rows: [
+            ["Consenso per i trattamenti di cura", "No", "GDPR art. 9, par. 2, lett. h e par. 3; Garante, provv. 55/2019"],
+            ["Consenso per trattamenti non necessari alla cura, come le comunicazioni promozionali", "Sì", "GDPR art. 6, par. 1, lett. a"],
+            ["Informativa ai pazienti", "Sì, al momento della raccolta dei dati", "GDPR art. 13"],
+            ["Registro delle attività di trattamento", "Sì, da esibire al Garante su richiesta", "GDPR art. 30; Garante, provv. 55/2019"],
+            ["Responsabile della protezione dei dati (DPO)", "No", "GDPR art. 37; Garante, provv. 55/2019"],
+            ["Valutazione d'impatto (DPIA)", "Di regola no", "GDPR art. 35 e considerando 91"],
+            ["Accordo con chi tratta i dati per conto dello studio", "Sì, con ogni responsabile del trattamento", "GDPR art. 28"],
+            ["Notifica delle violazioni al Garante", "Sì, entro 72 ore, salvo rischio improbabile", "GDPR art. 33"],
+          ],
+          note: "Regole in vigore a ottobre 2026 per il medico che esercita in forma individuale. Case di cura, ospedali privati e strutture che trattano dati su larga scala hanno obblighi più ampi, a partire dal DPO.",
+        },
+      },
+      {
+        title: "Il consenso: quando non serve e quando sì",
+        body: "Con il provvedimento n. 55 del 7 marzo 2019 il Garante ha chiarito il punto che più confondeva gli studi: il professionista sanitario soggetto al segreto professionale non deve chiedere il consenso del paziente per i trattamenti necessari alla prestazione richiesta, sia che lavori nel proprio studio sia che lavori in una struttura. Il modulo \"consenso al trattamento dei dati\" che molti studi fanno ancora firmare a ogni nuovo paziente, per la cura, non è necessario.\n\nServe invece un'altra base giuridica, di solito il consenso, per i trattamenti che con la cura hanno a che fare solo indirettamente. Il Garante cita come esempi i programmi di fidelizzazione, le app mediche gestite da altri titolari e le finalità promozionali o commerciali. Per lo studio significa, in concreto, la newsletter o le comunicazioni promozionali ai pazienti.\n\nNon va confuso con il consenso informato all'atto sanitario, disciplinato dalla legge 219/2017: quello riguarda la scelta del paziente di sottoporsi alla prestazione, non i suoi dati, ed è sempre necessario.",
+      },
+      {
+        title: "L'informativa: cosa deve contenere",
+        body: "Il consenso per la cura non serve, l'informativa sì. L'articolo 13 del GDPR la richiede al momento in cui i dati vengono raccolti, cioè di norma alla prima visita, e ne fissa il contenuto: l'identità e i contatti del titolare, le finalità e la base giuridica di ciascun trattamento, i destinatari a cui i dati possono essere comunicati, il periodo di conservazione o i criteri per stabilirlo, i diritti del paziente e il diritto di proporre reclamo al Garante.\n\nIl Garante chiede che sia concisa, trasparente, comprensibile e scritta in un linguaggio semplice. Per lo studio del singolo medico basta un documento solo, che descriva i trattamenti reali: le visite e la cartella clinica, la fatturazione e l'invio al Sistema Tessera Sanitaria, gli appuntamenti, e le eventuali comunicazioni facoltative.\n\nUn'informativa scritta per un ospedale e copiata nello studio è il difetto più comune: elenca trattamenti che non esistono e tace su quelli che ci sono, per esempio il commercialista che riceve le fatture o il servizio esterno a cui si appoggia l'agenda.",
+      },
+      {
+        title: "Il registro delle attività di trattamento",
+        body: "L'articolo 30 del GDPR esonera dal registro le organizzazioni con meno di 250 dipendenti, ma le esenzioni non valgono quando il trattamento riguarda dati particolari o non è occasionale. Il Garante, nel provvedimento del 2019, ne ha tratto la conseguenza per la sanità: il registro è obbligatorio anche per il singolo libero professionista. Non va inviato al Garante: va tenuto aggiornato ed esibito in caso di controllo.\n\nIl registro elenca i trattamenti dello studio e, per ciascuno, le finalità, le categorie di pazienti e di dati, i destinatari, i termini di conservazione quando è possibile indicarli e una descrizione generale delle misure di sicurezza. Per uno studio specialistico le righe sono poche, e la tabella qui sotto ne dà un esempio.\n\nIl valore del registro non è burocratico. Costringe a fare l'inventario di dove stanno davvero i dati: la cartella nel gestionale, gli esami in una cartella del computer, le fatture dal commercialista, le immagini dell'ecografo, le foto mandate dal paziente sul telefono. Spesso è compilandolo che lo studio scopre un archivio di cui nessuno si occupava.",
+        table: {
+          caption: "Esempio di righe del registro per uno studio specialistico",
+          columns: ["Trattamento", "Dati trattati", "Base giuridica"],
+          rows: [
+            ["Visite, cartella clinica e referti", "Anagrafica, dati sanitari, immagini ed esami", "Finalità di cura: GDPR art. 9, par. 2, lett. h"],
+            ["Fatturazione e invio al Sistema Tessera Sanitaria", "Anagrafica, codice fiscale, importi", "Obbligo di legge: GDPR art. 6, par. 1, lett. c"],
+            ["Appuntamenti e promemoria", "Nome, telefono, email", "Prestazione richiesta dal paziente: GDPR art. 6, par. 1, lett. b"],
+            ["Comunicazioni promozionali facoltative", "Nome, email", "Consenso: GDPR art. 6, par. 1, lett. a"],
+          ],
+          note: "Esempio indicativo: le righe vanno adattate ai trattamenti reali dello studio, con i destinatari, i tempi di conservazione e le misure di sicurezza di ciascuno.",
+        },
+      },
+      {
+        title: "DPO e valutazione d'impatto: perché di regola non servono",
+        body: "Il responsabile della protezione dei dati, il DPO, è obbligatorio quando le attività principali del titolare consistono nel trattamento su larga scala di dati particolari. Il Garante ha chiarito che il singolo professionista sanitario che lavora in libera professione non vi è tenuto, perché i dati dei suoi pazienti non costituiscono un trattamento su larga scala. Il DPO serve invece alle aziende sanitarie e, in generale, a ospedali privati, case di cura e residenze sanitarie.\n\nLo stesso ragionamento vale per la valutazione d'impatto prevista dall'articolo 35. Il considerando 91 del GDPR lo dice in modo esplicito: il trattamento dei dati dei pazienti da parte di un singolo medico non dovrebbe essere considerato su larga scala, e in quel caso la valutazione d'impatto non dovrebbe essere obbligatoria.\n\nSe lo studio cresce, con più medici, più sedi o un poliambulatorio organizzato come società, la risposta può cambiare: è una verifica da rifare quando cambia la struttura, non una volta per sempre.",
+      },
+      {
+        title: "Chi lavora con te: collaboratori e fornitori",
+        body: "La segretaria o il collaboratore che accede ai dati dei pazienti agisce sotto l'autorità del titolare e va istruito su come trattarli, come prevede l'articolo 29 del GDPR. Il Codice privacy, all'articolo 2-quaterdecies, consente di attribuire per iscritto compiti e funzioni legati al trattamento a persone designate: è il modo più semplice per dimostrare chi può fare cosa.\n\nDiverso è il caso dei soggetti esterni che trattano i dati per conto dello studio, i responsabili del trattamento: il servizio di agenda online, il fornitore di un gestionale che conserva l'archivio sui propri server, a volte il commercialista. Con ciascuno serve un accordo scritto ai sensi dell'articolo 28, che stabilisca cosa possono fare con i dati e con quali garanzie.\n\nCon un gestionale che salva l'archivio sul computer dello studio, come [Corioli](/gdpr), il fornitore non tratta i dati dei pazienti e quindi non è un responsabile del trattamento: per l'uso standard del software non serve un accordo ai sensi dell'articolo 28.",
+      },
+      {
+        title: "Sicurezza e violazioni dei dati",
+        body: "L'articolo 32 chiede misure di sicurezza adeguate al rischio, senza un elenco chiuso. Per uno studio significa, in concreto, accessi protetti da password personali, computer aggiornati, dischi cifrati sui portatili, copie di sicurezza conservate fuori dal computer di lavoro e verificate con una prova di ripristino.\n\nSe qualcosa va storto, un portatile rubato, un ransomware, un referto inviato al paziente sbagliato, l'articolo 33 chiede di notificare la violazione al Garante entro 72 ore da quando se ne è venuti a conoscenza, salvo che sia improbabile che presenti un rischio per i pazienti. Se il rischio è elevato, l'articolo 34 chiede di informare anche le persone coinvolte. In ogni caso la violazione va documentata, anche quando non va notificata.\n\nCon l'archiviazione locale la sicurezza è nelle mani dello studio, ed è un vantaggio solo se viene gestita. Corioli salva l'archivio sul computer dello studio, si blocca con PIN, Windows Hello o Touch ID e fa copie automatiche sullo stesso disco; la copia su un supporto esterno e la cifratura del disco restano scelte dello studio, e vanno scritte nel registro tra le misure di sicurezza.",
+      },
+    ],
+    faq: [
+      {
+        question: "Il medico deve far firmare il consenso privacy ai pazienti?",
+        answer:
+          "Non per i trattamenti necessari alla cura. Il Garante, nel provvedimento n. 55 del 7 marzo 2019, ha chiarito che il professionista sanitario soggetto al segreto professionale non deve chiedere il consenso per la prestazione richiesta: la base giuridica è l'articolo 9, paragrafo 2, lettera h, del GDPR. Il consenso serve per i trattamenti non necessari alla cura, come le comunicazioni promozionali.",
+      },
+      {
+        question: "Il medico libero professionista deve tenere il registro dei trattamenti?",
+        answer:
+          "Sì. L'esenzione dell'articolo 30 del GDPR per chi ha meno di 250 dipendenti non vale quando si trattano dati sanitari, e il Garante ha confermato l'obbligo anche per il singolo professionista. Il registro non va inviato al Garante, ma tenuto aggiornato ed esibito in caso di controllo.",
+      },
+      {
+        question: "Lo studio medico deve nominare un DPO?",
+        answer:
+          "Il medico che lavora da solo no: secondo il Garante i dati dei suoi pazienti non sono un trattamento su larga scala. Il DPO è obbligatorio per le aziende sanitarie e, in generale, per ospedali privati, case di cura e residenze sanitarie.",
+      },
+      {
+        question: "Cosa deve contenere l'informativa privacy dello studio medico?",
+        answer:
+          "Secondo l'articolo 13 del GDPR: identità e contatti del titolare, finalità e base giuridica dei trattamenti, destinatari dei dati, periodo di conservazione o criteri per stabilirlo, diritti del paziente e diritto di reclamo al Garante. Va data al momento della raccolta dei dati, di solito alla prima visita, in un linguaggio semplice.",
+      },
+      {
+        question: "Entro quando va notificata una violazione dei dati?",
+        answer:
+          "Entro 72 ore da quando il titolare ne è venuto a conoscenza, salvo che sia improbabile che presenti un rischio per le persone, come prevede l'articolo 33 del GDPR. Se il rischio è elevato vanno informati anche i pazienti coinvolti, e ogni violazione va comunque documentata.",
+      },
+      {
+        question: "Serve un contratto con il fornitore del gestionale?",
+        answer:
+          "Serve quando il fornitore tratta i dati per conto dello studio, per esempio perché conserva l'archivio sui propri server: in quel caso è un responsabile del trattamento e va firmato un accordo ai sensi dell'articolo 28 del GDPR. Con un gestionale che salva i dati solo sul computer dello studio il fornitore non tratta i dati dei pazienti e l'accordo, per l'uso standard, non serve.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Regolamento (UE) 2016/679 del Parlamento europeo e del Consiglio, del 27 aprile 2016 (GDPR): articoli 6, 9, 13, 28, 29, 30, 32-35 e 37, considerando 91.",
+        url: "https://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX:32016R0679",
+      },
+      {
+        title:
+          "Garante per la protezione dei dati personali, provvedimento n. 55 del 7 marzo 2019, Chiarimenti sull'applicazione della disciplina per il trattamento dei dati relativi alla salute in ambito sanitario (doc. web n. 9091942).",
+        url: "https://www.garanteprivacy.it/home/docweb/-/docweb-display/docweb/9091942",
+      },
+      {
+        title:
+          "Decreto legislativo 30 giugno 2003, n. 196, Codice in materia di protezione dei dati personali, come modificato dal decreto legislativo 10 agosto 2018, n. 101: articolo 2-quaterdecies.",
+        url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2003-06-30;196",
+      },
+    ],
+  },
+  {
     slug: "superammortamento-2026-medici-centri-medici",
     title: "Superammortamento 2026: vale per medici e centri medici?",
     description:
@@ -136,7 +852,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Il gestionale dello studio si può superammortizzare?",
-        body: "Un software usato in abbonamento non è un bene che si compra ma un servizio che si paga: il canone è un costo dell'anno, e non c'è niente da ammortizzare né da maggiorare. Vale per il professionista, che lo deduce nell'anno in cui lo paga, come per la società, che lo imputa per competenza. La maggiorazione si applica alle quote di ammortamento e ai canoni di leasing: un software dell'allegato V può rientrarvi se viene acquistato e ammortizzato, non se si paga un abbonamento.\n\nCorioli, per esempio, costa 30 euro al mese, tutto incluso, e si installa sul computer dello studio: per chi è in regime ordinario è una spesa inerente all'attività come le altre, deducibile nell'anno. Il computer su cui gira, invece, è un bene strumentale: se costa più di 516,46 euro si ammortizza in più anni, e se si usa anche fuori dallo studio si deduce al 50%.\n\nQuesto articolo descrive le regole in vigore a ottobre 2026 e non sostituisce una consulenza: forma dell'attività, regime fiscale e natura del bene cambiano la risposta da uno studio all'altro, e la verifica sul singolo caso spetta al commercialista.",
+        body: "Un software usato in abbonamento non è un bene che si compra ma un servizio che si paga: il canone è un costo dell'anno, e non c'è niente da ammortizzare né da maggiorare. Vale per il professionista, che lo deduce nell'anno in cui lo paga, come per la società, che lo imputa per competenza. La maggiorazione si applica alle quote di ammortamento e ai canoni di leasing: un software dell'allegato V può rientrarvi se viene acquistato e ammortizzato, non se si paga un abbonamento.\n\nCorioli, per esempio, costa [30 euro al mese, tutto incluso](/prezzi), e si installa sul computer dello studio: per chi è in regime ordinario è una spesa inerente all'attività come le altre, deducibile nell'anno. Il computer su cui gira, invece, è un bene strumentale: se costa più di 516,46 euro si ammortizza in più anni, e se si usa anche fuori dallo studio si deduce al 50%.\n\nQuesto articolo descrive le regole in vigore a ottobre 2026 e non sostituisce una consulenza: forma dell'attività, regime fiscale e natura del bene cambiano la risposta da uno studio all'altro, e la verifica sul singolo caso spetta al commercialista.",
       },
     ],
     faq: [
@@ -206,7 +922,7 @@ export const posts: BlogPost[] = [
     slug: "corioli-cardiologia-disponibile",
     title: "Corioli Cardiologia è disponibile: cosa contiene e come provarla",
     description:
-      "Il gestionale per l'ambulatorio cardiologico si scarica dal Microsoft Store: com'è fatta la visita, quali moduli si accendono, cosa resta volutamente spento e come iniziare i 30 giorni di prova.",
+      "Il gestionale per l'ambulatorio cardiologico è sul Microsoft Store: com'è fatta la visita, quali moduli si accendono e come iniziare i 30 giorni di prova.",
     excerpt:
       "Corioli Cardiologia è sul Microsoft Store, con 30 giorni di prova gratuita. La visita, i moduli strumentali da accendere, gli indici con la formula in chiaro e quello che abbiamo scelto di lasciare spento.",
     date: "29 Settembre 2026",
@@ -223,7 +939,7 @@ export const posts: BlogPost[] = [
     sections: [
       {
         title: "Un'applicazione a sé, con il suo archivio",
-        body: "Corioli Cardiologia nasce dalla stessa base di Corioli, il gestionale che usano i ginecologi, ma non è un modulo aggiunto: è un'applicazione distinta, con la sua scheda sul Microsoft Store e il suo archivio. Dentro non ci sono le visite ostetriche e i calcolatori fetali, ci sono i moduli strumentali e gli indici della cardiologia.\n\nLa separazione è voluta. Un ambulatorio cardiologico non ha bisogno di vedere una cartella ostetrica, e uno studio che le usa tutte e due può installarle sullo stesso computer: gli archivi restano distinti e le due applicazioni non interferiscono. Il prezzo è lo stesso, 30 euro al mese tutto incluso, senza moduli a pagamento.\n\nI requisiti clinici li detta un team di cardiologi: l'ordine delle sezioni, che cosa entra nel referto e che cosa resta nella maschera, quali soglie usare e quali calcoli mostrare. Il software si adegua al modo in cui si referta, non il contrario.",
+        body: "[Corioli Cardiologia](/cardiologia) nasce dalla stessa base di Corioli, il gestionale che usano i ginecologi, ma non è un modulo aggiunto: è un'applicazione distinta, con la sua scheda sul Microsoft Store e il suo archivio. Dentro non ci sono le visite ostetriche e i calcolatori fetali, ci sono i moduli strumentali e gli indici della cardiologia.\n\nLa separazione è voluta. Un ambulatorio cardiologico non ha bisogno di vedere una cartella ostetrica, e uno studio che le usa tutte e due può installarle sullo stesso computer: gli archivi restano distinti e le due applicazioni non interferiscono. Il prezzo è lo stesso, 30 euro al mese tutto incluso, senza moduli a pagamento.\n\nI requisiti clinici li detta un team di cardiologi: l'ordine delle sezioni, che cosa entra nel referto e che cosa resta nella maschera, quali soglie usare e quali calcoli mostrare. Il software si adegua al modo in cui si referta, non il contrario.",
       },
       {
         title: "La visita: essenziale all'apertura, completa quando serve",
@@ -269,7 +985,7 @@ export const posts: BlogPost[] = [
     slug: "calcium-score-cad-rads-tc-coronarica",
     title: "Calcium score e CAD-RADS 2.0: come si leggono nel referto della TC coronarica",
     description:
-      "Come si calcola il punteggio di Agatston, le fasce di calcificazione, cosa non dice un calcium score zero, le categorie CAD-RADS 2.0 con burden di placca e modificatori, e cosa riportare nel referto.",
+      "Punteggio di Agatston e fasce di calcificazione, limiti del calcium score zero, CAD-RADS 2.0 con burden di placca e modificatori, e cosa scrivere nel referto.",
     excerpt:
       "Due numeri della stessa indagine che rispondono a domande diverse: quanto calcio c'è nelle coronarie e quanto è ristretto il lume. Agatston, fasce, CAD-RADS 2.0, burden di placca e modificatori, con gli errori di lettura più comuni.",
     date: "29 Settembre 2026",
@@ -310,7 +1026,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Cosa riportare nel referto cardiologico",
-        body: "Nel referto della visita conviene riportare tre informazioni della TC, sempre con la data e il centro dell'esame: il calcium score con la fascia e la soglia usata, la categoria CAD-RADS con burden e modificatori, e la stenosi massima con il segmento in cui si trova, secondo il modello a 18 segmenti della SCCT. Se è stata eseguita una FFR-TC, il suo esito completa il quadro.\n\nIn Corioli Cardiologia la TC coronarica è un modulo che si accende quando serve. Contiene il calcium score con la fascia di Agatston, con la soglia della calcificazione severa impostabile a 300 o a 400, la categoria CAD-RADS con i modificatori, il burden di placca, i segmenti SCCT interessati, la stenosi massima, l'FFR-TC e la sintesi del referto radiologico. Nel referto stampato escono tre numeri: Agatston, CAD-RADS e burden di placca.\n\nLa fascia del calcium score porta sempre con sé un'avvertenza che non si può togliere: il punteggio non equivale a una stenosi ostruttiva e va integrato con la clinica. La variazione fra due esami si calcola solo sui valori misurati, senza interpolazioni. Il percentile MESA non viene mostrato finché le tabelle di riferimento non saranno inserite e verificate, perché un percentile approssimato sposterebbe un paziente di fascia di rischio.",
+        body: "Nel referto della visita conviene riportare tre informazioni della TC, sempre con la data e il centro dell'esame: il calcium score con la fascia e la soglia usata, la categoria CAD-RADS con burden e modificatori, e la stenosi massima con il segmento in cui si trova, secondo il modello a 18 segmenti della SCCT. Se è stata eseguita una FFR-TC, il suo esito completa il quadro.\n\nIn [Corioli Cardiologia](/cardiologia) la TC coronarica è un modulo che si accende quando serve. Contiene il calcium score con la fascia di Agatston, con la soglia della calcificazione severa impostabile a 300 o a 400, la categoria CAD-RADS con i modificatori, il burden di placca, i segmenti SCCT interessati, la stenosi massima, l'FFR-TC e la sintesi del referto radiologico. Nel referto stampato escono tre numeri: Agatston, CAD-RADS e burden di placca.\n\nLa fascia del calcium score porta sempre con sé un'avvertenza che non si può togliere: il punteggio non equivale a una stenosi ostruttiva e va integrato con la clinica. La variazione fra due esami si calcola solo sui valori misurati, senza interpolazioni. Il percentile MESA non viene mostrato finché le tabelle di riferimento non saranno inserite e verificate, perché un percentile approssimato sposterebbe un paziente di fascia di rischio.",
       },
     ],
     faq: [
@@ -367,7 +1083,7 @@ export const posts: BlogPost[] = [
     slug: "egfr-ckd-epi-cockcroft-gault-doac",
     title: "eGFR con CKD-EPI 2021 o clearance di Cockcroft-Gault: quale usare in cardiologia",
     description:
-      "La formula CKD-EPI 2021 senza coefficiente etnico, gli stadi KDIGO e perché per la dose degli anticoagulanti orali diretti serve ancora la clearance di Cockcroft-Gault. Con esempi numerici.",
+      "CKD-EPI 2021 senza coefficiente etnico, stadi KDIGO e perché per la dose dei DOAC serve ancora la clearance di Cockcroft-Gault. Con esempi numerici.",
     excerpt:
       "Stessa creatinina, due numeri diversi: l'eGFR stadia la malattia renale, la clearance di Cockcroft-Gault decide la dose dei DOAC. Formule, esempi e i pazienti in cui i due valori si allontanano di più.",
     date: "29 Settembre 2026",
@@ -404,7 +1120,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Cosa scrivere nel referto",
-        body: "Accanto a un valore di funzione renale conviene riportare sempre la creatinina, la formula e l'unità di misura. «eGFR 50 mL/min/1,73 m² (CKD-EPI 2021)» e «clearance 32 mL/min (Cockcroft-Gault, peso 52 kg)» sono due informazioni diverse, e un collega che legge soltanto «funzione renale 50» non sa quale delle due ha davanti. Se il paziente assume un anticoagulante diretto, il valore che giustifica la dose è la clearance, ed è quello che conviene far comparire.\n\nIn Corioli Cardiologia l'eGFR con CKD-EPI 2021 e lo stadio KDIGO si calcolano nel pannello della funzione renale, dalla creatinina, dall'età e dal sesso del paziente. La clearance di Cockcroft-Gault sta nel modulo della fibrillazione atriale, accanto a CHA2DS2-VASc e HAS-BLED, e usa il peso corporeo. Entrambi i valori riportano la formula da cui vengono e nessuno dei due viene scritto da solo nel referto. Se in anagrafica il sesso non è indicato, i calcoli si fermano e lo dicono, invece di rispondere su un sesso scelto a caso.",
+        body: "Accanto a un valore di funzione renale conviene riportare sempre la creatinina, la formula e l'unità di misura. «eGFR 50 mL/min/1,73 m² (CKD-EPI 2021)» e «clearance 32 mL/min (Cockcroft-Gault, peso 52 kg)» sono due informazioni diverse, e un collega che legge soltanto «funzione renale 50» non sa quale delle due ha davanti. Se il paziente assume un anticoagulante diretto, il valore che giustifica la dose è la clearance, ed è quello che conviene far comparire.\n\nIn [Corioli Cardiologia](/cardiologia) l'eGFR con CKD-EPI 2021 e lo stadio KDIGO si calcolano nel pannello della funzione renale, dalla creatinina, dall'età e dal sesso del paziente. La clearance di Cockcroft-Gault sta nel modulo della fibrillazione atriale, accanto a CHA2DS2-VASc e HAS-BLED, e usa il peso corporeo. Entrambi i valori riportano la formula da cui vengono e nessuno dei due viene scritto da solo nel referto. Se in anagrafica il sesso non è indicato, i calcoli si fermano e lo dicono, invece di rispondere su un sesso scelto a caso.",
       },
     ],
     faq: [
@@ -496,7 +1212,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Come lo gestisce un gestionale cardiologico",
-        body: "Quasi tutti i dati che servono a questi punteggi sono già nella visita: età e sesso nell'anagrafica, ipertensione, diabete, scompenso e malattia vascolare fra i fattori di rischio, la creatinina fra gli esami di laboratorio. Un calcolatore separato obbliga a ricopiarli; un gestionale che li rilegge da dove stanno elimina l'errore alla radice.\n\nIn Corioli Cardiologia il modulo della fibrillazione atriale funziona così: età e sesso arrivano dall'anagrafica e non sono caselle da spuntare, gli altri fattori dal pannello dei fattori di rischio della visita, e i due punteggi compaiono in un riquadro con la fonte accanto. Il punteggio calcolato è il CHA2DS2-VASc; quando un punto deriva solo dal sesso femminile l'applicazione lo segnala, e togliendolo si ottiene il CHA2DS2-VA. L'HAS-BLED distingue le voci su cui si può intervenire, e il software non propone né sconsiglia l'anticoagulazione: la decisione resta del medico.\n\nNel referto finisce solo il totale, accanto a peso, creatinina, età ed eGFR. E il modulo si stampa solo se il medico ha dichiarato la fibrillazione atriale: i punteggi si calcolano da età, sesso e fattori di rischio, quindi senza quell'interruttore comparirebbero su ogni referto.",
+        body: "Quasi tutti i dati che servono a questi punteggi sono già nella visita: età e sesso nell'anagrafica, ipertensione, diabete, scompenso e malattia vascolare fra i fattori di rischio, la creatinina fra gli esami di laboratorio. Un calcolatore separato obbliga a ricopiarli; un gestionale che li rilegge da dove stanno elimina l'errore alla radice.\n\nIn [Corioli Cardiologia](/cardiologia) il modulo della fibrillazione atriale funziona così: età e sesso arrivano dall'anagrafica e non sono caselle da spuntare, gli altri fattori dal pannello dei fattori di rischio della visita, e i due punteggi compaiono in un riquadro con la fonte accanto. Il punteggio calcolato è il CHA2DS2-VASc; quando un punto deriva solo dal sesso femminile l'applicazione lo segnala, e togliendolo si ottiene il CHA2DS2-VA. L'HAS-BLED distingue le voci su cui si può intervenire, e il software non propone né sconsiglia l'anticoagulazione: la decisione resta del medico.\n\nNel referto finisce solo il totale, accanto a peso, creatinina, età ed eGFR. E il modulo si stampa solo se il medico ha dichiarato la fibrillazione atriale: i punteggi si calcolano da età, sesso e fattori di rischio, quindi senza quell'interruttore comparirebbero su ogni referto.",
       },
     ],
     faq: [
@@ -583,7 +1299,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Cosa scrivere nel referto",
-        body: "Un QTc scritto da solo non è confrontabile con quello del controllo successivo, soprattutto se nel frattempo è cambiata la frequenza. Nel referto conviene riportare il QT misurato, la frequenza cardiaca, la formula usata e il QTc risultante: quattro numeri, una riga.\n\nIn Corioli Cardiologia il modulo ECG ha campi separati per PR, QRS, QT e asse; il QTc secondo Bazett si calcola mentre si compila, con la formula indicata accanto al risultato e un avviso quando la frequenza è fuori dalla finestra 50-100 bpm. Nel referto l'elettrocardiogramma esce come tabella, e il QTc è in grassetto solo se è fuori dai limiti: nessun giudizio scritto accanto, perché a leggere il foglio è un medico.",
+        body: "Un QTc scritto da solo non è confrontabile con quello del controllo successivo, soprattutto se nel frattempo è cambiata la frequenza. Nel referto conviene riportare il QT misurato, la frequenza cardiaca, la formula usata e il QTc risultante: quattro numeri, una riga.\n\nIn [Corioli Cardiologia](/cardiologia) il modulo ECG ha campi separati per PR, QRS, QT e asse; il QTc secondo Bazett si calcola mentre si compila, con la formula indicata accanto al risultato e un avviso quando la frequenza è fuori dalla finestra 50-100 bpm. Nel referto l'elettrocardiogramma esce come tabella, e il QTc è in grassetto solo se è fuori dai limiti: nessun giudizio scritto accanto, perché a leggere il foglio è un medico.",
       },
     ],
     faq: [
@@ -677,7 +1393,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Cosa scrivere nel referto",
-        body: "Un referto di flussimetria ombelicale completo dice dove è stata fatta la misura, riporta il PI e, se lo si usa, l'IR con il percentile per l'epoca gestazionale, e descrive il flusso diastolico: presente, ridotto, assente o invertito. Se sono state misurate anche l'arteria cerebrale media o le arterie uterine, i loro valori e il rapporto cerebro-placentare vanno accanto, con le curve di riferimento usate.\n\nIn Corioli la flussimetria del cordone ombelicale è un blocco della visita ostetrica: inserisci PI e IR, e l'applicazione mostra il percentile per l'epoca gestazionale con una barra grafica fra il 5° e il 95°. Per il PI le curve sono quelle della Fetal Medicine Foundation. L'arteria cerebrale media e il rapporto cerebro-placentare, oggi, si descrivono nel testo del referto con i modelli: non hanno un calcolatore dedicato.",
+        body: "Un referto di flussimetria ombelicale completo dice dove è stata fatta la misura, riporta il PI e, se lo si usa, l'IR con il percentile per l'epoca gestazionale, e descrive il flusso diastolico: presente, ridotto, assente o invertito. Se sono state misurate anche l'arteria cerebrale media o le arterie uterine, i loro valori e il rapporto cerebro-placentare vanno accanto, con le curve di riferimento usate.\n\nIn [Corioli](/ginecologia) la flussimetria del cordone ombelicale è un blocco della visita ostetrica: inserisci PI e IR, e l'applicazione mostra il percentile per l'epoca gestazionale con una barra grafica fra il 5° e il 95°. Per il PI le curve sono quelle della Fetal Medicine Foundation. L'arteria cerebrale media e il rapporto cerebro-placentare, oggi, si descrivono nel testo del referto con i modelli: non hanno un calcolatore dedicato.",
       },
     ],
     faq: [
@@ -770,7 +1486,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Dove si colloca Corioli",
-        body: "Corioli è un gestionale medico installato: un'applicazione desktop per Windows e macOS che salva l'archivio sul computer dello studio. Le cartelle cliniche non vengono trasmesse ai nostri server e non vi accediamo; verso di noi vanno solo i dati della licenza e i messaggi che scrivi in chat all'assistenza. Per l'uso ordinario non serve un accordo di nomina a responsabile del trattamento.\n\nIl rovescio, detto chiaramente: l'applicazione fa copie automatiche ogni giorno e prima di ogni importazione o ripristino, ma stanno sullo stesso disco, e la copia fuori dal computer, da esportare dalle impostazioni, resta compito dello studio. E non c'è una sincronizzazione automatica fra computer diversi: se lavori su più sedi con lo stesso archivio, oggi Corioli non è lo strumento giusto.",
+        body: "[Corioli](/download) è un gestionale medico installato: un'applicazione desktop per Windows e macOS che salva l'archivio sul computer dello studio. Le cartelle cliniche non vengono trasmesse ai nostri server e non vi accediamo; verso di noi vanno solo i dati della licenza e i messaggi che scrivi in chat all'assistenza. Per l'uso ordinario non serve un accordo di nomina a responsabile del trattamento.\n\nIl rovescio, detto chiaramente: l'applicazione fa copie automatiche ogni giorno e prima di ogni importazione o ripristino, ma stanno sullo stesso disco, e la copia fuori dal computer, da esportare dalle impostazioni, resta compito dello studio. E non c'è una sincronizzazione automatica fra computer diversi: se lavori su più sedi con lo stesso archivio, oggi Corioli non è lo strumento giusto.",
       },
     ],
     faq: [
@@ -816,13 +1532,13 @@ export const posts: BlogPost[] = [
     slug: "gestionale-per-cardiologi-cosa-cercare",
     title: "Gestionale per cardiologi: cosa deve saper fare davvero",
     description:
-      "ECG, ecocardiogramma, calcium score, QTc, eGFR, CHA2DS2-VASc: cosa distingue un software pensato per l'ambulatorio cardiologico da un gestionale generico, e le domande da fare prima di sceglierlo.",
+      "ECG, ecocardiogramma, calcium score, QTc, eGFR, CHA2DS2-VASc: cosa distingue un software per l'ambulatorio cardiologico da un gestionale generico.",
     excerpt:
       "Un gestionale cardiologico non si giudica dall'archivio pazienti, ma da come si comporta quando devi refertare un ECG e un eco in dieci minuti. Ecco i criteri che contano.",
     date: "7 Settembre 2026",
     isoDate: "2026-09-07",
-    updated: "22 Settembre 2026",
-    updatedIso: "2026-09-22",
+    updated: "21 Ottobre 2026",
+    updatedIso: "2026-10-21",
     category: "Cardiologia",
     lead: "La domanda con cui inizia quasi ogni valutazione di un gestionale è sbagliata. Non è «dove archivio i pazienti»: quello lo fa qualsiasi software, compreso un elenco di cartelle su Windows. La domanda utile è un'altra — quando ho davanti una persona, un tracciato ECG e un ecocardiografo, quanto tempo passa fra l'ultima misura e un referto pronto da consegnare? È lì che i gestionali generici si vedono, ed è lì che si decide se lo strumento ti fa risparmiare mezz'ora al giorno o te la fa perdere.",
     keyPoints: [
@@ -838,7 +1554,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Misure strutturate: la differenza pratica",
-        body: "Prendi un ecocardiogramma transtoracico. Le misure che finiscono nel referto sono sempre quelle: DTD e DTS, setto interventricolare, parete posteriore, frazione di eiezione, atrio sinistro, radice aortica, aorta ascendente, TAPSE, PAPs, rapporto E/A ed E/e'. Sono una dozzina di numeri con la loro unità di misura e il loro intervallo di normalità.\n\nSe quei numeri vivono dentro una frase — «FE 58%, AS 38 mm, TAPSE 21 mm» — sono testo. Il software non sa che 58 è una percentuale, non sa che quel valore ha un significato clinico, non può dirti come è cambiato dal controllo dell'anno scorso e non può metterlo in una tabella leggibile nel PDF. Se invece ogni misura è un campo, tutto questo diventa possibile senza che tu faccia nulla di diverso mentre scrivi.\n\nVale lo stesso per l'elettrocardiogramma — ritmo, PR, QRS, QT, asse — e per la TC coronarica, dove il calcium score, la fascia Agatston e il CAD-RADS sono classificazioni codificate, non aggettivi. La domanda da fare a chi ti vende un gestionale è secca: questi sono campi o è un editor di testo con un titolo sopra?",
+        body: "Prendi un ecocardiogramma transtoracico. Le misure che finiscono nel referto sono sempre quelle: DTD e DTS, setto interventricolare, parete posteriore, frazione di eiezione, atrio sinistro, gradienti transvalvolari, radice aortica, aorta ascendente, TAPSE, PAPs, rapporto E/A. Sono una dozzina di numeri con la loro unità di misura e il loro intervallo di normalità.\n\nSe quei numeri vivono dentro una frase — «FE 58%, AS 38 mm, TAPSE 21 mm» — sono testo. Il software non sa che 58 è una percentuale, non sa che quel valore ha un significato clinico, non può dirti come è cambiato dal controllo dell'anno scorso e non può metterlo in una tabella leggibile nel PDF. Se invece ogni misura è un campo, tutto questo diventa possibile senza che tu faccia nulla di diverso mentre scrivi.\n\nVale lo stesso per l'elettrocardiogramma — PR, QRS, QT, asse — e per la TC coronarica, dove il calcium score, la fascia Agatston e il CAD-RADS sono classificazioni codificate, non aggettivi. La domanda da fare a chi ti vende un gestionale è secca: questi sono campi o è un editor di testo con un titolo sopra?",
       },
       {
         title: "I calcoli devono stare dove sta il dato",
@@ -893,7 +1609,7 @@ export const posts: BlogPost[] = [
     slug: "sistema-tessera-sanitaria-invio-dati-annuale",
     title: "Sistema Tessera Sanitaria: l'invio dei dati è diventato annuale",
     description:
-      "Dalle spese sostenute dal 2025 la trasmissione al Sistema Tessera Sanitaria è annuale, entro il 31 gennaio dell'anno successivo. Cosa cambia per il medico privato e come arrivare preparati alla scadenza.",
+      "Dalle spese del 2025 l'invio al Sistema Tessera Sanitaria è annuale, entro il 31 gennaio dell'anno dopo. Cosa cambia per il medico privato e come prepararsi.",
     excerpt:
       "Addio invio semestrale: il Sistema TS è passato alla cadenza annuale. Sembra una semplificazione, ma concentra dodici mesi di documenti in una sola scadenza. Ecco come organizzarsi.",
     date: "18 Agosto 2026",
@@ -945,13 +1661,22 @@ export const posts: BlogPost[] = [
     slug: "conservazione-cartella-clinica-studio-privato",
     title: "Per quanto tempo conservare la cartella clinica nello studio privato",
     description:
-      "Nessuna norma fissa un termine preciso per la cartella clinica del libero professionista. Cosa dice il Garante Privacy, perché dieci anni è il riferimento più usato e come impostare una politica di conservazione difendibile.",
+      "Nessuna norma fissa un termine per la cartella clinica del libero professionista: cosa dice il Garante e perché dieci anni è il riferimento più usato.",
     excerpt:
       "Quanto vanno tenuti i dati clinici di un paziente in uno studio privato? La risposta non è nel codice: è una scelta che il medico deve motivare. Ecco i criteri per farlo bene.",
     date: "11 Agosto 2026",
     isoDate: "2026-08-11",
+    updated: "2 Novembre 2026",
+    updatedIso: "2026-11-02",
     category: "Normativa",
-    lead: "È una delle domande che ricorrono più spesso quando uno specialista mette ordine nel proprio archivio: per quanto tempo devo conservare le cartelle dei pazienti? Molti si aspettano un numero secco scritto da qualche parte. Non c'è — almeno non per lo studio privato — e capire perché aiuta a prendere una decisione consapevole invece di accumulare tutto per sempre.",
+    lead: "Per la cartella clinica dello studio privato nessuna norma fissa un termine di conservazione: lo decide il medico, come titolare del trattamento, e il riferimento più usato e più difendibile è di dieci anni, la prescrizione ordinaria. Per le cartelle degli ospedali e delle case di cura, invece, la conservazione è illimitata. È una delle domande che ricorrono più spesso quando uno specialista mette ordine nel proprio archivio, e capire da dove viene la risposta aiuta a prendere una decisione motivata invece di accumulare tutto per sempre.",
+    keyPoints: [
+      "Per la cartella clinica del medico libero professionista non convenzionato nessuna norma fissa un termine di conservazione: lo stabilisce il medico, come titolare del trattamento, in base alla finalità.",
+      "Le cartelle cliniche degli ospedali e delle case di cura, con i relativi referti, si conservano invece illimitatamente, come ricorda il Garante nei chiarimenti del 7 marzo 2019.",
+      "Il riferimento più usato è di dieci anni, la prescrizione ordinaria del codice civile: è il termine della responsabilità contrattuale, quella del libero professionista che ha un rapporto diretto con il paziente secondo la legge Gelli-Bianco.",
+      "Il GDPR chiede di indicare nell'informativa ai pazienti il periodo di conservazione o i criteri usati per stabilirlo, e di non tenere i dati più del necessario.",
+      "Una cancellazione è effettiva solo se riguarda anche i backup: serve una rotazione delle copie coerente con il termine scelto.",
+    ],
     sections: [
       {
         title: "La differenza tra ospedale e studio privato",
@@ -959,15 +1684,19 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Perché dieci anni è il riferimento più usato",
-        body: "In assenza di un termine di legge, la prassi più diffusa e più difendibile è ancorare la conservazione al termine di prescrizione ordinaria, che nell'ipotesi più ampia è di dieci anni. Il ragionamento è lineare: il medico conserva la documentazione clinica anche per poter tutelare i propri diritti e la propria difesa in caso di contestazioni future, e finché quella possibilità esiste la finalità di conservazione è attuale.\n\nÈ un criterio che regge perché lega il tempo di conservazione a una ragione concreta e verificabile, non a una preferenza personale. E funziona in entrambe le direzioni: giustifica il fatto che i dati siano ancora lì dopo otto anni, e giustifica il fatto che vengano cancellati dopo dodici.\n\nAttenzione però a non trattarlo come un automatismo universale. Il principio generale enunciato dal Garante resta che i dati vanno conservati per il tempo necessario al perseguimento della finalità per cui sono stati raccolti, e ci sono situazioni in cui quel tempo è ragionevolmente diverso: un percorso di cura ancora in corso, una documentazione rilevante per la storia clinica di lungo periodo della paziente, un contenzioso aperto che congela qualsiasi cancellazione. La politica di conservazione dovrebbe prevedere questi casi invece di ignorarli.",
+        body: "In assenza di un termine di legge, la prassi più diffusa e più difendibile è ancorare la conservazione al termine di prescrizione ordinaria, che nell'ipotesi più ampia è di dieci anni. Il ragionamento è lineare: il medico conserva la documentazione clinica anche per poter tutelare i propri diritti e la propria difesa in caso di contestazioni future, e finché quella possibilità esiste la finalità di conservazione è attuale.\n\nPerché proprio dieci anni lo spiega la legge 24/2017, la Gelli-Bianco. Il medico che lavora in una struttura risponde verso il paziente a titolo extracontrattuale, e quel diritto al risarcimento si prescrive in cinque anni. Il libero professionista che ha assunto un'obbligazione contrattuale direttamente con il paziente, invece, risponde a titolo contrattuale, e qui vale la prescrizione ordinaria del codice civile: dieci anni. È il caso tipico dello specialista nel proprio studio.\n\nÈ un criterio che regge perché lega il tempo di conservazione a una ragione concreta e verificabile, non a una preferenza personale. E funziona in entrambe le direzioni: giustifica il fatto che i dati siano ancora lì dopo otto anni, e giustifica il fatto che vengano cancellati dopo dodici.\n\nAttenzione però a non trattarlo come un automatismo universale. Il principio generale enunciato dal Garante resta che i dati vanno conservati per il tempo necessario al perseguimento della finalità per cui sono stati raccolti, e ci sono situazioni in cui quel tempo è ragionevolmente diverso: un percorso di cura ancora in corso, una documentazione rilevante per la storia clinica di lungo periodo della paziente, un contenzioso aperto che congela qualsiasi cancellazione. La politica di conservazione dovrebbe prevedere questi casi invece di ignorarli.",
       },
       {
         title: "Come si scrive una politica di conservazione che sta in piedi",
         body: "Non serve un documento lungo. Serve un documento che esista e che descriva scelte reali. Quattro elementi bastano a renderlo utile.\n\nIl primo è il termine ordinario: quanti anni conservi la documentazione clinica dopo l'ultimo contatto con il paziente, e perché hai scelto quel numero. Il secondo sono le eccezioni: i casi in cui il termine si allunga (contenzioso in corso, obblighi specifici) o si accorcia, definiti in anticipo e non decisi caso per caso. Il terzo è il momento della verifica: una data ricorrente — una volta l'anno è sufficiente — in cui si controlla cosa ha superato il termine, invece di aspettare che qualcuno se ne accorga. Il quarto è il modo in cui la cancellazione avviene concretamente, inclusi i backup, che è il punto in cui quasi tutte le politiche di conservazione si rompono.\n\nQuest'ultimo aspetto merita attenzione. Cancellare una cartella dall'archivio principale mentre la stessa cartella continua a esistere in dieci copie di backup accumulate negli anni significa non averla cancellata. Una politica di backup con rotazione definita — copie che vengono sovrascritte o eliminate dopo un periodo stabilito — non serve solo a risparmiare spazio: è ciò che rende la cancellazione effettiva.",
       },
       {
+        title: "Cosa scrivere nell'informativa",
+        body: "Il periodo di conservazione non resta un documento interno: il GDPR chiede di comunicarlo ai pazienti nell'informativa, indicando il periodo oppure, se non è possibile, i criteri usati per determinarlo. Il Garante lo ha ripetuto nei chiarimenti del 7 marzo 2019 sul trattamento dei dati sanitari, aggiungendo che quando nessuna norma fissa un termine è il titolare a doverlo individuare, senza superare quanto necessario alla finalità.\n\nIn pratica basta una frase chiara, per esempio che la documentazione clinica è conservata per dieci anni dall'ultima prestazione, il termine di prescrizione ordinaria, salvo contenziosi in corso o obblighi di legge diversi. Il resto degli adempimenti privacy dello studio, dall'informativa al registro dei trattamenti, è nella guida al [GDPR per il medico libero professionista](/blog/gdpr-medico-libero-professionista-adempimenti).",
+      },
+      {
         title: "Perché l'archivio digitale rende tutto questo praticabile",
-        body: "Su carta, applicare una politica di conservazione è teoricamente possibile e praticamente raro. Significa scorrere fisicamente un archivio, individuare i fascicoli oltre il termine, estrarli e distruggerli in modo sicuro. Nella maggior parte degli studi questo non succede mai, e l'archivio cresce fino a esaurire lo spazio disponibile.\n\nIn un archivio digitale la stessa operazione diventa una interrogazione: quali pazienti non hanno contatti da più di N anni. Da lì la revisione annuale è un'ora di lavoro invece di un progetto rimandato a tempo indeterminato. È una di quelle differenze che non si notano il primo anno e diventano evidenti al settimo.\n\nC'è anche un vantaggio meno ovvio, che riguarda chi sceglie l'archiviazione locale. Quando i dati clinici restano sul computer dello studio e non transitano da server di terzi, il perimetro della conservazione è netto: sai esattamente dove sono le copie, chi può accedervi e cosa succede quando decidi di cancellarle. Non devi verificare le politiche di retention di un fornitore né chiederti quanto a lungo un provider mantenga i propri backup. In cambio, l'onere di eseguire quei backup — e di gestirne la rotazione — è interamente tuo: è il rovescio della medaglia dell'archiviazione locale, e va affrontato con un piano preciso.",
+        body: "Su carta, applicare una politica di conservazione è teoricamente possibile e praticamente raro. Significa scorrere fisicamente un archivio, individuare i fascicoli oltre il termine, estrarli e distruggerli in modo sicuro. Nella maggior parte degli studi questo non succede mai, e l'archivio cresce fino a esaurire lo spazio disponibile.\n\nIn un archivio digitale la stessa operazione diventa una interrogazione: quali pazienti non hanno contatti da più di N anni. Da lì la revisione annuale è un'ora di lavoro invece di un progetto rimandato a tempo indeterminato. È una di quelle differenze che non si notano il primo anno e diventano evidenti al settimo.\n\nC'è anche un vantaggio meno ovvio, che riguarda chi sceglie l'archiviazione locale. Quando i dati clinici restano sul computer dello studio e non transitano da server di terzi, il perimetro della conservazione è netto: sai esattamente dove sono le copie, chi può accedervi e cosa succede quando decidi di cancellarle. Non devi verificare le politiche di retention di un fornitore né chiederti quanto a lungo un provider mantenga i propri backup. In cambio, l'onere di eseguire quei backup — e di gestirne la rotazione — è interamente tuo: è il rovescio della medaglia dell'archiviazione locale, e va affrontato con un piano preciso, come quello della [regola 3-2-1 applicata allo studio](/blog/backup-studio-medico-regola-3-2-1).\n\nÈ il modello di [Corioli](/gdpr): l'archivio sta sul computer dello studio, l'app fa da sola una copia giornaliera sullo stesso disco e l'esportazione completa dalle impostazioni è la copia da conservare altrove. Dove tenere quelle copie e per quanto, invece, lo decide la politica di conservazione dello studio.",
       },
     ],
     faq: [
@@ -991,13 +1720,39 @@ export const posts: BlogPost[] = [
         answer:
           "Aiuta a renderli praticabili. In un archivio digitale individuare i pazienti senza contatti da oltre N anni è una ricerca, mentre su carta è una revisione fisica dell'archivio che nella pratica quasi nessuno esegue. Il gestionale non decide la politica al posto tuo — quella resta una scelta del titolare del trattamento — ma trasforma la verifica periodica in un'operazione di routine invece che in un progetto rimandato.",
       },
+      {
+        question: "Cosa devo scrivere nell'informativa sulla conservazione?",
+        answer:
+          "Il periodo di conservazione o, se non è possibile, i criteri usati per determinarlo: lo chiede l'articolo 13 del GDPR e il Garante lo ha ricordato nei chiarimenti del 7 marzo 2019. Per lo studio privato basta una frase come: documentazione conservata per dieci anni dall'ultima prestazione, salvo contenziosi in corso o obblighi di legge diversi.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Garante per la protezione dei dati personali. Chiarimenti sull'applicazione della disciplina per il trattamento dei dati relativi alla salute in ambito sanitario, provvedimento n. 55 del 7 marzo 2019.",
+        url: "https://www.garanteprivacy.it/home/docweb/-/docweb-display/docweb/9091942",
+      },
+      {
+        title:
+          "Regolamento (UE) 2016/679 del Parlamento europeo e del Consiglio, del 27 aprile 2016 (GDPR), articoli 5 e 13.",
+        url: "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+      },
+      {
+        title:
+          "Legge 8 marzo 2017, n. 24, Disposizioni in materia di sicurezza delle cure e della persona assistita, nonché in materia di responsabilità professionale degli esercenti le professioni sanitarie, articolo 7.",
+        url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2017-03-08;24~art7",
+      },
+      {
+        title: "Codice civile, articoli 2946 (prescrizione ordinaria) e 2947 (prescrizione del diritto al risarcimento del danno).",
+        url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art2946",
+      },
     ],
   },
   {
     slug: "backup-studio-medico-regola-3-2-1",
     title: "Backup dello studio medico: la regola 3-2-1 applicata all'ambulatorio",
     description:
-      "Se i dati clinici sono salvati in locale, il backup è responsabilità del medico. Come applicare la regola 3-2-1 in uno studio privato, cosa cifrare e perché un backup mai testato non è un backup.",
+      "Con i dati clinici in locale il backup tocca al medico: la regola 3-2-1 applicata allo studio privato, cosa cifrare e perché un backup mai provato non basta.",
     excerpt:
       "L'archiviazione locale mette i dati sotto il tuo controllo e, insieme, sotto la tua responsabilità. Ecco come costruire un backup serio senza diventare un sistemista.",
     date: "30 Luglio 2026",
@@ -1049,13 +1804,21 @@ export const posts: BlogPost[] = [
     slug: "consenso-informato-digitale-studio-medico",
     title: "Consenso informato: cosa dice la legge 219/2017 e come gestirlo senza carta",
     description:
-      "La legge 219/2017 impone che il consenso informato sia documentato e inserito nella cartella clinica. Come raccoglierlo e archiviarlo in formato digitale in uno studio specialistico privato.",
+      "La legge 219/2017 vuole il consenso informato documentato e inserito nella cartella clinica: come raccoglierlo e archiviarlo in digitale nello studio privato.",
     excerpt:
       "Il consenso informato non è un modulo da far firmare in fretta: è un atto che la legge vuole documentato e collegato alla cartella clinica. Ecco cosa serve e come smettere di gestirlo su carta.",
     date: "21 Luglio 2026",
     isoDate: "2026-07-21",
+    updatedIso: "2026-10-21",
+    updated: "21 Ottobre 2026",
     category: "Normativa",
     lead: "In molti studi il consenso informato vive una doppia vita: da un lato è considerato un adempimento formale da sbrigare in sala d'attesa, dall'altro è il primo documento che viene cercato — spesso senza trovarlo — quando emerge una contestazione. La legge 219/2017 lo tratta come parte integrante della relazione di cura, e prescrive con precisione dove deve finire.",
+    keyPoints: [
+      "La legge 22 dicembre 2017, n. 219, articolo 1, comma 4, vuole il consenso informato documentato in forma scritta, con una videoregistrazione o, per la persona con disabilità, con dispositivi che le consentano di comunicare.",
+      "In qualunque forma sia espresso, il consenso va inserito nella cartella clinica e nel fascicolo sanitario elettronico: non è un documento da archiviare in un raccoglitore a parte.",
+      "Il consenso alla cura della legge 219/2017 e il consenso al trattamento dei dati del GDPR sono due documenti diversi: per le finalità di cura i dati si trattano senza consenso, secondo il Garante, e i due testi vanno tenuti distinti.",
+      "Portare il consenso nel digitale significa prima di tutto conservarlo nella cartella della paziente; la validità della firma dipende dalla modalità scelta, autografa poi acquisita o elettronica.",
+    ],
     sections: [
       {
         title: "Cosa prescrive la legge 219/2017",
@@ -1067,11 +1830,23 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Come funziona un consenso gestito nel gestionale",
-        body: "Spostare il consenso dentro il gestionale non cambia il contenuto del documento né la sostanza dell'obbligo: cambia il fatto che il documento nasca già collegato alla persona e alla prestazione, invece di dover essere ricongiunto a mano.\n\nIl flusso tipico è questo. Il modulo esiste come modello nel software, in una versione unica e aggiornata, così che nessuno usi per errore un'informativa superata. Al momento della visita il consenso viene generato per quella paziente, con i suoi dati già compilati dall'anagrafica: si elimina la trascrizione manuale e con essa gli errori di trascrizione. Una volta acquisito, il documento resta agganciato alla scheda della paziente e compare nel suo storico insieme a visite e referti — che è esattamente ciò che la legge chiede quando prescrive l'inserimento in cartella clinica. Recuperarlo tre anni dopo è una ricerca per nome, non una battuta di caccia in un raccoglitore.\n\nÈ il modo in cui Corioli gestisce il consenso informato: come parte della cartella clinica elettronica, non come allegato separato. Va detto con precisione cosa questo significa e cosa no: il software garantisce che il documento sia prodotto correttamente, collegato alla paziente e sempre reperibile nello storico. La validità giuridica della sottoscrizione dipende invece dalla modalità di firma che scegli di adottare, ed è un piano distinto — con implicazioni diverse a seconda che si usi una firma autografa su copia stampata poi acquisita, o una firma elettronica di livello adeguato.",
+        body: "Spostare il consenso dentro il gestionale non cambia il contenuto del documento né la sostanza dell'obbligo: cambia il fatto che il documento resti collegato alla persona e alla prestazione, invece di dover essere ricongiunto a mano.\n\nNei software che lo prevedono il flusso completo è questo. Il modulo esiste come modello, in una versione unica e aggiornata, così che nessuno usi per errore un'informativa superata. Al momento della visita il consenso viene generato per quella paziente, con i dati già compilati dall'anagrafica, e una volta firmato resta agganciato alla sua scheda, nello storico insieme a visite e referti: è ciò che la legge chiede quando prescrive l'inserimento in cartella clinica.\n\nAnche senza generazione automatica, il passo che conta di più è l'ultimo. Il consenso firmato su carta si scansiona e si allega alla scheda della paziente, così da stare nella cartella e non in un raccoglitore a parte: recuperarlo tre anni dopo è una ricerca per nome. In Corioli oggi funziona così: il consenso firmato si carica come PDF o immagine fra i file della paziente, accanto agli esami esterni. Corioli non genera il modulo di consenso e non raccoglie la firma: quella resta su carta, o con lo strumento di firma elettronica che lo studio usa già.\n\nLa validità giuridica della sottoscrizione è un piano distinto dall'archiviazione: una firma autografa su copia stampata poi acquisita e una firma elettronica di livello adeguato hanno effetti probatori diversi, e la scelta va fatta in base al tipo di prestazione.",
       },
       {
         title: "Consenso al trattamento e consenso alla cura: non confonderli",
         body: "Vale la pena chiarire un equivoco che ricorre spesso, perché genera moduli confusi e archivi disordinati. Il consenso informato di cui parla la legge 219/2017 riguarda l'atto sanitario: è l'adesione consapevole della paziente al trattamento proposto, dopo essere stata informata su natura, benefici, rischi e alternative.\n\nIl consenso al trattamento dei dati personali disciplinato dal GDPR è un'altra cosa, e risponde a una domanda diversa: come possono essere trattati i suoi dati e per quali finalità. Va peraltro ricordato che nel contesto sanitario il trattamento dei dati per finalità di cura si fonda normalmente su basi giuridiche diverse dal consenso, cosa che rende ancora meno sensato accorpare i due documenti in un unico foglio da far firmare.\n\nIn pratica: teneteli distinti, con testi separati e finalità dichiarate in modo chiaro. Un unico modulo che mescola l'informativa clinica e quella privacy indebolisce entrambe, perché rende difficile dimostrare che la paziente sia stata effettivamente informata su ciascuna delle due cose. Sono anche documenti con cicli di vita diversi: l'informativa privacy si aggiorna quando cambiano i trattamenti, il consenso alla cura si rinnova quando cambia la prestazione proposta.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Legge 22 dicembre 2017, n. 219, Norme in materia di consenso informato e di disposizioni anticipate di trattamento, articolo 1.",
+        url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2017-12-22;219",
+      },
+      {
+        title:
+          "Garante per la protezione dei dati personali, provvedimento n. 55 del 7 marzo 2019, Chiarimenti sull'applicazione della disciplina per il trattamento dei dati relativi alla salute in ambito sanitario (doc. web n. 9091942).",
+        url: "https://www.garanteprivacy.it/home/docweb/-/docweb-display/docweb/9091942",
       },
     ],
     faq: [
@@ -1093,7 +1868,7 @@ export const posts: BlogPost[] = [
       {
         question: "Un consenso gestito nel gestionale ha valore legale?",
         answer:
-          "Il gestionale garantisce che il documento sia prodotto nella versione corretta, compilato con i dati della paziente e conservato dentro la sua cartella clinica, come la legge richiede. La validità della sottoscrizione dipende però dalla modalità di firma adottata: una firma autografa su copia stampata e poi acquisita, o una firma elettronica di livello adeguato, hanno effetti probatori diversi. È una scelta da valutare con il proprio consulente in base al tipo di prestazione.",
+          "Il gestionale non cambia il valore del consenso: serve a conservarlo dentro la cartella clinica della paziente, come la legge richiede, e a ritrovarlo. La validità dipende dalla modalità di firma adottata: una firma autografa su copia stampata e poi acquisita, o una firma elettronica di livello adeguato, hanno effetti probatori diversi. È una scelta da valutare con il proprio consulente in base al tipo di prestazione.",
       },
     ],
   },
@@ -1101,11 +1876,13 @@ export const posts: BlogPost[] = [
     slug: "fse-2-0-obbligo-studi-privati-cosa-fare",
     title: "FSE 2.0 obbligatorio per gli studi privati: cosa deve fare lo specialista",
     description:
-      "Dal 31 marzo 2026 il Fascicolo Sanitario Elettronico 2.0 è obbligatorio anche per le strutture private: cosa significa per il medico specialista, quali documenti vanno alimentati e da dove iniziare.",
+      "Dal 31 marzo 2026 il Fascicolo Sanitario Elettronico 2.0 è obbligatorio anche per le strutture private: cosa cambia per lo specialista e da dove iniziare.",
     excerpt:
       "Il FSE 2.0 è diventato obbligatorio anche per il privato: cosa cambia per lo specialista in ambulatorio, quali documenti vanno inviati e come prepararsi senza stravolgere il proprio flusso.",
     date: "3 Luglio 2026",
     isoDate: "2026-07-03",
+    updated: "2 Novembre 2026",
+    updatedIso: "2026-11-02",
     category: "Normativa",
     lead: "Dal 31 marzo 2026 anche le strutture sanitarie private hanno l'obbligo di alimentare il Fascicolo Sanitario Elettronico 2.0. Per molti specialisti in libera professione è il primo contatto vero con il FSE, e le domande sono sempre le stesse: cosa devo inviare, con quali strumenti, e cosa rischio se non lo faccio? Facciamo ordine.",
     sections: [
@@ -1119,7 +1896,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Il prerequisito che molti sottovalutano: un archivio clinico ordinato",
-        body: "Si parla molto di canali di invio e poco del punto di partenza: non puoi alimentare il FSE se i tuoi referti nascono sparsi tra file Word, PDF rinominati a mano e cartelle sul desktop. L'obbligo di alimentazione presuppone che ogni prestazione produca un documento clinico completo, associato correttamente al paziente, con dati anagrafici e clinici coerenti.\n\nÈ esattamente il lavoro che un gestionale medico fa per natura: anagrafica unica, visita strutturata, referto generato dai dati della cartella — non ricopiato a mano. Chi lavora già così ha davanti solo il passaggio tecnico dell'invio; chi lavora ancora con documenti sciolti ha davanti anche il riordino dell'archivio, ed è quello il vero costo nascosto dell'adeguamento.\n\nCorioli aiuta proprio su questo primo miglio: ogni visita produce un referto PDF completo e coerente con la cartella clinica, l'archivio resta ordinato per paziente e i dati storici si importano anche da Word ed Excel. Sul fronte dell'invio regionale, il consiglio resta quello di verificare i canali della propria Regione: il panorama è in evoluzione e cambia da territorio a territorio.",
+        body: "Si parla molto di canali di invio e poco del punto di partenza: non puoi alimentare il FSE se i tuoi referti nascono sparsi tra file Word, PDF rinominati a mano e cartelle sul desktop. L'obbligo di alimentazione presuppone che ogni prestazione produca un documento clinico completo, associato correttamente al paziente, con dati anagrafici e clinici coerenti.\n\nÈ esattamente il lavoro che un gestionale medico fa per natura: anagrafica unica, visita strutturata, referto generato dai dati della cartella — non ricopiato a mano. Chi lavora già così ha davanti solo il passaggio tecnico dell'invio; chi lavora ancora con documenti sciolti ha davanti anche il riordino dell'archivio, ed è quello il vero costo nascosto dell'adeguamento.\n\nCorioli aiuta proprio su questo primo miglio: ogni visita produce un referto PDF completo e coerente con la cartella clinica, l'archivio resta ordinato per paziente e l'archivio storico in Word o Excel si può trasferire con il servizio di migrazione su preventivo. Corioli non invia i documenti al FSE. Sul fronte dell'invio regionale, il consiglio resta quello di verificare i canali della propria Regione: il panorama è in evoluzione e cambia da territorio a territorio.",
       },
       {
         title: "Cosa rischia chi non si adegua",
@@ -1148,11 +1925,13 @@ export const posts: BlogPost[] = [
     slug: "percentili-crescita-pediatrici-oms-guida",
     title: "Percentili di crescita OMS: come leggerli e calcolarli senza errori",
     description:
-      "Guida pratica ai percentili di crescita pediatrici OMS: cosa indicano peso e altezza per età, come si interpreta l'attraversamento dei canali, il target genetico di Tanner e perché conviene calcolarli nel gestionale.",
+      "Percentili di crescita OMS: cosa indicano peso e altezza per età, come leggere l'attraversamento dei canali e come si calcola il target genetico di Tanner.",
     excerpt:
       "Cosa dicono davvero i percentili OMS di peso e altezza, quando un attraversamento di canale deve far drizzare le antenne e come il target genetico aiuta a interpretare la curva.",
     date: "30 Giugno 2026",
     isoDate: "2026-06-30",
+    updated: "2 Novembre 2026",
+    updatedIso: "2026-11-02",
     category: "Pediatria",
     lead: "I percentili di crescita sono il linguaggio con cui la pediatria descrive se un bambino sta crescendo bene. Ma tra curve OMS, canali di crescita e target genetico, l'interpretazione richiede metodo — e il calcolo manuale, visita dopo visita, è una fonte silenziosa di errori.",
     sections: [
@@ -1174,7 +1953,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Percentili nel gestionale: il calcolo dove nasce il dato",
-        body: "La soluzione più solida è calcolare i percentili direttamente dove il dato viene registrato: nella cartella clinica. Il modulo pediatrico di Corioli include percentili di peso e altezza secondo gli standard OMS, il target genetico calcolato dalle stature dei genitori, il BMI pediatrico e il grafico dell'andamento staturale visita dopo visita.\n\nIl medico inserisce la misura una volta sola: percentile e posizione sulla curva si aggiornano da soli, la traiettoria è subito visibile accanto alle visite precedenti e il referto eredita valori coerenti con la cartella. E i dati restano in locale, nel computer dello studio: un dettaglio che per chi tratta dati di minori non è affatto un dettaglio.",
+        body: "La soluzione più solida è calcolare i percentili direttamente dove il dato viene registrato: nella cartella clinica. È la strada del modulo pediatrico di Corioli, che è in sviluppo e non ha ancora una data di uscita: oggi Corioli è disponibile per ginecologia e ostetricia e per cardiologia.\n\nIl medico inserisce la misura una volta sola: percentile e posizione sulla curva si aggiornano da soli, la traiettoria è subito visibile accanto alle visite precedenti e il referto eredita valori coerenti con la cartella. E i dati restano in locale, nel computer dello studio: un dettaglio che per chi tratta dati di minori non è affatto un dettaglio.",
       },
     ],
     faq: [
@@ -1196,7 +1975,7 @@ export const posts: BlogPost[] = [
       {
         question: "Corioli calcola i percentili OMS automaticamente?",
         answer:
-          "Sì. Il modulo pediatrico di Corioli calcola percentili di peso e altezza secondo gli standard OMS, il target genetico dalle stature dei genitori e il BMI pediatrico, e traccia il grafico dell'andamento visita dopo visita. I valori si aggiornano inserendo la misura una volta sola e vengono riportati coerenti nel referto PDF.",
+          "Non ancora. Il modulo pediatrico di Corioli è in sviluppo e non ha una data di uscita annunciata. Oggi Corioli è disponibile per ginecologia e ostetricia, dove la visita ginecologica pediatrica registra lo stadio di Tanner, e per cardiologia.",
       },
     ],
   },
@@ -1204,21 +1983,45 @@ export const posts: BlogPost[] = [
     slug: "stima-peso-fetale-hadlock-guida-pratica",
     title: "Stima del peso fetale con Hadlock: guida pratica per l'ambulatorio",
     description:
-      "Come funziona la stima del peso fetale con le formule di Hadlock: parametri biometrici (BPD, HC, AC, FL), margini di errore, percentili di crescita e perché conviene calcolarla dentro la cartella clinica.",
+      "Come funziona la stima del peso fetale con Hadlock: parametri biometrici (BPD, HC, AC, FL), margini di errore e percentili di crescita.",
     excerpt:
       "BPD, HC, AC e FL: come le formule di Hadlock stimano il peso fetale, quanto è ampio il margine d'errore e come evitare gli errori di trascrizione tra ecografo, cartella e referto.",
     date: "26 Giugno 2026",
     isoDate: "2026-06-26",
+    updated: "2 Novembre 2026",
+    updatedIso: "2026-11-02",
     category: "Ostetricia",
-    lead: "La stima del peso fetale è uno dei calcoli più frequenti dell'ecografia ostetrica del secondo e terzo trimestre, e le formule di Hadlock ne sono lo standard di fatto. Capire cosa c'è dentro quel numero — e quanto fidarsi — aiuta a usarlo bene; calcolarlo dentro la cartella clinica aiuta a non sbagliarlo.",
+    lead: "Le formule di Hadlock stimano il peso fetale combinando in un'equazione logaritmica da due a quattro misure biometriche: diametro biparietale (BPD), circonferenza cranica (HC), circonferenza addominale (AC) e lunghezza del femore (FL). In uno studio della Fetal Medicine Foundation su 5.163 gravidanze, la versione con HC, AC e FL è risultata la più accurata e ha stimato il peso entro il 10% di quello alla nascita in 8 casi su 10. Qui trovi le quattro formule con un esempio, come leggere il margine d'errore, il passaggio al percentile e come evitare gli errori di trascrizione.",
+    keyPoints: [
+      "Le formule di Hadlock del 1985 stimano il peso fetale in grammi da due, tre o quattro misure biometriche in centimetri: diametro biparietale, circonferenza cranica, circonferenza addominale e lunghezza del femore.",
+      "Nello studio della Fetal Medicine Foundation su 5.163 gravidanze singole (Hammami 2018), la formula con HC, AC e FL è risultata la più accurata: stima entro il 10% del peso alla nascita nell'80% dei casi.",
+      "Vuol dire che in 2 casi su 10 l'errore supera il 10%: su un feto stimato 3.000 g, il peso alla nascita può cadere fuori dall'intervallo 2.700-3.300 g.",
+      "La circonferenza addominale è la misura che pesa di più nella stima, ed è anche la più sensibile alla tecnica di misura.",
+      "Il peso stimato acquista significato solo come percentile per l'età gestazionale, per esempio sulle curve di peso fetale pubblicate da Hadlock nel 1991.",
+    ],
     sections: [
       {
         title: "Cosa misura davvero la stima del peso fetale",
-        body: "Il peso fetale non si misura: si stima. Le formule di Hadlock, pubblicate negli anni '80 e ancora oggi le più utilizzate al mondo, combinano i parametri biometrici rilevati in ecografia — diametro biparietale (BPD), circonferenza cranica (HC), circonferenza addominale (AC) e lunghezza del femore (FL) — in equazioni logaritmiche che restituiscono il peso stimato in grammi.\n\nEsistono diverse varianti della formula (con due, tre o quattro parametri): quella a tre parametri HC-AC-FL e quella a quattro sono tra le più diffuse nei software ecografici. La circonferenza addominale è il parametro che pesa di più sulla stima, ed è anche il più sensibile alle condizioni di misura.",
+        body: "Il peso fetale non si misura: si stima. Le formule di Hadlock, pubblicate nel 1985 e ancora oggi fra le più usate, combinano i parametri biometrici rilevati in ecografia — diametro biparietale (BPD), circonferenza cranica (HC), circonferenza addominale (AC) e lunghezza del femore (FL) — in equazioni logaritmiche che restituiscono il peso stimato in grammi.\n\nEsistono quattro varianti della formula, con due, tre o quattro parametri. La circonferenza addominale entra in tutte ed è il parametro che pesa di più sulla stima, ed è anche il più sensibile alle condizioni di misura: un piano di scansione obliquo o una compressione della sonda la cambiano di qualche millimetro, e il peso stimato si sposta di conseguenza.",
+      },
+      {
+        title: "Le quattro formule di Hadlock, con un esempio",
+        body: "Tutte le formule restituiscono il logaritmo in base 10 del peso in grammi, con le misure in centimetri: il peso si ottiene elevando 10 al risultato. Cambiano le misure che entrano nel calcolo.\n\nUn esempio con la formula a tre parametri. Con HC di 30 cm, AC di 30 cm e FL di 6,5 cm il logaritmo vale 1,326 + 0,321 + 1,314 + 1,027 − 0,636 = 3,352, e il peso stimato è 10 elevato a 3,352, circa 2.250 g.\n\nAttenzione ai nomi: software e calcolatori numerano le formule in modo diverso, Hadlock I, II, III, IV oppure 1, 2, 3, 4, e lo stesso numero può indicare formule diverse in due programmi. Quello che conta è quali misure usa la formula, ed è l'informazione da riportare nel referto.",
+        table: {
+          caption: "Le formule di Hadlock 1985 per la stima del peso fetale",
+          columns: ["Misure", "log10 del peso in grammi (misure in cm)"],
+          rows: [
+            ["AC, FL", "1,304 + 0,05281 × AC + 0,1938 × FL − 0,004 × AC × FL"],
+            ["BPD, AC, FL", "1,335 − 0,0034 × AC × FL + 0,0316 × BPD + 0,0457 × AC + 0,1623 × FL"],
+            ["HC, AC, FL", "1,326 − 0,00326 × AC × FL + 0,0107 × HC + 0,0438 × AC + 0,158 × FL"],
+            ["BPD, HC, AC, FL", "1,3596 − 0,00386 × AC × FL + 0,0064 × HC + 0,00061 × BPD × AC + 0,0424 × AC + 0,174 × FL"],
+          ],
+          note: "Coefficienti di Hadlock et al., Am J Obstet Gynecol 1985, come riportati nei codici LOINC delle quattro formule. Le misure vanno in centimetri: inserirle in millimetri dà pesi senza senso.",
+        },
       },
       {
         title: "Il margine di errore: un numero da leggere con onestà",
-        body: "Anche nelle mani migliori, la stima ecografica del peso fetale ha un errore tipico intorno al ±10% rispetto al peso reale alla nascita, che può ampliarsi agli estremi (feti molto piccoli o macrosomici) e a fine gravidanza. Su un feto stimato 3.000 g significa un intervallo realistico di circa 2.700-3.300 g.\n\nQuesto non rende la stima inutile — resta fondamentale per il monitoraggio della crescita e per le decisioni cliniche — ma suggerisce due buone pratiche: comunicarla come stima con il suo intervallo, e valutarla sempre in serie, confrontando l'andamento tra ecografie successive più che il singolo valore assoluto.",
+        body: "Anche nelle mani migliori, la stima ecografica del peso fetale ha un margine di errore ampio. Nello studio pubblicato nel 2018 dal gruppo della Fetal Medicine Foundation su 5.163 gravidanze singole, la formula di Hadlock con HC, AC e FL è risultata la più accurata fra i modelli pubblicati, e la stima era entro il 10% del peso alla nascita nell'80% dei casi. Nei restanti 2 casi su 10 l'errore era più grande: su un feto stimato 3.000 g, il peso reale poteva cadere fuori dall'intervallo 2.700-3.300 g.\n\nQuesto non rende la stima inutile — resta fondamentale per il monitoraggio della crescita e per le decisioni cliniche — ma suggerisce due buone pratiche: comunicarla come stima con il suo intervallo, e valutarla sempre in serie, confrontando l'andamento tra ecografie successive più che il singolo valore assoluto.",
       },
       {
         title: "Dal peso stimato al percentile: il passaggio che dà significato",
@@ -1230,7 +2033,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Hadlock dentro la cartella: una misura, tutto coerente",
-        body: "La soluzione è far viaggiare i numeri il meno possibile: inserire le misure biometriche una volta sola, nella cartella clinica, e lasciare che stima di Hadlock, percentili e curva di crescita si calcolino da soli, agganciati alla datazione già stabilita in cartella.\n\nÈ così che funziona in Corioli: la biometria inserita in visita produce automaticamente peso stimato, percentili e posizione sulla curva di crescita, il referto PDF eredita gli stessi valori senza ricopiature e ogni ecografia si confronta con le precedenti nella timeline della paziente. Meno trascrizioni, meno errori, e una storia di crescita fetale leggibile a colpo d'occhio — con i dati salvati in locale, nello studio.",
+        body: "La soluzione è far viaggiare i numeri il meno possibile: inserire le misure biometriche una volta sola, nella cartella clinica, e lasciare che stima di Hadlock, percentili e curva di crescita si calcolino da soli, agganciati all'età gestazionale già calcolata in cartella.\n\nÈ così che funziona in [Corioli](/ginecologia): nella visita ostetrica inserisci BPD, HC, AC e FL in millimetri, e l'app calcola i percentili della biometria secondo Hadlock 1984, il peso stimato con la formula di Hadlock che hai scelto fra le quattro e il suo centile sulle curve del 1991, con le settimane di gestazione calcolate dall'ultima mestruazione. Il grafico di crescita mette in fila i pesi di tutte le visite della stessa gravidanza, e il referto PDF eredita gli stessi valori senza ricopiature. Meno trascrizioni, meno errori, e una storia di crescita fetale leggibile a colpo d'occhio — con i dati salvati in locale, nello studio.",
       },
     ],
     faq: [
@@ -1242,7 +2045,12 @@ export const posts: BlogPost[] = [
       {
         question: "Quanto è precisa la stima del peso fetale?",
         answer:
-          "L'errore tipico è intorno al ±10% rispetto al peso alla nascita, e può aumentare per feti molto piccoli o macrosomici e a fine gravidanza. Per questo la stima va comunicata come tale, con il suo intervallo, e interpretata soprattutto nell'andamento tra ecografie successive.",
+          "Nello studio della Fetal Medicine Foundation su 5.163 gravidanze singole, la formula di Hadlock con HC, AC e FL ha stimato il peso entro il 10% di quello alla nascita nell'80% dei casi: in 2 casi su 10 l'errore era maggiore. Per questo la stima va comunicata come tale, con il suo intervallo, e interpretata soprattutto nell'andamento tra ecografie successive.",
+      },
+      {
+        question: "Qual è la formula di Hadlock più accurata?",
+        answer:
+          "Nel confronto pubblicato nel 2018 dal gruppo della Fetal Medicine Foundation, la più accurata fra i modelli pubblicati è risultata la formula di Hadlock del 1985 con circonferenza cranica, circonferenza addominale e lunghezza del femore: log10 del peso = 1,326 − 0,00326 × AC × FL + 0,0107 × HC + 0,0438 × AC + 0,158 × FL, con le misure in centimetri.",
       },
       {
         question: "Perché il percentile conta più del peso assoluto?",
@@ -1252,7 +2060,29 @@ export const posts: BlogPost[] = [
       {
         question: "Corioli calcola la stima di Hadlock automaticamente?",
         answer:
-          "Sì. Inserendo la biometria in visita, Corioli calcola il peso fetale stimato secondo Hadlock, i percentili e la posizione sulla curva di crescita, tutto agganciato alla datazione della cartella. I valori vengono riportati coerenti nel referto PDF, senza trascrizioni manuali.",
+          "Sì. Inserendo la biometria nella visita ostetrica, Corioli calcola il peso fetale stimato con la formula di Hadlock scelta dal medico fra le quattro, il centile sulle curve Hadlock 1991 e il grafico di crescita della gravidanza, sull'età gestazionale calcolata dall'ultima mestruazione. I valori vengono riportati coerenti nel referto PDF, senza trascrizioni manuali.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Hadlock FP, Harrist RB, Sharman RS, Deter RL, Park SK. Estimation of fetal weight with the use of head, body, and femur measurements: a prospective study. Am J Obstet Gynecol. 1985;151(3):333-337.",
+        url: "https://doi.org/10.1016/0002-9378(85)90298-4",
+      },
+      {
+        title:
+          "Hadlock FP, Harrist RB, Martinez-Poyer J. In utero analysis of fetal growth: a sonographic weight standard. Radiology. 1991;181(1):129-133.",
+        url: "https://doi.org/10.1148/radiology.181.1.1887021",
+      },
+      {
+        title:
+          "Hammami A, Mazer Zumaeta A, Syngelaki A, Akolekar R, Nicolaides KH. Ultrasonographic estimation of fetal weight: development of new model and assessment of performance of previous models. Ultrasound Obstet Gynecol. 2018;52(1):35-43.",
+        url: "https://doi.org/10.1002/uog.19066",
+      },
+      {
+        title:
+          "Hadlock FP, Deter RL, Harrist RB, Park SK. Estimating fetal age: computer-assisted analysis of multiple fetal growth parameters. Radiology. 1984;152(2):497-501.",
+        url: "https://doi.org/10.1148/radiology.152.2.6739822",
       },
     ],
   },
@@ -1260,7 +2090,7 @@ export const posts: BlogPost[] = [
     slug: "corioli-congresso-miomi-uterini-2026",
     title: "Com'è andata: Corioli al congresso sui miomi uterini",
     description:
-      "Il racconto della giornata di Corioli al congresso sui miomi uterini a Nana Bianca: lo stand, le demo dal vivo e i confronti con ginecologi e ostetrici sulla cartella clinica e sul referto in un click.",
+      "La giornata di Corioli al congresso sui miomi uterini a Nana Bianca: lo stand, le demo dal vivo e i confronti con ginecologi e ostetrici.",
     excerpt:
       "Eravamo allo stand del congresso sui miomi uterini, tra ginecologi e ostetrici: ecco com'è andata la giornata, cosa abbiamo mostrato e cosa ci portiamo a casa.",
     date: "19 Giugno 2026",
@@ -1306,7 +2136,7 @@ export const posts: BlogPost[] = [
     slug: "miomi-uterini-storia-clinica-completa",
     title: "Miomi uterini: perché la storia clinica completa fa la differenza",
     description:
-      "Nella gestione dei miomi uterini avere a portata di mano l'intera storia clinica della paziente migliora diagnosi, follow-up e decisioni. Come Corioli aiuta il ginecologo in ambulatorio.",
+      "Nei miomi uterini avere sotto mano l'intera storia clinica migliora diagnosi, follow-up e decisioni. Come Corioli aiuta il ginecologo in ambulatorio.",
     excerpt:
       "Dimensioni, sintomi e follow-up dei miomi vanno letti nel tempo: avere l'intera storia clinica a portata di mano migliora le decisioni. Vi aspettiamo al congresso a Nana Bianca.",
     date: "17 Giugno 2026",
@@ -1328,7 +2158,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Come Corioli mette la storia clinica al centro della visita",
-        body: "Corioli è un gestionale medico pensato per la pratica clinica di ginecologi e ostetrici. La cartella ginecologica e ostetrica raccoglie anamnesi strutturata, diario delle visite con timeline, referti, ecografie e allegati in un unico ambiente consultabile in pochi clic. I valori - comprese le misure dei miomi - restano confrontabili nel tempo, così il follow-up smette di essere una ricostruzione a memoria.\n\nIl risultato è quello che raccontiamo al congresso: il medico arriva alla decisione con il quadro completo davanti, produce il referto senza copia-incolla e dedica più attenzione alla paziente. Se domani sei a Nana Bianca, passa a trovarci: ti mostriamo come funziona sul campo.",
+        body: "[Corioli](/ginecologia) è un gestionale medico pensato per la pratica clinica di ginecologi e ostetrici. La cartella ginecologica e ostetrica raccoglie anamnesi strutturata, diario delle visite con timeline, referti, ecografie e allegati in un unico ambiente consultabile in pochi clic. I valori - comprese le misure dei miomi - restano confrontabili nel tempo, così il follow-up smette di essere una ricostruzione a memoria.\n\nIl risultato è quello che raccontiamo al congresso: il medico arriva alla decisione con il quadro completo davanti, produce il referto senza copia-incolla e dedica più attenzione alla paziente. Se domani sei a Nana Bianca, passa a trovarci: ti mostriamo come funziona sul campo.",
       },
     ],
     faq: [
@@ -1356,11 +2186,13 @@ export const posts: BlogPost[] = [
     title:
       "Calcolo dell'età gestazionale: settimane di gravidanza e datazione",
     description:
-      "Come si calcola l'età gestazionale e la data presunta del parto: regola di Naegele, datazione ecografica, settimane + giorni e perché un gestionale ostetrico riduce gli errori.",
+      "Età gestazionale e data presunta del parto: regola di Naegele, datazione ecografica, settimane più giorni e come un gestionale riduce gli errori.",
     excerpt:
       "Regola di Naegele, datazione ecografica e settimane+giorni: come si calcola l'età gestazionale senza errori e perché conviene farlo dentro la cartella clinica.",
     date: "16 Giugno 2026",
     isoDate: "2026-06-16",
+    updated: "2 Novembre 2026",
+    updatedIso: "2026-11-02",
     category: "Ostetricia",
     lead: "L'età gestazionale è il punto di partenza di ogni visita ostetrica: da essa dipendono la data presunta del parto, l'interpretazione della biometria fetale e il timing degli screening. Calcolarla in modo corretto e mantenerla coerente nel tempo è tanto importante quanto è facile sbagliarla con conti fatti a mano.",
     sections: [
@@ -1382,7 +2214,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Perché calcolare l'età gestazionale dentro il gestionale",
-        body: "Avere la datazione integrata nella cartella clinica elimina i passaggi manuali: l'età gestazionale si aggiorna automaticamente a ogni visita a partire dalla datazione stabilita, resta coerente con la data presunta del parto e si collega direttamente alla biometria e ai percentili. Il referto eredita lo stesso valore, senza ricopiature.\n\nCorioli include i calcolatori ostetrici - datazione, età gestazionale, stima del peso fetale secondo Hadlock, percentili e curve di crescita - direttamente nel flusso della visita. Il medico inserisce i dati una volta sola e li ritrova coerenti in cartella e nel referto PDF, riducendo gli errori di trascrizione e il tempo speso a fare conti tra app diverse.",
+        body: "Avere la datazione integrata nella cartella clinica elimina i passaggi manuali: l'età gestazionale si aggiorna automaticamente a ogni visita a partire dalla datazione stabilita, resta coerente con la data presunta del parto e si collega direttamente alla biometria e ai percentili. Il referto eredita lo stesso valore, senza ricopiature.\n\n[Corioli per ginecologia e ostetricia](/ginecologia) include i calcolatori ostetrici - età gestazionale e data presunta del parto dall'ultima mestruazione, stima del peso fetale secondo Hadlock, percentili e curve di crescita - direttamente nel flusso della visita. Il medico inserisce i dati una volta sola e li ritrova coerenti in cartella e nel referto PDF, riducendo gli errori di trascrizione e il tempo speso a fare conti tra app diverse.",
       },
     ],
     faq: [
@@ -1406,7 +2238,7 @@ export const posts: BlogPost[] = [
       {
         question: "Corioli calcola l'età gestazionale automaticamente?",
         answer:
-          "Sì. Corioli include i calcolatori ostetrici integrati nella cartella clinica: una volta stabilita la datazione, l'età gestazionale si aggiorna automaticamente a ogni visita e resta coerente con la data presunta del parto, la biometria fetale e i percentili. Il valore viene riportato anche nel referto PDF senza ricopiature manuali, riducendo il rischio di errori.",
+          "Sì, dall'ultima mestruazione. Nella visita ostetrica Corioli calcola le settimane di gestazione alla data di ogni visita e la data presunta del parto a 280 giorni, e le usa per biometria fetale e percentili. Il valore viene riportato anche nel referto PDF senza ricopiature manuali, riducendo il rischio di errori.",
       },
     ],
   },
@@ -1414,15 +2246,22 @@ export const posts: BlogPost[] = [
     slug: "gestionale-per-ginecologi-cosa-cercare",
     title: "Gestionale per ginecologi: cosa cercare nel 2026",
     description:
-      "Guida alla scelta del gestionale medico per ginecologi: funzionalità cliniche, calcolatori ostetrici, cartella ostetrica elettronica, GDPR e differenze rispetto ai software generici.",
+      "Come scegliere un gestionale per ginecologi: funzioni cliniche, calcolatori ostetrici, cartella ostetrica elettronica, GDPR e limiti dei software generici.",
     excerpt:
       "Funzionalità cliniche, calcolatori ostetrici, cartella ostetrica elettronica e GDPR: tutto quello che serve davvero a un ginecologo in ambulatorio.",
     date: "5 Febbraio 2025",
     isoDate: "2025-02-05",
-    updated: "22 Settembre 2026",
-    updatedIso: "2026-09-22",
+    updated: "2 Novembre 2026",
+    updatedIso: "2026-11-02",
     category: "Ginecologia",
-    lead: "Un ginecologo ha esigenze cliniche molto specifiche che un software generico non può soddisfare. Dalla biometria fetale alla curva di crescita, dalla cartella ostetrica al consenso informato: ogni visita richiede strumenti pensati per la specializzazione.",
+    lead: "Un gestionale per ginecologi deve saper fare quello che serve in visita: cartella ostetrica, età gestazionale, biometria e peso fetale con le formule di riferimento, flussimetria e referti PDF, senza app esterne né ricopiature in Word. Un software generico gestisce agenda e fatture, ma non il flusso clinico della visita ostetrica e ginecologica. Qui trovi le funzioni da pretendere, come si confrontano i principali software in Italia e quanto costano davvero.",
+    keyPoints: [
+      "Un gestionale per ginecologi deve avere la cartella ostetrica e ginecologica strutturata, l'età gestazionale calcolata a ogni visita, biometria e peso fetale con le formule di Hadlock, la flussimetria e i referti PDF.",
+      "I calcolatori vanno dentro la visita: un numero calcolato in un'app esterna e ricopiato a mano nel referto è un'occasione di errore in più.",
+      "Le curve di riferimento devono essere dichiarate: per la biometria Hadlock 1984, per il peso fetale Hadlock 1985 con i centili del 1991, per il PI dell'arteria ombelicale le curve della Fetal Medicine Foundation.",
+      "Nel confronto dei prezzi conta il costo su 12 mesi con tutti i moduli che servono, non il canone d'ingresso.",
+      "Corioli costa 30€ al mese tutto incluso, salva i dati in locale nello studio e si prova gratis per 30 giorni senza carta di credito.",
+    ],
     sections: [
       {
         title: "Perché i gestionali generici non bastano in ginecologia",
@@ -1430,24 +2269,24 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Funzionalità indispensabili per un ginecologo",
-        body: "Un gestionale per ginecologi deve includere: cartella ostetrica e ginecologica strutturata, calcolo automatico dell'età gestazionale, stima del peso fetale (Hadlock), percentili e biometria fetale, tracciamento del BMI e del delta peso materno, curve di crescita con grafici, generazione di referti PDF completi e gestione del consenso informato. Questi non sono optional: sono il cuore della visita specialistica.",
+        body: "Un gestionale per ginecologi deve includere: cartella ostetrica e ginecologica strutturata, calcolo automatico dell'età gestazionale, stima del peso fetale (Hadlock), percentili e biometria fetale, tracciamento del BMI e dell'aumento di peso in gravidanza, curve di crescita con grafici, generazione di referti PDF completi e archiviazione ordinata dei documenti della paziente, compresi i consensi firmati. Questi non sono optional: sono il cuore della visita specialistica.\n\nConta anche da dove vengono i numeri. Un percentile senza la curva di riferimento non è confrontabile con quello di un collega: il software deve dire quale formula usa, per esempio Hadlock 1984 per la biometria, Hadlock 1985 per il peso fetale con i centili del 1991, le curve della Fetal Medicine Foundation per il PI dell'arteria ombelicale, e possibilmente lasciarti scegliere quando ne esistono più versioni.",
       },
       {
         title: "Il valore dei calcolatori clinici integrati",
-        body: "Avere i calcolatori clinici dentro il gestionale elimina il bisogno di app separate e riduce il rischio di errori di trascrizione. I risultati si inseriscono direttamente nel referto, risparmiando minuti preziosi a ogni visita. Per un ambulatorio che fa 20 visite al giorno, questo si traduce in un'ora e mezza di lavoro in meno ogni giorno.",
+        body: "Avere i calcolatori clinici dentro il gestionale elimina il bisogno di app separate e riduce il rischio di errori di trascrizione. Le misure si inseriscono una volta sola e i risultati finiscono direttamente nel referto: niente numeri ricopiati a mano dall'app del calcolo al documento, che è proprio il punto in cui gli errori si infilano. Su un ambulatorio con molte visite al giorno, i minuti risparmiati a visita diventano tempo che torna alla paziente.",
       },
       {
         title: "Corioli per ginecologi e ostetrici",
-        body: "Corioli nasce specificamente per ginecologia e ostetricia, sviluppato con la consulenza di specialisti delle migliori strutture italiane. Include tutti gli strumenti clinici elencati sopra, una cartella ostetrica elettronica completa, referti PDF personalizzabili e un approccio privacy by design: i dati delle pazienti restano salvati in locale, nel tuo studio, sotto il tuo esclusivo controllo. La prova gratuita di 30 giorni permette di valutarlo nel proprio flusso clinico reale.",
+        body: "[Corioli per ginecologia e ostetricia](/ginecologia) nasce specificamente per questa specialità, sviluppato insieme a un team di ginecologi che ne detta i requisiti clinici. Ha tre visite distinte, ginecologica, ginecologica pediatrica e ostetrica, con un'anamnesi per sezioni che si adatta allo studio. Nella visita ostetrica calcola le settimane di gestazione dall'ultima mestruazione alla data della visita e la data presunta del parto, la biometria fetale con i percentili di Hadlock 1984, il peso fetale con la formula di Hadlock scelta dal medico e il centile sulle curve del 1991, con il grafico di crescita di tutta la gravidanza, e la flussimetria dell'arteria ombelicale con il PI sulle curve della Fetal Medicine Foundation. Ci sono anche BMI con fasce OMS, aumento di peso in gravidanza e HOMA-IR.\n\nDalla visita escono in PDF referto, ricetta, certificato e richiesta di esame, con le immagini ecografiche, la firma e il timbro. Esami esterni e consensi firmati si allegano alla scheda della paziente come PDF o immagine. I dati restano salvati in locale, nel tuo studio, sotto il tuo esclusivo controllo, e la prova gratuita di 30 giorni permette di valutarlo nel proprio flusso clinico reale.",
       },
       {
         title: "Confronto tra i principali software ginecologici in Italia",
         variant: "comparison-table",
-        body: "Scegliere un gestionale per ginecologi significa confrontare soluzioni molto diverse tra loro: alcune nascono per la gestione amministrativa dello studio e aggiungono moduli clinici in un secondo momento, altre sono verticali e pensate fin dall'inizio per la visita ostetrica e ginecologica. In Italia, tra i nomi più citati in ambulatorio troviamo Corioli, ArzaMed, Gynobase e WindDoctor. Nessuno di questi software è 'migliore in assoluto': la scelta dipende da quanto peso dai agli strumenti clinici nativi rispetto alla fatturazione elettronica, al numero di utenti e al budget mensile dello studio.\n\nArzaMed è una soluzione cloud consolidata, molto orientata alla gestione complessiva di studi e poliambulatori: agenda, fatturazione sanitaria, integrazione con il Sistema Tessera Sanitaria e cartella clinica ginecologica personalizzabile. È una scelta solida per chi gestisce team numerosi, ma il canone parte da 99€ al mese per due utenti — un investimento significativo per il libero professionista che lavora da solo.\n\nGynobase è storico nel panorama italiano: offre gestione di anagrafiche, visite ginecologiche e visite in gravidanza, con la possibilità di usare una versione desktop offline (Gynobase Portable) quando la connessione non è disponibile. L'interfaccia è essenziale e funzionale, ma i calcolatori fetali avanzati e l'esperienza utente moderna non sono il suo punto di forza principale.\n\nWindDoctor propone un gestionale cloud accessibile, con piani a partire da 10€ al mese e una prova gratuita limitata. Copre appuntamenti, cartelle cliniche digitali e fatturazione, ma resta un software generalista: per la biometria fetale, i percentili Hadlock e una cartella ostetrica strutturata il medico dovrà spesso integrare strumenti esterni.\n\nCorioli si colloca come alternativa verticale: nato per ginecologia e ostetricia, integra cartella ostetrica elettronica, calcolatori fetali (Hadlock, biometria, percentili, età gestazionale), referti PDF e consenso informato digitale in un unico flusso clinico. Costa 30€ al mese, tutto incluso, con prova gratuita di 30 giorni — un posizionamento pensato per lo specialista privato che vuole strumenti clinici professionali senza il costo di un gestionale enterprise.\n\nLa tabella seguente riassume le differenze principali. I prezzi indicativi sono quelli pubblicati sui siti ufficiali al 2025 e possono variare in base a moduli aggiuntivi, numero di utenti e promozioni in corso.",
+        body: "Scegliere un gestionale per ginecologi significa confrontare soluzioni molto diverse tra loro: alcune nascono per la gestione amministrativa dello studio e aggiungono moduli clinici in un secondo momento, altre sono verticali e pensate fin dall'inizio per la visita ostetrica e ginecologica. In Italia, tra i nomi più citati in ambulatorio troviamo Corioli, ArzaMed, Gynobase e WindDoctor. Nessuno di questi software è 'migliore in assoluto': la scelta dipende da quanto peso dai agli strumenti clinici nativi rispetto alla fatturazione elettronica, al numero di utenti e al budget mensile dello studio.\n\nArzaMed è una soluzione cloud consolidata, molto orientata alla gestione complessiva di studi e poliambulatori: agenda, fatturazione sanitaria, integrazione con il Sistema Tessera Sanitaria e cartella clinica ginecologica personalizzabile. È una scelta solida per chi gestisce team numerosi, ma il canone parte da 99€ al mese per due utenti — un investimento significativo per il libero professionista che lavora da solo.\n\nGynobase è storico nel panorama italiano: offre gestione di anagrafiche, visite ginecologiche e visite in gravidanza, con la possibilità di usare una versione desktop offline (Gynobase Portable) quando la connessione non è disponibile. L'interfaccia è essenziale e funzionale, ma i calcolatori fetali avanzati e l'esperienza utente moderna non sono il suo punto di forza principale.\n\nWindDoctor propone un gestionale cloud accessibile, con piani a partire da 10€ al mese e una prova gratuita limitata. Copre appuntamenti, cartelle cliniche digitali e fatturazione, ma resta un software generalista: per la biometria fetale, i percentili Hadlock e una cartella ostetrica strutturata il medico dovrà spesso integrare strumenti esterni.\n\nCorioli si colloca come alternativa verticale: nato per ginecologia e ostetricia, integra cartella ostetrica elettronica, calcolatori fetali (Hadlock, biometria, percentili, età gestazionale), referti PDF e documenti della paziente in un unico flusso clinico. Costa 30€ al mese, tutto incluso, con prova gratuita di 30 giorni — un posizionamento pensato per lo specialista privato che vuole strumenti clinici professionali senza il costo di un gestionale enterprise.\n\nLa tabella seguente riassume le differenze principali. I prezzi indicativi sono quelli pubblicati sui siti ufficiali e consultati ad agosto 2026, e possono variare in base a moduli aggiuntivi, numero di utenti e promozioni in corso.",
       },
       {
         title: "Quanto costa un gestionale per ginecologi?",
-        body: "Il costo di un gestionale per ginecologi dipende dal modello commerciale scelto dal fornitore e dalle funzionalità incluse nel canone base. Conoscere le tre tipologie di pricing più diffuse aiuta a evitare sorprese e a calcolare il costo reale su 12 mesi, non solo quello del primo mese promozionale.\n\nIl modello più comune oggi è l'abbonamento mensile (SaaS cloud): paghi un canone fisso ogni mese e ottieni accesso al software, aggiornamenti automatici, backup e assistenza. I vantaggi sono prevedibilità, nessun investimento iniziale in server o licenze e la possibilità di disdire se il software non si adatta al tuo flusso. I canoni variano da circa 10€ al mese per soluzioni generaliste con funzionalità limitate, fino a 99€-499€ al mese per gestionali enterprise pensati per poliambulatori con molti utenti. Per un ginecologo in libera professione, la fascia utile si colloca generalmente tra 15€ e 50€ al mese per un software verticale completo.\n\nEsiste ancora, soprattutto tra software più datati, il modello a licenza perpetua: paghi una tantum per il software e lo installi sul tuo computer. Il costo iniziale può sembrare conveniente, ma di solito non include aggiornamenti, assistenza continuativa e adeguamenti normativi — voci che, sommate nel tempo, spesso superano l'abbonamento. Attenzione a non confondere il modello di pagamento con l'architettura: un software installato in studio può benissimo essere in abbonamento con aggiornamenti continui, ed è un vantaggio quando vuoi che i dati restino sotto il tuo controllo.\n\nIl modello freemium prevede una versione base gratuita con limiti (numero di pazienti, documenti o funzionalità) e piani a pagamento per sbloccare il pieno potenziale. WindDoctor, ad esempio, offre una prova gratuita con 12 documenti annui; Gynobase permette di registrarsi e testare il servizio. Attenzione: un piano freemium può andare bene per valutare l'interfaccia, ma raramente copre le esigenze cliniche di un ambulatorio ostetrico attivo con decine di visite settimanali.\n\nQuando calcoli il budget, considera anche i costi nascosti: moduli extra per calcolatori clinici avanzati, migrazione dati storici, personalizzazione template PDF, utenti aggiuntivi per segreteria o collaboratori. Un canone d'ingresso basso a cui si sommano moduli per i percentili fetali, utenti aggiuntivi e personalizzazioni può finire per costare più di un software con un prezzo unico e tutto incluso.\n\nCorioli adotta un modello di abbonamento trasparente: un solo prezzo, 30€ al mese, tutto incluso. Il canone comprende cartella clinica elettronica illimitata, anagrafica pazienti, refertazione PDF, calcolatori clinici avanzati — percentili, stime Hadlock, curve di crescita — e un'impostazione privacy by design con i dati salvati in locale nello studio. Non esistono moduli a pagamento da aggiungere dopo. L'unico servizio a parte è la migrazione dei dati storici da Word, Excel o altri gestionali, facoltativa e su preventivo. Non ci sono costi di attivazione né vincoli contrattuali: puoi provare Corioli gratuitamente per 30 giorni, senza carta di credito, e valutarlo nel tuo ambulatorio reale prima di decidere.",
+        body: "Il costo di un gestionale per ginecologi dipende dal modello commerciale scelto dal fornitore e dalle funzionalità incluse nel canone base. Conoscere le tre tipologie di pricing più diffuse aiuta a evitare sorprese e a calcolare il costo reale su 12 mesi, non solo quello del primo mese promozionale.\n\nIl modello più comune oggi è l'abbonamento mensile (SaaS cloud): paghi un canone fisso ogni mese e ottieni accesso al software, aggiornamenti automatici, backup e assistenza. I vantaggi sono prevedibilità, nessun investimento iniziale in server o licenze e la possibilità di disdire se il software non si adatta al tuo flusso. I canoni variano molto: le soluzioni generaliste con funzionalità limitate costano poco, i gestionali enterprise pensati per poliambulatori con molti utenti arrivano a diverse centinaia di euro al mese.\n\nEsiste ancora, soprattutto tra software più datati, il modello a licenza perpetua: paghi una tantum per il software e lo installi sul tuo computer. Il costo iniziale può sembrare conveniente, ma di solito non include aggiornamenti, assistenza continuativa e adeguamenti normativi — voci che, sommate nel tempo, spesso superano l'abbonamento. Attenzione a non confondere il modello di pagamento con l'architettura: un software installato in studio può benissimo essere in abbonamento con aggiornamenti continui, ed è un vantaggio quando vuoi che i dati restino sotto il tuo controllo.\n\nIl modello freemium prevede una versione base gratuita con limiti (numero di pazienti, documenti o funzionalità) e piani a pagamento per sbloccare il pieno potenziale. WindDoctor, ad esempio, offre una prova gratuita con 12 documenti annui; Gynobase permette di registrarsi e testare il servizio. Attenzione: un piano freemium può andare bene per valutare l'interfaccia, ma raramente copre le esigenze cliniche di un ambulatorio ostetrico attivo con decine di visite settimanali.\n\nQuando calcoli il budget, considera anche i costi nascosti: moduli extra per calcolatori clinici avanzati, migrazione dati storici, personalizzazione template PDF, utenti aggiuntivi per segreteria o collaboratori. Un canone d'ingresso basso a cui si sommano moduli per i percentili fetali, utenti aggiuntivi e personalizzazioni può finire per costare più di un software con un prezzo unico e tutto incluso.\n\nCorioli adotta un modello di abbonamento trasparente: un solo prezzo, [30€ al mese, tutto incluso](/prezzi). Il canone comprende cartella clinica elettronica illimitata, anagrafica pazienti, refertazione PDF, calcolatori clinici avanzati — percentili, stime Hadlock, curve di crescita — e un'impostazione privacy by design con i dati salvati in locale nello studio. Non esistono moduli a pagamento da aggiungere dopo. L'unico servizio a parte è la migrazione dei dati storici da Word, Excel o altri gestionali, facoltativa e su preventivo. Non ci sono costi di attivazione né vincoli contrattuali: puoi provare Corioli gratuitamente per 30 giorni, senza carta di credito, e valutarlo nel tuo ambulatorio reale prima di decidere.",
       },
     ],
     faq: [
@@ -1459,7 +2298,7 @@ export const posts: BlogPost[] = [
       {
         question: "Posso migrare i dati dal mio vecchio software?",
         answer:
-          "Sì. Corioli include un servizio di migrazione dati storici che permette di trasferire l'archivio pazienti da Word, Excel, carta o altri gestionali medici. Il costo è su preventivo, in base al formato e alla dimensione dell'archivio, e copre l'importazione dell'anagrafica e dei dati clinici principali. Il team di Corioli ti guida nel processo: non devi fare da solo export manuali o conversioni di formato. Molti ginecologi che passano da Word o da software datati come Gynobase completano la migrazione in pochi giorni, continuando a lavorare in parallelo finché l'archivio non è completamente operativo nel nuovo gestionale.",
+          "Sì. Corioli include un servizio di migrazione dati storici che permette di trasferire l'archivio pazienti da Word, Excel, carta o altri gestionali medici. Il costo è su preventivo, in base al formato e alla dimensione dell'archivio, e copre l'importazione dell'anagrafica e dei dati clinici principali. Il team di Corioli ti guida nel processo: non devi fare da solo export manuali o conversioni di formato. Anagrafiche e appuntamenti in CSV si possono anche importare da soli, con il controllo dei doppioni.",
       },
       {
         question: "È conforme al GDPR?",
@@ -1477,34 +2316,98 @@ export const posts: BlogPost[] = [
           "Sì. Corioli offre supporto in italiano via chat ed email, con un team che conosce il contesto clinico della ginecologia e dell'ostetricia — non un call center generico. Durante la prova gratuita di 30 giorni hai accesso allo stesso livello di assistenza dei clienti attivi, così puoi risolvere dubbi operativi mentre valuti il software nel tuo ambulatorio. Per richieste di configurazione avanzata, personalizzazione template PDF o migrazione dati, il team è raggiungibile anche telefonicamente. Corioli ha sede in Italia (Sesto Fiorentino, FI) e sviluppa il software in collaborazione con ginecologi italiani.",
       },
     ],
+    sources: [
+      {
+        title:
+          "Hadlock FP, Deter RL, Harrist RB, Park SK. Estimating fetal age: computer-assisted analysis of multiple fetal growth parameters. Radiology. 1984;152(2):497-501.",
+        url: "https://doi.org/10.1148/radiology.152.2.6739822",
+      },
+      {
+        title:
+          "Hadlock FP, Harrist RB, Sharman RS, Deter RL, Park SK. Estimation of fetal weight with the use of head, body, and femur measurements: a prospective study. Am J Obstet Gynecol. 1985;151(3):333-337.",
+        url: "https://doi.org/10.1016/0002-9378(85)90298-4",
+      },
+      {
+        title:
+          "Hadlock FP, Harrist RB, Martinez-Poyer J. In utero analysis of fetal growth: a sonographic weight standard. Radiology. 1991;181(1):129-133.",
+        url: "https://doi.org/10.1148/radiology.181.1.1887021",
+      },
+      {
+        title:
+          "Ciobanu A, Wright A, Syngelaki A, Wright D, Akolekar R, Nicolaides KH. Fetal Medicine Foundation reference ranges for umbilical artery and middle cerebral artery pulsatility index and cerebroplacental ratio. Ultrasound Obstet Gynecol. 2019;53(4):465-472.",
+        url: "https://doi.org/10.1002/uog.20157",
+      },
+    ],
   },
   {
     slug: "come-sostituire-word-excel-studio-medico",
     title: "Come sostituire Word e Excel nello studio medico",
     description:
-      "Guida pratica per passare da Word ed Excel a un gestionale medico: come migrare i dati storici, eliminare la carta e migliorare il flusso clinico senza perdere nulla.",
+      "Come passare da Word ed Excel a un gestionale medico: migrare i dati storici, eliminare la carta e migliorare il flusso clinico senza perdere nulla.",
     excerpt:
       "Come migrare i dati storici, eliminare la carta e migliorare il flusso clinico passando a un gestionale medico senza perdere nulla.",
     date: "28 Gennaio 2025",
     isoDate: "2025-01-28",
+    updated: "2 Novembre 2026",
+    updatedIso: "2026-11-02",
     category: "Gestione Studio",
-    lead: "Word e Excel sono strumenti potenti, ma non sono stati progettati per gestire pazienti, visite cliniche e referti medici. Molti studi li usano per abitudine, senza rendersi conto di quanto tempo si perda ogni giorno.",
+    lead: "Per sostituire Word ed Excel nello studio medico servono tre passaggi: scegliere un gestionale che abbia le visite e i calcoli della tua specialità, portarci l'archivio storico e fissare un giorno da cui le visite nuove si registrano solo lì. Word ed Excel sono strumenti potenti, ma non sono nati per gestire pazienti, visite e referti: ogni documento vive da solo, senza legami con l'anagrafica e con lo storico. Qui trovi cosa non funziona, cosa conviene portare nel gestionale e cosa no, e come si organizza il passaggio.",
+    keyPoints: [
+      "Con Word ogni referto è un file a sé, senza collegamento con l'anagrafica, con le visite precedenti o con i calcoli: l'archivio cresce, ma non si può interrogare.",
+      "Excel tiene i numeri ma non la struttura clinica: non distingue le visite, non produce referti e una cella sovrascritta per sbaglio non lascia traccia.",
+      "I referti già scritti in Word non vanno ricopiati: si salvano in PDF e si allegano alla scheda del paziente, mentre le anagrafiche si importano.",
+      "Il passaggio funziona quando c'è una data precisa da cui le visite nuove si registrano solo nel gestionale, con il vecchio archivio ancora consultabile.",
+      "In Corioli la migrazione da Word ed Excel è un servizio su preventivo, in base a formato e dimensione dell'archivio; il software costa 30€ al mese tutto incluso.",
+    ],
     sections: [
       {
         title: "I limiti concreti di Word per i referti medici",
-        body: "Con Word ogni referto si crea da zero o da un template che va aggiornato manualmente. Non esiste una connessione con l'anagrafica del paziente, con lo storico delle visite o con i calcolatori clinici. Il risultato è un archivio di file separati, difficile da consultare, impossibile da interrogare e vulnerabile a perdite accidentali.",
+        body: "Con Word ogni referto si crea da zero o da un template che va aggiornato manualmente. Non esiste una connessione con l'anagrafica del paziente, con lo storico delle visite o con i calcolatori clinici. Il risultato è un archivio di file separati, difficile da consultare, impossibile da interrogare e vulnerabile a perdite accidentali.\n\nC'è poi il problema delle versioni. Se un referto viene corretto e salvato sopra, la versione precedente sparisce, e non resta traccia di chi ha cambiato cosa e quando. Per un documento clinico è una debolezza seria, perché è proprio la storia delle modifiche a dimostrare che cosa è stato scritto alla data della visita.",
       },
       {
         title: "Excel per i dati clinici: perché non funziona",
-        body: "Excel può sembrare pratico per tenere traccia di parametri nel tempo, ma manca di struttura clinica. Non distingue tra visite, non gestisce il consenso, non produce referti e non offre alcuna sicurezza per i dati sanitari. Il rischio di errori di inserimento e di perdita di dati è elevato.",
+        body: "Excel può sembrare pratico per tenere traccia di parametri nel tempo, ma manca di struttura clinica. Non distingue tra visite, non produce referti e un valore sovrascritto per sbaglio, o una riga ordinata male, cambia i dati senza lasciare traccia. Il rischio di errori di inserimento e di perdita di dati è elevato.\n\nAnche la protezione è limitata. La password su un file impedisce di aprirlo a chi non la conosce, ma non registra le modifiche e non segue le copie: basta un allegato a una email o una chiavetta perché esista una versione del foglio fuori controllo. Il GDPR tratta i dati sanitari come categorie particolari e chiede misure di sicurezza adeguate al rischio.",
+      },
+      {
+        title: "Cosa portare nel gestionale e cosa no",
+        body: "Il passaggio non obbliga a ricopiare anni di archivio. Le anagrafiche dei pazienti, se stanno in un foglio Excel, si importano. I referti già scritti in Word restano quello che sono, documenti firmati a una certa data: si salvano in PDF e si allegano alla scheda del paziente, dove si ritrovano con una ricerca per nome invece che fra le cartelle del disco.\n\nI dati numerici del passato, pesi, misure, valori di laboratorio, conviene inserirli solo dove servono davvero, per esempio per i pazienti seguiti nel tempo di cui vuoi vedere l'andamento. Tutto il resto può restare nei PDF allegati.\n\nConviene partire dai pazienti attivi, quelli che rivedrai nei prossimi mesi, e lasciare l'archivio storico più vecchio per ultimo.",
       },
       {
         title: "Come funziona la migrazione a un gestionale medico",
-        body: "Il passaggio a un gestionale medico moderno non richiede di ripartire da zero. I dati storici dei pazienti (anche da Word, Excel o carta) possono essere importati o inseriti progressivamente. Corioli include un servizio di migrazione dei dati storici che permette di trasferire l'archivio esistente senza perdere continuità clinica.",
+        body: "Il passaggio a un gestionale medico moderno non richiede di ripartire da zero. I dati storici dei pazienti, anche da Word, Excel o carta, possono essere importati o inseriti progressivamente. Il metodo, dalla richiesta dell'esportazione alla verifica dell'import, è spiegato passo per passo nella [guida per cambiare gestionale senza perdere i dati](/blog/cambiare-gestionale-medico-migrazione-dati).\n\nIn Corioli anagrafiche e appuntamenti si importano da file CSV con un tracciato preciso, con il controllo dei doppioni. Per i file Word ed Excel organizzati a modo proprio, la migrazione dei dati storici è un servizio su preventivo, calcolato in base al formato e alla dimensione dell'archivio, che si [chiede dal modulo contatti](/contatti?richiesta=migrazione).\n\nIl passaggio regge quando ha una data: da quel giorno le visite nuove si registrano solo nel gestionale, e il vecchio archivio resta consultabile ma non si aggiorna più. Lavorare in parallelo sui due sistemi, inserendo la stessa visita due volte, produce archivi che divergono in pochi giorni.",
       },
       {
-        title: "Il guadagno reale in ambulatorio",
-        body: "I medici che passano a Corioli riportano di recuperare in media due ore al giorno di lavoro amministrativo. L'anamnesi si compila in modo guidato, i calcolatori clinici sono integrati nella visita e i referti escono in PDF pronti con un clic. Meno tempo al computer significa più attenzione al paziente.",
+        title: "Cosa cambia in ambulatorio",
+        body: "Con un gestionale l'anamnesi si compila in modo guidato e si ritrova alla visita successiva, i calcolatori clinici sono integrati nella visita e i referti escono in PDF con carta intestata, firma e timbro, senza impaginare ogni volta un documento. Lo storico del paziente è in un'unica scheda: visite, documenti prodotti, esami esterni e consensi firmati allegati.\n\nIn Corioli, in più, ogni modifica a una visita lascia una traccia nella cronologia, che non si cancella: quello che in Word si perdeva salvando sopra. Le [funzionalità di Corioli](/funzionalita) sono descritte per esteso, e il software costa 30€ al mese tutto incluso, con 30 giorni di prova gratuita.",
+      },
+    ],
+    faq: [
+      {
+        question: "Devo ricopiare a mano i vecchi referti scritti in Word?",
+        answer:
+          "No. I referti già scritti sono documenti firmati a una certa data: si salvano in PDF e si allegano alla scheda del paziente nel gestionale. Conviene inserire come dati strutturati solo i valori che servono a seguire nel tempo i pazienti attivi.",
+      },
+      {
+        question: "Posso importare l'elenco pazienti che tengo in Excel?",
+        answer:
+          "Sì, se il foglio si salva in CSV con le colonne che il gestionale si aspetta. In Corioli anagrafiche e appuntamenti si importano da CSV con un tracciato preciso e il controllo dei doppioni; se il tuo file è organizzato in un altro modo, la migrazione è un servizio su preventivo.",
+      },
+      {
+        question: "Un file Excel protetto da password basta per il GDPR?",
+        answer:
+          "Il GDPR non elenca strumenti obbligatori: l'articolo 32 chiede misure adeguate al rischio, che per i dati sanitari è alto. La password impedisce di aprire il file, ma non registra le modifiche e non protegge le copie che circolano per email o su chiavetta.",
+      },
+      {
+        question: "Devo usare Word e il gestionale insieme per un periodo?",
+        answer:
+          "Meglio di no. Si sceglie una data da cui le visite nuove si registrano solo nel gestionale, e il vecchio archivio resta consultabile senza aggiornarlo. Inserire la stessa visita due volte crea due archivi che in pochi giorni non coincidono più.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Regolamento (UE) 2016/679 del Parlamento europeo e del Consiglio, del 27 aprile 2016 (GDPR), articoli 9 e 32.",
+        url: "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
       },
     ],
   },
@@ -1512,11 +2415,13 @@ export const posts: BlogPost[] = [
     slug: "gestionale-medico-gdpr-cosa-deve-avere",
     title: "Gestionale medico e GDPR: cosa deve avere per essere conforme",
     description:
-      "Guida pratica alla conformità GDPR per studi medici: cosa deve garantire un gestionale medico in termini di sicurezza, accessi, backup e contratti per proteggere i dati dei pazienti.",
+      "Cosa deve garantire un gestionale medico per il GDPR: sicurezza, accessi, backup e contratti con il fornitore per proteggere i dati dei pazienti.",
     excerpt:
-      "Crittografia, backup, DPA, accessi controllati e consenso digitale: la checklist per valutare la conformità GDPR di un software medico.",
+      "Crittografia, backup, DPA e accessi controllati: la checklist per valutare un software medico sul GDPR, e cosa cambia se i dati restano nello studio.",
     date: "20 Gennaio 2025",
     isoDate: "2025-01-20",
+    updated: "21 Ottobre 2026",
+    updatedIso: "2026-10-21",
     category: "Normativa",
     lead: "I dati sanitari sono tra le informazioni più sensibili che esistano. Per un medico specialista privato, scegliere un gestionale non conforme al GDPR non è solo un rischio legale: è una responsabilità verso i propri pazienti.",
     sections: [
@@ -1534,7 +2439,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Come Corioli gestisce la conformità",
-        body: "Corioli segue la strada della minimizzazione: è un software desktop per Windows con archiviazione locale, quindi i dati clinici dei pazienti non lasciano mai lo studio e Corioli non vi ha accesso in alcun modo. Il medico resta l'unico titolare del trattamento, senza DPA necessario per l'uso standard, senza trasferimenti extra-UE e senza rischi di violazione lato fornitore. Il modulo di raccolta del consenso informato digitale è integrato nel software, eliminando la necessità di archivi cartacei separati.",
+        body: "[Corioli](/gdpr) segue la strada della minimizzazione: è un software desktop per Windows con archiviazione locale, quindi i dati clinici dei pazienti non lasciano mai lo studio e Corioli non vi ha accesso in alcun modo. Il medico resta l'unico titolare del trattamento, senza DPA necessario per l'uso standard, senza trasferimenti extra-UE e senza rischi di violazione lato fornitore. I consensi firmati si allegano alla scheda del paziente come PDF o immagine, così stanno nella cartella clinica invece che in un archivio cartaceo separato.",
       },
     ],
   },
@@ -1542,7 +2447,7 @@ export const posts: BlogPost[] = [
     slug: "cos-e-cartella-clinica-elettronica-come-sceglierla",
     title: "Cos'è la cartella clinica elettronica e come sceglierla",
     description:
-      "Guida completa alla cartella clinica elettronica per studi medici: differenze con la carta, vantaggi, criteri di scelta e cosa deve offrire un buon software medico.",
+      "Cos'è la cartella clinica elettronica, cosa cambia rispetto alla carta, i vantaggi e i criteri per scegliere il software giusto per lo studio medico.",
     excerpt:
       "Differenze con la carta, vantaggi concreti e i criteri tecnici e clinici per scegliere il software giusto per il tuo studio medico.",
     date: "15 Gennaio 2025",
@@ -1564,7 +2469,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Corioli come cartella clinica elettronica per specialisti",
-        body: "Corioli è una cartella clinica elettronica progettata per medici specialisti privati. Integra in un unico ambiente la gestione del paziente, l'anamnesi specializzata, i calcolatori clinici e la produzione di referti PDF. I dati restano salvati in locale, nello studio del medico, secondo un approccio privacy by design attento alla conformità GDPR.",
+        body: "[Corioli](/funzionalita) è una cartella clinica elettronica progettata per medici specialisti privati. Integra in un unico ambiente la gestione del paziente, l'anamnesi specializzata, i calcolatori clinici e la produzione di referti PDF. I dati restano salvati in locale, nello studio del medico, secondo un approccio privacy by design attento alla conformità GDPR.",
       },
     ],
   },
@@ -1572,7 +2477,7 @@ export const posts: BlogPost[] = [
     slug: "migliori-software-gestionali-medici-italia",
     title: "Migliori software gestionali per medici in Italia (2026)",
     description:
-      "Guida ai migliori software gestionali per medici in Italia nel 2026: cosa valutare, differenze tra soluzioni generiche e verticali, e perché la specializzazione fa la differenza.",
+      "I migliori software gestionali per medici in Italia nel 2026: cosa valutare, differenze tra soluzioni generiche e verticali e perché la specializzazione conta.",
     excerpt:
       "Cosa distingue un gestionale generico da uno verticale, cosa valutare prima di scegliere e come orientarsi tra cloud e dati salvati in locale.",
     date: "10 Gennaio 2025",
@@ -1592,7 +2497,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Perché Corioli nasce diverso",
-        body: "Corioli è stato costruito osservando direttamente il lavoro di ginecologi e ostetrici in ambulatorio, non partendo da un modello amministrativo da adattare alla clinica. Il risultato è un software in cui l'anamnesi è strutturata per la specializzazione, i calcolatori (datazione, Hadlock, percentili, BMI) sono integrati nella visita e i referti escono in PDF pronti senza lavoro extra.",
+        body: "[Corioli](/ginecologia) è stato costruito osservando direttamente il lavoro di ginecologi e ostetrici in ambulatorio, non partendo da un modello amministrativo da adattare alla clinica. Il risultato è un software in cui l'anamnesi è strutturata per la specializzazione, i calcolatori (età gestazionale, Hadlock, percentili, BMI) sono integrati nella visita e i referti escono in PDF pronti senza lavoro extra.",
       },
       {
         title: "Cloud o dati in locale?",
@@ -1622,7 +2527,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Il ruolo di Corioli",
-        body: "Corioli nasce come gestionale medico per specialisti, con un modulo dedicato a ginecologia e ostetricia. L'obiettivo è portare in un unico ambiente cartella clinica elettronica, calcolatori clinici, refertazione e un approccio ai dati rispettoso del GDPR, con archiviazione in locale nello studio.",
+        body: "Corioli nasce come gestionale medico per specialisti, con un [modulo dedicato a ginecologia e ostetricia](/ginecologia). L'obiettivo è portare in un unico ambiente cartella clinica elettronica, calcolatori clinici, refertazione e un approccio ai dati rispettoso del GDPR, con archiviazione in locale nello studio.",
       },
     ],
   },
@@ -1648,7 +2553,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Quando passare a Corioli",
-        body: "Corioli è indicato quando il medico vuole superare Word, Excel e carta con un software per dottori pensato per la pratica clinica specialistica, non solo per l'amministrazione dello studio.",
+        body: "[Corioli](/ginecologia) è indicato quando il medico vuole superare Word, Excel e carta con un software per dottori pensato per la pratica clinica specialistica, non solo per l'amministrazione dello studio.",
       },
     ],
   },
@@ -1676,7 +2581,7 @@ export const posts: BlogPost[] = [
       },
       {
         title: "Come si posiziona Corioli",
-        body: "Corioli è progettato per studi specialistici che vogliono una cartella clinica elettronica con referti, dati strutturati e un'impostazione privacy by design: i dati restano in locale, nello studio, con attenzione alla conformità GDPR.",
+        body: "[Corioli](/funzionalita) è progettato per studi specialistici che vogliono una cartella clinica elettronica con referti, dati strutturati e un'impostazione privacy by design: i dati restano in locale, nello studio, con attenzione alla conformità GDPR.",
       },
     ],
   },
@@ -1688,16 +2593,58 @@ export const postsBySlug: Record<string, BlogPost> = Object.fromEntries(
 
 // --- Categorie -------------------------------------------------------------
 
-// Slug URL-safe di una categoria ("Gestione Studio" -> "gestione-studio").
-// Usata da /blog/categoria/[slug] e dalla sitemap: unica fonte, cosi i due
-// non possono divergere.
-export function categorySlug(category: string): string {
-  return category
+// Slug URL-safe di un testo: senza accenti, minuscolo, parole unite da "-".
+export function slugify(text: string): string {
+  return text
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
+}
+
+// Slug URL-safe di una categoria ("Gestione Studio" -> "gestione-studio").
+// Usata da /blog/categoria/[slug] e dalla sitemap: unica fonte, cosi i due
+// non possono divergere.
+export function categorySlug(category: string): string {
+  return slugify(category);
+}
+
+// Link interni del body: [testo](/percorso). Il gruppo esterno di LINK_INTERNO
+// serve a split(), che cosi tiene i link fra le parti di testo.
+export const LINK_INTERNO = /(\[[^\]]+\]\(\/[^)\s]*\))/;
+const LINK_INTERNO_PARTI = /^\[([^\]]+)\]\((\/[^)\s]*)\)$/;
+
+export function parseLinkInterno(parte: string): { testo: string; href: string } | null {
+  const m = parte.match(LINK_INTERNO_PARTI);
+  return m ? { testo: m[1], href: m[2] } : null;
+}
+
+// Il body in testo semplice, con i link riscritti da `formato` (di default
+// resta solo il testo del link).
+export function bodyInTesto(
+  body: string,
+  formato: (testo: string, href: string) => string = (testo) => testo,
+): string {
+  return body
+    .split(LINK_INTERNO)
+    .map((parte) => {
+      const link = parseLinkInterno(parte);
+      return link ? formato(link.testo, link.href) : parte;
+    })
+    .join("");
+}
+
+// Minuti di lettura, stimati a 200 parole al minuto su tutto il testo che il
+// lettore trova nella pagina: lead, "In breve", sezioni e domande frequenti.
+export function readingMinutes(post: BlogPost): number {
+  const text = [
+    post.lead,
+    ...(post.keyPoints ?? []),
+    ...post.sections.map((section) => bodyInTesto(section.body)),
+    ...(post.faq ?? []).flatMap((item) => [item.question, item.answer]),
+  ].join(" ");
+  return Math.max(1, Math.round(text.split(/\s+/).filter(Boolean).length / 200));
 }
 
 // Testi delle pagine di categoria. Ogni voce alimenta title, description e
@@ -1710,7 +2657,7 @@ export const categoryMeta: Record<
   Normativa: {
     title: "Normativa sanitaria per lo studio privato",
     description:
-      "FSE 2.0, GDPR, Sistema Tessera Sanitaria, conservazione della documentazione clinica e agevolazioni come l'iperammortamento: le regole che riguardano il medico specialista e il centro medico privato.",
+      "FSE 2.0, GDPR, Sistema Tessera Sanitaria, conservazione della documentazione clinica e iperammortamento: le regole per lo specialista e il centro privato.",
     intro:
       "Gli adempimenti e le agevolazioni che toccano davvero lo studio privato, spiegati senza gergo: cosa prescrive la norma, a chi si applica, cosa cambia nella pratica quotidiana e da dove conviene iniziare.",
   },

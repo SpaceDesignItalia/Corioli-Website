@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { pageOpenGraph } from "@/lib/seo";
+import { jsonLdProps, pageOpenGraph } from "@/lib/seo";
 import Link from "next/link";
 import BlogGrid from "@/components/BlogGrid";
 import { posts, categories } from "./posts";
@@ -49,6 +49,7 @@ const blogStructuredData = {
         headline: post.title,
         description: post.description,
         datePublished: post.isoDate,
+        dateModified: post.updatedIso ?? post.isoDate,
         url: `https://corioli.it/blog/${post.slug}`,
       })),
     },
@@ -75,12 +76,9 @@ const blogStructuredData = {
 export default function BlogPage() {
   return (
     <div className="pt-32 pb-24 bg-background min-h-screen">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(blogStructuredData).replace(/</g, "\u003c"),
-        }}
-      />
+      {/* jsonLdProps: qui l'escape era scritto con una barra sola, cioè
+          sostituiva "<" con "<" e non proteggeva niente. */}
+      <script {...jsonLdProps(blogStructuredData)} />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-20 text-center">
          <h1 className="font-heading text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight text-balance">

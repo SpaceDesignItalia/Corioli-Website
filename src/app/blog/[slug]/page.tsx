@@ -5,9 +5,39 @@ import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import FaqList from "@/components/FaqList";
 import { RicordaEdizione } from "@/components/DownloadLinks";
-import { edizioneDaCategoria } from "@/lib/ms-store";
+import { edizioneDaCategoria, type Edizione } from "@/lib/ms-store";
 import { SITE_URL, pageOpenGraph } from "@/lib/seo";
-import { posts, postsBySlug, categorySlug } from "../posts";
+import {
+  posts,
+  postsBySlug,
+  categorySlug,
+  readingMinutes,
+  slugify,
+  LINK_INTERNO,
+  parseLinkInterno,
+} from "../posts";
+
+// Indice "In questo articolo" solo dagli articoli con almeno quattro sezioni:
+// sotto, si legge tutto con un colpo d'occhio e l'indice è solo rumore.
+const MIN_SECTIONS_FOR_TOC = 4;
+
+// Riquadro finale secondo la specialità dell'articolo: chi legge di QTc o di
+// Hadlock trova la prova dell'app giusta, gli altri la demo. Prima era una
+// richiesta di demo uguale per tutti, anche sotto gli articoli clinici.
+const ctaPerEdizione: Record<Edizione, { titolo: string; testo: string; etichetta: string }> = {
+  cardiologia: {
+    titolo: "Prova Corioli Cardiologia nel tuo ambulatorio",
+    testo:
+      "ECG, ecocardiogramma e TC coronarica in campi strutturati, indici con la formula in chiaro e referti PDF. 30 giorni di prova gratuita, senza carta di credito.",
+    etichetta: "Scarica la prova gratuita",
+  },
+  ginecologia: {
+    titolo: "Prova Corioli per ginecologia e ostetricia",
+    testo:
+      "Biometria e peso fetale con Hadlock, flussimetria, cartella ostetrica e referti PDF. 30 giorni di prova gratuita, senza carta di credito.",
+    etichetta: "Scarica la prova gratuita",
+  },
+};
 
 type ComparisonRow = {
   name: string;
@@ -40,7 +70,9 @@ const gynecologySoftwareComparison: ComparisonRow[] = [
   {
     name: "Gynobase",
     deployment: "Cloud + versione desktop offline",
-    fetalCalculators: "Parziali — strumenti base, interfaccia datata",
+    // "interfaccia datata" era un giudizio, non un dato: in una pubblicità
+    // comparativa si confrontano caratteristiche verificabili.
+    fetalCalculators: "Parziali — strumenti di base",
     obstetricRecord: "Sì — visite in gravidanza e ginecologia",
     freeTrial: "Demo e registrazione",
     price: "Su richiesta",
@@ -131,6 +163,8 @@ export default async function BlogPostPage({
   }
 
   const relatedPosts = getRelatedPosts(slug);
+  const minutes = readingMinutes(post);
+  const showToc = post.sections.length >= MIN_SECTIONS_FOR_TOC;
 
   const articleStructuredData = {
     "@context": "https://schema.org",
@@ -144,6 +178,7 @@ export default async function BlogPostPage({
           ? { abstract: post.keyPoints.join(" ") }
           : {}),
         articleSection: post.category,
+        timeRequired: `PT${minutes}M`,
         datePublished: post.isoDate,
         dateModified: post.updatedIso ?? post.isoDate,
         inLanguage: "it-IT",
@@ -233,7 +268,7 @@ export default async function BlogPostPage({
         </Link>
 
         <div className="mb-12">
-          <div className="flex items-center gap-4 mb-6">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-6">
             <Link
               href={`/blog/categoria/${categorySlug(post.category)}`}
               className="text-xs font-bold uppercase text-brand-600 bg-brand-50 px-2.5 py-1 rounded-md hover:bg-brand-100 transition-colors no-underline"
@@ -241,13 +276,17 @@ export default async function BlogPostPage({
               {post.category}
             </Link>
             <span className="text-sm text-gray-500 font-medium">
-              {post.date}
+              <time dateTime={post.isoDate}>{post.date}</time>
             </span>
             {post.updated && (
-              <span className="text-sm text-gray-400 font-medium">
-                Aggiornato il {post.updated}
+              <span className="text-sm text-gray-500 font-medium">
+                Aggiornato il{" "}
+                <time dateTime={post.updatedIso}>{post.updated}</time>
               </span>
             )}
+            <span className="text-sm text-gray-500 font-medium">
+              {minutes} min di lettura
+            </span>
           </div>
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
             {post.title}
@@ -300,14 +339,56 @@ export default async function BlogPostPage({
             </aside>
           )}
 
+          {showToc && (
+            <nav
+              aria-labelledby="in-questo-articolo"
+              className="my-10 p-6 md:p-8 rounded-2xl border border-gray-200"
+            >
+              <h2 id="in-questo-articolo" className="font-heading text-sm font-bold uppercase tracking-wide text-gray-700 mt-0 mb-4">
+                In questo articolo
+              </h2>
+              {/* Voci alte almeno 34px: da telefono si toccano col dito, e con
+                  il solo testo restavano a 19px. Il padding sostituisce il gap. */}
+              <ol className="flex flex-col m-0 pl-5 list-decimal marker:text-brand-500 marker:font-semibold">
+                {post.sections.map((section) => (
+                  <li key={section.title} className="m-0 pl-1 text-base leading-snug">
+                    <a
+                      href={`#${slugify(section.title)}`}
+                      className="block py-1.5 text-gray-700 hover:text-brand-700 underline-offset-2 hover:underline"
+                    >
+                      {section.title}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          )}
+
           {post.sections.map((section) => (
             <section key={section.title}>
-              <h2 className="font-heading text-2xl font-bold mt-12 mb-4 text-gray-900">
+              {/* scroll-mt: l'header fisso coprirebbe il titolo raggiunto dall'indice */}
+              <h2
+                id={slugify(section.title)}
+                className="font-heading text-2xl font-bold mt-12 mb-4 text-gray-900 scroll-mt-28"
+              >
                 {section.title}
               </h2>
               {section.body.split("\n\n").map((paragraph) => (
                 <p key={paragraph.slice(0, 40)} className="mb-6">
-                  {paragraph}
+                  {paragraph.split(LINK_INTERNO).map((parte, i) => {
+                    const link = parseLinkInterno(parte);
+                    return link ? (
+                      <Link
+                        key={i}
+                        href={link.href}
+                        className="font-medium text-brand-700 underline underline-offset-2 decoration-brand-300 hover:text-brand-800 hover:decoration-brand-700"
+                      >
+                        {link.testo}
+                      </Link>
+                    ) : (
+                      parte
+                    );
+                  })}
                 </p>
               ))}
               {section.image && (
@@ -329,7 +410,12 @@ export default async function BlogPostPage({
               )}
               {section.table && (
                 <div className="my-8 overflow-x-auto rounded-2xl border border-gray-200 shadow-sm not-prose">
-                  <table className="w-full min-w-[560px] text-sm text-left">
+                  {/* Da tre colonne in su la tabella tiene 560px e da telefono si
+                      scorre di lato; con due colonne il testo va a capo e sta
+                      nello schermo senza scorrere. */}
+                  <table
+                    className={`w-full text-sm text-left${section.table.columns.length > 2 ? " min-w-[560px]" : ""}`}
+                  >
                     <caption className="px-4 py-3 text-left font-heading font-bold text-base text-gray-900 bg-gray-50 border-b border-gray-200">
                       {section.table.caption}
                     </caption>
@@ -424,7 +510,7 @@ export default async function BlogPostPage({
                       ))}
                     </tbody>
                   </table>
-                  <p className="px-4 py-3 text-xs text-gray-500 bg-gray-50 border-t border-gray-100">
+                  <p className="px-4 py-3 text-sm text-gray-500 bg-gray-50 border-t border-gray-100">
                     * Prezzi e funzionalità basati su informazioni pubbliche
                     consultate ad agosto 2026. I listini dei fornitori cambiano
                     con frequenza: verificare sempre sul sito ufficiale prima
@@ -501,22 +587,42 @@ export default async function BlogPostPage({
         )}
 
         <div className="mt-16 pt-10 border-t border-gray-100">
-          <div className="bg-brand-900 rounded-3xl p-10 text-center relative overflow-hidden">
+          <div className="bg-brand-900 rounded-3xl p-8 sm:p-10 text-center relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-600 rounded-full blur-[80px] opacity-40 transform translate-x-1/2 -translate-y-1/2"></div>
             <div className="relative z-10">
-              <h4 className="font-heading font-bold text-2xl text-white mb-3">
-                Pronto a trasformare il tuo ambulatorio?
-              </h4>
-              <p className="text-brand-100 text-sm mb-8 max-w-md mx-auto">
-                Scopri come Corioli può farti risparmiare ore di lavoro
-                amministrativo con una demo gratuita di 15 minuti.
+              <h2 className="font-heading font-bold text-2xl text-white mb-3">
+                {edizione
+                  ? ctaPerEdizione[edizione].titolo
+                  : "Pronto a trasformare il tuo ambulatorio?"}
+              </h2>
+              <p className="text-brand-100 text-base mb-8 max-w-md mx-auto leading-relaxed">
+                {edizione
+                  ? ctaPerEdizione[edizione].testo
+                  : "Scopri come Corioli può farti risparmiare ore di lavoro amministrativo con una demo gratuita di 15 minuti."}
               </p>
-              <Link
-                href="/contatti"
-                className="bg-white text-brand-900 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors inline-block text-sm shadow-md"
-              >
-                Richiedi una Demo
-              </Link>
+              {edizione ? (
+                <div className="flex flex-col sm:flex-row justify-center gap-3">
+                  <Link
+                    href={`/download#${edizione}`}
+                    className="bg-white text-brand-900 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors inline-block text-base shadow-md"
+                  >
+                    {ctaPerEdizione[edizione].etichetta}
+                  </Link>
+                  <Link
+                    href="/contatti"
+                    className="border border-brand-400 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-800 transition-colors inline-block text-base"
+                  >
+                    Richiedi una demo
+                  </Link>
+                </div>
+              ) : (
+                <Link
+                  href="/contatti"
+                  className="bg-white text-brand-900 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors inline-block text-base shadow-md"
+                >
+                  Richiedi una demo
+                </Link>
+              )}
             </div>
           </div>
         </div>
