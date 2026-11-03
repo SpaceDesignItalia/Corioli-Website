@@ -3,6 +3,7 @@ import { SITE_URL, breadcrumbList, jsonLdProps, pageOpenGraph } from "@/lib/seo"
 import { MS_STORE_URL } from "@/lib/ms-store";
 import Link from "next/link";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
+import VideoDemo from "@/components/VideoDemo";
 import FaqList from "@/components/FaqList";
 import { RicordaEdizione } from "@/components/DownloadLinks";
 import {
@@ -388,22 +389,27 @@ export default function GinecologiaPage() {
       <script {...jsonLdProps(faqStructuredData)} />
 
       <div className="pt-32 md:pt-44 pb-24 bg-background">
-        {/* L'interfaccia per prima, come in /cardiologia (richiesta di Pablo,
-            21/10/2026): questa pagina è il link delle campagne, e chi arriva,
-            quasi sempre da telefono, deve vedere subito l'app. Sopra la
-            galleria solo l'H1; sotto, la prova. La descrizione sta in "In
-            breve". */}
-        <section id="interfaccia" className="pb-12 md:pb-16 scroll-mt-24">
+        {/* Il film per primo (richiesta di Pablo, 3/11/2026): questa pagina è
+            il link delle campagne, e chi arriva, quasi sempre da telefono, non
+            tocca le schede della galleria. Il film parte da solo e mostra i
+            problemi dello studio e la schermata che li risolve. La galleria
+            resta più sotto, per chi vuole guardare ogni schermata. */}
+        <section id="video" className="pb-12 md:pb-16 scroll-mt-24">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12">
-            <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-6 px-2">
+            <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 px-2">
               <p className="text-brand-700 font-bold text-xs sm:text-sm tracking-[0.18em] uppercase mb-3">
-                Esplora l&apos;interfaccia
+                Guarda come funziona
               </p>
               <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 tracking-tight text-balance">
                 Gestionale per Ginecologi e Ostetrici
               </h1>
             </div>
-            <ScreenshotGallery title={null} />
+            <VideoDemo
+              edizione="ginecologia"
+              telefono={{ src: "/video/2026-11/ginecologia-telefono.mp4", poster: "/video/2026-11/ginecologia-telefono.jpg" }}
+              computer={{ src: "/video/2026-11/ginecologia-computer.mp4", poster: "/video/2026-11/ginecologia-computer.jpg" }}
+              descrizione="Ripresa di Corioli su un archivio di prova: la dashboard con le gravidanze in corso, una visita ostetrica a 28+5 settimane con biometria fetale, percentili e peso fetale stimato calcolati dall'app, il referto scritto con il modello Eco III Trimestre e il PDF con le curve di crescita."
+            />
 
             <div className="mt-10 sm:mt-12 flex flex-col items-center text-center px-2">
               <Link
@@ -456,6 +462,14 @@ export default function GinecologiaPage() {
                 </div>
               ))}
             </dl>
+          </div>
+        </section>
+
+        {/* La galleria, sotto il film: per chi vuole guardare ogni schermata
+            da vicino. */}
+        <section id="interfaccia" className="pb-20 md:pb-28 scroll-mt-24">
+          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12">
+            <ScreenshotGallery title="Guarda ogni schermata da vicino" prioritaria={false} />
           </div>
         </section>
 

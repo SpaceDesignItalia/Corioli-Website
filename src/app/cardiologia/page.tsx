@@ -4,6 +4,7 @@ import { pageOpenGraph } from "@/lib/seo";
 import { MS_STORE_URL } from "@/lib/ms-store";
 import Link from "next/link";
 import ScreenshotGallery, { type Screenshot } from "@/components/ScreenshotGallery";
+import FilmDemo from "@/components/FilmDemo";
 import FaqList from "@/components/FaqList";
 import { MacRequestLink, RicordaEdizione, StoreLink } from "@/components/DownloadLinks";
 import {
@@ -589,36 +590,22 @@ export default function CardiologiaPage() {
       />
 
       <div className="pt-32 md:pt-44 pb-24 bg-background">
-        {/* L'interfaccia per prima (richiesta di Pablo, 21/10/2026): questa
-            pagina è il link delle campagne, e chi arriva, quasi sempre da
-            telefono, deve vedere subito l'app. Sopra la galleria solo l'H1 e
-            una riga; sotto, il download. La descrizione sta in "In breve". */}
-        <section id="interfaccia" className="pb-12 md:pb-16 scroll-mt-24">
+        {/* Il film per primo (richiesta di Pablo, 3/11/2026): questa pagina è
+            il link delle campagne, e chi arriva, quasi sempre da telefono, non
+            tocca le schede della galleria. Il film parte da solo e mostra i
+            problemi dell'ambulatorio e la schermata che li risolve. La
+            galleria resta più sotto, per chi vuole guardare ogni schermata. */}
+        <section id="video" className="pb-12 md:pb-16 scroll-mt-24">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12">
-            <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-6 px-2">
+            <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 px-2">
               <p className="text-brand-700 font-bold text-xs sm:text-sm tracking-[0.18em] uppercase mb-3">
-                Esplora l&apos;interfaccia
+                Guarda come funziona
               </p>
               <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 tracking-tight text-balance">
                 Gestionale per Cardiologi
               </h1>
             </div>
-            <ScreenshotGallery
-              screenshots={screenshots}
-              frameRatio={SCREENSHOT_RATIO}
-              title={null}
-              intro={
-                <>
-                  Corioli Cardiologia com&apos;è davvero, su un archivio di
-                  prova con tutti i moduli accesi. Nella visita e nel referto
-                  PDF{" "}
-                  <strong className="text-brand-700">
-                    scorri all&apos;interno della finestra
-                  </strong>{" "}
-                  per vederli interi.
-                </>
-              }
-            />
+            <FilmDemo edizione="cardiologia" />
 
             <div className="mt-10 sm:mt-12 flex flex-col items-center text-center px-2">
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
@@ -681,6 +668,30 @@ export default function CardiologiaPage() {
                 </div>
               ))}
             </dl>
+          </div>
+        </section>
+
+        {/* La galleria, sotto il film: per chi vuole guardare ogni schermata
+            da vicino, visita e referto interi compresi. */}
+        <section id="interfaccia" className="pb-20 md:pb-28 scroll-mt-24">
+          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12">
+            <ScreenshotGallery
+              screenshots={screenshots}
+              frameRatio={SCREENSHOT_RATIO}
+              title="Guarda ogni schermata da vicino"
+              prioritaria={false}
+              intro={
+                <>
+                  Corioli Cardiologia com&apos;è davvero, su un archivio di
+                  prova con tutti i moduli accesi. Nella visita e nel referto
+                  PDF{" "}
+                  <strong className="text-brand-700">
+                    scorri all&apos;interno della finestra
+                  </strong>{" "}
+                  per vederli interi.
+                </>
+              }
+            />
           </div>
         </section>
 

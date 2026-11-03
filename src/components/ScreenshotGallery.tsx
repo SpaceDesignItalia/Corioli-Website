@@ -73,6 +73,9 @@ type ScreenshotGalleryProps = {
   // sotto, e solo quelle piu alte (un referto PDF) si scorrono. Senza, la
   // finestra ha le altezze fisse pensate per le schermate della ginecologia.
   frameRatio?: number;
+  // false quando la galleria non è in cima alla pagina (sotto il film demo):
+  // la prima schermata non deve contendere la banda al caricamento.
+  prioritaria?: boolean;
 };
 
 export default function ScreenshotGallery({
@@ -88,6 +91,7 @@ export default function ScreenshotGallery({
     </>
   ),
   frameRatio,
+  prioritaria = true,
 }: ScreenshotGalleryProps) {
   const [activeTab, setActiveTab] = useState(screenshots[0].id);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -393,8 +397,8 @@ export default function ScreenshotGallery({
                     // Solo lo screenshot della tab attiva e prioritario: gli
                     // altri restano lazy e nascosti finche la loro scheda
                     // non viene toccata (vedi `montate`).
-                    priority={activeTab === screen.id}
-                    loading={activeTab === screen.id ? "eager" : "lazy"}
+                    priority={prioritaria && activeTab === screen.id}
+                    loading={prioritaria && activeTab === screen.id ? "eager" : "lazy"}
                     sizes="(max-width: 768px) 100vw, (max-width: 1400px) 90vw, 1280px"
                   />
                 </div>
