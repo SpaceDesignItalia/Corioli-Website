@@ -4,7 +4,7 @@ import { pageOpenGraph } from "@/lib/seo";
 import { MS_STORE_URL } from "@/lib/ms-store";
 import Link from "next/link";
 import ScreenshotGallery, { type Screenshot } from "@/components/ScreenshotGallery";
-import FilmDemo from "@/components/FilmDemo";
+import VideoDemo from "@/components/VideoDemo";
 import FaqList from "@/components/FaqList";
 import { MacRequestLink, RicordaEdizione, StoreLink } from "@/components/DownloadLinks";
 import {
@@ -605,7 +605,12 @@ export default function CardiologiaPage() {
                 Gestionale per Cardiologi
               </h1>
             </div>
-            <FilmDemo edizione="cardiologia" />
+            <VideoDemo
+              edizione="cardiologia"
+              telefono={{ src: "/video/2026-11/cardiologia-telefono.mp4", poster: "/video/2026-11/cardiologia-telefono.jpg" }}
+              computer={{ src: "/video/2026-11/cardiologia-computer.mp4", poster: "/video/2026-11/cardiologia-computer.jpg" }}
+              descrizione="Ripresa di Corioli Cardiologia su un archivio di prova: i pazienti sopra l'obiettivo di LDL in dashboard, una visita con pressione e valore precedente, ECG con il QTc calcolato con quattro formule, esami di laboratorio con LDL, non-HDL ed eGFR calcolati, CHA2DS2-VASc e HAS-BLED, e il referto PDF."
+            />
 
             <div className="mt-10 sm:mt-12 flex flex-col items-center text-center px-2">
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
