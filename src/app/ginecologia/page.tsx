@@ -401,7 +401,7 @@ export default function GinecologiaPage() {
                 Guarda come funziona
               </p>
               <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 tracking-tight text-balance">
-                Gestionale per Ginecologi e Ostetrici
+                Gestionale per Ginecologia e Ostetricia
               </h1>
             </div>
             <VideoDemo
