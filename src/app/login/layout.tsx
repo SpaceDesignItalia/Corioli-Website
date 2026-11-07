@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Login",
-  description: "Accesso riservato a Corioli.",
+  title: "Prova Corioli",
+  description: "Prova Corioli con dati di prova: scegli la specialità.",
   // Senza questo eredita dal layout radice il canonical verso la home:
   // noindex più canonical verso un'altra pagina sono due segnali opposti.
   alternates: {

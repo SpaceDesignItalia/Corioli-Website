@@ -7,8 +7,28 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 2678400, // 31 giorni: sono asset statici che cambiano di rado
   },
+  // Le demo non devono comparire nei motori di ricerca.
+  async headers() {
+    return [
+      {
+        source: "/demo/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+      // Gli asset delle demo hanno l'hash nel nome: cambiano nome a ogni
+      // build, quindi possono restare in cache un anno. Chi riapre la demo non
+      // riscarica niente.
+      {
+        source: "/demo/:spec/assets/:file*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+    ];
+  },
   async rewrites() {
     return [
+      // Le demo sono app a pagina singola in public/demo/<specialita>/:
+      // senza queste regole l'indirizzo senza index.html darebbe 404.
+      { source: "/demo/:spec(ginecologia|cardiologia)", destination: "/demo/:spec/index.html" },
+      { source: "/demo/:spec(ginecologia|cardiologia)/", destination: "/demo/:spec/index.html" },
       {
         source: "/ingest/static/:path*",
         destination: "https://eu-assets.i.posthog.com/static/:path*",
