@@ -173,6 +173,14 @@ export default function Footer() {
               </Link>
             </li>
             <li>
+              <Link
+                href="/termini"
+                className="inline-block py-1.5 hover:text-brand-600 transition-colors"
+              >
+                Condizioni di abbonamento
+              </Link>
+            </li>
+            <li>
               <CookiePreferencesButton className="inline-block py-1.5 hover:text-brand-600 transition-colors text-left" />
             </li>
           </ul>

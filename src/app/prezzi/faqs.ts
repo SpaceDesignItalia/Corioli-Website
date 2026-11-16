@@ -23,7 +23,11 @@ export const pricingFaqs = [
   },
   {
     q: "Posso disdire quando voglio?",
-    a: "Sì. Non ci sono vincoli contrattuali né costi di attivazione: l'abbonamento è mensile e si disdice in qualsiasi momento.",
+    a: "Sì. Non ci sono vincoli contrattuali né costi di attivazione: l'abbonamento è mensile e si disdice in qualsiasi momento, restando attivo fino alla fine del mese già pagato. Tutti i dettagli sono nelle condizioni di abbonamento su corioli.it/termini.",
+  },
+  {
+    q: "Cosa succede ai miei dati se smetto di pagare?",
+    a: "Restano tuoi e restano sul tuo computer. Alla fine della prova o dell'abbonamento Corioli passa in sola lettura: puoi sempre consultare, stampare ed esportare le cartelle, ma non aggiungere pazienti o visite finché non ti abboni di nuovo.",
   },
   {
     q: "Dove vengono salvati i dati dei miei pazienti?",
