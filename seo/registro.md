@@ -171,3 +171,26 @@ colonne (informativa, formule di Hadlock) stanno nello schermo a 360px.
 **Proposto per il prossimo giro:** "Aprire uno studio medico privato: cosa
 serve" (la query "studio medico privato" arriva già su Search Console), da
 verificare Regione per Regione.
+
+## 16/11/2026
+
+**Un articolo nuovo:** `homa-ir-come-si-calcola-e-si-interpreta` (Ginecologia).
+Formula di Matthews e conversione mg/dL e mmol/L, esempio numerico, condizioni
+di validità, soglie non universali. Claim sull'app verificati in
+`Corioli/src/utils/metabolicIndices.ts` (fasce 2/2,5/5) e in
+`CorioliGenerale/src/utils/rangeClinici.ts` (`FASCE_HOMA_IR`). DOI di Matthews
+1985 e Wallace 2004 non riaperti in questa sessione: da controllare. Voce
+"HOMA-IR" del glossario ora porta all'articolo.
+
+**Stenosi aortica: rimandata.** Le soglie di gravità del testo ESC/EACTS 2025
+(area indicizzata, intervento) non sono state lette sulla fonte primaria
+(doi 10.1093/eurheartj/ehaf194): solo riassunti. Da fare con il PDF alla mano.
+
+**Altri 4 articoli, stesso giorno** (query a intento alto, tutte verificabili):
+`quanto-costa-gestionale-studio-medico` (Guide; nessun prezzo di concorrenti,
+solo listino Corioli), `calcolo-superficie-corporea-mosteller-dubois` e
+`ldl-calcolato-friedewald-quando-non-fidarsi` (Cardiologia; claim app verificati
+in `cardioCalcs.ts`), `aumento-di-peso-in-gravidanza-bmi-pregravidico`
+(Ostetricia; intervalli IOM 2009). **Da fare:** aprire i DOI delle fonti (scritti
+a memoria) e controllare la tabella IOM sul testo; poi `node seo/indexnow.mjs`
+dopo la pubblicazione.

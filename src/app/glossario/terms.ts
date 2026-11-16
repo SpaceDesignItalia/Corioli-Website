@@ -560,5 +560,9 @@ export const glossaryTerms: GlossaryTerm[] = [
     group: "cardiologia",
     definition:
       "Indice di insulino-resistenza calcolato dal prodotto di glicemia e insulinemia a digiuno diviso per una costante. Ha senso solo su un prelievo eseguito a digiuno ed è un indicatore di supporto, da leggere nel contesto metabolico complessivo del paziente e non come esito isolato.",
+    link: {
+      href: "/blog/homa-ir-come-si-calcola-e-si-interpreta",
+      label: "HOMA-IR: come si calcola e come si interpreta",
+    },
   },
 ];

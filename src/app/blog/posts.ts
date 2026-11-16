@@ -84,6 +84,441 @@ export type BlogPost = {
 // Ordine: dal più recente al meno recente.
 export const posts: BlogPost[] = [
   {
+    slug: "quanto-costa-gestionale-studio-medico",
+    title: "Quanto costa un gestionale per studio medico: le voci da confrontare",
+    description:
+      "Canone, migrazione, formazione, backup e rinnovi: le voci che fanno il costo reale di un gestionale medico su tre anni e le domande da fare prima di firmare.",
+    excerpt:
+      "Il prezzo mensile è solo una riga. Cosa entra davvero nel costo di un gestionale per lo studio privato, come si confrontano due offerte su tre anni e quali domande fare al fornitore.",
+    date: "16 Novembre 2026",
+    isoDate: "2026-11-16",
+    category: "Guide",
+    lead: "Chiedere \"quanto costa un gestionale medico\" porta a risposte che vanno da pochi euro al mese a diverse migliaia di euro l'anno, perché non si sta confrontando la stessa cosa. Il canone è solo una voce: contano anche il passaggio dei dati, la formazione, il backup, gli aggiornamenti e cosa succede se un giorno cambi software. Qui trovi le voci da mettere in colonna e come confrontare due offerte su un orizzonte di tre anni.",
+    keyPoints: [
+      "Il costo reale di un gestionale è canone più migrazione dei dati, formazione, backup e aggiornamenti: confronta le offerte su tre anni, non sul prezzo del primo mese.",
+      "I modelli di prezzo più diffusi sono a canone per utente, a moduli e a licenza con canone di assistenza: a parità di canone dichiarato, il totale può cambiare molto.",
+      "Prima di firmare chiedi cosa è incluso, quanto costa portare i tuoi dati dentro e, soprattutto, come si esportano e quanto costa farlo se cambi software.",
+      "Una prova gratuita nel tuo ambulatorio reale vale più di una demo: mostra se il software regge i tuoi referti e i tuoi tempi.",
+      "Corioli costa 30 € al mese con tutte le funzioni incluse e una prova di 30 giorni; la migrazione dei dati da un altro programma si fa su preventivo.",
+    ],
+    sections: [
+      {
+        title: "Perché i prezzi non sono confrontabili",
+        body: "Due preventivi per \"un gestionale\" spesso descrivono prodotti diversi. Uno comprende agenda, cartella clinica e modelli di stampa; l'altro solo la cartella, con l'agenda a parte. Uno include gli aggiornamenti; l'altro li vende come assistenza annuale. Uno ha un canone basso e un costo di avvio alto; l'altro il contrario.\n\nPer questo, prima di guardare il numero, conviene scrivere cosa ti serve: quanti utenti, quali specialità, se serve l'agenda, se ci sono referti con modelli personalizzati, se devi portare dati da un software precedente. Poi si chiede a ogni fornitore lo stesso elenco.",
+      },
+      {
+        title: "Le voci che fanno il costo reale",
+        body: "Canone o licenza: la riga più visibile. A mese o a anno, per utente o per studio, con o senza vincolo di durata.\n\nAvvio: installazione, configurazione, eventuale migrazione dei dati dal programma o dal foglio di calcolo che usi oggi. È la voce che più spesso non compare nel prezzo di listino.\n\nFormazione: quante ore sono incluse e quante si pagano. Un software che richiede giorni di corso ha un costo in tempo, oltre che in euro.\n\nBackup e sicurezza: chi fa le copie, dove stanno, quanto costa il supporto se qualcosa va storto. Se non sono incluse, sono un costo tuo: un disco esterno, o un servizio a parte.\n\nAggiornamenti e assistenza: incluse nel canone o a pagamento. Un software clinico cambia con le linee guida e con le norme, e un aggiornamento a pagamento a ogni versione cambia il conto.\n\nUscita: la voce che nessuno mette a preventivo. Se un giorno cambi software, i tuoi dati si esportano in un formato leggibile, e a che costo? Ne parliamo in [Come cambiare gestionale medico senza perdere i dati](/blog/cambiare-gestionale-medico-migrazione-dati).",
+      },
+      {
+        title: "I modelli di prezzo più comuni",
+        body: "Canone per utente: si paga per ogni medico o operatore che accede. È chiaro, ma cresce con lo studio, e un software pensato per un singolo specialista può avere regole diverse per più utenti.\n\nCanone a moduli: la base costa poco e le funzioni, come agenda, fatturazione o i calcolatori clinici, si aggiungono a pagamento. Il prezzo dichiarato è quello del modulo minimo, quello che userai è spesso un altro.\n\nLicenza più assistenza: si paga un importo iniziale e poi un canone annuale per aggiornamenti e supporto. Funziona se resti anni sullo stesso programma; pesa se i canoni crescono o se l'aggiornamento è un acquisto a parte.\n\nCanone unico con tutto incluso: un solo numero. È il più facile da confrontare, e proprio per questo conviene controllare cosa significa \"tutto\".",
+      },
+      {
+        title: "Un confronto su tre anni",
+        body: "Per confrontare due offerte metti tutte le voci in una tabella su 36 mesi: canone per 36 mesi, avvio e migrazione, formazione oltre le ore incluse, aggiornamenti e assistenza, copie di sicurezza se non incluse. Il totale diviso per 36 dà il costo mensile vero, ed è questo il numero da mettere accanto al prezzo di listino.\n\nUn esempio di ordine di grandezza: un canone di 30 € al mese vale 1.080 € in tre anni. Un'offerta con canone di 20 € al mese, 600 € di avvio e 150 € l'anno di assistenza arriva a 720 + 600 + 450 = 1.770 €. Il canone più basso costa di più sul totale. I numeri qui sono solo un esempio di calcolo, non il listino di un fornitore: il punto è fare lo stesso conto con i preventivi che hai in mano.",
+      },
+      {
+        title: "Le domande da fare prima di firmare",
+        body: "Cosa è incluso nel canone, voce per voce? Gli aggiornamenti sono compresi? Quanto costa la migrazione dei miei dati e quanto tempo richiede? Esiste un periodo di prova nel mio ambulatorio, con i miei dati o dati di prova? Chi fa il backup e dove stanno le copie? Se disdico, in che formato esporto i miei dati e a che costo? Cosa cambia se il medico che usa il programma diventa due?\n\nUna risposta chiara a queste sette domande vale più di uno sconto. Se il fornitore non sa dirti come esporti i tuoi dati, è un'informazione.",
+      },
+      {
+        title: "Il prezzo di Corioli",
+        body: "[Corioli](/prezzi) costa 30 € al mese, con tutte le funzioni incluse: niente moduli a pagamento e gli aggiornamenti arrivano senza costi aggiuntivi. La prova dura 30 giorni, nel tuo ambulatorio reale. I dati restano salvati nel tuo studio, sul tuo computer.\n\nLa migrazione dei dati da un altro gestionale o da un foglio di calcolo non è nel canone: si fa su preventivo, perché dipende dal software di partenza e dalla quantità di dati. Puoi chiederlo dal [modulo per la migrazione](/contatti?richiesta=migrazione). Per scegliere fra le specialità, le pagine di [ginecologia e ostetricia](/ginecologia) e di [cardiologia](/cardiologia) mostrano cosa c'è dentro.",
+      },
+    ],
+    faq: [
+      {
+        question: "Quanto costa un gestionale per studio medico?",
+        answer:
+          "Dipende dal modello di prezzo: si va da canoni di poche decine di euro al mese a licenze e abbonamenti molto più alti per studi con più utenti. Il confronto va fatto sul totale di tre anni, includendo avvio, migrazione dei dati, formazione, aggiornamenti e assistenza, non sul solo canone. Corioli costa 30 € al mese con tutto incluso.",
+      },
+      {
+        question: "Cosa si paga oltre al canone di un gestionale medico?",
+        answer:
+          "Le voci più comuni sono l'avvio e l'eventuale migrazione dei dati dal programma precedente, la formazione oltre le ore incluse, gli aggiornamenti e l'assistenza se non sono compresi, e le copie di sicurezza se non le gestisce il fornitore.",
+      },
+      {
+        question: "Conviene un gestionale a canone o a licenza?",
+        answer:
+          "Il canone costa meno all'inizio e si può interrompere, la licenza con assistenza annuale pesa di più all'avvio e conviene solo se resti molti anni sullo stesso programma e gli aggiornamenti sono inclusi. Il modo di decidere è mettere entrambe le offerte in una tabella su 36 mesi.",
+      },
+      {
+        question: "Esiste una prova gratuita dei gestionali medici?",
+        answer:
+          "Molti fornitori offrono una demo o una prova: la differenza è fra una dimostrazione guidata e un periodo d'uso nel tuo ambulatorio. Corioli offre 30 giorni di prova completa, con tutte le funzioni, nel proprio studio.",
+      },
+      {
+        question: "Quanto costa passare da un gestionale a un altro?",
+        answer:
+          "Dipende da quanti dati ci sono e da come li esporta il programma di partenza. Per questo il costo di solito si definisce con un preventivo. Chiedi sempre prima di firmare in che formato potrai esportare i tuoi dati se un giorno cambi software.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Prezzi di Corioli: listino pubblicato su corioli.it/prezzi.",
+        url: "https://corioli.it/prezzi",
+      },
+    ],
+  },
+  {
+    slug: "calcolo-superficie-corporea-mosteller-dubois",
+    title: "Superficie corporea: formule di Mosteller e DuBois a confronto",
+    description:
+      "Come si calcola la superficie corporea con Mosteller e DuBois, un esempio con i numeri, quanto differiscono nell'obesità e perché il numero dell'ecografo può non coincidere.",
+    excerpt:
+      "Due formule, due risultati leggermente diversi. Calcolo passo passo con Mosteller e DuBois, dove la differenza si vede e come riportare la formula nel referto.",
+    date: "16 Novembre 2026",
+    isoDate: "2026-11-16",
+    category: "Cardiologia",
+    lead: "La superficie corporea (BSA) serve per indicizzare molte misure cliniche, e si calcola da peso e altezza con più di una formula. Le due più usate sono quella di Mosteller, la più semplice, e quella di DuBois, la più antica. Danno risultati quasi uguali in una persona normopeso e si allontanano quando il peso è molto diverso dalla media. Qui trovi le formule con un esempio, dove la differenza conta e cosa scrivere nel referto.",
+    keyPoints: [
+      "Mosteller: BSA (m²) = √(altezza in cm × peso in kg / 3600). Con 170 cm e 70 kg è 1,82 m².",
+      "DuBois: BSA (m²) = 0,007184 × peso^0,425 × altezza^0,725. Con gli stessi dati è 1,81 m²: in un normopeso le due formule coincidono entro un centesimo.",
+      "La differenza cresce con il peso: con 175 cm e 120 kg Mosteller dà 2,42 m² e DuBois 2,32 m², circa il 4% in meno.",
+      "Se il numero dell'ecografo non coincide con quello calcolato a mano, la causa più comune è la formula, non l'errore: molti ecografi usano DuBois.",
+      "Nel referto va scritta la formula usata accanto al valore, perché un indice calcolato con formule diverse non è confrontabile da un esame al successivo.",
+    ],
+    sections: [
+      {
+        title: "A cosa serve la superficie corporea",
+        body: "La superficie corporea riporta a una misura comune grandezze che dipendono dalle dimensioni della persona. Si usa per indicizzare misure dell'ecocardiogramma, per esprimere la gittata come indice cardiaco, per normalizzare il filtrato renale e per dosare alcuni farmaci. Il vantaggio è che due pazienti di taglia diversa diventano confrontabili.\n\nNon si misura: si calcola da peso e altezza con una formula empirica. Ne esistono molte; due coprono quasi tutto l'uso clinico.",
+      },
+      {
+        title: "Mosteller: la formula semplice",
+        body: "Proposta da Mosteller nel 1987, è la radice quadrata del prodotto di altezza in centimetri e peso in chilogrammi, diviso 3600: BSA = √(altezza × peso / 3600). Si fa con una calcolatrice tascabile, ed è il motivo per cui si è diffusa.\n\nUn esempio: 170 cm e 70 kg. Il prodotto è 11.900, diviso 3600 fa 3,306, e la radice quadrata dà 1,82 m².",
+      },
+      {
+        title: "DuBois: la formula storica",
+        body: "La formula di DuBois e DuBois risale al 1916: BSA = 0,007184 × peso^0,425 × altezza^0,725, con peso in chilogrammi e altezza in centimetri. Richiede le potenze con esponente decimale, quindi serve una calcolatrice scientifica o un foglio di calcolo, ed è stata ricavata su un numero molto piccolo di persone.\n\nCon gli stessi 170 cm e 70 kg il risultato è 1,81 m²: un centesimo di differenza da Mosteller, irrilevante in clinica.",
+      },
+      {
+        title: "Dove le due formule si allontanano",
+        body: "La differenza si vede ai due estremi di peso. Con 175 cm e 120 kg Mosteller dà 2,42 m² e DuBois 2,32 m²: una differenza di circa 0,10 m², quattro punti percentuali. Con 160 cm e 50 kg è l'opposto, ma di poco: 1,49 contro 1,50.\n\nUna differenza del 4% è piccola per una singola misura, ma si trasmette a ogni valore indicizzato: una misura divisa per 2,42 e la stessa divisa per 2,32 danno numeri che differiscono di quella percentuale. Quando il valore è vicino a una soglia di normalità, può bastare per cambiare la fascia.\n\nNessuna delle due formule è stata validata in modo specifico nell'obesità grave. Per questo il numero va letto con la formula accanto, e le soglie di riferimento vanno applicate con la formula con cui sono state ricavate.",
+      },
+      {
+        title: "Perché il numero dell'ecografo può essere diverso",
+        body: "Un caso frequente: il medico calcola la superficie corporea a mano o con un programma, la confronta con quella stampata dall'ecografo e trova uno scarto di qualche centesimo. Quasi sempre la differenza sta nella formula: molti apparecchi usano DuBois, molti software Mosteller. Controlla anche che peso e altezza inseriti siano gli stessi e nelle stesse unità.\n\nPrima di cercare un errore, confronta la formula. Se il valore cambia solo di qualche centesimo e la formula è diversa, il conto è giusto.",
+      },
+      {
+        title: "Cosa scrivere nel referto e come lo fa Corioli Cardiologia",
+        body: "Un valore indicizzato è confrontabile solo se è chiaro con quale superficie corporea è stato calcolato. Nel referto conviene riportare peso, altezza, superficie corporea e formula usata.\n\nIn [Corioli Cardiologia](/cardiologia) la superficie corporea si calcola con la formula di Mosteller dal peso della visita e dall'altezza della scheda del paziente, e accanto compare il valore secondo DuBois, proprio perché molti ecografi calcolano con quella: chi confronta il numero dell'apparecchio con quello della maschera vede subito che la differenza è la formula. Se manca il peso o l'altezza, l'app dice quale dei due manca.",
+      },
+    ],
+    faq: [
+      {
+        question: "Qual è la formula della superficie corporea di Mosteller?",
+        answer:
+          "BSA (m²) = √(altezza in cm × peso in kg / 3600). Per esempio, con 170 cm e 70 kg il prodotto è 11.900, diviso 3600 fa 3,306 e la radice quadrata dà 1,82 m².",
+      },
+      {
+        question: "Qual è la formula di DuBois per la superficie corporea?",
+        answer:
+          "BSA (m²) = 0,007184 × peso^0,425 × altezza^0,725, con il peso in kg e l'altezza in cm. Con 170 cm e 70 kg dà 1,81 m².",
+      },
+      {
+        question: "Quale formula è meglio usare, Mosteller o DuBois?",
+        answer:
+          "In un adulto normopeso danno risultati quasi uguali. Mosteller è più semplice da calcolare ed è quella che molti software adottano; DuBois è la più storica ed è usata da molti ecografi. Contano la coerenza e il riportare la formula nel referto, perché il valore indicizzato dipende da quale si è scelta.",
+      },
+      {
+        question: "Quanto differiscono Mosteller e DuBois nell'obesità?",
+        answer:
+          "Di più che nel normopeso. Con 175 cm e 120 kg Mosteller dà 2,42 m² e DuBois 2,32 m², circa il 4% in meno. È una differenza piccola per una misura singola, ma che si propaga a ogni valore indicizzato.",
+      },
+      {
+        question: "Perché la superficie corporea dell'ecografo è diversa dalla mia?",
+        answer:
+          "Il motivo più comune è la formula: l'apparecchio può usare DuBois e il tuo calcolo Mosteller, o viceversa. Verifica anche che peso e altezza siano gli stessi. Con la stessa formula i due valori devono coincidere.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Mosteller RD. Simplified calculation of body-surface area. N Engl J Med. 1987;317(17):1098.",
+        url: "https://doi.org/10.1056/NEJM198710223171717",
+      },
+      {
+        title:
+          "Du Bois D, Du Bois EF. A formula to estimate the approximate surface area if height and weight be known. Arch Intern Med. 1916;17(6_2):863-871.",
+      },
+    ],
+  },
+  {
+    slug: "ldl-calcolato-friedewald-quando-non-fidarsi",
+    title: "LDL calcolato con Friedewald: formula, limiti e quando serve il dosaggio diretto",
+    description:
+      "LDL = colesterolo totale − HDL − trigliceridi/5: esempio, perché non vale con trigliceridi sopra 400 mg/dL, dove sottostima e cosa riportare accanto al non-HDL.",
+    excerpt:
+      "La formula con cui si ricava l'LDL dal profilo lipidico ha più di cinquant'anni e un limite netto sui trigliceridi. Esempio, quando sottostima il valore e perché conviene riportare anche il colesterolo non-HDL.",
+    date: "16 Novembre 2026",
+    isoDate: "2026-11-16",
+    category: "Cardiologia",
+    lead: "Nella maggior parte dei referti di laboratorio l'LDL non è misurato: è calcolato con la formula di Friedewald, a partire da colesterolo totale, HDL e trigliceridi. Funziona bene in un intervallo preciso di valori e perde affidabilità proprio dove la decisione clinica conta, cioè con trigliceridi alti e LDL molto bassi. Qui trovi la formula con un esempio, i suoi limiti e cosa riportare accanto.",
+    keyPoints: [
+      "Formula di Friedewald: LDL = colesterolo totale − HDL − trigliceridi/5, in mg/dL. Con totale 220, HDL 50 e trigliceridi 150 l'LDL è 140 mg/dL.",
+      "Il fattore trigliceridi/5 stima il colesterolo delle VLDL ed è un'approssimazione: con i trigliceridi a 400 mg/dL o più non si applica e serve l'LDL dosato direttamente.",
+      "Quando l'LDL è molto basso o i trigliceridi sono alti, Friedewald tende a sottostimare il valore: è il caso in cui il margine rispetto a un obiettivo terapeutico è più sottile.",
+      "Il colesterolo non-HDL, totale meno HDL, non dipende dai trigliceridi con un fattore fisso ed è utile da riportare accanto all'LDL.",
+      "Esistono formule alternative, come quella di Martin-Hopkins, che usano un fattore variabile al posto del 5 e riducono la sottostima.",
+    ],
+    sections: [
+      {
+        title: "Perché l'LDL si calcola",
+        body: "Il colesterolo LDL si può dosare direttamente, ma è un esame più costoso e meno diffuso del profilo lipidico di base. Per questo i laboratori misurano colesterolo totale, HDL e trigliceridi e ricavano l'LDL con una formula. Nel 1972 Friedewald, Levy e Fredrickson proposero quella che è ancora la più usata.\n\nIl ragionamento è questo: il colesterolo totale è la somma di quello nelle LDL, nelle HDL e nelle VLDL. Le VLDL non si misurano, ma trasportano la maggior parte dei trigliceridi, e il rapporto fra i due, in media, è circa uno a cinque.",
+      },
+      {
+        title: "La formula, con un esempio",
+        body: "LDL = colesterolo totale − HDL − trigliceridi/5, con tutti i valori in mg/dL. Se il laboratorio riporta mmol/L, il fattore diventa trigliceridi/2,2.\n\nUn esempio: colesterolo totale 220, HDL 50, trigliceridi 150. I trigliceridi divisi per 5 fanno 30; 220 − 50 − 30 dà un LDL di 140 mg/dL.\n\nUn secondo caso con trigliceridi più alti: totale 260, HDL 40, trigliceridi 350. 350/5 è 70, e 260 − 40 − 70 dà 150 mg/dL. Qui il fattore pesa quasi metà del risultato, ed è per questo che l'affidabilità cala.",
+      },
+      {
+        title: "I limiti: trigliceridi e LDL basso",
+        body: "Il limite netto è sui trigliceridi: con 400 mg/dL o più la formula non si applica, perché il rapporto fra trigliceridi e colesterolo nelle VLDL non è più quello ipotizzato. In quel caso serve il dosaggio diretto dell'LDL.\n\nPrima di quella soglia, il fattore fisso 5 non vale per tutti: il rapporto cambia con i livelli di trigliceridi e di colesterolo non-HDL. Quando i trigliceridi sono alti e l'LDL è basso, Friedewald tende a sottostimare l'LDL. Nel lavoro che propose la formula alternativa di Martin e colleghi, nel 2013, la sottostima era proprio il problema da correggere, con un fattore che varia in base a trigliceridi e non-HDL.\n\nÈ una differenza che conta quando l'LDL è vicino a un obiettivo terapeutico: un valore calcolato di 68 con trigliceridi alti può nascondere uno vero più alto.",
+      },
+      {
+        title: "Il colesterolo non-HDL come controllo",
+        body: "Il colesterolo non-HDL è semplicemente il totale meno l'HDL, e comprende tutte le particelle che contengono apolipoproteina B. Non richiede la stima delle VLDL, quindi non risente del fattore trigliceridi/5. Con totale 220 e HDL 50 vale 170 mg/dL.\n\nRiportarlo accanto all'LDL costa una sottrazione e dà un riferimento stabile quando i trigliceridi sono alti. Se LDL e non-HDL raccontano due storie diverse, vale la pena guardare i trigliceridi.",
+      },
+      {
+        title: "A digiuno o no",
+        body: "Per molti anni il profilo lipidico si è richiesto a digiuno. Un documento di consenso della European Atherosclerosis Society e della Federazione europea di chimica clinica del 2016 ha indicato che il digiuno non è indispensabile di routine, e che il prelievo non a digiuno è una scelta pratica per la maggioranza dei pazienti. Con trigliceridi molto alti la formula di Friedewald resta comunque limitata, a digiuno o no.",
+      },
+      {
+        title: "Come lo fa Corioli Cardiologia",
+        body: "In [Corioli Cardiologia](/cardiologia) l'LDL si calcola con Friedewald dal pannello lipidico, solo se l'LDL misurato non è stato inserito. Con trigliceridi da 400 mg/dL in su l'app non produce un numero e scrive che serve l'LDL diretto; se i valori sono incoerenti fra loro, lo segnala invece di mostrare un risultato negativo. Il colesterolo non-HDL e i rapporti colesterolo totale/HDL e trigliceridi/HDL si calcolano accanto, e la formula usata è indicata vicino al risultato.",
+      },
+    ],
+    faq: [
+      {
+        question: "Come si calcola l'LDL con la formula di Friedewald?",
+        answer:
+          "LDL = colesterolo totale − HDL − trigliceridi/5, in mg/dL. Con totale 220, HDL 50 e trigliceridi 150, i trigliceridi/5 fanno 30 e l'LDL è 140 mg/dL. Se i valori sono in mmol/L si divide per 2,2 invece che per 5.",
+      },
+      {
+        question: "Quando la formula di Friedewald non si può usare?",
+        answer:
+          "Con trigliceridi pari o superiori a 400 mg/dL, perché il rapporto fra trigliceridi e colesterolo nelle VLDL non è più quello su cui si basa la formula. In quel caso serve l'LDL dosato direttamente.",
+      },
+      {
+        question: "Perché l'LDL calcolato può essere sottostimato?",
+        answer:
+          "Perché il fattore trigliceridi/5 è fisso, mentre il rapporto reale cambia con i livelli di trigliceridi e di colesterolo non-HDL. Quando l'LDL è basso e i trigliceridi sono alti, il fattore sovrastima il colesterolo delle VLDL e quindi sottostima l'LDL.",
+      },
+      {
+        question: "Cos'è il colesterolo non-HDL e come si calcola?",
+        answer:
+          "È il colesterolo contenuto in tutte le particelle aterogene, e si calcola sottraendo l'HDL dal colesterolo totale. Non richiede il fattore dei trigliceridi, quindi è più stabile dell'LDL calcolato quando i trigliceridi sono alti.",
+      },
+      {
+        question: "Serve il digiuno per il profilo lipidico?",
+        answer:
+          "Non di routine: un documento di consenso europeo del 2016 considera accettabile il prelievo non a digiuno per la maggior parte dei pazienti. Con trigliceridi molto alti l'LDL calcolato resta comunque poco affidabile.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Friedewald WT, Levy RI, Fredrickson DS. Estimation of the concentration of low-density lipoprotein cholesterol in plasma, without use of the preparative ultracentrifuge. Clin Chem. 1972;18(6):499-502.",
+        url: "https://doi.org/10.1093/clinchem/18.6.499",
+      },
+      {
+        title:
+          "Martin SS, Blaha MJ, Elshazly MB, et al. Comparison of a novel method vs the Friedewald equation for estimating low-density lipoprotein cholesterol levels from the standard lipid profile. JAMA. 2013;310(19):2061-2068.",
+        url: "https://doi.org/10.1001/jama.2013.280532",
+      },
+      {
+        title:
+          "Nordestgaard BG, Langsted A, Mora S, et al. Fasting is not routinely required for determination of a lipid profile: clinical and laboratory implications including flagging at desirable concentration cut-points. Eur Heart J. 2016;37(25):1944-1958.",
+        url: "https://doi.org/10.1093/eurheartj/ehw152",
+      },
+    ],
+  },
+  {
+    slug: "aumento-di-peso-in-gravidanza-bmi-pregravidico",
+    title: "Aumento di peso in gravidanza: quanto è giusto in base al BMI pregravidico",
+    description:
+      "Intervalli di aumento di peso in gravidanza per categoria di BMI secondo le raccomandazioni IOM 2009: kg totali, ritmo settimanale e come calcolare il BMI pregravidico.",
+    excerpt:
+      "Il BMI prima della gravidanza decide quanto peso è atteso: da 12,5-18 kg nelle sottopeso a 5-9 kg nelle obese. Intervalli, ritmo per trimestre e come riportarli in cartella.",
+    date: "16 Novembre 2026",
+    isoDate: "2026-11-16",
+    category: "Ostetricia",
+    lead: "Quanto peso può prendere una donna in gravidanza non ha una risposta unica: dipende dal BMI prima del concepimento. Le raccomandazioni più usate sono quelle dell'Institute of Medicine del 2009, che indicano un intervallo di aumento totale per ciascuna categoria OMS e un ritmo settimanale per il secondo e il terzo trimestre. Qui trovi gli intervalli in tabella, un esempio di calcolo e come tenerne traccia in cartella.",
+    keyPoints: [
+      "Il BMI pregravidico si calcola come peso in kg diviso altezza in metri al quadrato, con le fasce OMS: sotto 18,5 sottopeso, 18,5-24,9 normopeso, 25-29,9 sovrappeso, 30 e oltre obesità.",
+      "Secondo le raccomandazioni IOM 2009 l'aumento totale atteso è 12,5-18 kg nelle sottopeso, 11,5-16 kg nelle normopeso, 7-11,5 kg nelle sovrappeso e 5-9 kg nelle donne con obesità.",
+      "Nel secondo e terzo trimestre il ritmo atteso è di circa 0,42 kg a settimana nelle normopeso, 0,51 nelle sottopeso, 0,28 nelle sovrappeso e 0,22 nelle obese.",
+      "Nel primo trimestre l'aumento atteso è modesto, in genere tra 0,5 e 2 kg complessivi.",
+      "Sono intervalli per la gravidanza singola: in una gemellare gli intervalli sono diversi e vanno valutati caso per caso.",
+    ],
+    sections: [
+      {
+        title: "Perché conta il BMI di partenza",
+        body: "Un aumento di peso troppo basso si associa a più nati piccoli per l'epoca e parti pretermine; uno troppo alto a più macrosomia, tagli cesarei e ritenzione di peso dopo il parto. Il punto di equilibrio dipende da dove si parte: una donna sottopeso ha bisogno di accumulare di più, una con obesità di meno.\n\nPer questo le raccomandazioni non danno un numero solo ma un intervallo per ogni categoria di BMI pregravidico. Il BMI usato è quello prima della gravidanza, non quello attuale: se il peso pregravidico non è noto, si usa il peso più vicino al concepimento disponibile, oppure quello del primo controllo, con la cautela del caso.",
+      },
+      {
+        title: "Calcolare il BMI pregravidico",
+        body: "BMI = peso in kg / (altezza in metri)². Un esempio: 62 kg e 165 cm. L'altezza al quadrato è 2,72, e 62 / 2,72 dà 22,8: normopeso. Un altro: 78 kg e 160 cm, 78 / 2,56 dà 30,5, che rientra nell'obesità di classe I.\n\nLe fasce sono quelle dell'OMS: sotto 18,5 sottopeso; da 18,5 a 24,9 normopeso; da 25 a 29,9 sovrappeso; da 30 in su obesità. Per l'adulto, che è il caso della gravidanza, valgono le stesse soglie del resto dell'ambulatorio.",
+      },
+      {
+        title: "Gli intervalli di aumento totale",
+        body: "Le raccomandazioni IOM del 2009 (Rasmussen e Yaktine), riprese dall'American College of Obstetricians and Gynecologists, sono quelle di riferimento in gran parte del mondo per la gravidanza singola. Nella tabella trovi l'aumento totale atteso e il ritmo settimanale nel secondo e terzo trimestre.",
+        table: {
+          caption:
+            "Aumento di peso raccomandato in gravidanza singola per categoria di BMI pregravidico (IOM 2009)",
+          columns: [
+            "BMI pregravidico",
+            "Categoria",
+            "Aumento totale",
+            "Ritmo settimanale (2° e 3° trimestre)",
+          ],
+          rows: [
+            ["Sotto 18,5", "Sottopeso", "12,5-18 kg", "0,51 kg (0,44-0,58)"],
+            ["18,5-24,9", "Normopeso", "11,5-16 kg", "0,42 kg (0,35-0,50)"],
+            ["25-29,9", "Sovrappeso", "7-11,5 kg", "0,28 kg (0,23-0,33)"],
+            ["30 e oltre", "Obesità", "5-9 kg", "0,22 kg (0,17-0,27)"],
+          ],
+          note: "Per la gravidanza gemellare gli intervalli sono diversi. Il primo trimestre ha un aumento atteso di circa 0,5-2 kg per tutte le categorie.",
+        },
+      },
+      {
+        title: "Come usarli in ambulatorio",
+        body: "Gli intervalli servono a confrontare la curva reale con quella attesa, non a giudicare un singolo controllo. Per una donna normopeso, a 20 settimane il percorso atteso è di circa 4-5 kg: 0,5-2 kg nel primo trimestre più otto settimane a circa 0,42 kg. Chi è a 4 kg è nel suo percorso; chi ne ha già presi 9 merita un'attenzione diversa.\n\nUn dato isolato dice poco: il peso va letto in sequenza, a ogni visita, accanto a pressione arteriosa e crescita fetale. Un aumento improvviso, in poco tempo, soprattutto con edemi o pressione alta, ha un significato diverso da un aumento graduale.\n\nLa consulenza su alimentazione e attività fisica resta il punto centrale, e gli intervalli sono raccomandazioni, non obiettivi da raggiungere a ogni costo.",
+      },
+      {
+        title: "Tenerne traccia in cartella con Corioli",
+        body: "Per vedere l'aumento servono due numeri a ogni visita: il peso pregravidico, che è fisso, e il peso attuale. In [Corioli per la ginecologia e ostetricia](/ginecologia) la visita ostetrica registra entrambi, calcola il BMI con le fasce OMS anche sul peso pregravidico e mostra l'aumento di peso in gravidanza, così la sequenza è davanti senza ricalcolarla a mano. Gli intervalli IOM restano un riferimento da applicare con il proprio giudizio: l'app non li usa per dare un giudizio.",
+      },
+    ],
+    faq: [
+      {
+        question: "Quanto peso si può prendere in gravidanza?",
+        answer:
+          "Dipende dal BMI prima della gravidanza. Secondo le raccomandazioni IOM 2009: 12,5-18 kg se sottopeso, 11,5-16 kg se normopeso, 7-11,5 kg se sovrappeso, 5-9 kg se con obesità. Valgono per la gravidanza singola.",
+      },
+      {
+        question: "Quanto peso si deve prendere ogni settimana in gravidanza?",
+        answer:
+          "Dal secondo trimestre il ritmo atteso è di circa 0,42 kg a settimana nelle donne normopeso, 0,51 nelle sottopeso, 0,28 nelle sovrappeso e 0,22 nelle donne con obesità. Nel primo trimestre l'aumento atteso è di 0,5-2 kg in tutto.",
+      },
+      {
+        question: "Come si calcola il BMI pregravidico?",
+        answer:
+          "Si divide il peso prima della gravidanza in kg per il quadrato dell'altezza in metri. Con 62 kg e 165 cm il BMI è 22,8, cioè normopeso. Si usano le fasce OMS: sotto 18,5, 18,5-24,9, 25-29,9, 30 e oltre.",
+      },
+      {
+        question: "Gli intervalli valgono anche per una gravidanza gemellare?",
+        answer:
+          "No. Le raccomandazioni IOM 2009 danno intervalli provvisori diversi per le gravidanze gemellari, più alti per ciascuna categoria. Vanno valutati caso per caso.",
+      },
+      {
+        question: "Cosa fare se non si conosce il peso prima della gravidanza?",
+        answer:
+          "Si usa il peso più vicino al concepimento che la paziente ricorda o che è documentato, oppure quello misurato al primo controllo, tenendo presente che quest'ultimo include già parte dell'aumento. La stima va indicata come tale in cartella.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Institute of Medicine and National Research Council. Weight Gain During Pregnancy: Reexamining the Guidelines. Rasmussen KM, Yaktine AL, eds. Washington, DC: The National Academies Press; 2009.",
+        url: "https://doi.org/10.17226/12584",
+      },
+      {
+        title:
+          "American College of Obstetricians and Gynecologists. Committee Opinion No. 548: Weight gain during pregnancy. Obstet Gynecol. 2013;121(1):210-212.",
+      },
+      {
+        title:
+          "World Health Organization. Obesity: preventing and managing the global epidemic. Report of a WHO Consultation. WHO Technical Report Series 894. Geneva: WHO; 2000.",
+      },
+    ],
+  },
+  {
+    slug: "homa-ir-come-si-calcola-e-si-interpreta",
+    title: "HOMA-IR: come si calcola e come si interpreta",
+    description:
+      "Formula di Matthews con glicemia in mg/dL e insulinemia, esempio numerico, perché vale solo a digiuno e perché le soglie di insulino-resistenza non sono universali.",
+    excerpt:
+      "Un prodotto diviso per 405, ma con regole d'uso che cambiano il risultato: prelievo a digiuno, unità di misura, metodo di dosaggio dell'insulina. Formula, esempio e come leggere il valore senza una soglia unica.",
+    date: "16 Novembre 2026",
+    isoDate: "2026-11-16",
+    category: "Ginecologia",
+    lead: "L'HOMA-IR stima l'insulino-resistenza da due valori di laboratorio, glicemia e insulinemia a digiuno, con un'unica moltiplicazione. È semplice da calcolare e per questo è facile da usare male: unità di misura sbagliate, prelievo non a digiuno, una soglia presa come verdetto. Qui trovi la formula con un esempio, le condizioni in cui il valore ha senso e come leggerlo quando le soglie in circolazione non coincidono.",
+    keyPoints: [
+      "Formula di Matthews (1985): HOMA-IR = glicemia (mg/dL) × insulinemia (µU/mL) / 405. Con glicemia in mmol/L il denominatore è 22,5.",
+      "Esempio: glicemia 92 mg/dL e insulinemia 11 µU/mL danno 92 × 11 / 405 = 2,5.",
+      "Il valore ha senso solo su un prelievo a digiuno: dopo un pasto l'insulinemia sale e l'indice si sovrastima.",
+      "Non esiste una soglia universale: il valore di taglio dipende dal metodo di dosaggio dell'insulina, dalla popolazione e dal laboratorio, e in letteratura oscilla fra circa 2 e 2,9.",
+      "È un indicatore di supporto: si legge insieme a BMI, glicemia, quadro clinico e, nella sindrome dell'ovaio policistico, al resto dell'inquadramento, non come diagnosi.",
+    ],
+    sections: [
+      {
+        title: "Cosa misura l'HOMA-IR",
+        body: "HOMA sta per Homeostasis Model Assessment. Il modello, descritto da Matthews e colleghi nel 1985, parte da un'idea semplice: a digiuno glicemia e insulinemia sono tenute in equilibrio da un circuito di retroazione fra pancreas e tessuti. Se per mantenere la stessa glicemia serve più insulina del solito, i tessuti rispondono meno all'ormone: c'è insulino-resistenza.\n\nL'HOMA-IR ricava questa resistenza da un solo prelievo, senza clamp né test da carico. È il motivo per cui si usa così tanto in ambulatorio, in ginecologia per le pazienti con sospetta sindrome dell'ovaio policistico o con alterazioni metaboliche, in cardiologia nel profilo glucidico. È anche il motivo dei suoi limiti: un prelievo solo, un momento solo.",
+      },
+      {
+        title: "La formula, con un esempio",
+        body: "HOMA-IR = glicemia a digiuno × insulinemia a digiuno / 405, con la glicemia in mg/dL e l'insulinemia in µU/mL. Se la glicemia è espressa in mmol/L, la costante diventa 22,5: i due modi sono equivalenti, perché 1 mmol/L di glucosio corrisponde a circa 18 mg/dL e 405 diviso 18 fa 22,5.\n\nUn esempio: glicemia 92 mg/dL, insulinemia 11 µU/mL. Il prodotto è 1.012 e diviso 405 dà 2,5. Con gli stessi valori in mmol/L, 5,1 × 11 / 22,5 dà lo stesso risultato, 2,5.\n\nL'errore più comune è mescolare le unità: la glicemia in mmol/L con il 405, o l'insulinemia in pmol/L senza convertirla. Il numero che esce sembra plausibile, ma è sbagliato di un fattore 6 o 18. Prima di calcolare, guarda in che unità è scritto il referto del laboratorio.",
+      },
+      {
+        title: "Quando il valore è affidabile",
+        body: "Il modello descrive lo stato basale, quindi il prelievo deve essere a digiuno. Dopo un pasto l'insulinemia sale per ore mentre la glicemia può essere già rientrata: l'indice risulta più alto e non dice più nulla sulla resistenza di base. Anche una malattia acuta, un forte stress o certi farmaci spostano i due valori.\n\nL'insulina poi non si dosa con un metodo solo. I diversi kit non danno lo stesso numero sullo stesso campione, e per questo lo stesso HOMA-IR può cadere sopra o sotto una soglia a seconda del laboratorio. Wallace e colleghi, nella revisione del modello del 2004, insistono proprio su questo: l'indice è utile per confrontare gruppi o seguire una persona nel tempo con lo stesso metodo, meno per applicare un limite assoluto.\n\nInfine, nei pazienti in terapia insulinica o con un diabete in cui il pancreas produce poca insulina, la formula non descrive più il fenomeno che vuole misurare.",
+      },
+      {
+        title: "Le soglie: perché non ce n'è una sola",
+        body: "Per l'adulto le fasce usate più spesso, a titolo orientativo, sono: sotto 2 valore nella norma, da 2 a 2,5 zona borderline, da 2,5 in su insulino-resistenza probabile, oltre 5 valore marcatamente elevato. Sono convenzioni di lettura, non limiti validati una volta per tutte: in letteratura il valore di taglio proposto per l'insulino-resistenza varia da circa 2 a circa 2,9 a seconda della popolazione studiata, dell'età, dell'etnia e del metodo di dosaggio dell'insulina.\n\nIn pratica conviene fare tre cose. Usare la soglia del proprio laboratorio quando la indica. Scrivere nel referto il valore calcolato e non solo l'etichetta, così chi lo rilegge può applicare un'altra scala. E non trasformare mai un 2,6 in una diagnosi e un 2,4 in una rassicurazione: la differenza fra i due è dentro l'errore di misura dell'insulina.",
+      },
+      {
+        title: "Dopo il numero: come leggerlo",
+        body: "Un HOMA-IR si interpreta accanto agli altri dati. Il BMI e la circonferenza vita dicono quanto la resistenza sia attesa; la glicemia a digiuno e l'emoglobina glicata mostrano se il pancreas sta già faticando a compensare; i trigliceridi e l'HDL completano il quadro metabolico. Un valore di 3 in una paziente magra, con ciclo regolare e profilo lipidico normale, non pesa come lo stesso valore in una paziente con obesità addominale e iperandrogenismo.\n\nNella sindrome dell'ovaio policistico l'insulino-resistenza è frequente ma non fa parte dei criteri diagnostici, e il suo valore non decide da solo la terapia. Seguire lo stesso indice nel tempo, con lo stesso laboratorio, è più informativo di una singola misura.",
+      },
+      {
+        title: "Come lo calcolano Corioli e Corioli Cardiologia",
+        body: "In [Corioli per la ginecologia](/ginecologia) la visita ha due campi, glicemia a digiuno e insulinemia: quando sono compilati entrambi l'HOMA-IR si calcola con la formula di Matthews e compare con la fascia accanto (normale sotto 2, borderline fino a 2,5, insulino-resistenza fino a 5, marcata oltre). Nel PDF resta solo il testo della fascia, perché il referto è in bianco e nero.\n\nIn [Corioli Cardiologia](/cardiologia) l'indice sta nel pannello del metabolismo glucidico, con la stessa formula e la dicitura che vale solo su prelievo a digiuno. Le fasce sono più fini, da meno di 1 a 5 e oltre, e accanto al valore un pulsante apre la tabella completa. In entrambe le app la fascia è una chiave di lettura scritta accanto al numero, non un sì o un no: il giudizio resta al medico.",
+      },
+    ],
+    faq: [
+      {
+        question: "Come si calcola l'HOMA-IR?",
+        answer:
+          "Si moltiplicano glicemia a digiuno in mg/dL e insulinemia a digiuno in µU/mL e si divide per 405. Con la glicemia in mmol/L il denominatore è 22,5. Per esempio, 92 mg/dL e 11 µU/mL danno 92 × 11 / 405 = 2,5.",
+      },
+      {
+        question: "Qual è il valore normale dell'HOMA-IR?",
+        answer:
+          "Non c'è un valore valido per tutti. Come lettura orientativa nell'adulto, sotto 2 è considerato nella norma e da 2,5 in su si parla di insulino-resistenza probabile, ma i valori di taglio proposti in letteratura oscillano fra circa 2 e 2,9 secondo popolazione, età e metodo di dosaggio dell'insulina. Conviene usare il riferimento del proprio laboratorio.",
+      },
+      {
+        question: "L'HOMA-IR si può calcolare senza essere a digiuno?",
+        answer:
+          "Il calcolo si può fare, ma il risultato non è interpretabile. Dopo un pasto l'insulinemia è più alta anche a glicemia normale, e l'indice risulta sovrastimato. Il modello descrive lo stato basale, quindi serve un prelievo a digiuno.",
+      },
+      {
+        question: "Un HOMA-IR alto significa sindrome dell'ovaio policistico?",
+        answer:
+          "No. L'insulino-resistenza è frequente nella sindrome dell'ovaio policistico ma non fa parte dei criteri diagnostici, e si trova anche in molte donne senza la sindrome. L'HOMA-IR è un indicatore di supporto da leggere insieme al quadro clinico complessivo.",
+      },
+      {
+        question: "L'HOMA-IR vale anche per chi prende insulina?",
+        answer:
+          "No. In chi è in terapia insulinica, o ha un diabete con una produzione di insulina molto ridotta, la formula non descrive più il rapporto fra insulina e glicemia che il modello assume, e il valore non è affidabile.",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Matthews DR, Hosker JP, Rudenski AS, Naylor BA, Treacher DF, Turner RC. Homeostasis model assessment: insulin resistance and beta-cell function from fasting plasma glucose and insulin concentrations in man. Diabetologia. 1985;28(7):412-419.",
+        url: "https://doi.org/10.1007/BF00280883",
+      },
+      {
+        title:
+          "Wallace TM, Levy JC, Matthews DR. Use and abuse of HOMA modeling. Diabetes Care. 2004;27(6):1487-1495.",
+        url: "https://doi.org/10.2337/diacare.27.6.1487",
+      },
+    ],
+  },
+  {
     slug: "holter-pressorio-valori-normali-calo-notturno",
     title: "Holter pressorio delle 24 ore: valori normali e calo notturno",
     description:
